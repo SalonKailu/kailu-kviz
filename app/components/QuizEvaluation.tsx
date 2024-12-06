@@ -208,7 +208,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Citlivá + Sem tam pupínek': 'Vaše citlivá pleť potřebuje nejen zklidnit, ale občas i pomoct s pupínky. Připravila jsem pro vás kombinaci dvou sad - hlavní sadu pro citlivou pleť a mini sadu "Sem tam pupínek". Hlavní sada pro každodenní péči zklidní podrážděnou pleť, zmírní zarudnutí a posílí její přirozenou ochrannou bariéru. Mini sada pak rychle pomůže v případě akutních problémů. Dopřejte své pleti něžnou péči s možností rychlého zásahu!',
   
-  'Kuperóza': 'Vypadá to, že vás trápí kuperóza! Nejlepší variantou pro vás bude skvělá sada speciálně sestavená pro pleť s kuperózou.',
+  'Kuperóza': 'Vypadá to, že vás trápí kuperóza! Nejlepší variantou pro vás bude zklidňující sada speciálně sestavená pro pleť s kuperózou.',
   
   'Dermatitida': 'Vybrala jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u mě v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
