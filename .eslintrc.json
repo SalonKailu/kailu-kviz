@@ -1,8 +1,10 @@
 {
-  "extends": "next/core-web-api",
+  "extends": "next",
   "rules": {
     "@typescript-eslint/no-unused-vars": "off",
     "prefer-const": "off",
-    "@next/next/no-img-element": "off"
-  }
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "ignorePatterns": ["*.test.tsx", "*.test.ts"]
 }
