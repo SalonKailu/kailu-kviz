@@ -18,42 +18,46 @@ interface TestCase {
 
 const testCases = [
   {
-    name: "Test 1: Citlivá pleť s přáním zbavit se citlivosti, limit 2500",
+    name: "Test: Priorita akné vs pupínky",
     answers: {
-      'skin-description': 'Je citlivá. Často červená, občas pne, nebo se vytvoří šupinky. Málokterá kosmetika mi sedne',
-      'skin-nose': 'Póry jsou viditelné jen při bližším pohledu',
-      'skin-cheeks': 'Čert vem póry, mě na první pohled upoutá zarudnutí a celkově podrážděný vzhled',
-      'cosmetic-compatibility': ['S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním'],
-      'skin': ['Rozšířené póry / černé tečky'],
-      'wish-fish': 'Už nechci mít citlivou pleť',
+      'skin-description': 'Mastí se hodně a všude!',
+      'skin-nose': 'Vaše póry si na schovávanou nehrají',
+      'skin-cheeks': 'Ano, jsou všude',
+      'cosmetic-compatibility': ['Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!'],
+      'skin': ['Akné (více než 5 pupínků)', 'Sem tam pupínek'],
+      'wish-fish': 'Ať mi zmizí pupínky',
       'budget-limit': 'Mám limit 2500 Kč'
     },
-    expectedSkinType: SKIN_TYPES.SENSITIVE,
-    expectedSet: PRODUCT_SETS.CITLIVA
+    expectedSkinType: SKIN_TYPES.OILY,
+    expectedSet: PRODUCT_SETS.PROBLEM_AKNE
   },
   {
-    name: "Test 2: Normální pleť se stárnutím a černými tečkami, bez limitu",
+    name: "Test: Spokojená zákaznice bez problémů",
     answers: {
       'skin-description': 'Je v pohodě, nemám s ní větší problémy',
       'skin-nose': 'Póry jsou viditelné jen při bližším pohledu',
       'skin-cheeks': 'Sem tam možná nějaký je',
       'cosmetic-compatibility': ['Většina kosmetických přípravků mi sedne'],
-      'skin': ['Vrásky', 'Rozšířené póry / černé tečky'],
-      'wish-fish': 'Chci zpomalit stárnutí',
-      'budget-limit': 'Rád/a se podívám i na dražší možnost'
+      'skin': ['Není, jsem spokojená / Nic z výše uvedeného', 'Sem tam pupínek'],
+      'wish-fish': 'Ráda bych, aby moje pleť byla zářivější a vypnutější',
+      'budget-limit': 'Mám limit 2500 Kč'
     },
     expectedSkinType: SKIN_TYPES.NORMAL,
-    expectedSet: PRODUCT_SETS.SUCHA_ANTIAGE
+    expectedSet: PRODUCT_SETS.NORMALNI_KOMPLET
   },
+
   {
-    name: "Test 3: Smíšená pleť s pupínky a přáním mít zářivější pleť, limit 1500",
+    name: "Test: Smíšená pleť s více problémy a nízkým rozpočtem",
     answers: {
       'skin-description': 'Dost se mastí, tváře ale o něco méně, než zbytek obličeje',
       'skin-nose': 'Vaše póry si na schovávanou nehrají',
-      'skin-cheeks': 'Vidím je hlavně v oblasti vedle nosu',
-      'cosmetic-compatibility': ['U některé kosmetiky mám pocit napnuté pleti, jindy se zase více lesknu'],
-      'skin': ['Sem tam pupínek'],
-      'wish-fish': 'Ráda bych, aby moje pleť byla zářivější a vypnujější',
+      'skin-cheeks': 'Vidím je hlavně v oblasti vedle nosu, na tvářích potom o něco méně',
+      'cosmetic-compatibility': [
+        'U některé kosmetiky mám pocit napnuté pleti, jindy se zase více lesknu',
+        'Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!'
+      ],
+      'skin': ['Sem tam pupínek', 'Vrásky', 'Pigmentové skvrny nebo jizvy po akné'],
+      'wish-fish': 'Ať se moje pleť přestane lesknout',
       'budget-limit': 'Chtěl/a bych se vejít do 1500 Kč'
     },
     expectedSkinType: SKIN_TYPES.MIXED,

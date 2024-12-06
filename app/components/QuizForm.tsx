@@ -7,7 +7,9 @@ import { Label } from "./ui/label";
 import { Search } from 'lucide-react';
 import { evaluateQuiz, type QuizResult } from './QuizEvaluation';
 import { runTests } from './QuizEvaluation.test';
-import QuizResults from './QuizResults';
+import { RESULT_TEXTS } from './QuizEvaluation';
+import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
+import { SKIN_TYPE_URLS } from './QuizEvaluation';
 
 
 const INTRO_TEXT = {
@@ -300,35 +302,123 @@ if (!currentQ) {
 
  console.log('currentQ:', currentQ);
 
+console.log('recommendedSet:', result?.recommendedSet);
+console.log('PRODUCT_URLS:', PRODUCT_URLS);
+
  if (result) {
+  const isDermatitis = result.recommendedSet === 'Dermatitida';
+
   return (
-    <QuizResults 
-      results={result}
-      onContinue={() => window.location.href = getSetUrl(result.recommendedSet)}
-    />
-  );
-}
-            {/* Speciální doporučení */}
-            {(result.specialRecommendations.hasPigmentation || 
-              result.specialRecommendations.hasUndereyeCircles) && (
-              <div className="mt-6">
-                <p className="text-lg font-semibold">Speciální doporučení:</p>
-                {result.specialRecommendations.hasPigmentation && (
-                  <p className="mt-2">Pro pigmentové skvrny doporučujeme chemický peeling. 
-                    Více informací najdete na našem webu.</p>
-                )}
-                {result.specialRecommendations.hasUndereyeCircles && (
-                  <p className="mt-2">
-                    {result.specialRecommendations.antiAgeSuggested 
-                      ? 'Krém na kruhy pod očima je již součástí vaší anti-age sady.'
-                      : 'Pro zmírnění kruhů pod očima vám doporučuji přihodit do košíku skvělý oční krém od korejské značky Skin1004.'}
-                  </p>
-                )}
-              </div>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-center text-2xl font-semibold mb-8">
+        ✨ VAŠE VÝSLEDKY ✨
+      </h1>
+      
+      <p className="mb-4">
+        Vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
+        <a> </a><a 
+  href={`${SHOP_BASE_URL}${SKIN_TYPE_URLS[result.skinType]}`}
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="text-black underline hover:text-[#faa4a6]"
+>
+  Tady se o ní dozvíte více
+</a>
+      </p>
+
+      {!isDermatitis && (
+  <div className="bg-[#f1eae2] mb-6 p-6 rounded-lg">
+  <h2 className="font-semibold mb-4">
+    Doporučená péče:{' '}
+    <a 
+      href={`${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-black underline hover:text-[#faa4a6]"
+    >
+      {DISPLAY_NAMES[result.recommendedSet.split(' + ')[0]]}
+    </a>
+  </h2>
+  {(result.recommendedSet.includes('+ Sem tam pupínek') || result.problems.includes('Kruhy pod očima')) && (
+          <div>
+            <p className="font-semibold">Doplňkové produkty:</p>
+            {result.recommendedSet.includes('+ Sem tam pupínek') && (
+              <p>
+                <a 
+                  href={`${SHOP_BASE_URL}sem-tam-pupinek`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black underline hover:text-[#faa4a6]"
+                >
+                  Mini sada Sem tam pupínek
+                </a>
+              </p>
+            )}
+            {result.problems.includes('Kruhy pod očima') && (
+              <p>
+                <a 
+                  href={`${SHOP_BASE_URL}ocni-krem`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-black underline hover:text-[#faa4a6]"
+                >
+                  Oční krém
+                </a>
+              </p>
             )}
           </div>
-        </CardContent>
-      </Card>
+        )}
+      </div>
+    )}
+
+    
+      <div className="space-y-4 mb-6">
+        <p>{RESULT_TEXTS[result.recommendedSet]}</p>
+        
+        {!isDermatitis && result.specialRecommendations.hasPigmentation && (
+          <p className="mt-4">
+            S pigmentovými skvrnami je to trochu složitější. Kosmetika si s nimi může částečně poradit, ale nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je chemický peeling. Více o něm píšu na {' '}
+    <a 
+      href="https://www.kailu.cz/kosmetika" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="text-black underline hover:text-[#faa4a6]"
+    >webu</a>,{' '} kde máte také rovnou i možnost objednání.
+          </p>
+        )}
+        
+        {!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
+          <p className="mt-4">
+            {result.specialRecommendations.antiAgeSuggested
+              ? 'Krém, který si hravě poradí s kruhy pod očima, je již součástí vaší anti-age sady.'
+              : (
+                <>
+A skvělý {' '}
+    <a 
+      href="https://www.kailushop.cz/ocni-krem" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="text-black underline hover:text-[#faa4a6]"
+    >
+      oční krém
+    </a>{' '}
+    od korejské značky Skin1004 vám doporučuji zejména pro zmírnění kruhů pod očima. 
+    Navíc působí skvěle i jako prevence drobných vrásek kolem očí.
+                </>
+              )}
+          </p>
+        )}
+      </div>
+
+      <button
+  onClick={() => window.location.href = isDermatitis 
+    ? 'https://www.kailu.cz' 
+    : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`
+  }
+  className="w-full py-3 bg-[#f1eae2] hover:bg-[#e5ddd4] transition-colors duration-200 rounded-lg text-black font-medium"
+>
+  {isDermatitis ? 'Objednat se' : 'Pokračovat'}
+</button>
     </div>
   );
 }
