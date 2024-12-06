@@ -1,5 +1,7 @@
 import * as React from "react"
 
+interface CardProps { className?: string; }
+
 const Card = React.forwardRef(({...props }, ref) => (
   <div
     ref={ref}

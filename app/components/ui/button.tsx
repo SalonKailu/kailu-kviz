@@ -1,5 +1,7 @@
 import * as React from "react"
 
+interface ButtonProps { className?: string; variant?: string; size?: string; }
+
 const Button = React.forwardRef(({...props }, ref) => {
   return (
     <button

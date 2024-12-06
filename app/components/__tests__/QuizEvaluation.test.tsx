@@ -1,21 +1,6 @@
 import { evaluateSkinType, selectProductSet, type SkinType, type ProductSet } from './QuizEvaluation';
 import { SKIN_TYPES, PRODUCT_SETS } from './QuizEvaluation';
 
-interface TestCase {
-  name: string;
-  answers: {
-    'skin-description'?: string;
-    'skin-nose'?: string;
-    'skin-cheeks'?: string;
-    'cosmetic-compatibility'?: string[];
-    'skin'?: string[];
-    'wish-fish'?: string; 
-    'budget-limit'?: string;
-  };
-  expectedSkinType?: SkinType;
-  expectedSet: ProductSet;
-}
-
 const testCases = [
   {
     name: "Test: Priorita akné vs pupínky",

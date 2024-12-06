@@ -10,6 +10,7 @@ import { runTests } from './QuizEvaluation.test';
 import { RESULT_TEXTS } from './QuizEvaluation';
 import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
 import { SKIN_TYPE_URLS } from './QuizEvaluation';
+import Image from 'next/image';
 
 
 const INTRO_TEXT = {
@@ -105,7 +106,8 @@ const QUESTIONS = [
     { text: 'Akné (více než 5 pupínků🤫)', image: 'https://www.kailushop.cz/user/documents/upload/akne.png' },
     { text: 'Rozšířené póry / černé tečky', image: 'https://www.kailushop.cz/user/documents/upload/cernetecky.png' },
     { text: 'Dermatitida', image: 'https://www.kailushop.cz/user/documents/upload/dermatitida.png' },
-    { text: 'Kuperóza ("popraskané žilky")', image: 'https://www.kailushop.cz/user/documents/upload/kuperoza.png' }
+    { text: 'Kuperóza ("popraskané žilky")', image: 'https://www.kailushop.cz/user/documents/upload/kuperoza.png' },
+    { text: 'Není, jsem spokojená / Nic z výše uvedeného' }
   ]
 },
 {
@@ -479,7 +481,7 @@ A skvělý {' '}
                    {/* Hover obrázek */}
 <div className="absolute left-full ml-4 hidden group-hover:block transition-opacity duration-300">
 {typeof option === 'object' && option.image && (
-    <img
+    <Image
       src={option.image}
       alt={option.text}
       className="w-[200px] h-[200px] object-cover rounded-lg shadow-lg"
@@ -501,7 +503,7 @@ A skvělý {' '}
                          onMouseLeave={() => setHoveredImage(null)}
                        >
                          <div className="relative overflow-hidden rounded-lg h-full">
-                           <img
+                           <Image
                              src={image.url}
                              alt={image.alt}
                              className={`w-full h-full object-cover transition-transform duration-200 ${

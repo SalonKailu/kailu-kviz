@@ -1,6 +1,8 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
 
+interface RadioGroupProps { className?: string; }
+
 const RadioGroup = React.forwardRef(({...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
