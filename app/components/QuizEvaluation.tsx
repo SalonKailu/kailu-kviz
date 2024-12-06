@@ -422,7 +422,7 @@ export function selectProductSet(
 
   
   // Filtrování podle cenového limitu
-  let affordableSets = availableSets.filter(set => {
+  const affordableSets = availableSets.filter(set => {
     const setPrice = PRICE_LIMITS[set];
     if (setPrice === null) {
       return budget === null;
