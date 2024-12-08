@@ -272,7 +272,7 @@ const QuizForm = () => {
  if (showIntro) {
    return (
      <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
-       <Card className="min-h-screen bg-gray-50 dark:bg-gray-800 py-8 px-4 max-w-[1100px] mx-auto text-gray-900 dark:text-white">
+       <Card className="min-h-screen bg-gray-50 dark:bg-gray-800 py-8 px-4 max-w-[1100px] mx-auto">
          <CardContent className="p-4">
            <SectionHeader currentQuestion={currentQuestion} />
            <div className="space-y-1">
@@ -432,13 +432,13 @@ A skvělý {' '}
        <CardContent className="p-4">
          <SectionHeader currentQuestion={currentQuestion} />
          <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-         <h2 className="text-md font-bold mb-2 dark:text-white">
+         <h2 className="text-md font-bold mb-2 text-gray-900">
   {currentQ.title}
 </h2>
 
            {currentQ.type === 'info' ? (
              <div className="space-y-10">
-               <p className="text-sm leading-[1.8] dark:text-white">{currentQ.content}</p>
+               <p className="text-sm leading-[1.8]">{currentQ.content}</p>
                <div className="flex justify-end mt-6">
                  <CustomButton
                    onClick={() => handleQuestionChange(currentQuestion + 1)}
@@ -466,7 +466,7 @@ A skvělý {' '}
     />
                    <Label
                      htmlFor={`option-${index}`}
-                     className="text-sm cursor-pointer leading-[1.8] dark:text-white"
+                     className="text-sm cursor-pointer leading-[1.8] "
                    >
                      {typeof option === 'object' ? option.text : option}
                    </Label>
@@ -520,7 +520,7 @@ A skvělý {' '}
                              />
                              <Label
                                htmlFor={`option-${index}`}
-                               className="text-sm cursor-pointer leading-[1.8] dark:text-white"
+                               className="text-sm cursor-pointer leading-[1.8] "
                              >
                                {currentQ.options[index]}
                              </Label>
