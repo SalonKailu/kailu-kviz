@@ -98,15 +98,15 @@ const QUESTIONS = [
   type: 'checkbox',
   section: 'target',
   options: [
-    { text: 'Pigmentové skvrny nebo jizvy po akné', image: 'https://www.kailushop.cz/user/documents/upload/skvrny.png' },
-    { text: 'Kruhy pod očima', image: 'https://www.kailushop.cz/user/documents/upload/kruhy.png' },
-    { text: 'Vrásky', image: 'https://www.kailushop.cz/user/documents/upload/vrasky.png' },
-    { text: 'Sem tam pupínek', image: 'https://www.kailushop.cz/user/documents/upload/pupinek.png' },
-    { text: 'Akné (více než 5 pupínků🤫)', image: 'https://www.kailushop.cz/user/documents/upload/akne.png' },
-    { text: 'Rozšířené póry / černé tečky', image: 'https://www.kailushop.cz/user/documents/upload/cernetecky.png' },
-    { text: 'Dermatitida', image: 'https://www.kailushop.cz/user/documents/upload/dermatitida.png' },
-    { text: 'Kuperóza ("popraskané žilky")', image: 'https://www.kailushop.cz/user/documents/upload/kuperoza.png' },
-    { text: 'Není, jsem spokojená / Nic z výše uvedeného' }
+    'Pigmentové skvrny nebo jizvy po akné',
+    'Kruhy pod očima',
+    'Vrásky',
+    'Sem tam pupínek',
+    'Akné (více než 5 pupínků🤫)',
+    'Rozšířené póry / černé tečky',
+    'Dermatitida',
+    'Kuperóza ("popraskané žilky")',
+    'Není, jsem spokojená / Nic z výše uvedeného'
   ]
 },
 {
@@ -498,6 +498,9 @@ A skvělý {' '}
                            <Image
                              src={image.url}
                              alt={image.alt}
+                             layout="responsive" // Dynamická velikost
+                width={1} // Poměr stran
+                height={1} // Poměr stran (čtverec díky "aspect-square")
                              className={`w-full h-full object-cover transition-transform duration-200 ${
                                hoveredImage === index ? 'scale-125' : 'scale-100'
                              }`}
