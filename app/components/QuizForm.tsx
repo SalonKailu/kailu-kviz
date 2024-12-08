@@ -272,7 +272,7 @@ const QuizForm = () => {
  if (showIntro) {
    return (
      <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
-       <Card className="min-h-screen bg-gray-50 py-8 px-4 max-w-[800px] mx-auto">
+       <Card className="min-h-screen bg-gray-50 dark:bg-gray-800 py-8 px-4 max-w-[1100px] mx-auto text-gray-900 dark:text-white">
          <CardContent className="p-4">
            <SectionHeader currentQuestion={currentQuestion} />
            <div className="space-y-1">
@@ -432,7 +432,7 @@ A skvělý {' '}
        <CardContent className="p-4">
          <SectionHeader currentQuestion={currentQuestion} />
          <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-           <h2 className="text-md font-bold mb-2">
+         <h2 className="text-md font-bold mb-2 text-gray-900 dark:text-white">
              {currentQ.title}
            </h2>
 
@@ -466,7 +466,7 @@ A skvělý {' '}
     />
                    <Label
                      htmlFor={`option-${index}`}
-                     className="text-sm cursor-pointer leading-[1.8] transition-colors duration-200 hover:text-gray-800"
+                     className="text-sm cursor-pointer leading-[1.8] text-gray-900 dark:text-white"
                    >
                      {typeof option === 'object' ? option.text : option}
                    </Label>
