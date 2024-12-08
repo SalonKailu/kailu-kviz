@@ -6,6 +6,9 @@ const config: NextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
+  },
+  draftMode: {
+    enabled: false
   }
 }
 
