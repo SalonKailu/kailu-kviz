@@ -6,7 +6,6 @@ import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
 import { Search } from 'lucide-react';
 import { evaluateQuiz, type QuizResult } from './QuizEvaluation';
-import { runTests } from './QuizEvaluation.test';
 import { RESULT_TEXTS } from './QuizEvaluation';
 import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
 import { SKIN_TYPE_URLS } from './QuizEvaluation';
@@ -427,14 +426,7 @@ A skvělý {' '}
 
  return (
   <>
-    {process.env.NODE_ENV === 'development' && (
-      <button
-        onClick={runTests}
-        className="fixed top-4 right-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
-        Spustit testy
-      </button>
-    )}
+
    <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
      <Card className="min-h-screen bg-gray-50 py-8 px-4 max-w-[800px] mx-auto">
        <CardContent className="p-4">
