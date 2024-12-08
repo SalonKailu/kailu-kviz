@@ -488,7 +488,7 @@ A skvělý {' '}
                {currentQ.images ? (
                  <div className="flex flex-wrap gap-4">
                    {currentQ.images.map((image, index) => (
-                     <div key={index} className="flex flex-col w-[200px]">
+                     <div key={index} className="flex flex-col w-[150px]">
                        <div
                          className="relative aspect-square group"
                          onMouseEnter={() => setHoveredImage(index)}
@@ -505,11 +505,7 @@ A skvělý {' '}
                                hoveredImage === index ? 'scale-125' : 'scale-100'
                              }`}
                            />
-                           {hoveredImage === index && (
-                             <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                               <Search className="w-8 h-8 text-white" />
-                             </div>
-                           )}
+                         
                          </div>
                        </div>
                        <div className="mt-2">
@@ -535,27 +531,28 @@ A skvělý {' '}
                    ))}
                  </div>
                ) : (
-                 <RadioGroup
-                   value={answers[currentQ.id]}
-                   onValueChange={handleAnswer}
-                   className="space-y-1"
-                 >
-                   {currentQ.options.map((option, index) => (
-                     <div key={index} className="flex items-start space-x-3 py-2 transition-all duration-200 hover:translate-x-0.5">
-                       <RadioGroupItem 
-                         value={option} 
-                         id={`option-${index}`}
-                         className="mt-0.5"
-                       />
-                       <Label
-                         htmlFor={`option-${index}`}
-                         className="text-sm cursor-pointer leading-[1.8] transition-colors duration-200 hover:text-gray-800"
-                       >
-                         {option}
-                       </Label>
-                     </div>
-                   ))}
-                 </RadioGroup>
+                <RadioGroup
+                value={answers[currentQ.id]}
+                onValueChange={handleAnswer}
+                className="space-y-2"
+              >
+                {currentQ.options.map((option, index) => (
+                  <div key={index} className="flex flex-col w-full">
+                    <div className="flex items-start space-x-2 py-2">
+                      <RadioGroupItem
+                        value={option}
+                        id={`option-${index}`}
+                      />
+                      <Label
+                        htmlFor={`option-${index}`}
+                        className="text-sm cursor-pointer leading-[1.8]"
+                      >
+                        {option}
+                      </Label>
+                    </div>
+                  </div>
+                ))}
+              </RadioGroup>
                )}
              </div>
            )}
