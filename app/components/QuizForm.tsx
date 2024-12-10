@@ -519,7 +519,7 @@ A skvělý {' '}
                              />
                              <Label
                                htmlFor={`option-${index}`}
-                               className="text-sm cursor-pointer leading-[1.8] "
+                               className="text-sm cursor-pointer leading-[1.8] text-gray-900"
                              >
                                {currentQ.options[index]}
                              </Label>
