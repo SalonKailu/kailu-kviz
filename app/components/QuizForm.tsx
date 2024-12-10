@@ -135,7 +135,7 @@ const QUESTIONS = [
 },
 {
   id: 'budget-intro',
-  title: 'Balíček na míru už se chystá. 🎁 ',
+  title: 'Balíček na míru už se chystá. 🎁',
   type: 'info',
   section: 'budget',
   content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. Jedná se o částku, která vám kompletně pokryje tříměsíční péči o pleť.',
@@ -143,7 +143,7 @@ const QUESTIONS = [
 },
 {
   id: 'budget-limit',
-  title: 'Máte stanovený cenový limit? '
+  title: 'Máte stanovený cenový limit?',
   type: 'radio',
   section: 'budget',
   options: [
