@@ -4,7 +4,6 @@ import { Card, CardContent } from "./ui/card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import { Search } from 'lucide-react';
 import { evaluateQuiz, type QuizResult } from './QuizEvaluation';
 import { RESULT_TEXTS } from './QuizEvaluation';
 import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
@@ -270,26 +269,26 @@ const QuizForm = () => {
  };
 
  if (showIntro) {
-   return (
-     <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
-       <Card className="min-h-screen bg-gray-50 dark:bg-gray-800 py-8 px-4 max-w-[1100px] mx-auto">
-         <CardContent className="p-4">
-           <SectionHeader currentQuestion={currentQuestion} />
-           <div className="space-y-1">
-             {INTRO_TEXT.paragraphs.map((paragraph, index) => (
-               <p key={index} className="text-sm leading-[1.8]">{paragraph}</p>
-             ))}
-           </div>
-           <div className="flex justify-end mt-6">
-             <CustomButton onClick={() => setShowIntro(false)}>
-               Pojďme na to!
-             </CustomButton>
-           </div>
-         </CardContent>
-       </Card>
-     </div>
-   );
- }
+  return (
+    <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
+      <Card className="min-h-screen bg-gray-50 py-8 px-4 max-w-[1100px] mx-auto">
+        <CardContent className="p-4">
+          <SectionHeader currentQuestion={currentQuestion} />
+          <div className="space-y-1">
+            {INTRO_TEXT.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-sm leading-[1.8] text-gray-900 dark:text-gray-200">{paragraph}</p>
+            ))}
+          </div>
+          <div className="flex justify-end mt-6">
+            <CustomButton onClick={() => setShowIntro(false)}>
+              Pojďme na to!
+            </CustomButton>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
  console.log('currentQuestion:', currentQuestion);
 console.log('QUESTIONS length:', QUESTIONS.length);
@@ -545,7 +544,7 @@ A skvělý {' '}
                       />
                       <Label
                         htmlFor={`option-${index}`}
-                        className="text-sm cursor-pointer leading-[1.8]"
+                        className="text-sm cursor-pointer leading-[1.8] text-gray-900 dark:text-gray-200"
                       >
                         {option}
                       </Label>
