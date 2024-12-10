@@ -135,15 +135,15 @@ const QUESTIONS = [
 },
 {
   id: 'budget-intro',
-  title: 'Balíček na míru už se chystá. 🎁 Ale peníze bohužel ani v našem rybníku nerostou, proto se vás ještě zeptáme na váš rozpočet.',
+  title: 'Balíček na míru už se chystá. 🎁 ',
   type: 'info',
   section: 'budget',
-  content: 'Jedná se o částku, kterou plánujete investovat do své skin-care na následující 2-3 měsíce. Spotřeba produktů se u zákaznic mírně liší, záleží na konkrétní sadě a především na způsobu používání.',
-  buttonText: 'Jdeme na to!'
+  content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. Jedná se o částku, která vám kompletně pokryje tříměsíční péči o pleť.',
+  buttonText: 'Mám rozmyšleno!'
 },
 {
   id: 'budget-limit',
-  title: 'Kolik byste chtěl/a maximálně utratit za vaši novou pleťovou péči?',
+  title: 'Máte stanovený cenový limit? '
   type: 'radio',
   section: 'budget',
   options: [
@@ -175,7 +175,7 @@ const SectionHeader = ({ currentQuestion }) => {
 
  return (
    <div className="pt-2 mb-3">
-     <h1 className="text-base font-semibold flex items-center">
+     <h1 className="text-base font-semibold flex items-center text-gray-900">
        {getHeaderText()}
      </h1>
      <div className="h-px bg-[#c0b6aa] mt-2"></div>
@@ -488,7 +488,7 @@ A skvělý {' '}
                {currentQ.images ? (
                  <div className="flex flex-wrap gap-4">
                    {currentQ.images.map((image, index) => (
-                     <div key={index} className="flex flex-col w-[150px]">
+                     <div key={index} className="flex flex-col w-[160px]">
                        <div
                          className="relative aspect-square group"
                          onMouseEnter={() => setHoveredImage(index)}

@@ -9,10 +9,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: {
+          DEFAULT: "var(--background)",
+          dark: "var(--background-dark)",
+        },
+        foreground: {
+          DEFAULT: "var(--foreground)",
+          dark: "var(--foreground-dark)",
+        },
       },
     },
   },
+  darkMode: 'media', // Přidáme toto pro automatickou detekci tmavého režimu
   plugins: [],
 } satisfies Config;
