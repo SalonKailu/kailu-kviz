@@ -11,15 +11,15 @@ export default {
       colors: {
         background: {
           DEFAULT: "var(--background)",
-          dark: "var(--background-dark)",
+          dark: "var(--background)",  // změněno na stejnou hodnotu
         },
         foreground: {
           DEFAULT: "var(--foreground)",
-          dark: "var(--foreground-dark)",
+          dark: "var(--foreground)",  // změněno na stejnou hodnotu
         },
       },
     },
   },
-  darkMode: 'media', // Přidáme toto pro automatickou detekci tmavého režimu
+  // darkMode: 'media',  // Odstraníme nebo zakomentujeme tuto řádku
   plugins: [],
 } satisfies Config;
