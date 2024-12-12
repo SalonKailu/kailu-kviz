@@ -276,7 +276,7 @@ const QuizForm = () => {
           <SectionHeader currentQuestion={currentQuestion} />
           <div className="space-y-1">
             {INTRO_TEXT.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-sm leading-[1.8] text-gray-900 dark:text-gray-200">{paragraph}</p>
+              <p key={index} className="text-sm leading-[1.8] text-gray-900">{paragraph}</p>
             ))}
           </div>
           <div className="flex justify-end mt-6">
@@ -544,7 +544,7 @@ A skvělý {' '}
                       />
                       <Label
                         htmlFor={`option-${index}`}
-                        className="text-sm cursor-pointer leading-[1.8] text-gray-900 dark:text-gray-200"
+                        className="text-sm cursor-pointer leading-[1.8] text-gray-900"
                       >
                         {option}
                       </Label>
