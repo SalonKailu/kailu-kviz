@@ -184,7 +184,7 @@ export const SPECIAL_RECOMMENDATIONS = {
 export const RESULT_TEXTS: Record<ProductSet, string> = {
   'Suchá základ': 'Vaše suchá pleť volá po pravidelné hydrataci a výživě. Připravila jsem pro vás základní sadu 4 produktů, která je perfektní pro začátek nebo pokud hledáte cenově dostupnější variantu. Přestože jde o základní péči, její účinnost vás příjemně překvapí! Pleť bude hydratovaná, vyživená a příjemná na dotek.',
   
-  'Suchá komplet': 'Vaše suchá pleť potřebuje komplexní péči pro obnovu komfortu a vitality. Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující, jejich textura je příjemná a dobře se vstřebává.',
+  'Suchá komplet': 'Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující. Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.',
   
   'Suchá a normální Anti-age': 'Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží speciální péči! Připravila jsem pro vás produkty, které kombinují intenzivní hydrataci s účinnými anti-age složkami. Dopřejte své pleti péči, která vyřeší hned dva problémy najednou!',
   
@@ -212,7 +212,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u mě v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
-  'Problém: AKNÉ': 'Akné může být opravdu náročným společníkem, ale věřte, že výsledky na sebe nenechají dlouho čekat! Připravila jsme pro vás speciální sadu, která pomůže vaší pleti najít rovnováhu. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje a projasňuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a vysvětlí, co vaše pleť skutečně potřebuje.'
+  'Problém: AKNÉ': 'Akné může být opravdu náročným společníkem, ale věřte, že výsledky na sebe nenechají dlouho čekat! Připravila jsme pro vás speciální sadu, která pomůže vaší pleti najít rovnováhu. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje a projasňuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám s tím, co vaše pleť skutečně potřebuje.'
 };
 // Funkce pro vyhodnocení typu pleti
 export function evaluateSkinType(answers: QuizAnswers): SkinType {
