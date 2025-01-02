@@ -128,7 +128,7 @@ const QUESTIONS = [
     'Ať mi zmizí pupínky.',
     'Zbav mě vrásek.',
     'Ať už není moje pleť tak vysušená.',
-    'Ráda bych, aby moje pleť byla zářivější a vypnujější.',
+    'Ráda bych, aby moje pleť byla zářivější a vypnutější.',
     'Nechť mé černé tečky navždy zmizí!',
   ]
 },
@@ -393,7 +393,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
               ? 'Krém, který si hravě poradí s kruhy pod očima, je již součástí vaší anti-age sady.'
               : (
                 <>
-A skvělý {' '}
+Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     <a 
       href="https://www.kailushop.cz/ocni-krem" 
       target="_blank" 
@@ -402,8 +402,7 @@ A skvělý {' '}
     >
       oční krém
     </a>{' '}
-    od korejské značky Skin1004 vám doporučuji zejména pro zmírnění kruhů pod očima. 
-    Navíc působí skvěle i jako prevence drobných vrásek kolem očí.
+    od korejské značky Skin1004, který navíc působí skvěle i jako prevence drobných vrásek kolem očí.
                 </>
               )}
           </p>
