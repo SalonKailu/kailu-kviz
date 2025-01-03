@@ -470,18 +470,12 @@ export function selectProductSet(
   if (wishAnswer) {
     console.log('\nVyhodnocuji přání:', wishAnswer);
     
-    // Přání ohledně stárnutí a vrásek
-    if (wishAnswer.includes('zpomalit stárnutí') || wishAnswer.includes('Zbav mě vrásek')) {
-      if (skinType === SKIN_TYPES.DRY || skinType === SKIN_TYPES.NORMAL) {
-        console.log('Přání ohledně stárnutí - vybírám anti-age sadu pro suchou/normální pleť');
-        const antiAgeSada = affordableSets.find(set => set.includes('Anti-age'));
-        if (antiAgeSada) return antiAgeSada;
-      } else if (skinType === SKIN_TYPES.MIXED || skinType === SKIN_TYPES.OILY) {
-        console.log('Přání ohledně stárnutí - vybírám anti-age sadu pro mastnou/smíšenou pleť');
-        const antiAgeSada = affordableSets.find(set => set.includes('Anti-age'));
-        if (antiAgeSada) return antiAgeSada;
-      }
-    }
+   // Přání ohledně těhotenství
+if (wishAnswer.includes('Zrovna jsem těhotná')) {
+  console.log('Přání ohledně těhotenství - vybírám sadu pro citlivou pleť');
+  const citlivaSada = affordableSets.find(set => set.includes('Citlivá'));
+  if (citlivaSada) return citlivaSada;
+}
   
     // Přání ohledně mastnoty a lesku
     if (wishAnswer.includes('přestane lesknout') || wishAnswer.includes('černé tečky')) {
@@ -507,7 +501,7 @@ export function selectProductSet(
     }
   
     // Přání ohledně hydratace a zářivosti
-    if (wishAnswer.includes('vysušená') || wishAnswer.includes('zářivější a vypnujější')) {
+    if (wishAnswer.includes('vysušená') || wishAnswer.includes('zářivější a vypnutější')) {
       console.log('Přání ohledně hydratace/zářivosti - vybírám kompletní sadu');
       const kompletSada = affordableSets.find(set => set.includes('komplet'));
       if (kompletSada) return kompletSada;
