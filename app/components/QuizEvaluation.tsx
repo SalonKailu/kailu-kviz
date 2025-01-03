@@ -204,7 +204,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální.“ Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada pro váš typ pleti udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek.“ Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
   
-  'Citlivá': 'Vaše pleť si zaslouží tu nejjemnější péči. Připravila jsem pro vás sadu 5 produktů se zklidňujícími a regeneračními složkami. Přestože jsou produkty velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť a posílí její přirozenou ochrannou bariéru. Dopřejte své pleti péči, kterou si zaslouží!',
+  'Citlivá': 'Vaše pleť si zaslouží tu nejjemnější péči. Připravila jsem pro vás sadu 5 produktů se zklidňujícími a regeneračními složkami. Přestože jsou produkty velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.',
   
   'Citlivá + Sem tam pupínek': 'Vaše citlivá pleť potřebuje nejen zklidnit, ale občas i pomoct s pupínky. Připravila jsem pro vás kombinaci dvou sad - hlavní sadu pro citlivou pleť a mini sadu "Sem tam pupínek". Hlavní sada pro každodenní péči zklidní podrážděnou pleť, zmírní zarudnutí a posílí její přirozenou ochrannou bariéru. Mini sada pak rychle pomůže v případě akutních problémů. Dopřejte své pleti něžnou péči s možností rychlého zásahu!',
   
