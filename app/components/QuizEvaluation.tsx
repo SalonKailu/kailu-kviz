@@ -188,7 +188,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Suchá a normální Anti-age': 'Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží speciální péči! Připravila jsem pro vás produkty, které kombinují intenzivní hydrataci s účinnými anti-age složkami. Vaše pleť bude jen zářit!',
   
-  'Suchá základ + Sem tam pupínek': 'Vaše suchá pleť potřebuje především hydrataci, ale občas se na ní přesto vyklube nějaká ta nechtěná boulička. 🤭 Proto jsem pro vás připravila základní sadu 3 produktů doplněnou o mini sadu "Sem tam pupínek". Zatímco základní sada zajistí pleti potřebnou hydrataci a výživu, mini sada bude vaším pomocníkem v případě náhlých nedokonalostí. S touto kombinací bude vaše pleť spokojená za všech okolností!',
+  'Suchá základ + Sem tam pupínek': 'Vaše suchá pleť potřebuje především hydrataci, ale občas se na ní přesto vyklube nějaká ta nechtěná boulička. 😯 Proto vám dopočuruji základní sadu pro váš typ pleti v kombinaci s mini sadou "Sem tam pupínek". Zatímco základní sada zajistí pleti potřebnou hydrataci a výživu, mini sada bude vaším pomocníkem v případě náhlých nedokonalostí. S touto kombinací bude vaše pleť spokojená za všech okolností!',
   
   'M+SM základ': 'Vaše pleť si zaslouží profesionální péči, která ji udrží v rovnováze. Pokud s péčí o pleť teprve začínáte nebo hledáte cenově dostupnější variantu, bude pro vás tato sada perfektní volbou. Produkty jsou lehké, nezatěžují pleť, regulují maz, ale nevysušují. Dopřejte své pleti pravidelnou péči, která zabere jen pár minut denně!',
   
