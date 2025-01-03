@@ -126,7 +126,7 @@ const QUESTIONS = [
     'Ať se moje pleť přestane lesknout.',
     'Už nechci mít citlivou pleť.',
     'Ať mi zmizí pupínky.',
-    'Zbav mě vrásek.',
+    'Zrovna jsem těhotná, nebo kojím - proto se chci vyhnout látkám, které bych neměla používat.',
     'Ať už není moje pleť tak vysušená.',
     'Ráda bych, aby moje pleť byla zářivější a vypnutější.',
     'Nechť mé černé tečky navždy zmizí!',
