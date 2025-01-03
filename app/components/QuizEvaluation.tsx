@@ -417,6 +417,10 @@ export function selectProductSet(
   }
   // Kontrola těhotenství
 if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
+  if (budget === 1500) {
+    console.log('Těhotenství s limitem 1500 - vracím základní sadu pro normální pleť');
+    return PRODUCT_SETS.NORMALNI_ZAKLAD;
+  }
   console.log('Těhotenství - vracím sadu pro citlivou pleť');
   return PRODUCT_SETS.CITLIVA;
 }
