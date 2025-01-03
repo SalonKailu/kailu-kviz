@@ -415,6 +415,11 @@ export function selectProductSet(
     console.log('Nalezena kuperóza - vracím speciální sadu');
     return PRODUCT_SETS.KUPEROZA;
   }
+  // Kontrola těhotenství
+if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
+  console.log('Těhotenství - vracím sadu pro citlivou pleť');
+  return PRODUCT_SETS.CITLIVA;
+}
 
   // Získání dostupných sad pro typ pleti
   const availableSets = SADY_DLE_TYPU[skinType];
@@ -470,12 +475,6 @@ export function selectProductSet(
   if (wishAnswer) {
     console.log('\nVyhodnocuji přání:', wishAnswer);
     
-   // Přání ohledně těhotenství
-if (wishAnswer.includes('Zrovna jsem těhotná')) {
-  console.log('Přání ohledně těhotenství - vybírám sadu pro citlivou pleť');
-  const citlivaSada = affordableSets.find(set => set.includes('Citlivá'));
-  if (citlivaSada) return citlivaSada;
-}
   
     // Přání ohledně mastnoty a lesku
     if (wishAnswer.includes('přestane lesknout') || wishAnswer.includes('černé tečky')) {
