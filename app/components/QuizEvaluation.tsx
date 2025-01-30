@@ -366,26 +366,35 @@ if (noseAnswer) {
 }
 function countSensitivityPoints(answers: QuizAnswers): number {
   let sensitivityPoints = 0;
+  console.log('=== POČÍTÁNÍ BODŮ CITLIVOSTI ===');
   
   // První otázka - popis pleti
   if (answers['skin-description']?.includes('Je citlivá')) {
     sensitivityPoints++;
+    console.log('+ 1 bod za citlivý popis pleti');
   }
   
   // Otázka o tvářích
   if (answers['skin-cheeks']?.includes('Čert vem póry')) {
     sensitivityPoints++;
+    console.log('+ 1 bod za zarudnutí/podráždění na tvářích');
   }
   
   // Kosmetická kompatibilita
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
-  if (cosmeticAnswers.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+  
+  // Každá relevantní odpověď dá bod
+  if (cosmeticAnswers.includes('S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním')) {
     sensitivityPoints++;
-  }
-  if (cosmeticAnswers.includes('S kosmetikou musím opatrně')) {
-    sensitivityPoints++;
+    console.log('+ 1 bod za opatrnost s kosmetikou');
   }
   
+  if (cosmeticAnswers.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    sensitivityPoints++;
+    console.log('+ 1 bod za vysušování pleti');
+  }
+  
+  console.log('Celkový počet bodů citlivosti:', sensitivityPoints);
   return sensitivityPoints;
 }
 
