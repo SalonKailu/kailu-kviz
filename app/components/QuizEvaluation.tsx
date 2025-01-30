@@ -444,12 +444,15 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     console.log('Standardní výběr sady:', recommendedSet);
   }
   
-  // Určení zobrazovaného typu pleti
-  const displaySkinType = (sensitivityPoints >= 2 || (isPregnant && budget > 1500))
-    ? `${basicSkinType} a také citlivá` 
-    : basicSkinType;
-  
-  console.log('Zobrazovaný typ pleti:', displaySkinType);
+  // Určení zobrazovaného typu pleti - tady je hlavní změna
+const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+const displaySkinType = isSensitive 
+  ? `${basicSkinType} a také citlivá` 
+  : basicSkinType;
+
+console.log('Základní typ pleti:', basicSkinType);
+console.log('Je citlivá:', isSensitive);
+console.log('Výsledný zobrazený typ:', displaySkinType);
   
   return {
     skinType: displaySkinType,
