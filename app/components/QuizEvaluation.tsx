@@ -251,8 +251,8 @@ if (skinDescription) {
     console.log('Přidán 1 bod pro Mastnou');
   } else if (skinDescription.includes('Je citlivá')) {
     points[SKIN_TYPES.SENSITIVE]++;
-    points[SKIN_TYPES.DRY]++;
-    console.log('Přidán 1 bod pro Citlivou a 1 bod pro Suchou');
+
+    console.log('Přidán 1 bod pro Citlivou');
   }
   console.log('Body po první otázce:', {
     Suchá: points[SKIN_TYPES.DRY],
