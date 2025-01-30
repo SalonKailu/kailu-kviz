@@ -383,15 +383,14 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   // Kosmetická kompatibilita
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
   
-  // Každá relevantní odpověď dá bod
   if (cosmeticAnswers.includes('S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním')) {
-    sensitivityPoints++;
-    console.log('+ 1 bod za opatrnost s kosmetikou');
+    sensitivityPoints += 2; // Zvýšíme na 2 body za opatrnost
+    console.log('+ 2 body za opatrnost s kosmetikou');
   }
   
   if (cosmeticAnswers.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    sensitivityPoints++;
-    console.log('+ 1 bod za vysušování pleti');
+    sensitivityPoints += 2; // Zvýšíme na 2 body za vysušování
+    console.log('+ 2 body za vysušování pleti');
   }
   
   console.log('Celkový počet bodů citlivosti:', sensitivityPoints);
@@ -454,10 +453,10 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   }
   
   // Určení zobrazovaného typu pleti - tady je hlavní změna
-const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
-const displaySkinType = isSensitive 
-  ? `${basicSkinType} a také citlivá` 
-  : basicSkinType;
+  const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+  const displaySkinType = isSensitive && basicSkinType !== 'Citlivá'
+    ? `${basicSkinType} a také citlivá` 
+    : basicSkinType;
 
 console.log('Základní typ pleti:', basicSkinType);
 console.log('Je citlivá:', isSensitive);
