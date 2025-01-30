@@ -316,12 +316,12 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
       <p className="mb-4">
         Vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
         <a> </a><a 
-  href={`${SHOP_BASE_URL}${SKIN_TYPE_URLS[result.skinType]}`}
-  target="_blank" 
-  rel="noopener noreferrer"
-  className="text-black underline hover:text-[#faa4a6]"
+href={`${SHOP_BASE_URL}${result.skinType.includes('citlivá') ? 'citlivost' : SKIN_TYPE_URLS[result.skinType.split(' a také')[0]]}`}
+target="_blank"
+rel="noopener noreferrer"
+className="text-black underline hover:text-[#faa4a6]"
 >
-  Tady se o ní dozvíte více
+Tady se o ní dozvíte více
 </a>
       </p>
 
