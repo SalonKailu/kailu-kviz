@@ -225,11 +225,11 @@ export function evaluateSkinType(answers: QuizAnswers): SkinType {
   };
   console.log('=== VYHODNOCENÍ TYPU PLETI ===');
   console.log('Počáteční stav bodů:', {
-    Suchá: points[SKIN_TYPES.DRY],
-    Smíšená: points[SKIN_TYPES.MIXED],
-    Mastná: points[SKIN_TYPES.OILY],
-    Citlivá: points[SKIN_TYPES.SENSITIVE],
-    Normální: points[SKIN_TYPES.NORMAL]
+   suchá: points[SKIN_TYPES.DRY],
+    smíšená: points[SKIN_TYPES.MIXED],
+    mastná: points[SKIN_TYPES.OILY],
+    citlivá: points[SKIN_TYPES.SENSITIVE],
+    normální: points[SKIN_TYPES.NORMAL]
   });
 
   // Vyhodnocení první otázky
@@ -255,11 +255,11 @@ if (skinDescription) {
     console.log('Přidán 1 bod pro Citlivou');
   }
   console.log('Body po první otázce:', {
-    Suchá: points[SKIN_TYPES.DRY],
-    Smíšená: points[SKIN_TYPES.MIXED],
-    Mastná: points[SKIN_TYPES.OILY],
-    Citlivá: points[SKIN_TYPES.SENSITIVE],
-    Normální: points[SKIN_TYPES.NORMAL]
+    suchá: points[SKIN_TYPES.DRY],
+    smíšená: points[SKIN_TYPES.MIXED],
+    mastná: points[SKIN_TYPES.OILY],
+    citlivá: points[SKIN_TYPES.SENSITIVE],
+    normální: points[SKIN_TYPES.NORMAL]
   });
 }
 
@@ -279,11 +279,11 @@ if (noseAnswer) {
     console.log('Přidán 1 bod pro Suchou');
   }
   console.log('Body po otázce o nose:', {
-    Suchá: points[SKIN_TYPES.DRY],
-    Smíšená: points[SKIN_TYPES.MIXED],
-    Mastná: points[SKIN_TYPES.OILY],
-    Citlivá: points[SKIN_TYPES.SENSITIVE],
-    Normální: points[SKIN_TYPES.NORMAL]
+   suchá: points[SKIN_TYPES.DRY],
+   smíšená: points[SKIN_TYPES.MIXED],
+   mastná: points[SKIN_TYPES.OILY],
+   citlivá: points[SKIN_TYPES.SENSITIVE],
+   normální: points[SKIN_TYPES.NORMAL]
   });
 }
 
@@ -308,11 +308,11 @@ if (noseAnswer) {
  
   }
   console.log('Body po otázce o tvářích:', {
-    Suchá: points[SKIN_TYPES.DRY],
-    Smíšená: points[SKIN_TYPES.MIXED],
-    Mastná: points[SKIN_TYPES.OILY],
-    Citlivá: points[SKIN_TYPES.SENSITIVE],
-    Normální: points[SKIN_TYPES.NORMAL]
+    suchá: points[SKIN_TYPES.DRY],
+    smíšená: points[SKIN_TYPES.MIXED],
+    mastná: points[SKIN_TYPES.OILY],
+    citlivá: points[SKIN_TYPES.SENSITIVE],
+    normální: points[SKIN_TYPES.NORMAL]
   });
 }
   // Otázka o kosmetice
