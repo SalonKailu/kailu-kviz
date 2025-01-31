@@ -389,13 +389,13 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   // Kosmetická kompatibilita
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
 
-  if (cosmeticAnswers.includes('S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním')) {
+  if (cosmeticAnswers.some(answer => answer.includes('S kosmetikou musím opatrně'))) {
     sensitivityPoints++;
     console.log('+ 1 bod za opatrnost s kosmetikou');
   }
   
-  if (cosmeticAnswers.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    sensitivityPoints++; 
+  if (cosmeticAnswers.some(answer => answer.includes('Občas mám pocit, že mi pleť spíše vysuší'))) {
+    sensitivityPoints++;
     console.log('+ 1 bod za vysušování pleti');
   }
   
