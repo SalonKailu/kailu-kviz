@@ -186,7 +186,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Suchá komplet': 'Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující. Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.',
   
-  'Suchá a normální Anti-age': 'Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží speciální péči! Připravila jsem pro vás produkty, které kombinují intenzivní hydrataci s účinnými anti-age složkami. Vaše pleť bude jen zářit!',
+  'Suchá a normální Anti-age': 'Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží speciální péči! Připravila jsem pro vás produkty, které kombinují intenzivní hydrataci s účinnými anti-age složkami. Vaše pleť bude jen zářit.✨',
   
   'Suchá základ + Sem tam pupínek': 'Vaše suchá pleť potřebuje především hydrataci, ale občas se na ní přesto vyklube nějaká ta nechtěná boulička. 😯 Proto vám doporučuji základní sadu pro váš typ pleti v kombinaci s mini sadou "Sem tam pupínek". Zatímco základní sada zajistí pleti potřebnou hydrataci a výživu, mini sada bude vaším pomocníkem v případě náhlých nedokonalostí. S touto kombinací bude vaše pleť spokojená za všech okolností!',
   
@@ -403,6 +403,14 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   return sensitivityPoints;
 }
 
+const points = {
+  [SKIN_TYPES.DRY]: 0,
+  [SKIN_TYPES.MIXED]: 0,
+  [SKIN_TYPES.OILY]: 0,
+  [SKIN_TYPES.SENSITIVE]: 0,
+  [SKIN_TYPES.NORMAL]: 0
+};
+
 // Hlavní vyhodnocovací funkce
 export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   // Základní typ pleti
@@ -465,7 +473,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   
   if (basicSkinType === 'Citlivá') {
     // Najdeme druhý nejčastější typ pleti
-    const sortedSkinTypes = Object.entries(skinTypeScores)
+    const sortedSkinTypes = Object.entries(points)
       .filter(([type]) => type !== 'Citlivá') // Vyřadíme "Citlivá"
       .sort((a, b) => b[1] - a[1]); // Seřadíme podle bodů
   
