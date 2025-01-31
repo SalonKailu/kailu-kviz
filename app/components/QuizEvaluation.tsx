@@ -194,7 +194,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'M+SM komplet': 'Vaše pleť si žádá péči, která efektivně reguluje tvorbu kožního mazu a zároveň nevysušuje. Proto jsem pro vás připravila komplexní sadu šesti produktů, které šetrně čistí, hydratují a harmonizují pleť. Součástí je i náš bestseller – enzymatický peeling, expert na odstranění černých teček. 🦸‍♀️ S touto výbavou udržíme vaši pleť v dokonalé kondici!',
   
-  'M+SM komplet + Sem tam pupínek': 'Přesně pro vás jsem připravila sadu pro každodenní péči a také doplňkovou sadu "Sem tam pupínek". Zatímco hlavní sada se postará o každodenní potřeby vaší (občas docela náladové) pleti, mini sada vám pomůže ve chvílích, kdy se vám vyklube nevítaný pupínek. S touto kombinací budete vždy o krok napřed!',
+  'M+SM komplet + Sem tam pupínek': 'Zatímco hlavní sada se postará o každodenní potřeby vaší (občas docela náladové) pleti, mini sada vám pomůže ve chvílích, kdy se vám vyklube nevítaný pupínek. S touto kombinací budete vždy o krok napřed!',
   
   'M+SM Anti-age': 'Připravila jsem pro vás sadu 5 produktů, které respektují specifické potřeby vaší pleti a zároveň účinně bojují proti známkám stárnutí. Redukují nadměrnou mastnotu, oddalují tvorbu vrásek, zpevňují pleť a hydratují ji, aniž by ucpávaly póry. Dopřejte své pleti péči, která myslí na každý detail! ',
   
@@ -379,10 +379,16 @@ function countSensitivityPoints(answers: QuizAnswers): number {
     sensitivityPoints++;
     console.log('+ 1 bod za zarudnutí/podráždění na tvářích');
   }
+
+    // Přání nemít citlivou pleť
+    if (answers['wish-fish']?.includes('Už nechci mít citlivou')) {
+      sensitivityPoints++;
+      console.log('+ 1 bod za přání nemít citlivou pleť');
+    }
   
   // Kosmetická kompatibilita
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
-  
+
   if (cosmeticAnswers.includes('S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním')) {
     sensitivityPoints++;
     console.log('+ 1 bod za opatrnost s kosmetikou');
@@ -470,7 +476,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
 } else {
     displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá, což je stav, který bychom měli řešit přednostně.` 
+      ? `${basicSkinType} a také citlivá, což je stav, který bychom měli řešit přednostně` 
       : basicSkinType;
   }
 
