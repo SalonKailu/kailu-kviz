@@ -32,7 +32,7 @@ const QUESTIONS = [
      'Je suchá - pocitově i na pohled, občas pne nebo svědí',
      'Dost se mastí, tváře ale o něco méně, než zbytek obličeje',
      'Mastí se hodně a všude!',
-     'Je citlivá. Často červená, občas pne, nebo se vytvoří šupinky. Málokterá kosmetika mi sedne'
+     'Je citlivá. Málokterá kosmetika mi sedne'
    ]
  },
  {
