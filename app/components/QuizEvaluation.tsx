@@ -42,11 +42,11 @@ export interface QuizResult {
 }
 // Konstanty pro typy pleti
 export const SKIN_TYPES: Record<string, SkinType> = {
-  DRY: 'Suchá',
-  MIXED: 'Smíšená',
-  OILY: 'Mastná',
-  SENSITIVE: 'Citlivá',
-  NORMAL: 'Normální'
+  DRY: 'suchá',
+  MIXED: 'smíšená',
+  OILY: 'mastná',
+  SENSITIVE: 'citlivá',
+  NORMAL: 'normální'
 } as const;
 
 // Konstanty pro produktové sady
@@ -204,15 +204,15 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální.“ Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada pro váš typ pleti udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek.“ Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
   
-  'Citlivá': 'Připravila jsem pro vás sadu 5 produktů se zklidňujícími a regeneračními složkami. Přestože jsou produkty velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.',
+  'Citlivá': 'Připravila jsem pro vás velmi účinnou sadu produktů se zklidňujícími a probiotickými složkami. Přestože jsou produkty velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.',
   
-  'Citlivá + Sem tam pupínek': 'Vaše citlivá pleť potřebuje nejen zklidnit, ale občas i pomoct s pupínky. Proto bych vám doporučila kombinaci dvou sad. Hlavní sada pro každodenní péči zklidní podrážděnou pleť, zmírní zarudnutí a posílí její přirozenou ochrannou bariéru. Doplňková sada Sem tam pupínek pak rychle pomůže v případě akutních problémů.',
+  'Citlivá + Sem tam pupínek': 'Doporučila bych vám kombinaci dvou sad. Hlavní sada pro každodenní péči zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratuje a vyživí. A doplňková sada Sem tam pupínek výrazně urychlí hojení a zamezí výskytu nedokonalostí.',
   
   'Kuperóza': 'Vybral/a jste možnost, že vás trápí kuperóza! Nejlepší variantou pro vás bude zklidňující sada speciálně sestavená pro vaši pleť. Součástí balíčku je navíc manuál, ve kterém se dozvíte několik užitečných rad a tipů, které vaší pleti prospějí.',
   
-  'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u mě v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
+  'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
-  'Problém: AKNÉ': 'Akné může být opravdu náročným společníkem, ale věřte, že výsledky na sebe nenechají dlouho čekat! Připravila jsme pro vás speciální sadu, která pomůže vaší pleti najít rovnováhu. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje a projasňuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám s tím, co vaše pleť skutečně potřebuje.'
+  'Problém: AKNÉ': 'Připravila jsme pro vás velmi účinnou sadu s retinolem, která pomůže vaší pleti najít rovnováhu. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje a projasňuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám s tím, co vaše pleť skutečně potřebuje.'
 };
 // Funkce pro vyhodnocení typu pleti
 export function evaluateSkinType(answers: QuizAnswers): SkinType {
@@ -484,7 +484,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
 } else {
     displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá, což je stav, který bychom měli řešit přednostně` 
+      ? `${basicSkinType} a také citlivá, což bychom měli řešit přednostně` 
       : basicSkinType;
   }
 
