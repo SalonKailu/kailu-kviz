@@ -116,33 +116,33 @@ export const SKIN_TYPE_URLS = {
 
 // Sady podle typu pleti s prioritami
 export const SADY_DLE_TYPU: Record<SkinType, ProductSet[]> = {
-  'Suchá': [
+  'suchá': [
     'Suchá a normální Anti-age',
     'Suchá komplet',
     'Suchá základ + Sem tam pupínek',
     'Suchá základ'
   ],
-  'Smíšená': [
+  'smíšená': [
     'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM základ'
   ],
-  'Mastná': [
+  'mastná': [
     'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM základ'
   ],
-  'Normální': [
+  'normální': [
     'Suchá a normální Anti-age',
     'Normální základ + Sem tam pupínek',
     'Normální komplet',
     'Normální základ'
   ],
-  'Citlivá': [
+  'citlivá': [
     'Citlivá + Sem tam pupínek',
     'Citlivá'
   ]
@@ -471,7 +471,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
 
   let displaySkinType;
   
-  if (basicSkinType === 'Citlivá') {
+  if (basicSkinType === 'citlivá') {
     // Najdeme druhý nejčastější typ pleti
     const sortedSkinTypes = Object.entries(points)
       .filter(([type]) => type !== 'Citlivá') // Vyřadíme "Citlivá"
