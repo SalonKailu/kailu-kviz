@@ -401,6 +401,17 @@ function countSensitivityPoints(answers: QuizAnswers): number {
 export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   // Základní typ pleti
   const basicSkinType = evaluateSkinType(answers);
+
+  // Pokud je základní typ citlivá, najdeme druhý nejsilnější typ
+const points = evaluateSkinType(answers);
+const baseType = Object.entries(points)
+  .filter(([type]) => type !== 'Citlivá')
+  .sort(([,a], [,b]) => b - a)[0][0];
+
+// Upravíme zobrazovaný typ
+const displaySkinType = basicSkinType === 'Citlivá'
+  ? `typově ${baseType.toLowerCase()}, ale nyní se musíme zaměřit především na její citlivost`
+  : basicSkinType;
   
   // Body citlivosti
   const sensitivityPoints = countSensitivityPoints(answers);
