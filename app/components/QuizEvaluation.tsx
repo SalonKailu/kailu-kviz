@@ -384,13 +384,13 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
   
   if (cosmeticAnswers.includes('S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním')) {
-    sensitivityPoints += 2; // Zvýšíme na 2 body za opatrnost
-    console.log('+ 2 body za opatrnost s kosmetikou');
+    sensitivityPoints++;
+    console.log('+ 1 bod za opatrnost s kosmetikou');
   }
   
   if (cosmeticAnswers.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    sensitivityPoints += 2; // Zvýšíme na 2 body za vysušování
-    console.log('+ 2 body za vysušování pleti');
+    sensitivityPoints++; 
+    console.log('+ 1 bod za vysušování pleti');
   }
   
   console.log('Celkový počet bodů citlivosti:', sensitivityPoints);
@@ -401,17 +401,6 @@ function countSensitivityPoints(answers: QuizAnswers): number {
 export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   // Základní typ pleti
   const basicSkinType = evaluateSkinType(answers);
-
-  // Pokud je základní typ citlivá, najdeme druhý nejsilnější typ
-const points = evaluateSkinType(answers);
-const baseType = Object.entries(points)
-  .filter(([type]) => type !== 'Citlivá')
-  .sort(([,a], [,b]) => b - a)[0][0];
-
-// Upravíme zobrazovaný typ
-const displaySkinType = basicSkinType === 'Citlivá'
-  ? `typově ${baseType.toLowerCase()}, ale nyní se musíme zaměřit především na její citlivost`
-  : basicSkinType;
   
   // Body citlivosti
   const sensitivityPoints = countSensitivityPoints(answers);
@@ -465,9 +454,25 @@ const displaySkinType = basicSkinType === 'Citlivá'
   
   // Určení zobrazovaného typu pleti - tady je hlavní změna
   const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
-  const displaySkinType = isSensitive && basicSkinType !== 'Citlivá'
-    ? `${basicSkinType} a také citlivá` 
-    : basicSkinType;
+
+  let displaySkinType;
+  
+  if (basicSkinType === 'Citlivá') {
+    // Najdeme druhý nejčastější typ pleti
+    const sortedSkinTypes = Object.entries(skinTypeScores)
+      .filter(([type]) => type !== 'Citlivá') // Vyřadíme "Citlivá"
+      .sort((a, b) => b[1] - a[1]); // Seřadíme podle bodů
+  
+    const secondMostCommonType = sortedSkinTypes.length > 0 ? sortedSkinTypes[0][0] : 'Neurčeno';
+  
+    displaySkinType = secondMostCommonType 
+    ? `Vaše pleť je ${secondMostCommonType}, ale nyní musíme řešit především její citlivost.` 
+    : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
+} else {
+    displaySkinType = isSensitive 
+      ? `${basicSkinType} a také citlivá, což je stav, který bychom měli řešit přednostně.` 
+      : basicSkinType;
+  }
 
 console.log('Základní typ pleti:', basicSkinType);
 console.log('Je citlivá:', isSensitive);
