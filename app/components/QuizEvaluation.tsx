@@ -480,7 +480,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     const secondMostCommonType = sortedSkinTypes.length > 0 ? sortedSkinTypes[0][0] : 'Neurčeno';
   
     displaySkinType = secondMostCommonType 
-    ? `Vaše pleť je ${secondMostCommonType}, ale nyní musíme řešit především její citlivost.` 
+    ? `${secondMostCommonType}, ale nyní musíme řešit především její citlivost` 
     : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
 } else {
     displaySkinType = isSensitive 
