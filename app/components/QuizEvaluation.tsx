@@ -500,6 +500,7 @@ console.log('Výsledný zobrazený typ:', displaySkinType);
       hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
       hasUndereyeCircles: problems.includes('Kruhy pod očima'),
       antiAgeSuggested: recommendedSet.includes('Anti-age'),
+      hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && !['Mastná', 'Smíšená'].includes(basicSkinType),
       isPregnant
     }
   };
