@@ -66,7 +66,6 @@ const QUESTIONS = [
      'Ano, jsou všude.',
      'Vidím je hlavně v oblasti vedle nosu, na tvářích potom o něco méně.',
      'Sem tam možná nějaký je.',
-     'Čert vem póry, mě na první pohled upoutá zarudnutí a celkově podrážděný vzhled.'
    ]
  },
  {
@@ -80,7 +79,6 @@ const QUESTIONS = [
      'Většina kosmetických přípravků mi sedne.',
      'Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!',
      'Moje pleť miluje pořádně hutné krémy a oleje!',
-     'U některé kosmetiky mám pocit napnuté pleti, jindy se zase více lesknu.'
    ]
  },
  {
@@ -122,13 +120,13 @@ const QUESTIONS = [
   type: 'radio',
   section: 'wish',
   options: [
-    'Zrovna jsem těhotná, nebo kojím - proto se chci vyhnout látkám, které bych neměla používat.','Chci zpomalit stárnutí.',
+    'Chci zpomalit stárnutí.',
     'Ať se moje pleť přestane lesknout.',
     'Už nechci mít citlivou pleť.',
     'Ať mi zmizí pupínky.',
     'Ať už není moje pleť tak vysušená.',
-    'Ráda bych, aby moje pleť byla zářivější a vypnutější.',
     'Nechť mé černé tečky navždy zmizí!',
+    'Zrovna jsem těhotná, nebo kojím - proto se chci vyhnout látkám, které bych neměla používat.',
   ]
 },
 {
@@ -136,7 +134,7 @@ const QUESTIONS = [
   title: 'Balíček na míru už se chystá. 🎁',
   type: 'info',
   section: 'budget',
-  content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. Jedná se o částku, která vám kompletně pokryje tříměsíční péči o pleť.',
+  content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. Jedná se o částku, která vám kompletně pokryje zhruba tříměsíční péči o pleť.',
   buttonText: 'Mám rozmyšleno!'
 },
 {
@@ -314,7 +312,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
       </h1>
       
       <p className="mb-4">
-        Vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
+        vaše pleť je<span className="font-semibold">{result.skinType}</span>. 
         <a> </a><a 
 href={`${SHOP_BASE_URL}${result.skinType.includes('citlivá') ? 'citlivost' : SKIN_TYPE_URLS[result.skinType.split(' a také')[0]]}`}
 target="_blank"
@@ -372,7 +370,10 @@ Tady se o ní dozvíte více
 
     
       <div className="space-y-4 mb-6">
-        <p>{RESULT_TEXTS[result.recommendedSet]}</p>
+      <div className="space-y-4 mb-6">
+  <p>{typeof RESULT_TEXTS[result.recommendedSet] === 'function' 
+    ? RESULT_TEXTS[result.recommendedSet](answers) 
+    : RESULT_TEXTS[result.recommendedSet]}</p>
         
         {!isDermatitis && result.specialRecommendations.hasPigmentation && (
           <p className="mt-4">
@@ -409,7 +410,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 
 {!isDermatitis && result.specialRecommendations.hasBlackheads && (
   <p className="mt-4">
-    Na černé tečky je tu expertem náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>, jak ho jednou vyzkoušíte, zamilujete si ho stejně jako my.🤩
+    A na černé tečky je tu expert náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
   </p>
 )}
       </div>

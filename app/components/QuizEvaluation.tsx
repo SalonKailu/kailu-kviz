@@ -181,7 +181,7 @@ export const SPECIAL_RECOMMENDATIONS = {
 };
 
 // Výsledné texty pro jednotlivé sady
-export const RESULT_TEXTS: Record<ProductSet, string> = {
+export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
   'Suchá základ': 'Vaše suchá pleť volá po pravidelné hydrataci a výživě. Připravila jsem pro vás základní sadu 4 produktů, která je perfektní pro začátek nebo pokud hledáte cenově dostupnější variantu. Přestože jde o základní péči, její účinnost vás příjemně překvapí! Pleť bude hydratovaná, vyživená a příjemná na dotek.',
   
   'Suchá komplet': 'Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující. Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.',
@@ -194,7 +194,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'M+SM komplet': 'Vaše pleť si žádá péči, která efektivně reguluje tvorbu kožního mazu a zároveň nevysušuje. Proto jsem pro vás připravila komplexní sadu šesti produktů, které šetrně čistí, hydratují a harmonizují pleť. Součástí je i náš bestseller – enzymatický peeling, expert na odstranění černých teček. 🦸‍♀️ S touto výbavou udržíme vaši pleť v dokonalé kondici!',
   
-  'M+SM komplet + Sem tam pupínek': 'Zatímco hlavní sada se postará o každodenní potřeby vaší (občas docela náladové) pleti, mini sada vám pomůže ve chvílích, kdy se vám vyklube nevítaný pupínek. S touto kombinací budete vždy o krok napřed!',
+  'M+SM komplet + Sem tam pupínek': 'Doporučila bych vám kombinaci dvou sad. Zatímco hlavní sada se postará o každodenní potřeby vaší (občas docela náladové) pleti, mini sada vám pomůže ve chvílích, kdy se vám vyklube nevítaný pupínek. 🦸‍♀️ S touto kombinací budete vždy o krok napřed!',
   
   'M+SM Anti-age': 'Připravila jsem pro vás sadu 5 produktů, které respektují specifické potřeby vaší pleti a zároveň účinně bojují proti známkám stárnutí. Redukují nadměrnou mastnotu, oddalují tvorbu vrásek, zpevňují pleť a hydratují ji, aniž by ucpávaly póry. Dopřejte své pleti péči, která myslí na každý detail! ',
   
@@ -204,7 +204,12 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální.“ Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada pro váš typ pleti udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek.“ Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
   
-  'Citlivá': 'Připravila jsem pro vás velmi účinnou sadu produktů se zklidňujícími a probiotickými složkami. Přestože jsou produkty velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.',
+  'Citlivá': (answers) => {
+    if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
+      return 'Připravila jsem pro vás sadu, která řeší obě vaše potřeby - zklidnění i hydrataci. A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨';
+    }
+    return 'Přestože jsou produkty v této sadě velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.';
+  },
   
   'Citlivá + Sem tam pupínek': 'Doporučila bych vám kombinaci dvou sad. Hlavní sada pro každodenní péči zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratuje a vyživí. A doplňková sada Sem tam pupínek výrazně urychlí hojení a zamezí výskytu nedokonalostí.',
   
@@ -212,7 +217,7 @@ export const RESULT_TEXTS: Record<ProductSet, string> = {
   
   'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
-  'Problém: AKNÉ': 'Připravila jsme pro vás velmi účinnou sadu s retinolem, která pomůže vaší pleti najít rovnováhu. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje a projasňuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám s tím, co vaše pleť skutečně potřebuje.'
+  'Problém: AKNÉ': 'Připravila jsme pro vás velmi účinnou sadu s retinolem. 😍 Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vaše pleť postupně zklidňuje, projasňuje a počet pupínků se viditelně snižuje. Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌'
 };
 // Funkce pro vyhodnocení typu pleti
 export function evaluateSkinType(answers: QuizAnswers): SkinType {
@@ -273,7 +278,8 @@ if (noseAnswer) {
     console.log('Přidán 1 bod pro Mastnou a 1 bod pro Smíšenou');
   } else if (noseAnswer.includes('Póry jsou viditelné jen při bližším pohledu')) {
     points[SKIN_TYPES.NORMAL]++;
-    console.log('Přidán 1 bod pro Normální');
+    points[SKIN_TYPES.DRY]++;
+    console.log('Přidán 1 bod pro Normální a 1 bod pro Suchou');
   } else if (noseAnswer.includes('Jaké póry')) {
     points[SKIN_TYPES.DRY]++;
     console.log('Přidán 1 bod pro Suchou');
@@ -301,10 +307,6 @@ if (noseAnswer) {
       points[SKIN_TYPES.NORMAL]++;
       points[SKIN_TYPES.DRY]++;
       console.log('Přidán bod pro Normální a Suchou');
-    } else if (cheeksAnswer.includes('Čert vem póry')) {
-      points[SKIN_TYPES.SENSITIVE]++;
-      points[SKIN_TYPES.DRY]++;
-      console.log('Přidán bod pro Citlivou a Suchou');
  
   }
   console.log('Body po otázce o tvářích:', {
@@ -372,12 +374,6 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   if (answers['skin-description']?.includes('Je citlivá')) {
     sensitivityPoints++;
     console.log('+ 1 bod za citlivý popis pleti');
-  }
-  
-  // Otázka o tvářích
-  if (answers['skin-cheeks']?.includes('Čert vem póry')) {
-    sensitivityPoints++;
-    console.log('+ 1 bod za zarudnutí/podráždění na tvářích');
   }
 
     // Přání nemít citlivou pleť
@@ -500,7 +496,10 @@ console.log('Výsledný zobrazený typ:', displaySkinType);
       hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
       hasUndereyeCircles: problems.includes('Kruhy pod očima'),
       antiAgeSuggested: recommendedSet.includes('Anti-age'),
-      hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && !['Mastná', 'Smíšená'].includes(basicSkinType),
+      hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
+  !['mastná', 'smíšená'].includes(basicSkinType) && 
+  !recommendedSet.includes('M+SM komplet') && 
+  !recommendedSet.includes('M+SM Anti-age'),
       isPregnant
     }
   };
@@ -571,15 +570,15 @@ export function selectProductSet(
     console.log('Pupínková sada není v dostupných sadách, pokračuji dalším výběrem');
 
 
-  // Pokud má být anti-age, vybereme anti-age sadu
-  if (problems.includes('Vrásky')) {
-    const antiAgeSet = affordableSets.find(set => set.includes('Anti-age'));
-    if (antiAgeSet) {
-      console.log('Nalezeny vrásky - vybírám anti-age sadu:', antiAgeSet);
-      return antiAgeSet;
-    }
-    console.log('Anti-age sada není v dostupných sadách, pokračuji dalším výběrem');
+ // Pokud má být anti-age, vybereme anti-age sadu
+if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnutí')) {
+  const antiAgeSet = affordableSets.find(set => set.includes('Anti-age'));
+  if (antiAgeSet) {
+    console.log('Nalezeny vrásky nebo přání zpomalit stárnutí - vybírám anti-age sadu:', antiAgeSet);
+    return antiAgeSet;
   }
+  console.log('Anti-age sada není v dostupných sadách, pokračuji dalším výběrem');
+}
   const wishAnswer = answers['wish-fish'];
   if (wishAnswer) {
     console.log('\nVyhodnocuji přání:', wishAnswer);
@@ -608,12 +607,7 @@ export function selectProductSet(
       if (affordableSets.includes(pupinekSet)) return pupinekSet;
     }
   
-    // Přání ohledně hydratace a zářivosti
-    if (wishAnswer.includes('vysušená') || wishAnswer.includes('zářivější a vypnutější')) {
-      console.log('Přání ohledně hydratace/zářivosti - vybírám kompletní sadu');
-      const kompletSada = affordableSets.find(set => set.includes('komplet'));
-      if (kompletSada) return kompletSada;
-    }
+
   }
   // Jinak vracíme první dostupnou sadu podle priority
   console.log('\nŽádné speciální podmínky, vracím první dostupnou sadu:', affordableSets[0]);
