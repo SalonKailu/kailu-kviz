@@ -370,7 +370,6 @@ Tady se o ní dozvíte více
 
     
       <div className="space-y-4 mb-6">
-      <div className="space-y-4 mb-6">
   <p>{typeof RESULT_TEXTS[result.recommendedSet] === 'function' 
     ? RESULT_TEXTS[result.recommendedSet](answers) 
     : RESULT_TEXTS[result.recommendedSet]}</p>
