@@ -439,18 +439,25 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
   {currentQ.title}
 </h2>
 
-           {currentQ.type === 'info' ? (
-             <div className="space-y-10">
-               <p className="text-sm leading-[1.8]">{currentQ.content}</p>
-               <div className="flex justify-end mt-6">
-                 <CustomButton
-                   onClick={() => handleQuestionChange(currentQuestion + 1)}
-                 >
-                   {currentQ.buttonText || 'Další'}
-                 </CustomButton>
-               </div>
-             </div>
-           ) : currentQ.type === 'checkbox' ? (
+{currentQ.type === 'info' ? (
+  <div className="space-y-10">
+    <p className="text-sm leading-[1.8]">{currentQ.content}</p>
+    <div className="flex justify-end mt-6">
+      <CustomButton
+        onClick={() => {
+          if (currentQuestion === QUESTIONS.length - 1) {
+            const quizResult = evaluateQuiz(answers);
+            setResult(quizResult);
+          } else {
+            handleQuestionChange(currentQuestion + 1);
+          }
+        }}
+      >
+        {currentQ.buttonText || 'Další'}
+      </CustomButton>
+    </div>
+  </div>
+) : currentQ.type === 'checkbox' ? (
              <div className="space-y-1">
                {currentQ.options.map((option, index) => (
                  <div key={index} className="flex items-start space-x-3 py-2 relative group">
