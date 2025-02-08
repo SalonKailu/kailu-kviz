@@ -569,6 +569,9 @@ export function selectProductSet(
   }
     console.log('Pupínková sada není v dostupných sadách, pokračuji dalším výběrem');
 
+    const wishAnswer = answers['wish-fish'];
+    if (wishAnswer) {
+      console.log('\nVyhodnocuji přání:', wishAnswer);
 
  // Pokud má být anti-age, vybereme anti-age sadu
 if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnutí')) {
@@ -579,9 +582,6 @@ if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnut
   }
   console.log('Anti-age sada není v dostupných sadách, pokračuji dalším výběrem');
 }
-  const wishAnswer = answers['wish-fish'];
-  if (wishAnswer) {
-    console.log('\nVyhodnocuji přání:', wishAnswer);
     
   
     // Přání ohledně mastnoty a lesku
@@ -611,5 +611,11 @@ if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnut
   }
   // Jinak vracíme první dostupnou sadu podle priority
   console.log('\nŽádné speciální podmínky, vracím první dostupnou sadu:', affordableSets[0]);
-  return affordableSets[0];
+  if (affordableSets.length > 0) {
+    console.log('Žádné speciální podmínky, vracím první dostupnou sadu:', affordableSets[0]);
+    return affordableSets[0];
+  } else {
+    console.log('Nenalezena žádná dostupná sada.');
+    return null; // Nebo jiná logická hodnota
+  }
 }
