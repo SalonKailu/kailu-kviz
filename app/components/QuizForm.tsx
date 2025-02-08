@@ -59,8 +59,8 @@ const QUESTIONS = [
    images: [
      { url: 'https://684389.myshoptet.com/user/documents/upload/tvare.png', alt: 'Póry všude' },
      { url: 'https://684389.myshoptet.com/user/documents/upload/tvare2.png', alt: 'Póry u nosu' },
-     { url: 'https://684389.myshoptet.com/user/documents/upload/tvare3.jpg', alt: 'Minimum pórů' },
-     { url: 'https://684389.myshoptet.com/user/documents/upload/tvare4.png', alt: 'Zarudlá pleť' }
+     { url: 'https://684389.myshoptet.com/user/documents/upload/tvare3.jpg', alt: 'Minimum pórů' }
+  
    ],
    options: [
      'Ano, jsou všude.',
@@ -312,7 +312,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
       </h1>
       
       <p className="mb-4">
-        vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
+        Vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
         <a> </a><a 
 href={`${SHOP_BASE_URL}${result.skinType.includes('citlivá') ? 'citlivost' : SKIN_TYPE_URLS[result.skinType.split(' a také')[0]]}`}
 target="_blank"
@@ -409,7 +409,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 
 {!isDermatitis && result.specialRecommendations.hasBlackheads && (
   <p className="mt-4">
-    A na černé tečky je tu expert náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
+    A na černé tečky je tu expert náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩 Jeho přidání do košíku určitě nebudete litovat.
   </p>
 )}
       </div>
