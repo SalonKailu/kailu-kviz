@@ -198,7 +198,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'M+SM Anti-age': 'Připravila jsem pro vás sadu 5 produktů, které respektují specifické potřeby vaší pleti a zároveň účinně bojují proti známkám stárnutí. Redukují nadměrnou mastnotu, oddalují tvorbu vrásek, zpevňují pleť a hydratují ji, aniž by ucpávaly póry. Dopřejte své pleti péči, která myslí na každý detail! ',
   
-  'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. I vaše pleť se s přibývajícím věkem mění a i když ji netrápí problémy jako suchost, nebo nadměrný maz, procesy spojené s přirozeným stárnutím se jí nevyhnou. Úbytek kolagenu, elastinu a tvorby kyseliny hyaluronové se začne projevovat již po 25. roce. Připravila jsem pro vás kompletní sadu 6 produktů, která kromě každodenní péče obsahuje i produkty pro intenzivnější ošetření. Vaše pleť bude dokonale vyživená, svěží a rozzářená. Dopřejte si tu nejlepší možnou péči!',
+  'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. I vaše pleť se s přibývajícím věkem mění a i když ji netrápí problémy jako suchost, nebo nadměrný maz, procesy spojené s přirozeným stárnutím se jí nevyhnou. Připravila jsem pro vás kompletní sadu 6 produktů, která kromě každodenní péče obsahuje i produkty pro intenzivnější ošetření. Vaše pleť bude dokonale vyživená, svěží a rozzářená.',
   
   'Normální základ': 'Pokud jste těhotná, tuto sadu vám doporučuji pro její vhodné, šetrné složení a přijatelnou cenu. Pokud těhotná nejste, znamená tento výsledek to, že je vaše pleť (naprosto) normální! Gratuluji - a tiše vám závidím. 😊 Máte poměrně vzácný typ pleti, o kterém většina z nás může jen snít. S pravidelným používáním této sady bude vaše pleť svěží, zdravá a přirozeně zářivá.',
   
@@ -480,7 +480,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
 } else {
     displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá, což bychom měli řešit přednostně` 
+      ? `${basicSkinType} a také citlivá.` 
       : basicSkinType;
   }
 

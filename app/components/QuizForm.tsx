@@ -319,7 +319,7 @@ target="_blank"
 rel="noopener noreferrer"
 className="text-black underline hover:text-[#faa4a6]"
 >
-Tady se o ní dozvíte více
+➡➡➡
 </a>
       </p>
 
