@@ -549,6 +549,24 @@ export function selectProductSet(
     console.log('Nalezeno akné - vracím speciální sadu pro akné');
     return PRODUCT_SETS.PROBLEM_AKNE;
   }
+  
+  // A nahraďte ho tímto blokem kódu:
+  const hasAcne = problems.includes('Akné (více než 5 pupínků)');
+  const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
+  
+  // Doporučit sadu na akné pouze pokud explicitně vybral akné nebo si přeje zbavit se pupínků
+  if (hasAcne || wantsToRemoveAcne) {
+    console.log('Nalezeno akné nebo přání zbavit se pupínků - vracím speciální sadu pro akné');
+    return PRODUCT_SETS.PROBLEM_AKNE;
+  }
+  
+  // Dále je potřeba upravit řazení dostupných sad, aby "Problém: AKNÉ" 
+  // nebyla na prvním místě, pokud uživatel nemá akné
+  if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne && !wantsToRemoveAcne) {
+    // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
+    affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
+    console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
+  }
 
   if (problems.includes('Sem tam pupínek')) {
     // Pro mastnou/smíšenou pleť
