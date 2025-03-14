@@ -220,7 +220,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return 'Přestože jsou produkty v této sadě velmi šetrné, jejich účinnost je neskutečná! Zklidní podrážděnou pleť, posílí její přirozenou ochrannou bariéru, hydratují a vyživují.';
   },
   
-  'Citlivá + Sem tam pupínek': 'Potřebujete péči, která si poradí s citlivostí i občasnými pupínky. Hlavní sada pro každodenní péči zklidní, hydratuje, vyživí vaši pleť a posílí její přirozenou ochrannou bariéru. Doplňková sada Sem tam pupínek v případě potřeby výrazně urychlí hojení pupínků a zamezí výskytu dalších nedokonalostí.',
+  'Citlivá + Sem tam pupínek': 'Potřebujete péči, která si poradí s citlivostí i občasnými pupínky. Sada pro každodenní péči zklidní, hydratuje, vyživí vaši pleť a posílí její přirozenou ochrannou bariéru. SOS gel v případě potřeby výrazně urychlí hojení pupínků a zamezí výskytu dalších nedokonalostí.',
   
   'Kuperóza': 'Nejlepší variantou pro vás bude zklidňující sada zaměřující se na kuperózu (popraskané žilky a začervenání v obličeji). Součástí balíčku je navíc manuál, ve kterém se dozvíte několik užitečných rad a tipů, které vaší pleti prospějí.',
   

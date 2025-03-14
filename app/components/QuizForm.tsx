@@ -391,14 +391,25 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
         {/* Obě možnosti doplňkových produktů */}
         {result.recommendedSet.includes('+ Sem tam pupínek') && (
           <span>
-            <a 
-              href={`${SHOP_BASE_URL}sem-tam-pupinek`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-black underline hover:text-[#faa4a6]"
-            >
-              Mini sada Sem tam pupínek
-            </a>
+            {result.recommendedSet === 'Citlivá + Sem tam pupínek' ? (
+              <a 
+                href="https://www.kailushop.cz/sos-gel/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black underline hover:text-[#faa4a6]"
+              >
+                SOS gel
+              </a>
+            ) : (
+              <a 
+                href={`${SHOP_BASE_URL}sem-tam-pupinek`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black underline hover:text-[#faa4a6]"
+              >
+                Mini sada Sem tam pupínek
+              </a>
+            )}
             {/* Čárka mezi produkty, pokud jsou zobrazeny oba */}
             {result.problems.includes('Kruhy pod očima') && ', '}
           </span>
