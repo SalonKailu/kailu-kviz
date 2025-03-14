@@ -107,11 +107,11 @@ export const PRODUCT_URLS = {
 
 // Konstanty pro typy pleti
 export const SKIN_TYPE_URLS = {
-  'Mastná': 'mastnaplet',
-  'Smíšená': 'smisenaplet',
-  'Suchá': 'suchaplet',
-  'Normální': 'normalniplet',
-  'Citlivá': 'citlivost'
+  'mastná': 'mastnaplet',
+  'smíšená': 'smisenaplet',
+  'suchá': 'suchaplet',
+  'normální': 'normalniplet',
+  'citlivá': 'citlivost'
 };
 
 // Sady podle typu pleti s prioritami
