@@ -471,6 +471,15 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 >
   {isDermatitis ? 'Objednat se' : 'Pokračovat'}
 </button>
+    {/* Testovací tlačítko - vložte sem */}
+    {process.env.NODE_ENV !== 'production' && (
+        <button 
+          onClick={() => import('./QuizEvaluation.test').then(module => module.runTests())}
+          style={{position: 'fixed', bottom: '10px', right: '10px', zIndex: 9999}}
+        >
+          Spustit testy
+        </button>
+      )}
     </div>
   );
 }

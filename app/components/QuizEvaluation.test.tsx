@@ -3,63 +3,49 @@ import { SKIN_TYPES, PRODUCT_SETS } from './QuizEvaluation';
 
 const testCases = [
   {
-    name: "Test: Mastná pleť s maximem problémů",
-    answers: {
-      'skin-description': 'Mastí se hodně a všude!',
-      'skin-nose': 'Vaše póry si na schovávanou nehrají',
-      'skin-cheeks': 'Ano, jsou všude',
-      'cosmetic-compatibility': [
-        'Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!',
-        'U některé kosmetiky mám pocit napnuté pleti, jindy se zase více lesknu'
-      ],
-      'skin': [
-        'Akné (více než 5 pupínků)',
-        'Pigmentové skvrny nebo jizvy po akné',
-        'Rozšířené póry / černé tečky',
-        'Kruhy pod očima'
-      ],
-      'wish-fish': 'Ať se moje pleť přestane lesknout',
-      'budget-limit': 'Rád/a se podívám i na dražší možnost'
-    },
-    expectedSkinType: SKIN_TYPES.OILY,
-    expectedSet: PRODUCT_SETS.PROBLEM_AKNE
-  },
-  {
-    name: "Test: Smíšená pleť se Sem tam pupínkem",
+    name: "Test: Smíšená pleť bez akné se sadou pro smíšenou pleť",
     answers: {
       'skin-description': 'Dost se mastí, tváře ale o něco méně, než zbytek obličeje',
-      'skin-nose': 'Vaše póry si na schovávanou nehrají',
-      'skin-cheeks': 'Vidím je hlavně v oblasti vedle nosu, na tvářích potom o něco méně',
+      'skin-nose': 'Vaše póry si na schovávanou nehrají. Jsou dobře viditelné, mohou (ale nemusí) v nich být i černé tečky',
+      'skin-cheeks': 'Vidím je hlavně v oblasti vedle nosu, na tvářích potom o něco méně.',
       'cosmetic-compatibility': [
-        'Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!',
-      ],
-      'skin': ['Sem tam pupínek'],
-      'wish-fish': 'Ať mi zmizí pupínky',
-      'budget-limit': 'Rád/a se podívám i na dražší možnost'
-    },
-    expectedSkinType: SKIN_TYPES.MIXED,
-    expectedSet: PRODUCT_SETS.MSM_KOMPLET_PUPINEK
-  },
-
-  {
-    name: "Test: Mastná pleť s akné a pupínky",
-    answers: {
-      'skin-description': 'Mastí se hodně a všude!',
-      'skin-nose': 'Vaše póry si na schovávanou nehrají',
-      'skin-cheeks': 'Ano, jsou všude',
-      'cosmetic-compatibility': [
+        'Většina kosmetických přípravků mi sedne.',
+        'S kosmetikou musím opatrně, pleť na ni často reaguje pnutím nebo zčervenáním.',
         'Některé produkty mi úplně ucpou pleť, zanesou póry a vyrobí pupínky!'
       ],
       'skin': [
-        'Akné (více než 5 pupínků)',
-        'Sem tam pupínek'  // I když vyberou obojí
+        'Pigmentové skvrny nebo jizvy po akné',
+        'Kruhy pod očima',
+        'Vrásky', 
+        'Sem tam pupínek',
+        'Rozšířené póry / černé tečky'
       ],
-      'wish-fish': 'Ať mi zmizí pupínky',
-      'budget-limit': 'Rád/a se podívám i na dražší možnost'
+      'wish-fish': 'Chci zpomalit stárnutí.',
+      'budget-limit': 'Mám limit 2500 Kč a určitě ho nechci překročit.'
     },
-    expectedSkinType: SKIN_TYPES.OILY,
-    expectedSet: PRODUCT_SETS.PROBLEM_AKNE  // Měla by se doporučit sada na akné
-  }
+    expectedSkinType: SKIN_TYPES.MIXED,
+    expectedSet: PRODUCT_SETS.MSM_KOMPLET
+  },
+  
+  {
+    name: "Test: Smíšená pleť s přáním zbavit se pupínků",
+    answers: {
+      'skin-description': 'Dost se mastí, tváře ale o něco méně, než zbytek obličeje',
+      'skin-nose': 'Vaše póry si na schovávanou nehrají. Jsou dobře viditelné, mohou (ale nemusí) v nich být i černé tečky',
+      'skin-cheeks': 'Vidím je hlavně v oblasti vedle nosu, na tvářích potom o něco méně.',
+      'cosmetic-compatibility': [
+        'Většina kosmetických přípravků mi sedne.'
+      ],
+      'skin': [
+        'Pigmentové skvrny nebo jizvy po akné',
+        'Rozšířené póry / černé tečky'
+      ],
+      'wish-fish': 'Ať mi zmizí pupínky.',
+      'budget-limit': 'Mám limit 2500 Kč a určitě ho nechci překročit.'
+    },
+    expectedSkinType: SKIN_TYPES.MIXED,
+    expectedSet: PRODUCT_SETS.PROBLEM_AKNE
+  },
 ];
 
 // Funkce pro spuštění testů
