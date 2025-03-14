@@ -385,36 +385,37 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
     </a>
   </h2>
   {(result.recommendedSet.includes('+ Sem tam pupínek') || result.problems.includes('Kruhy pod očima')) && (
-          <div>
-            <p className="font-semibold">Doplňkové produkty:</p>
-            {result.recommendedSet.includes('+ Sem tam pupínek') && (
-              <p>
-                <a 
-                  href={`${SHOP_BASE_URL}sem-tam-pupinek`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black underline hover:text-[#faa4a6]"
-                >
-                  Mini sada Sem tam pupínek
-                </a>
-              </p>
-            )}
-            {result.problems.includes('Kruhy pod očima') && (
-              <p>
-                <a 
-                  href={`${SHOP_BASE_URL}ocni-krem`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black underline hover:text-[#faa4a6]"
-                >
-                  Oční krém
-                </a>
-              </p>
-            )}
-          </div>
+    <div>
+      <p className="font-semibold">
+        Doplňkové produkty:{' '}
+        {/* Obě možnosti doplňkových produktů */}
+        {result.recommendedSet.includes('+ Sem tam pupínek') && (
+          <span>
+            <a 
+              href={`${SHOP_BASE_URL}sem-tam-pupinek`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black underline hover:text-[#faa4a6]"
+            >
+              Mini sada Sem tam pupínek
+            </a>
+            {/* Čárka mezi produkty, pokud jsou zobrazeny oba */}
+            {result.problems.includes('Kruhy pod očima') && ', '}
+          </span>
         )}
-      </div>
-    )}
+        {result.problems.includes('Kruhy pod očima') && (
+          <a 
+            href={`${SHOP_BASE_URL}ocni-krem`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-black underline hover:text-[#faa4a6]"
+          >
+            Oční krém
+          </a>
+        )}
+      </p>
+    </div>
+  )}
 
     
       <div className="space-y-4 mb-6">
