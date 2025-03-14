@@ -158,6 +158,24 @@ const QUESTIONS = [
 }
 ];
 
+const getSkinTypeUrl = (skinType) => {
+  const lowerType = skinType.toLowerCase().trim();
+  
+  if (lowerType.includes('citlivá') || lowerType.includes('citliva')) {
+    return `${SHOP_BASE_URL}citlivost`;
+  } else if (lowerType.includes('suchá') || lowerType.includes('sucha')) {
+    return `${SHOP_BASE_URL}suchaplet`;
+  } else if (lowerType.includes('mastná') || lowerType.includes('mastna')) {
+    return `${SHOP_BASE_URL}mastnaplet`;
+  } else if (lowerType.includes('smíšená') || lowerType.includes('smisena')) {
+    return `${SHOP_BASE_URL}smisenaplet`;
+  } else if (lowerType.includes('normální') || lowerType.includes('normalni')) {
+    return `${SHOP_BASE_URL}normalniplet`;
+  } else {
+    return SHOP_BASE_URL;
+  }
+};
+
 const SectionHeader = ({ currentQuestion }) => {
   const getHeaderText = () => {
     const question = QUESTIONS[currentQuestion];
@@ -312,16 +330,46 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
       </h1>
       
       <p className="mb-4">
-        Vaše pleť je <span className="font-semibold">{result.skinType}</span>. 
-        <a> </a><a 
-href={`${SHOP_BASE_URL}${result.skinType.includes('citlivá') ? 'citlivost' : SKIN_TYPE_URLS[result.skinType.split(' a také')[0]]}`}
-target="_blank"
-rel="noopener noreferrer"
-className="text-black underline hover:text-[#faa4a6]"
->
-➡➡➡
-</a>
-      </p>
+  Vaše pleť je{' '}
+  {result.skinType.includes(' a také ') ? (
+    <>
+      {/* Rozdělíme text na části před a po "a také" */}
+      <span className="font-semibold">
+        <a
+          href={getSkinTypeUrl(result.skinType.split(' a také ')[0])}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-black underline hover:text-[#faa4a6]"
+        >
+          {result.skinType.split(' a také ')[0]}
+        </a>
+        {' a také '}
+        <a
+          href={getSkinTypeUrl(result.skinType.split(' a také ')[1])}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-black underline hover:text-[#faa4a6]"
+        >
+          {result.skinType.split(' a také ')[1]}
+        </a>
+      </span>
+    </>
+  ) : (
+    <>
+      <span className="font-semibold">
+        <a
+          href={getSkinTypeUrl(result.skinType)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-black underline hover:text-[#faa4a6]"
+        >
+          {result.skinType}
+        </a>
+      </span>
+    </>
+  )}
+  .
+</p>
 
       {!isDermatitis && (
   <div className="bg-[#f1eae2] mb-6 p-6 rounded-lg">
