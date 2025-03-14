@@ -523,7 +523,7 @@ export function selectProductSet(
     console.log('Nalezena dermatitida - vracím speciální sadu');
     return PRODUCT_SETS.DERMATITIDA;
   }
-  if (problems.includes('Kuperóza ("popraskané žilky")')) {
+  if (problems.includes('Trvale začervenalá pleť / popraskané žilky)')) {
     console.log('Nalezena kuperóza - vracím speciální sadu');
     return PRODUCT_SETS.KUPEROZA;
   }

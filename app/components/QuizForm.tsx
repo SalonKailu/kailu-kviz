@@ -101,7 +101,7 @@ const QUESTIONS = [
     'Sem tam pupínek',
     'Akné (více než 5 pupínků🤫)',
     'Rozšířené póry / černé tečky',
-    'Zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí (dermatitida)',
+    'Zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí (Dermatitida)',
     'Trvale začervenalá pleť / popraskané žilky',
     'Není, jsem spokojená / Nic z výše uvedeného'
   ]
