@@ -38,15 +38,17 @@ export interface QuizResult {
     hasPigmentation: boolean;
     hasUndereyeCircles: boolean;
     antiAgeSuggested: boolean;
+    hasBlackheads?: boolean;
+    isPregnant?: boolean;
   };
 }
 // Konstanty pro typy pleti
 export const SKIN_TYPES: Record<string, SkinType> = {
-  DRY: 'suchá',
-  MIXED: 'smíšená',
-  OILY: 'mastná',
-  SENSITIVE: 'citlivá',
-  NORMAL: 'normální'
+  DRY: 'Suchá',
+  MIXED: 'Smíšená',
+  OILY: 'Mastná',
+  SENSITIVE: 'Citlivá',
+  NORMAL: 'Normální'
 } as const;
 
 // Konstanty pro produktové sady
@@ -83,6 +85,7 @@ export const DISPLAY_NAMES = {
   'Citlivá': 'Sada pro citlivou pleť',
   'Citlivá + Sem tam pupínek': 'Sada pro citlivou pleť s pupínky',
   'Kuperóza': 'Sada pro pleť s kuperózou',
+  'Dermatitida': 'Sada pro dermatitidu',
   'Problém: AKNÉ': 'Sada pro problematickou pleť'
 };
 
@@ -102,47 +105,48 @@ export const PRODUCT_URLS = {
 'Citlivá': 'sada-pro-citlivou-plet',
 'Citlivá + Sem tam pupínek': 'sada-pro-citlivou-plet',
 'Kuperóza': 'pece-o-plet-s-kuperozou',
+'Dermatitida': 'dermatitida',
 'Problém: AKNÉ': 'sada-pro-problematickou-plet'
 };
 
 // Konstanty pro typy pleti
 export const SKIN_TYPE_URLS = {
-  'mastná': 'mastnaplet',
-  'smíšená': 'smisenaplet',
-  'suchá': 'suchaplet',
-  'normální': 'normalniplet',
-  'citlivá': 'citlivost'
+  'Mastná': 'mastnaplet',
+  'Smíšená': 'smisenaplet',
+  'Suchá': 'suchaplet',
+  'Normální': 'normalniplet',
+  'Citlivá': 'citlivost'
 };
 
 // Sady podle typu pleti s prioritami
 export const SADY_DLE_TYPU: Record<SkinType, ProductSet[]> = {
-  'suchá': [
+  'Suchá': [
     'Suchá a normální Anti-age',
     'Suchá komplet',
     'Suchá základ + Sem tam pupínek',
     'Suchá základ'
   ],
-  'smíšená': [
+  'Smíšená': [
     'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM základ'
   ],
-  'mastná': [
+  'Mastná': [
     'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM základ'
   ],
-  'normální': [
+  'Normální': [
     'Suchá a normální Anti-age',
     'Normální základ + Sem tam pupínek',
     'Normální komplet',
     'Normální základ'
   ],
-  'citlivá': [
+  'Citlivá': [
     'Citlivá + Sem tam pupínek',
     'Citlivá'
   ]
@@ -194,7 +198,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'M+SM komplet': 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 Proto jsem pro vás vybrala tuto sadu – včetně našeho bestselleru, enzymatického peelingu, který si hravě poradí s černými tečkami. S tímto arzenálem bude vaše pleť čistá, vyvážená a svěží každý den!',
   
-  'M+SM komplet + Sem tam pupínek': 'Aby vaše náladová pleť zůstala v rovnováze a zároveň efektivně reagovala na občasné pupínky, doporučuji vám kombinaci dvou sad. Hlavní sada vaši pleť důkladně vyčistí, reguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem. Mini sada „Sem tam pupínek“ pak okamžitě zasáhne v případě, že se nějaký ten pupínek přece jen objeví. Společně tvoří perfektní duo – účinné, ale zároveň šetrné k vaší pleti.',
+  'M+SM komplet + Sem tam pupínek': 'Aby vaše náladová pleť zůstala v rovnováze a zároveň efektivně reagovala na občasné pupínky, doporučuji vám kombinaci dvou sad. Hlavní sada vaši pleť důkladně vyčistí, reguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem. Mini sada „Sem tam pupínek" pak okamžitě zasáhne v případě, že se nějaký ten pupínek přece jen objeví. Společně tvoří perfektní duo – účinné, ale zároveň šetrné k vaší pleti.',
   
   'M+SM Anti-age': 'Vaše pleť potřebuje péči, která myslí na každý detail! 💪 Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky. Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete! ',
   
@@ -207,7 +211,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return 'Vypadá to, že je vaše pleť (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊 Máte poměrně vzácný typ pleti, o kterém většina z nás může jen snít. S pravidelným používáním této sady bude vaše pleť svěží, zdravá a přirozeně zářivá.';
   },
   
-  'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální.“ Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se někdy objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek.“ Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
+  'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální." Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se někdy objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek." Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
   
   'Citlivá': (answers) => {
     if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
@@ -222,142 +226,149 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
-  'Problém: AKNÉ': 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt pupínků. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vám vaše pleť postupně mění. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌',
-
-'
+  'Problém: AKNÉ': 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt pupínků. Výsledky se nedostaví přes noc, ale s trpělivostí a správnou péčí uvidíte, jak se vám vaše pleť postupně mění. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌'
 };
+
+// Proměnná pro body typů pleti
+const points = {
+  'Suchá': 0,
+  'Smíšená': 0,
+  'Mastná': 0,
+  'Citlivá': 0,
+  'Normální': 0
+};
+
 // Funkce pro vyhodnocení typu pleti
 export function evaluateSkinType(answers: QuizAnswers): SkinType {
-  const points: Record<SkinType, number> = {
-    [SKIN_TYPES.DRY]: 0,
-    [SKIN_TYPES.MIXED]: 0,
-    [SKIN_TYPES.OILY]: 0,
-    [SKIN_TYPES.SENSITIVE]: 0,
-    [SKIN_TYPES.NORMAL]: 0
-  };
+  // Reset bodů pro nové vyhodnocení
+  points['Suchá'] = 0;
+  points['Smíšená'] = 0;
+  points['Mastná'] = 0;
+  points['Citlivá'] = 0;
+  points['Normální'] = 0;
+
   console.log('=== VYHODNOCENÍ TYPU PLETI ===');
   console.log('Počáteční stav bodů:', {
-   suchá: points[SKIN_TYPES.DRY],
-    smíšená: points[SKIN_TYPES.MIXED],
-    mastná: points[SKIN_TYPES.OILY],
-    citlivá: points[SKIN_TYPES.SENSITIVE],
-    normální: points[SKIN_TYPES.NORMAL]
+    Suchá: points['Suchá'],
+    Smíšená: points['Smíšená'],
+    Mastná: points['Mastná'],
+    Citlivá: points['Citlivá'],
+    Normální: points['Normální']
   });
 
   // Vyhodnocení první otázky
   const skinDescription = answers['skin-description'];
-if (skinDescription) {
-  console.log('\nVyhodnocuji otázku o typu pleti:', skinDescription);
-  if (skinDescription.includes('Je v pohodě')) {
-    points[SKIN_TYPES.NORMAL]++;
-    points[SKIN_TYPES.MIXED]++;
-    console.log('Přidán 1 bod pro Normální a 1 bod pro Smíšenou');
-  } else if (skinDescription.includes('Je suchá')) {
-    points[SKIN_TYPES.DRY]++;
-    console.log('Přidán 1 bod pro Suchou');
-  } else if (skinDescription.includes('Dost se mastí')) {
-    points[SKIN_TYPES.MIXED]++;
-    console.log('Přidán 1 bod pro Smíšenou');
-  } else if (skinDescription.includes('Mastí se hodně')) {
-    points[SKIN_TYPES.OILY]++;
-    console.log('Přidán 1 bod pro Mastnou');
-  } else if (skinDescription.includes('Je citlivá')) {
-    points[SKIN_TYPES.SENSITIVE]++;
-
-    console.log('Přidán 1 bod pro Citlivou');
+  if (skinDescription) {
+    console.log('\nVyhodnocuji otázku o typu pleti:', skinDescription);
+    if (skinDescription.includes('Je v pohodě')) {
+      points['Normální']++;
+      points['Smíšená']++;
+      console.log('Přidán 1 bod pro Normální a 1 bod pro Smíšenou');
+    } else if (skinDescription.includes('Je suchá')) {
+      points['Suchá']++;
+      console.log('Přidán 1 bod pro Suchou');
+    } else if (skinDescription.includes('Dost se mastí')) {
+      points['Smíšená']++;
+      console.log('Přidán 1 bod pro Smíšenou');
+    } else if (skinDescription.includes('Mastí se hodně')) {
+      points['Mastná']++;
+      console.log('Přidán 1 bod pro Mastnou');
+    } else if (skinDescription.includes('Je citlivá')) {
+      points['Citlivá']++;
+      console.log('Přidán 1 bod pro Citlivou');
+    }
+    console.log('Body po první otázce:', {
+      Suchá: points['Suchá'],
+      Smíšená: points['Smíšená'],
+      Mastná: points['Mastná'],
+      Citlivá: points['Citlivá'],
+      Normální: points['Normální']
+    });
   }
-  console.log('Body po první otázce:', {
-    suchá: points[SKIN_TYPES.DRY],
-    smíšená: points[SKIN_TYPES.MIXED],
-    mastná: points[SKIN_TYPES.OILY],
-    citlivá: points[SKIN_TYPES.SENSITIVE],
-    normální: points[SKIN_TYPES.NORMAL]
-  });
-}
 
-// Otázka o nose
-const noseAnswer = answers['skin-nose'];
-if (noseAnswer) {
-  console.log('\nVyhodnocuji otázku o nose:', noseAnswer);
-  if (noseAnswer.includes('Vaše póry si na schovávanou nehrají')) {
-    points[SKIN_TYPES.OILY]++;
-    points[SKIN_TYPES.MIXED]++;
-    console.log('Přidán 1 bod pro Mastnou a 1 bod pro Smíšenou');
-  } else if (noseAnswer.includes('Póry jsou viditelné jen při bližším pohledu')) {
-    points[SKIN_TYPES.NORMAL]++;
-    points[SKIN_TYPES.DRY]++;
-    console.log('Přidán 1 bod pro Normální a 1 bod pro Suchou');
-  } else if (noseAnswer.includes('Jaké póry')) {
-    points[SKIN_TYPES.DRY]++;
-    console.log('Přidán 1 bod pro Suchou');
+  // Otázka o nose
+  const noseAnswer = answers['skin-nose'];
+  if (noseAnswer) {
+    console.log('\nVyhodnocuji otázku o nose:', noseAnswer);
+    if (noseAnswer.includes('Vaše póry si na schovávanou nehrají')) {
+      points['Mastná']++;
+      points['Smíšená']++;
+      console.log('Přidán 1 bod pro Mastnou a 1 bod pro Smíšenou');
+    } else if (noseAnswer.includes('Póry jsou viditelné jen při bližším pohledu')) {
+      points['Normální']++;
+      points['Suchá']++;
+      console.log('Přidán 1 bod pro Normální a 1 bod pro Suchou');
+    } else if (noseAnswer.includes('Jaké póry')) {
+      points['Suchá']++;
+      console.log('Přidán 1 bod pro Suchou');
+    }
+    console.log('Body po otázce o nose:', {
+      Suchá: points['Suchá'],
+      Smíšená: points['Smíšená'],
+      Mastná: points['Mastná'],
+      Citlivá: points['Citlivá'],
+      Normální: points['Normální']
+    });
   }
-  console.log('Body po otázce o nose:', {
-   suchá: points[SKIN_TYPES.DRY],
-   smíšená: points[SKIN_TYPES.MIXED],
-   mastná: points[SKIN_TYPES.OILY],
-   citlivá: points[SKIN_TYPES.SENSITIVE],
-   normální: points[SKIN_TYPES.NORMAL]
-  });
-}
 
   // Otázka o tvářích
   const cheeksAnswer = answers['skin-cheeks'];
   if (cheeksAnswer) {
     console.log('\nVyhodnocuji otázku o tvářích:', cheeksAnswer);
     if (cheeksAnswer.includes('Ano, jsou všude')) {
-      points[SKIN_TYPES.OILY]++;
+      points['Mastná']++;
       console.log('Přidán bod pro Mastnou');
     } else if (cheeksAnswer.includes('Vidím je hlavně v oblasti vedle nosu')) {
-      points[SKIN_TYPES.MIXED]++;
+      points['Smíšená']++;
       console.log('Přidán bod pro Smíšenou');
     } else if (cheeksAnswer.includes('Sem tam možná nějaký je')) {
-      points[SKIN_TYPES.NORMAL]++;
-      points[SKIN_TYPES.DRY]++;
+      points['Normální']++;
+      points['Suchá']++;
       console.log('Přidán bod pro Normální a Suchou');
- 
+    }
+    console.log('Body po otázce o tvářích:', {
+      Suchá: points['Suchá'],
+      Smíšená: points['Smíšená'],
+      Mastná: points['Mastná'],
+      Citlivá: points['Citlivá'],
+      Normální: points['Normální']
+    });
   }
-  console.log('Body po otázce o tvářích:', {
-    suchá: points[SKIN_TYPES.DRY],
-    smíšená: points[SKIN_TYPES.MIXED],
-    mastná: points[SKIN_TYPES.OILY],
-    citlivá: points[SKIN_TYPES.SENSITIVE],
-    normální: points[SKIN_TYPES.NORMAL]
-  });
-}
+
   // Otázka o kosmetice
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
   if (cosmeticAnswers.length > 0) {
     console.log('\nVyhodnocuji otázky o kosmetice:', cosmeticAnswers);
     cosmeticAnswers.forEach(answer => {
       if (answer.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-        points[SKIN_TYPES.DRY]++;
-        points[SKIN_TYPES.SENSITIVE]++;
+        points['Suchá']++;
+        points['Citlivá']++;
         console.log('Přidán bod pro Suchou a Citlivou (vysušení)');
       }
       if (answer.includes('S kosmetikou musím opatrně')) {
-        points[SKIN_TYPES.SENSITIVE]++;
+        points['Citlivá']++;
         console.log('Přidán bod pro Citlivou (opatrnost)');
       }
       if (answer.includes('Většina kosmetických přípravků mi sedne')) {
-        points[SKIN_TYPES.NORMAL]++;
+        points['Normální']++;
         console.log('Přidán bod pro Normální');
       }
       if (answer.includes('Některé produkty mi úplně ucpou pleť')) {
-        points[SKIN_TYPES.OILY]++;
-        points[SKIN_TYPES.MIXED]++;
+        points['Mastná']++;
+        points['Smíšená']++;
         console.log('Přidán bod pro Mastnou a Smíšenou');
       }
       if (answer.includes('Moje pleť miluje pořádně hutné krémy')) {
-        points[SKIN_TYPES.DRY]++;
+        points['Suchá']++;
         console.log('Přidán bod pro Suchou');
       }
     });
     console.log('Body po otázce o kosmetice:', {
-      Suchá: points[SKIN_TYPES.DRY],
-      Smíšená: points[SKIN_TYPES.MIXED],
-      Mastná: points[SKIN_TYPES.OILY],
-      Citlivá: points[SKIN_TYPES.SENSITIVE],
-      Normální: points[SKIN_TYPES.NORMAL]
+      Suchá: points['Suchá'],
+      Smíšená: points['Smíšená'],
+      Mastná: points['Mastná'],
+      Citlivá: points['Citlivá'],
+      Normální: points['Normální']
     });
   }
 
@@ -373,6 +384,7 @@ if (noseAnswer) {
 
   return sortedTypes[0][0];
 }
+
 function countSensitivityPoints(answers: QuizAnswers): number {
   let sensitivityPoints = 0;
   console.log('=== POČÍTÁNÍ BODŮ CITLIVOSTI ===');
@@ -383,11 +395,11 @@ function countSensitivityPoints(answers: QuizAnswers): number {
     console.log('+ 1 bod za citlivý popis pleti');
   }
 
-    // Přání nemít citlivou pleť
-    if (answers['wish-fish']?.includes('Už nechci mít citlivou')) {
-      sensitivityPoints++;
-      console.log('+ 1 bod za přání nemít citlivou pleť');
-    }
+  // Přání nemít citlivou pleť
+  if (answers['wish-fish']?.includes('Už nechci mít citlivou')) {
+    sensitivityPoints++;
+    console.log('+ 1 bod za přání nemít citlivou pleť');
+  }
   
   // Kosmetická kompatibilita
   const cosmeticAnswers = answers['cosmetic-compatibility'] || [];
@@ -405,14 +417,6 @@ function countSensitivityPoints(answers: QuizAnswers): number {
   console.log('Celkový počet bodů citlivosti:', sensitivityPoints);
   return sensitivityPoints;
 }
-
-const points = {
-  [SKIN_TYPES.DRY]: 0,
-  [SKIN_TYPES.MIXED]: 0,
-  [SKIN_TYPES.OILY]: 0,
-  [SKIN_TYPES.SENSITIVE]: 0,
-  [SKIN_TYPES.NORMAL]: 0
-};
 
 // Hlavní vyhodnocovací funkce
 export function evaluateQuiz(answers: QuizAnswers): QuizResult {
@@ -438,7 +442,56 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     problem !== 'Není, jsem spokojená / Nic z výše uvedeného'
   ) || [];
   
-  console.log('Filtrované problémy:', problems); // Původní debug log
+  console.log('Filtrované problémy:', problems);
+  
+  // KLÍČOVÁ ZMĚNA: Priorita pro dermatitidu a kuperozu
+  if (problems.includes('Zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí (Dermatitida)')) {
+    console.log('Nalezena dermatitida - nastavuji speciální sadu');
+    
+    // Určení zobrazovaného typu pleti
+    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+    let displaySkinType = isSensitive 
+      ? `${basicSkinType} a také citlivá.` 
+      : basicSkinType;
+    
+    return {
+      skinType: displaySkinType,
+      recommendedSet: 'Dermatitida',
+      problems,
+      specialRecommendations: {
+        hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
+        hasUndereyeCircles: problems.includes('Kruhy pod očima'),
+        antiAgeSuggested: false,
+        hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
+          !['Mastná', 'Smíšená'].includes(basicSkinType),
+        isPregnant
+      }
+    };
+  }
+  
+  if (problems.includes('Trvale začervenalá pleť / popraskané žilky')) {
+    console.log('Nalezena kuperóza - nastavuji speciální sadu');
+    
+    // Určení zobrazovaného typu pleti
+    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+    let displaySkinType = isSensitive 
+      ? `${basicSkinType} a také citlivá.` 
+      : basicSkinType;
+    
+    return {
+      skinType: displaySkinType,
+      recommendedSet: 'Kuperóza',
+      problems,
+      specialRecommendations: {
+        hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
+        hasUndereyeCircles: problems.includes('Kruhy pod očima'),
+        antiAgeSuggested: false,
+        hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
+          !['Mastná', 'Smíšená'].includes(basicSkinType),
+        isPregnant
+      }
+    };
+  }
   
   // Pokud je těhotná, odstraníme pupínky z problémů
   if (isPregnant) {
@@ -469,12 +522,11 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     console.log('Standardní výběr sady:', recommendedSet);
   }
   
-  // Určení zobrazovaného typu pleti - tady je hlavní změna
+  // Určení zobrazovaného typu pleti
   const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
-
   let displaySkinType;
   
-  if (basicSkinType === 'citlivá') {
+  if (basicSkinType === 'Citlivá') {
     // Najdeme druhý nejčastější typ pleti
     const sortedSkinTypes = Object.entries(points)
       .filter(([type]) => type !== 'Citlivá') // Vyřadíme "Citlivá"
@@ -483,17 +535,17 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     const secondMostCommonType = sortedSkinTypes.length > 0 ? sortedSkinTypes[0][0] : 'Neurčeno';
   
     displaySkinType = secondMostCommonType 
-    ? `${secondMostCommonType}, ale nyní musíme řešit především její citlivost` 
-    : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
-} else {
+      ? `${secondMostCommonType}, ale nyní musíme řešit především její citlivost` 
+      : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
+  } else {
     displaySkinType = isSensitive 
       ? `${basicSkinType} a také citlivá.` 
       : basicSkinType;
   }
 
-console.log('Základní typ pleti:', basicSkinType);
-console.log('Je citlivá:', isSensitive);
-console.log('Výsledný zobrazený typ:', displaySkinType);
+  console.log('Základní typ pleti:', basicSkinType);
+  console.log('Je citlivá:', isSensitive);
+  console.log('Výsledný zobrazený typ:', displaySkinType);
   
   return {
     skinType: displaySkinType,
@@ -504,13 +556,14 @@ console.log('Výsledný zobrazený typ:', displaySkinType);
       hasUndereyeCircles: problems.includes('Kruhy pod očima'),
       antiAgeSuggested: recommendedSet.includes('Anti-age'),
       hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
-  !['mastná', 'smíšená'].includes(basicSkinType) && 
-  !recommendedSet.includes('M+SM komplet') && 
-  !recommendedSet.includes('M+SM Anti-age'),
+        !['Mastná', 'Smíšená'].includes(basicSkinType) && 
+        !recommendedSet.includes('M+SM komplet') && 
+        !recommendedSet.includes('M+SM Anti-age'),
       isPregnant
     }
   };
-}
+};
+
 // Funkce pro výběr produktové sady
 export function selectProductSet(
   skinType: SkinType, 
@@ -530,19 +583,18 @@ export function selectProductSet(
     console.log('Nalezena dermatitida - vracím speciální sadu');
     return PRODUCT_SETS.DERMATITIDA;
   }
+  
   if (problems.includes('Trvale začervenalá pleť / popraskané žilky')) {
     console.log('Nalezena kuperóza - vracím speciální sadu');
     return PRODUCT_SETS.KUPEROZA;
   }
 
-
   // Získání dostupných sad pro typ pleti
   const availableSets = SADY_DLE_TYPU[skinType];
   console.log('\nDostupné sady pro typ pleti:', availableSets);
 
-  
   // Filtrování podle cenového limitu
-  const affordableSets = availableSets.filter(set => {
+  let affordableSets = availableSets.filter(set => {
     const setPrice = PRICE_LIMITS[set];
     if (setPrice === null) {
       return budget === null;
@@ -552,12 +604,6 @@ export function selectProductSet(
   console.log('Sady v cenovém limitu:', affordableSets);
 
   // Výběr sady podle problémů
-  if (problems.includes('Akné (více než 5 pupínků)')) {
-    console.log('Nalezeno akné - vracím speciální sadu pro akné');
-    return PRODUCT_SETS.PROBLEM_AKNE;
-  }
-  
-  // A nahraďte ho tímto blokem kódu:
   const hasAcne = problems.includes('Akné (více než 5 pupínků)');
   const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
   
@@ -567,17 +613,15 @@ export function selectProductSet(
     return PRODUCT_SETS.PROBLEM_AKNE;
   }
   
-  // Dále je potřeba upravit řazení dostupných sad, aby "Problém: AKNÉ" 
-  // nebyla na prvním místě, pokud uživatel nemá akné
+  // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
   if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne && !wantsToRemoveAcne) {
-    // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
     affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
     console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
   }
 
   if (problems.includes('Sem tam pupínek')) {
     // Pro mastnou/smíšenou pleť
-    if ([SKIN_TYPES.MIXED, SKIN_TYPES.OILY].includes(skinType)) {
+    if (['Smíšená', 'Mastná'].includes(skinType)) {
       const pupinekSet = PRODUCT_SETS.MSM_KOMPLET_PUPINEK;
       if (affordableSets.includes(pupinekSet)) {
         console.log('Nalezen občasný pupínek pro mastnou/smíšenou pleť - vybírám:', pupinekSet);
@@ -591,27 +635,26 @@ export function selectProductSet(
         return pupinekSet;
       }
     }
-  }
     console.log('Pupínková sada není v dostupných sadách, pokračuji dalším výběrem');
-
-    const wishAnswer = answers['wish-fish'];
-    if (wishAnswer) {
-      console.log('\nVyhodnocuji přání:', wishAnswer);
-
- // Pokud má být anti-age, vybereme anti-age sadu
-if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnutí')) {
-  const antiAgeSet = affordableSets.find(set => set.includes('Anti-age'));
-  if (antiAgeSet) {
-    console.log('Nalezeny vrásky nebo přání zpomalit stárnutí - vybírám anti-age sadu:', antiAgeSet);
-    return antiAgeSet;
   }
-  console.log('Anti-age sada není v dostupných sadách, pokračuji dalším výběrem');
-}
-    
+
+  const wishAnswer = answers['wish-fish'];
+  if (wishAnswer) {
+    console.log('\nVyhodnocuji přání:', wishAnswer);
+
+    // Pokud má být anti-age, vybereme anti-age sadu
+    if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnutí')) {
+      const antiAgeSet = affordableSets.find(set => set.includes('Anti-age'));
+      if (antiAgeSet) {
+        console.log('Nalezeny vrásky nebo přání zpomalit stárnutí - vybírám anti-age sadu:', antiAgeSet);
+        return antiAgeSet;
+      }
+      console.log('Anti-age sada není v dostupných sadách, pokračuji dalším výběrem');
+    }
   
     // Přání ohledně mastnoty a lesku
     if (wishAnswer.includes('přestane lesknout') || wishAnswer.includes('černé tečky')) {
-      if ([SKIN_TYPES.MIXED, SKIN_TYPES.OILY].includes(skinType)) {
+      if (['Smíšená', 'Mastná'].includes(skinType)) {
         console.log('Přání ohledně mastnoty/černých teček - vybírám kompletní sadu pro mastnou/smíšenou pleť');
         const kompletSada = affordableSets.find(set => set.includes('komplet'));
         if (kompletSada) return kompletSada;
@@ -631,16 +674,18 @@ if (problems.includes('Vrásky') || wishAnswer?.includes('Chci zpomalit stárnut
       const pupinekSet = `${skinType} základ + Sem tam pupínek` as ProductSet;
       if (affordableSets.includes(pupinekSet)) return pupinekSet;
     }
-  
-
   }
+
   // Jinak vracíme první dostupnou sadu podle priority
-  console.log('\nŽádné speciální podmínky, vracím první dostupnou sadu:', affordableSets[0]);
   if (affordableSets.length > 0) {
     console.log('Žádné speciální podmínky, vracím první dostupnou sadu:', affordableSets[0]);
     return affordableSets[0];
   } else {
     console.log('Nenalezena žádná dostupná sada.');
-    return null; // Nebo jiná logická hodnota
+    // Fallback pro případ, že by nebyly žádné dostupné sady
+    return skinType === 'Suchá' ? PRODUCT_SETS.SUCHA_ZAKLAD :
+           skinType === 'Mastná' || skinType === 'Smíšená' ? PRODUCT_SETS.MSM_ZAKLAD :
+           skinType === 'Normální' ? PRODUCT_SETS.NORMALNI_ZAKLAD :
+           PRODUCT_SETS.CITLIVA;
   }
 }
