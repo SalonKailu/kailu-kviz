@@ -159,7 +159,7 @@ export const PRICE_LIMITS: Record<ProductSet, number | null> = {
   'Normální základ': 1500,
   'Dermatitida': 1500,
   'Suchá komplet': 2500,
-  'M+SM komplet': 2500,
+  'M+SM komplet': 2000,
   'Normální komplet': 2500,
   'Citlivá': 2500,
   'Kuperóza': 2500,
@@ -196,7 +196,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'M+SM základ': 'Vaše pleť si zaslouží profesionální péči, která ji udrží v rovnováze. Pokud s péčí o pleť teprve začínáte nebo hledáte cenově dostupnější variantu, bude pro vás tato sada perfektní volbou. Produkty jsou lehké, nezatěžují pleť, regulují maz, ale nevysušují. Dopřejte své pleti pravidelnou péči, která zabere jen pár minut denně!',
   
-  'M+SM komplet': 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 Proto jsem pro vás vybrala tuto sadu – včetně našeho bestselleru, enzymatického peelingu, který si hravě poradí s černými tečkami. S tímto arzenálem bude vaše pleť čistá, vyvážená a svěží každý den!',
+  'M+SM komplet': 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 Proto jsem pro vás vybrala tuto sadu, díky které bude vaše pleť čistá, vyvážená a svěží každý den!',
   
   'M+SM komplet + Sem tam pupínek': 'Aby vaše náladová pleť zůstala v rovnováze a zároveň efektivně reagovala na občasné pupínky, doporučuji vám kombinaci dvou sad. Hlavní sada vaši pleť důkladně vyčistí, reguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem. Mini sada „Sem tam pupínek" pak okamžitě zasáhne v případě, že se nějaký ten pupínek přece jen objeví. Společně tvoří perfektní duo – účinné, ale zároveň šetrné k vaší pleti.',
   
