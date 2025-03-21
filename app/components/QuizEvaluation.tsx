@@ -159,16 +159,16 @@ export const PRICE_LIMITS: Record<ProductSet, number | null> = {
   'Normální základ': 1500,
   'Dermatitida': 1500,
   'Suchá komplet': 2500,
-  'M+SM komplet': 2000,
+  'M+SM komplet': 2500,
   'Normální komplet': 2500,
   'Citlivá': 2500,
   'Kuperóza': 2500,
   'Problém: AKNÉ': 2500,
   'Suchá a normální Anti-age': null,
-  'M+SM Anti-age': null,
-  'Suchá základ + Sem tam pupínek': null,
+  'M+SM Anti-age': 2500,
+  'Suchá základ + Sem tam pupínek': 2500,
   'M+SM komplet + Sem tam pupínek': null,
-  'Normální základ + Sem tam pupínek': null,
+  'Normální základ + Sem tam pupínek': 2500,
   'Citlivá + Sem tam pupínek': null
 };
 // Speciální doporučení
@@ -202,7 +202,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'M+SM Anti-age': 'Vaše pleť potřebuje péči, která myslí na každý detail! 💪 Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky. Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete! ',
   
-  'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. I vaše pleť se s přibývajícím věkem mění a i když ji netrápí problémy jako suchost, nebo nadměrný maz, procesy spojené s přirozeným stárnutím se jí nevyhnou. Připravila jsem pro vás kompletní sadu 6 produktů, která kromě každodenní péče obsahuje i produkty pro intenzivnější ošetření. Vaše pleť bude dokonale vyživená, svěží a rozzářená.',
+  'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. I vaše pleť se s přibývajícím věkem mění a i když ji běžně netrápí problémy jako suchost, nebo nadměrný maz, procesy spojené s přirozeným stárnutím se jí nevyhnou. Připravila jsem pro vás kompletní sadu, díky které vaše pleť bude dokonale vyživená, svěží a rozzářená.',
   
   'Normální základ': (answers) => {
     if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
