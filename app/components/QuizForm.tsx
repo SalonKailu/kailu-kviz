@@ -12,12 +12,13 @@ import Image from 'next/image';
 
 
 const INTRO_TEXT = {
- title: "Poznejme vaši pleť 🔍",
+ title: "Vítejte na cestě za spokojenou pletí 🎀",
  paragraphs: [
-   'Začneme hned tím nejdůležitějším a určíme typ vaší pleti.',
-   'Pokud to jde: ❌nemějte make-up a ✅nachystejte si zrcátko.', 
-   'Velkým pomocníkem bude také denní světlo a absence krémů na pleti.',
-   'Odpovídejte upřímně a nebojte se, není to žádný test, všechny odpovědi mohou být správné. 😎'
+   'Pokud to jde, prosím:',
+    '✅mějte odlíčenou pleť',
+    '✅nachystejte si zrcátko',
+    'Velkým pomocníkem bude také denní světlo a absence krémů na pleti.',
+    'Odpovídejte upřímně a nebojte se, není to žádný test, všechny odpovědi mohou být správné. 😎'
  ]
 };
 
@@ -83,10 +84,10 @@ const QUESTIONS = [
  },
  {
    id: 'target-intro',
-   title: 'Skvělé, už máme celkem pěkný obrázek o tom, jaká vaše pleť je. Pokračujme tím, že se zaměříme na "detaily".',
+   title: '',
    type: 'info',
    section: 'target',
-   content: '',
+   content: 'Skvělé, už máme celkem pěkný obrázek o tom, jaká vaše pleť je. Pokračujme tím, že se zaměříme na "detaily".',
    buttonText: 'Jasně!'
  },
  {
@@ -108,10 +109,10 @@ const QUESTIONS = [
 },
 {
   id: 'wish-intro',
-  title: 'Z našeho kosmetického rybníčku náhle vyskočila zlatá rybka 🐠 a nabídla se, že vám splní vaše největší přání!',
+  title: 'Skvělé, už se nám to rýsuje...',
   type: 'info',
   section: 'wish',
-  content: '',
+  content: 'Když v tom z našeho kosmetického rybníčku náhle vyskočila zlatá rybka 🐠 a nabídla se, že vám splní vaše největší přání!',
   buttonText: 'Super!'
 },
 {
@@ -131,10 +132,10 @@ const QUESTIONS = [
 },
 {
   id: 'budget-intro',
-  title: 'Balíček na míru už se chystá. 🎁',
+  title: 'Čtvrtletní investice',
   type: 'info',
   section: 'budget',
-  content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. Jedná se o částku, která vám kompletně pokryje zhruba tříměsíční péči o pleť.',
+  content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. 👛 Ptáme se na částku, která vám kompletně pokryje zhruba <strong>tříměsíční péči</strong> o pleť.',
   buttonText: 'Mám rozmyšleno!'
 },
 {
@@ -144,7 +145,7 @@ const QUESTIONS = [
   section: 'budget',
   options: [
     'Chtěl/a bych se vejít do 1500 Kč - stačí mi základní sada.',
-    'Mám limit 2500 Kč a určitě ho nechci překročit.',
+    'Mám limit 2500 Kč.',
     'Rád/a se podívám i na dražší možnost, pokud pro mě bude nejvhodnější.',
   ]
 },
@@ -498,7 +499,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 
 {currentQ.type === 'info' ? (
   <div className="space-y-10">
-    <p className="text-sm leading-[1.8]">{currentQ.content}</p>
+    <p className="text-sm leading-[1.8]" dangerouslySetInnerHTML={{ __html: currentQ.content }}></p>
     <div className="flex justify-end mt-6">
       <CustomButton
         onClick={() => {

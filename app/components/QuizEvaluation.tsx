@@ -295,9 +295,9 @@ export function evaluateSkinType(answers: QuizAnswers): SkinType {
       points['Smíšená']++;
       console.log('Přidán 1 bod pro Mastnou a 1 bod pro Smíšenou');
     } else if (noseAnswer.includes('Póry jsou viditelné jen při bližším pohledu')) {
+      points['Smíšená']++;
       points['Normální']++;
-      points['Suchá']++;
-      console.log('Přidán 1 bod pro Normální a 1 bod pro Suchou');
+      console.log('Přidán 1 bod pro Normální a 1 bod pro Smíšenou');
     } else if (noseAnswer.includes('Jaké póry')) {
       points['Suchá']++;
       console.log('Přidán 1 bod pro Suchou');
@@ -451,7 +451,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     // Určení zobrazovaného typu pleti
     const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
     let displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá.` 
+      ? `${basicSkinType} a také citlivá` 
       : basicSkinType;
     
     return {
@@ -475,7 +475,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     // Určení zobrazovaného typu pleti
     const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
     let displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá.` 
+      ? `${basicSkinType} a také citlivá` 
       : basicSkinType;
     
     return {
@@ -539,7 +539,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
       : `Vaše pleť vykazuje známky citlivosti, což je nyní hlavní priorita.`;
   } else {
     displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá.` 
+      ? `${basicSkinType} a také citlivá` 
       : basicSkinType;
   }
 
