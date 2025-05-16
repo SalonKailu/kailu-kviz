@@ -456,7 +456,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
           </p>
         )}
 
-{!isDermatitis && result.specialRecommendations.hasBlackheads && (
+{!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
   <p className="mt-4">
     A na černé tečky je tu expert náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩 Jeho přidání do košíku určitě nebudete litovat.
   </p>
