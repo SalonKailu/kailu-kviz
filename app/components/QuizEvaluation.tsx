@@ -511,12 +511,23 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
       console.log('Těhotenství s vyšším limitem - vybírám Citlivou sadu');
     }
   } else if (sensitivityPoints >= 2) {
-    // Logika pro citlivou pleť (když není těhotná)
+  // Logika pro citlivou pleť (když není těhotná)
+  if (budget === 2000) {
+  // Pro základní typ pleti vybíráme kompletní sadu pro rozpočet 2000, pokud je dostupná
+const affordableSets = SADY_DLE_TYPU[basicSkinType].filter(set => {
+  const setPrice = PRICE_LIMITS[set];
+  return setPrice === null || setPrice <= 2000;
+});
+recommendedSet = affordableSets.length > 0 ? affordableSets[0] : `${basicSkinType} základ`;
+    console.log('Citlivá pleť s omezeným rozpočtem - vybírám:', recommendedSet);
+  } else {
+    // Pro vyšší rozpočet zvolíme citlivou sadu
     recommendedSet = problems.includes('Sem tam pupínek') 
       ? 'Citlivá + Sem tam pupínek'
       : 'Citlivá';
     console.log('Citlivá pleť - vybírám:', recommendedSet);
-  } else {
+  }
+} else {
     // Standardní logika pro ostatní případy
     recommendedSet = selectProductSet(basicSkinType, problems, budget, answers);
     console.log('Standardní výběr sady:', recommendedSet);
