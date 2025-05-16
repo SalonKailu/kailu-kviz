@@ -154,10 +154,10 @@ export const SADY_DLE_TYPU: Record<SkinType, ProductSet[]> = {
 
 // Cenové limity pro sady
 export const PRICE_LIMITS: Record<ProductSet, number | null> = {
-  'Suchá základ': 1500,
-  'M+SM základ': 1500,
-  'Normální základ': 1500,
-  'Dermatitida': 1500,
+  'Suchá základ': 2000,
+  'M+SM základ': 2000,
+  'Normální základ': 2000,
+  'Dermatitida': 2000,
   'Suchá komplet': 2500,
   'M+SM komplet': 2500,
   'Normální komplet': 2500,
@@ -433,7 +433,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   
   // Získání rozpočtu
   const budgetAnswer = answers['budget-limit'] || '';
-  const budget = budgetAnswer.includes('1500') ? 1500 :
+  const budget = budgetAnswer.includes('2000') ? 2000 :
                 budgetAnswer.includes('2500') ? 2500 : null;
   console.log('Rozpočet:', budget);
   
@@ -449,7 +449,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     console.log('Nalezena dermatitida - nastavuji speciální sadu');
     
     // Určení zobrazovaného typu pleti
-    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
     let displaySkinType = isSensitive 
       ? `${basicSkinType} a také citlivá` 
       : basicSkinType;
@@ -473,7 +473,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
     console.log('Nalezena kuperóza - nastavuji speciální sadu');
     
     // Určení zobrazovaného typu pleti
-    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
     let displaySkinType = isSensitive 
       ? `${basicSkinType} a také citlivá` 
       : basicSkinType;
@@ -503,9 +503,9 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   let recommendedSet: ProductSet;
   if (isPregnant) {
     // Logika pro těhotné
-    if (budget === 1500) {
+    if (budget === 2000) {
       recommendedSet = 'Normální základ';
-      console.log('Těhotenství s limitem 1500 - vybírám Normální základ');
+      console.log('Těhotenství s limitem 2000 - vybírám Normální základ');
     } else {
       recommendedSet = 'Citlivá';
       console.log('Těhotenství s vyšším limitem - vybírám Citlivou sadu');
@@ -523,7 +523,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   }
   
   // Určení zobrazovaného typu pleti
-  const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 1500);
+  const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
   let displaySkinType;
   
   if (basicSkinType === 'Citlivá') {

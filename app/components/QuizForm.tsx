@@ -12,7 +12,7 @@ import Image from 'next/image';
 
 
 const INTRO_TEXT = {
- title: "Vítejte na cestě za spokojenou pletí 🎀",
+ title: "Vítejte na cestě za spokojenou pletí! 🎀",
  paragraphs: [
    'Pokud to jde, prosím:',
     '✅mějte odlíčenou pleť',
@@ -112,12 +112,12 @@ const QUESTIONS = [
   title: 'Skvělé, už se nám to rýsuje...',
   type: 'info',
   section: 'wish',
-  content: 'Když v tom z našeho kosmetického rybníčku náhle vyskočila zlatá rybka 🐠 a nabídla se, že vám splní vaše největší přání!',
+  content: 'Když v tom z našeho kosmetického rybníčku náhle vyskočila <strong>zlatá rybka 🐠</strong> a nabídla se, že vám splní vaše největší přání!',
   buttonText: 'Super!'
 },
 {
   id: 'wish-fish',
-  title: 'Tak co to bude?',
+  title: 'Tak co to bude?   ',
   type: 'radio',
   section: 'wish',
   options: [
@@ -132,7 +132,7 @@ const QUESTIONS = [
 },
 {
   id: 'budget-intro',
-  title: 'Čtvrtletní investice',
+  title: '',
   type: 'info',
   section: 'budget',
   content: 'Ještě si prosím rozmyslete, kolik chcete do vaší nové kosmetické výbavy investovat. 👛 Ptáme se na částku, která vám kompletně pokryje zhruba <strong>tříměsíční péči</strong> o pleť.',
