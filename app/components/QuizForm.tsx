@@ -144,7 +144,7 @@ const QUESTIONS = [
   type: 'radio',
   section: 'budget',
   options: [
-    'Chtěl/a bych se vejít do 1500 Kč - stačí mi základní sada.',
+    'Chtěl/a bych se vejít do 2000 Kč - stačí mi základní sada.',
     'Mám limit 2500 Kč.',
     'Rád/a se podívám i na dražší možnost, pokud pro mě bude nejvhodnější.',
   ]
@@ -331,7 +331,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
       </h1>
       
       <p className="mb-4">
-  Vaše pleť je{' '}
+  Vaše pleť je:{' '}
   {result.skinType.includes(' a také ') ? (
     <>
       {/* Rozdělíme text na části před a po "a také" */}
