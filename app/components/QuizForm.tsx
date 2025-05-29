@@ -552,8 +552,8 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
  return (
   <>
 
-   <div className="bg-white py-2 px-4 container mx-auto max-w-[950px]">
-     <Card className="min-h-screen bg-white py-8 px-4 max-w-[800px] mx-auto">
+   <div className="bg-white py-2 px-1 md:px-4 container mx-auto max-w-[950px]">
+     <Card className="bg-white py-2 md:py-8 px-1 md:px-4 max-w-[800px] mx-auto">
        <CardContent className="p-4">
          <SectionHeader currentQuestion={currentQuestion} />
          <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
@@ -598,7 +598,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     />
                    <Label
                      htmlFor={`option-${index}`}
-                     className="text-sm cursor-pointer leading-[1.8] "
+                     className="text-sm cursor-pointer leading-[1.8] flex-1"
                    >
                      {typeof option === 'object' ? option.text : option}
                    </Label>
@@ -652,7 +652,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
                              />
                              <Label
                                htmlFor={`option-${index}`}
-                               className="text-sm cursor-pointer leading-[1.8] text-gray-900"
+                               className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
                              >
                                {currentQ.options[index]}
                              </Label>
@@ -677,7 +677,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
                       />
                       <Label
                         htmlFor={`option-${index}`}
-                        className="text-sm cursor-pointer leading-[1.8] text-gray-900"
+                        className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
                       >
                         {option}
                       </Label>
