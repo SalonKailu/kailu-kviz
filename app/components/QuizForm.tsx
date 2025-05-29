@@ -353,10 +353,10 @@ if (showIntro) {
           
           {/* Text vlevo */}
           <div className="flex-1 flex flex-col justify-center text-center md:text-left">
-            <h1 className="text-2xl md:text-3xl font-bold mb-4">
+            <h1 className="text-2xl md:text-3xl font-bold mb-6">
               Zjistěte, co vaše pleť skutečně potřebuje.
             </h1>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 mb-6">
               Bez dalšího hledání a testování produktů "naslepo".
             </p>
             <p className="text-gray-600 mb-8">
