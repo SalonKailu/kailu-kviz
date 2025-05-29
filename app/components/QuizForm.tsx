@@ -328,13 +328,13 @@ const QuizForm = () => {
       
       {/* VERZE PRO PC - skrytá na mobilu */}
       <div className="bg-white rounded-lg p-8 hidden md:block">
-        <div className="flex flex-col md:flex-row items-center gap-8">
+        <div className="flex flex-col md:flex-row items-stretch gap-8">
           {/* Text vlevo */}
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl md:text-3xl font-bold mb-4">
               Zjistěte, co vaše pleť skutečně potřebuje.
             </h1>
-            <p className="text-gray-600 mb-2">
+            <p className="text-gray-600 mb-4">
               Bez dalšího hledání a testování produktů "naslepo".
             </p>
             <p className="text-gray-600 mb-8">
@@ -346,13 +346,13 @@ const QuizForm = () => {
           </div>
           
           {/* Obrázek vpravo */}
-          <div className="flex-1 flex items-end justify-center">
-            <img 
-              src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
-              alt="Péče na míru"
-              className="w-full max-w-xs h-auto"
-            />
-          </div>
+<div className="flex-1 flex items-center justify-center">
+  <img 
+    src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
+    alt="Péče na míru"
+    className="w-full max-w-[300px] h-full object-contain"
+  />
+</div>
         </div>
       </div>
 
