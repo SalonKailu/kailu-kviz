@@ -362,19 +362,17 @@ if (showIntro) {
             <p className="text-gray-600 mb-8">
               Doporučíme vám péči přímo pro vás.
             </p>
-            <div className="flex justify-center md:justify-start">
-              <CustomButton onClick={() => setShowIntro(false)}>
-                SPUSTIT DIAGNOSTIKU
-              </CustomButton>
-            </div>
+            <CustomButton onClick={() => setShowIntro(false)}>
+              SPUSTIT DIAGNOSTIKU
+            </CustomButton>
           </div>
           
           {/* Obrázek vpravo */}
-          <div className="flex-1 flex items-center justify-center">
+          <div className="flex-1 flex items-stretch justify-center">
             <img 
               src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
               alt="Péče na míru"
-              className="object-contain max-h-[180px] md:max-h-[200px]"
+              className="h-full max-h-[300px] object-contain"
             />
           </div>
         </div>
