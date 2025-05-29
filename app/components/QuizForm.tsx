@@ -372,7 +372,7 @@ if (showIntro) {
             <img 
               src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
               alt="Péče na míru"
-              className="h-full max-h-[300px] object-contain"
+              className="h-full max-h-[250px] object-contain"
             />
           </div>
         </div>
