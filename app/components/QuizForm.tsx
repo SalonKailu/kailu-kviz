@@ -356,14 +356,14 @@ if (showIntro) {
             <h1 className="text-2xl md:text-3xl font-bold mb-4">
               Zjistěte, co vaše pleť skutečně potřebuje.
             </h1>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 mb-8">
               Bez dalšího hledání a testování produktů "naslepo".
             </p>
             <p className="text-gray-600 mb-8">
               Doporučíme vám péči přímo pro vás.
             </p>
             <CustomButton onClick={() => setShowIntro(false)}>
-              SPUSTIT DIAGNOSTIKU
+              <span className="text-lg font-bold">SPUSTIT DIAGNOSTIKU</span>
             </CustomButton>
           </div>
           
@@ -372,7 +372,7 @@ if (showIntro) {
             <img 
               src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
               alt="Péče na míru"
-              className="h-full max-h-[250px] object-contain"
+              className="h-full max-h-[350px] object-contain"
             />
           </div>
         </div>
