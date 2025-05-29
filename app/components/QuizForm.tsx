@@ -268,36 +268,24 @@ const QuizForm = () => {
  const [result, setResult] = useState<QuizResult | null>(null);
 
    // KÓD PRO DYNAMICKOU VÝŠKU
-  useEffect(() => {
-    // Funkce pro odeslání výšky do rodičovského okna
-    const sendHeight = () => {
-      const height = document.body.scrollHeight;
-      window.parent.postMessage(
-        { type: 'kviz-height', height: height },
-        '*' // Později změníte na konkrétní doménu vašeho e-shopu
-      );
-    };
+useEffect(() => {
+  const sendHeight = () => {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage(
+      { type: 'kviz-height', height: height },
+      '*'
+    );
+  };
 
-    // Pošleme výšku hned po načtení
-    sendHeight();
+  sendHeight();
+  
+  // Pošleme výšku každých 500ms
+  const interval = setInterval(sendHeight, 500);
 
-    // Sledujeme změny velikosti
-    const resizeObserver = new ResizeObserver(() => {
-      sendHeight();
-    });
-
-    // Sledujeme hlavní element
-    resizeObserver.observe(document.body);
-
-    // Pošleme výšku i při změnách obsahu
-    const interval = setInterval(sendHeight, 500);
-
-    // Cleanup při unmount
-    return () => {
-      resizeObserver.disconnect();
-      clearInterval(interval);
-    };
-  }, [currentQuestion, showIntro, result]); // Sledujeme změny stavu
+  return () => {
+    clearInterval(interval);
+  };
+}, [currentQuestion, showIntro, result]);
   // KONEC KÓDU PRO DYNAMICKOU VÝŠKU
 
  const handleQuizComplete = () => {
