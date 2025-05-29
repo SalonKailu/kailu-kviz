@@ -354,19 +354,6 @@ const QuizForm = () => {
     className="w-full max-w-xs h-auto"
   />
 </div>
-Co jsem změnila:
-Odstranila max-w-sm z divu
-Přidala flex items-end justify-center - zarovná obrázek dolů a vycentruje
-Přidala max-w-xs k obrázku - zmenší maximální šířku (max-w-xs = 320px)
-Pokud je to pořád moc velké, můžete zkusit:
-
-max-w-[250px] místo max-w-xs
-Nebo w-3/4 místo w-full (75% šířky)
-
-
-
-
-You’re almo
         </div>
       </div>
     </div>
