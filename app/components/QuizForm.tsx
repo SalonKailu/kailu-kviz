@@ -608,7 +608,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
            ) : (
              <div className="space-y-1">
                {currentQ.images ? (
-                 <div className="flex flex-wrap gap-4">
+                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                    {currentQ.images.map((image, index) => (
                      <div key={index} className="flex flex-col w-[160px]">
                        <div
