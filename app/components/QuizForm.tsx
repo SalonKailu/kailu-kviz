@@ -178,24 +178,62 @@ const getSkinTypeUrl = (skinType) => {
 };
 
 const SectionHeader = ({ currentQuestion }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
   const getHeaderText = () => {
     const question = QUESTIONS[currentQuestion];
-    
-    if (question.section === 'skin') return 'Poznejme vaši pleť 🔍'; // První sekce
-    if (question.section === 'target') return 'Zaměřme cíl 🎯'; // Druhá sekce
-    if (question.section === 'wish') return 'Přejte si ✨'; // Třetí sekce
-    if (question.section === 'budget') return 'Rozpočet 💰'; // Čtvrtá sekce
-    if (question.section === 'done') return 'A je to!🎉'; // Pátá sekce
- };
+    if (question.section === 'skin') return 'Poznejme vaši pleť 🔍';
+    if (question.section === 'target') return 'Zaměřme cíl 🎯';
+    if (question.section === 'wish') return 'Přejte si ✨';
+    if (question.section === 'budget') return 'Rozpočet 💰';
+    if (question.section === 'done') return 'A je to! 🎉';
+  };
 
- return (
-   <div className="pt-2 mb-3">
-     <h1 className="text-base font-semibold flex items-center text-gray-900">
-       {getHeaderText()}
-     </h1>
-     <div className="h-px bg-[#c0b6aa] mt-2"></div>
-   </div>
- );
+  const isFirstSection = QUESTIONS[currentQuestion].section === 'skin';
+
+  return (
+    <div className="pt-2 mb-3">
+      <h1 className="text-base font-semibold flex items-center text-gray-900 relative">
+        {getHeaderText()}
+        
+        {/* Zobrazit ikonku pouze v první sekci */}
+        {isFirstSection && (
+          <div className="relative ml-2">
+            <button
+              onClick={() => setShowTooltip(!showTooltip)}
+              onMouseEnter={() => setShowTooltip(true)}
+              onMouseLeave={() => setShowTooltip(false)}
+              className="inline-flex items-center justify-center w-5 h-5 text-xs font-semibold text-gray-600 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors"
+            >
+              i
+            </button>
+            
+            {/* Tooltip */}
+            {showTooltip && (
+              <div className="absolute left-0 top-7 z-10 w-64 p-4 bg-white rounded-lg shadow-lg border border-gray-200">
+                <div className="text-sm text-gray-700">
+                  <p className="font-semibold mb-2">💡Co potřebujete pro přesné výsledky:</p>
+                  <ul className="space-y-1 mb-3">
+                    <li>✅ Odlíčená pleť</li>
+                    <li>✅ Žádný krém</li>
+                    <li>✅ Denní světlo</li>
+                    <li>✅ Zrcátko</li>
+                  </ul>
+                  <p className="text-xs text-gray-600">
+                    Odpovídejte upřímně podle aktuálního stavu vaší pleti. 
+                    Není to test - všechny odpovědi jsou správné! 😊
+                  </p>
+                </div>
+                {/* Šipka */}
+                <div className="absolute -top-2 left-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white"></div>
+              </div>
+            )}
+          </div>
+        )}
+      </h1>
+      <div className="h-px bg-[#c0b6aa] mt-2"></div>
+    </div>
+  );
 };
 
 const CustomButton = ({ children, ...props }) => (
@@ -286,22 +324,38 @@ const QuizForm = () => {
 
  if (showIntro) {
   return (
-    <div className="bg-white py-2 px-4 container mx-auto max-w-[950px]">
-      <Card className="min-h-screen bg-white py-8 px-4 max-w-[1100px] mx-auto">
-        <CardContent className="p-4">
-          <SectionHeader currentQuestion={currentQuestion} />
-          <div className="space-y-1">
-            {INTRO_TEXT.paragraphs.map((paragraph, index) => (
-              <p key={index} className="text-sm leading-[1.8] text-gray-900">{paragraph}</p>
-            ))}
-          </div>
-          <div className="flex justify-end mt-6">
-            <CustomButton onClick={() => setShowIntro(false)}>
-              Pojďme na to!
+    <div className="bg-transparent py-4 px-4 container mx-auto max-w-[1000px]">
+      <div className="bg-white rounded-lg shadow-sm p-8">
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          {/* Text vlevo */}
+          <div className="flex-1 text-center md:text-left">
+            <h1 className="text-2xl md:text-3xl font-bold mb-4">
+              Zjistěte, co vaše pleť skutečně potřebuje.
+            </h1>
+            <p className="text-gray-600 mb-2">
+              Bez dalšího hledání a testování produktů "naslepo".
+            </p>
+            <p className="text-gray-600 mb-8">
+              Doporučíme vám péči přímo pro vás.
+            </p>
+            <CustomButton 
+              onClick={() => setShowIntro(false)}
+              className="mx-auto md:mx-0"
+            >
+              SPUSTIT DIAGNOSTIKU
             </CustomButton>
           </div>
-        </CardContent>
-      </Card>
+          
+          {/* Obrázek vpravo */}
+          <div className="flex-1 max-w-sm">
+            <img 
+              src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
+              alt="Péče na míru"
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
