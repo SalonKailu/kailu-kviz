@@ -286,8 +286,8 @@ const QuizForm = () => {
 
  if (showIntro) {
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
-      <Card className="min-h-screen bg-gray-50 py-8 px-4 max-w-[1100px] mx-auto">
+    <div className="bg-white py-2 px-4 container mx-auto max-w-[950px]">
+      <Card className="min-h-screen bg-white py-8 px-4 max-w-[1100px] mx-auto">
         <CardContent className="p-4">
           <SectionHeader currentQuestion={currentQuestion} />
           <div className="space-y-1">
@@ -488,8 +488,8 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
  return (
   <>
 
-   <div className="min-h-screen bg-gray-50 py-8 px-4 container mx-auto max-w-[950px]">
-     <Card className="min-h-screen bg-gray-50 py-8 px-4 max-w-[800px] mx-auto">
+   <div className="bg-white py-2 px-4 container mx-auto max-w-[950px]">
+     <Card className="min-h-screen bg-white py-8 px-4 max-w-[800px] mx-auto">
        <CardContent className="p-4">
          <SectionHeader currentQuestion={currentQuestion} />
          <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>

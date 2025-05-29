@@ -11,7 +11,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ededed;
+    --background: #ffffff;  /* Změněno z #ededed na #ffffff */
     --foreground: #171717;
   }
 }
@@ -20,4 +20,37 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;  /* Přidáno */
+  padding: 0; /* Přidáno */
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+#__next {
+  min-height: auto !important;
+}
+
+/* Override Tailwind třídy pro šedé pozadí */
+.bg-gray-50 {
+  background-color: transparent !important;
+}
+
+/* Pokud chcete zachovat bílé pozadí pro Cards */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+/* Pro iframe prostředí */
+@media (max-width: 99999px) {
+  .min-h-screen {
+    min-height: auto !important;
+  }
+  
+  .py-8 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
 }
