@@ -325,10 +325,10 @@ const QuizForm = () => {
  if (showIntro) {
   return (
     <div className="bg-transparent py-4 px-4 container mx-auto max-w-[1000px]">
-      <div className="bg-white rounded-lg p-8">
-        
-        {/* VERZE PRO PC - skrytá na mobilu */}
-        <div className="hidden md:flex flex-col md:flex-row items-center gap-8">
+      
+      {/* VERZE PRO PC - skrytá na mobilu */}
+      <div className="bg-white rounded-lg p-8 hidden md:block">
+        <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Text vlevo */}
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl md:text-3xl font-bold mb-4">
@@ -354,18 +354,18 @@ const QuizForm = () => {
             />
           </div>
         </div>
-
-        {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
-        <div className="flex md:hidden flex-col items-center">
-          <img 
-            src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
-            alt="Spustit diagnostiku"
-            onClick={() => setShowIntro(false)}
-            className="w-full h-auto cursor-pointer"
-          />
-        </div>
-
       </div>
+
+      {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
+      <div className="flex md:hidden py-2">
+        <img 
+          src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
+          alt="Spustit diagnostiku"
+          onClick={() => setShowIntro(false)}
+          className="w-full h-auto cursor-pointer"
+        />
+      </div>
+
     </div>
   );
 }
