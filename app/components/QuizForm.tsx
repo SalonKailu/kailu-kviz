@@ -331,7 +331,7 @@ const QuizForm = () => {
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl md:text-3xl font-bold mb-4">
               Zjistěte, co vaše pleť skutečně potřebuje.
-            </h1>
+            </h1><p></p>
             <p className="text-gray-600 mb-2">
               Bez dalšího hledání a testování produktů "naslepo".
             </p>
@@ -347,13 +347,26 @@ const QuizForm = () => {
           </div>
           
           {/* Obrázek vpravo */}
-          <div className="flex-1 max-w-sm">
-            <img 
-              src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
-              alt="Péče na míru"
-              className="w-full h-auto"
-            />
-          </div>
+<div className="flex-1 flex items-end justify-center">
+  <img 
+    src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
+    alt="Péče na míru"
+    className="w-full max-w-xs h-auto"
+  />
+</div>
+Co jsem změnila:
+Odstranila max-w-sm z divu
+Přidala flex items-end justify-center - zarovná obrázek dolů a vycentruje
+Přidala max-w-xs k obrázku - zmenší maximální šířku (max-w-xs = 320px)
+Pokud je to pořád moc velké, můžete zkusit:
+
+max-w-[250px] místo max-w-xs
+Nebo w-3/4 místo w-full (75% šířky)
+
+
+
+
+You’re almo
         </div>
       </div>
     </div>
