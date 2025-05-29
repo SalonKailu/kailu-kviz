@@ -326,35 +326,45 @@ const QuizForm = () => {
   return (
     <div className="bg-transparent py-4 px-4 container mx-auto max-w-[1000px]">
       <div className="bg-white rounded-lg p-8">
-        <div className="flex flex-col md:flex-row items-center gap-8">
+        
+        {/* VERZE PRO PC - skrytá na mobilu */}
+        <div className="hidden md:flex flex-col md:flex-row items-center gap-8">
           {/* Text vlevo */}
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl md:text-3xl font-bold mb-4">
               Zjistěte, co vaše pleť skutečně potřebuje.
-            </h1><p></p>
+            </h1>
             <p className="text-gray-600 mb-2">
               Bez dalšího hledání a testování produktů "naslepo".
             </p>
             <p className="text-gray-600 mb-8">
               Doporučíme vám péči přímo pro vás.
             </p>
-            <button 
-  onClick={() => setShowIntro(false)}
-  className="px-6 py-3 rounded-lg bg-[#faa4a6] hover:bg-[#f08a8c] text-black font-semibold transition-colors duration-200"
->
-  SPUSTIT DIAGNOSTIKU
-</button>
+            <CustomButton onClick={() => setShowIntro(false)}>
+              SPUSTIT DIAGNOSTIKU
+            </CustomButton>
           </div>
           
           {/* Obrázek vpravo */}
-<div className="flex-1 flex items-end justify-center">
-  <img 
-    src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
-    alt="Péče na míru"
-    className="w-full max-w-xs h-auto"
-  />
-</div>
+          <div className="flex-1 flex items-end justify-center">
+            <img 
+              src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
+              alt="Péče na míru"
+              className="w-full max-w-xs h-auto"
+            />
+          </div>
         </div>
+
+        {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
+        <div className="flex md:hidden flex-col items-center">
+          <img 
+            src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
+            alt="Spustit diagnostiku"
+            onClick={() => setShowIntro(false)}
+            className="w-full h-auto cursor-pointer"
+          />
+        </div>
+
       </div>
     </div>
   );
