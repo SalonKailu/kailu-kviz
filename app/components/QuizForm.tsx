@@ -325,7 +325,7 @@ const QuizForm = () => {
  if (showIntro) {
   return (
     <div className="bg-transparent py-4 px-4 container mx-auto max-w-[1000px]">
-      <div className="bg-white rounded-lg shadow-sm p-8">
+      <div className="bg-white rounded-lg p-8">
         <div className="flex flex-col md:flex-row items-center gap-8">
           {/* Text vlevo */}
           <div className="flex-1 text-center md:text-left">
@@ -338,12 +338,12 @@ const QuizForm = () => {
             <p className="text-gray-600 mb-8">
               Doporučíme vám péči přímo pro vás.
             </p>
-            <CustomButton 
-              onClick={() => setShowIntro(false)}
-              className="mx-auto md:mx-0"
-            >
-              SPUSTIT DIAGNOSTIKU
-            </CustomButton>
+            <button 
+  onClick={() => setShowIntro(false)}
+  className="px-6 py-3 rounded-lg bg-[#faa4a6] hover:bg-[#f08a8c] text-black font-semibold transition-colors duration-200"
+>
+  SPUSTIT DIAGNOSTIKU
+</button>
           </div>
           
           {/* Obrázek vpravo */}
