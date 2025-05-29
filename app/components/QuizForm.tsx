@@ -1,5 +1,5 @@
-
-import React, { useState } from 'react';
+"use client";
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "./ui/card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Checkbox } from "./ui/checkbox";
