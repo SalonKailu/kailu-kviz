@@ -240,7 +240,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
       return 'Připravila jsem pro vás sadu, která řeší obě vaše potřeby - zklidnění i hydrataci. A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨';
     }
-    return 'Konečně péče, která vaši citlivou pleť nepodrážadí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce. Tato sada vaši pleť zklidní a posílí - už za pár týdnů zapomenete, že jste kdy měli problém s citlivostí. Tohle je ta změna, na kterou jste čekali! ✨';
+    return 'Konečně péče, která vaši citlivou pleť nepodráždí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce. Tato sada vaši pleť zklidní a posílí - už za pár týdnů zapomenete, že jste kdy měli problém s citlivostí. Tohle je ta změna, na kterou jste čekali! ✨';
   },
   
   'Citlivá + Sem tam pupínek': 'Potřebujete péči, která posílí ochrannou bariéru vaší pleti. A přesně na to se zaměřuje sada pro citlivou pleť. Navíc zklidní, hydratuje a vyživí! Pokud budete chtít výrazně urychlit hojení případných pupínků, doporučuji přikoupit i doplňkový set Sem tam pupínek.',
