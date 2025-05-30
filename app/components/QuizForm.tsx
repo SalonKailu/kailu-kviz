@@ -348,12 +348,12 @@ if (showIntro) {
     <div className="bg-transparent">
       
       {/* VERZE PRO PC - pouze obrázek */}
-<div className="hidden md:flex justify-center items-center min-h-screen">
+<div className="hidden md:flex justify-center items-stretch min-h-screen w-full">
   <img 
     src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.svg"
     alt="Spustit diagnostiku"
     onClick={() => setShowIntro(false)}
-    className="w-full h-auto cursor-pointer"
+    className="w-full h-full cursor-pointer"
   />
 </div>
 
