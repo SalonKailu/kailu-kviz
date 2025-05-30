@@ -345,41 +345,20 @@ useEffect(() => {
 
 if (showIntro) {
   return (
-    <div className="bg-transparent py-4 px-4 container mx-auto max-w-[1000px]">
+    <div className="bg-transparent">
       
-      {/* VERZE PRO PC - skrytá na mobilu */}
-      <div className="bg-white rounded-lg p-8 hidden md:block">
-        <div className="flex flex-col md:flex-row items-stretch gap-8">
-          
-          {/* Text vlevo */}
-          <div className="flex-1 flex flex-col justify-center text-center md:text-left">
-            <h1 className="text-2xl md:text-3xl font-bold mb-6">
-              Zjistěte, co vaše pleť skutečně potřebuje.
-            </h1>
-            <p className="text-gray-600 mb-6">
-              Bez dalšího hledání a testování produktů "naslepo".
-            </p>
-            <p className="text-gray-600 mb-8">
-              Doporučíme vám péči přímo pro vás.
-            </p>
-            <CustomButton onClick={() => setShowIntro(false)}>
-              <span className="text-lg font-bold">SPUSTIT DIAGNOSTIKU</span>
-            </CustomButton>
-          </div>
-          
-          {/* Obrázek vpravo */}
-          <div className="flex-1 flex items-stretch justify-center">
-            <img 
-              src="https://www.kailushop.cz/user/documents/upload/kviz_pecenamiru.png"
-              alt="Péče na míru"
-              className="h-full max-h-[350px] object-contain"
-            />
-          </div>
-        </div>
+      {/* VERZE PRO PC - pouze obrázek */}
+      <div className="hidden md:flex justify-center items-center min-h-screen">
+        <img 
+          src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.svg"
+          alt="Spustit diagnostiku"
+          onClick={() => setShowIntro(false)}
+          className="w-full max-w-4xl h-auto cursor-pointer"
+        />
       </div>
 
       {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
-      <div className="flex md:hidden py-2">
+      <div className="flex md:hidden">
         <img 
           src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
           alt="Spustit diagnostiku"
@@ -388,7 +367,7 @@ if (showIntro) {
         />
       </div>
 
-    </div>
+    </div> 
   );
 }
 
@@ -549,12 +528,16 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 )}
       </div>
 
-      <button
-  onClick={() => window.location.href = isDermatitis 
-    ? 'https://www.kailu.cz' 
-    : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`
-  }
-  className="w-full py-3 bg-[#f1eae2] hover:bg-[#e5ddd4] transition-colors duration-200 rounded-lg text-black font-medium"
+<button
+  onClick={() => {
+    const url = isDermatitis
+      ? 'https://www.kailu.cz'
+      : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
+    
+    // Otevře v rodičovském okně (mimo iframe)
+    window.parent.location.href = url;
+  }}
+  className="w-full py-3 bg-[#faa4a6] hover:bg-[#f08a8c] transition-colors duration-200 rounded-lg text-black font-medium"
 >
   {isDermatitis ? 'Objednat se' : 'Pokračovat'}
 </button>
@@ -574,8 +557,8 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
  return (
   <>
 
-   <div className="bg-white py-2 px-1 md:px-4 container mx-auto max-w-[950px]">
-     <Card className="bg-white py-2 md:py-8 px-1 md:px-4 max-w-[800px] mx-auto">
+   <div className={`bg-white container mx-auto max-w-[950px] ${currentQuestion === 0 ? '' : 'py-2 px-1 md:px-4'}`}>
+  <Card className={`bg-white max-w-[800px] mx-auto ${currentQuestion === 0 ? 'p-2' : 'py-2 md:py-8 px-1 md:px-4'}`}>
        <CardContent className="p-4">
          <SectionHeader currentQuestion={currentQuestion} />
          <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
