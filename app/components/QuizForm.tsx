@@ -350,7 +350,7 @@ if (showIntro) {
       {/* VERZE PRO PC - pouze obrázek */}
 <div className="hidden md:flex justify-center items-stretch min-h-screen w-full">
   <img 
-    src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.svg"
+    src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.png"
     alt="Spustit diagnostiku"
     onClick={() => setShowIntro(false)}
     className="w-full h-full cursor-pointer"
