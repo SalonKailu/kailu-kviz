@@ -194,13 +194,36 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'Suchá základ + Sem tam pupínek': 'Vypadá to, že vaše suchá pleť potřebuje především hydrataci, ale občas se na ní vyklube i nějaký ten pupínek. 😯 Pro řešení obou problémů vám doporučuji pořídit si sadu, která pleť hydratuje a zároveň nezatíží a doplnit ji našim oblíbeným duem pro občasné pupínky.',
   
-  'M+SM základ': 'Přesně tohle vaše pleť potřebuje! 🎯 Díky těmto 4 produktům bude vaše pleť čistá, svěží, hydratovaná a zároveň matná! A to nejlepší? Vejdete se do rozpočtu a rutina vám zabere jen pár minut denně. 😊',
+  'M+SM základ': (answers) => {
+  if (answers['skin-description']?.includes('Je suchá') || 
+      answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    return 'Vypadá to, že vaše suchá pleť je ve skutečnosti dehydratovaná - chybí jí voda, ne tuky. 💧 Produkty v této sadě dodají vaší pleti hydrataci, ale nezanáší póry. Konečně budete mít pleť vyváženou - ne mastnou, ale ani vysušenou. 🎯';
+  }
+
+  return 'Tohle je přesně to, co vaše pleť potřebuje! 🎯 Konečně se zbavíte mastného lesku, který vás trápí. Díky těmto 4 produktům bude vaše pleť čistá, svěží, hydratovaná a zároveň matná. A víte co je nejlepší? Vejdete se do rozpočtu a péče vám zabere jen pár minut denně.💕';
+},
   
-  'M+SM komplet': 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 A přesně to vám zařídí tento úžasný set produktů složený z korejské a české kosmetiky.',
+  'M+SM komplet': (answers) => {
+  // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
+  if (answers['skin-description']?.includes('Je suchá') || 
+      answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    return 'Skvělá zpráva! Vaše pleť není typově suchá, jen jí chybí voda, což hravě vyřeší tato sada. Dodá pleti hydrataci, ale zároveň zreguluje maz a vy konečně pocítíte, jaké to je mít vyváženou pleť - žádný lesk, žádné pnutí! ✨';
+  }
+  
+  return 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 A přesně to vám zařídí tento úžasný set produktů složený z korejské a české kosmetiky.';
+},
   
   'M+SM komplet + Sem tam pupínek': 'Kompletní sada vaši pleť důkladně vyčistí, zreguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem. Pokud se přesto objeví nějaký ten pupínek, doporučuji mít po ruce produkty ze setu „Sem tam pupínek".',
   
-  'M+SM Anti-age': 'Vaše pleť potřebuje péči, která myslí na každý detail! 💪 Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky. Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete! ',
+  'M+SM Anti-age': (answers) => {
+  // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
+  if (answers['skin-description']?.includes('Je suchá') || 
+      answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    return 'Perfektní volba! Tato anti-age sada řeší hned tři problémy najednou - dehydrataci, póry náchylné k ucpávání i stárnutí. 💧✨ Sama tuto sadu používám a nemůžu si ji vynachválit!';
+  }
+  
+  return 'Vaše pleť potřebuje péči, která myslí na každý detail! 💪 Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky. Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete!';
+},
   
   'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. Tato sada udrží vaši pleť v perfektní kondici a ochrání ji před stárnutím. Protože i "bezproblémová" pleť si zaslouží to nejlepší!',
   
@@ -226,7 +249,18 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
   
-  'Problém: AKNÉ': 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt akné. Já tuto sadu zbožňuji zejména pro její rychlý nástup účinku a pro skutečně "nadupané" složení. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌'
+    'Problém: AKNÉ': (answers) => {
+    // Kontrola typu pleti
+    const skinType = evaluateSkinType(answers);
+    
+    // Pokud NENÍ mastná nebo smíšená pleť
+    if (!['Mastná', 'Smíšená'].includes(skinType)) {
+      return 'Z vašich odpovědí vyplývá, že vás trápí akné, ale máte spíše citlivou nebo dehydratovanou pleť. Máte dvě možnosti: 1) Zkusit nejdřív jemnější <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_parent" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>, která se zaměří na opravu kožní bariéry, což u vašeho typu pleti často "stačí". 2) Použít tuto sadu, ale URČITĚ si dokoupit hydratační sérum nebo krém, jinak riskujete vysušení a podráždění. Volba je na vás, ale pokud byste potřeboval/a poradit, nebojte se mi napsat! 😇';
+    }
+    
+    // Standardní odpověď pro mastnou/smíšenou pleť
+    return 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt akné. Já tuto sadu zbožňuji zejména pro její rychlý nástup účinku a pro skutečně "nadupané" složení. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌';
+  }
 };
 
 // Proměnná pro body typů pleti

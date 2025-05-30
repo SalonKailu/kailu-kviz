@@ -348,14 +348,14 @@ if (showIntro) {
     <div className="bg-transparent">
       
       {/* VERZE PRO PC - pouze obrázek */}
-      <div className="hidden md:flex justify-center items-center min-h-screen">
-        <img 
-          src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.svg"
-          alt="Spustit diagnostiku"
-          onClick={() => setShowIntro(false)}
-          className="w-full max-w-4xl h-auto cursor-pointer"
-        />
-      </div>
+<div className="hidden md:flex justify-center items-center min-h-screen">
+  <img 
+    src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.svg"
+    alt="Spustit diagnostiku"
+    onClick={() => setShowIntro(false)}
+    className="w-full h-auto cursor-pointer"
+  />
+</div>
 
       {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
       <div className="flex md:hidden">
