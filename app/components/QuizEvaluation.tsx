@@ -648,6 +648,15 @@ export function selectProductSet(
   });
   console.log('Sady v cenovém limitu:', affordableSets);
 
+if (wishAnswer.includes('zpomalit stárnutí')) {
+      console.log('Přání ohledně stárnutí - hledám antiage');
+ const antiAgeSet = affordableSets.find(set => set.includes('Anti-age'));
+  if (antiAgeSet) {
+    console.log('Nalezeny vrásky nebo přání zpomalit stárnutí - vybírám anti-age sadu:', antiAgeSet);
+    return antiAgeSet;
+  }
+  }
+
   // Výběr sady podle problémů
   const hasAcne = problems.includes('Akné (více než 5 pupínků)');
   const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
@@ -663,6 +672,7 @@ export function selectProductSet(
     affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
     console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
   }
+
 
   if (problems.includes('Sem tam pupínek')) {
     // Pro mastnou/smíšenou pleť
