@@ -537,9 +537,9 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     // Otevře v rodičovském okně (mimo iframe)
     window.parent.location.href = url;
   }}
-  className="w-full py-3 bg-[#faa4a6] hover:bg-[#f08a8c] transition-colors duration-200 rounded-lg text-black font-medium"
+  className="w-full py-3 bg-[#faa4a6] hover:bg-[#e9f0ec] transition-colors duration-200 rounded-lg text-black font-medium"
 >
-  {isDermatitis ? 'Objednat se' : 'Pokračovat'}
+  {isDermatitis ? 'Objednat se' : 'Kouknu se na moji sadu 👀'}
 </button>
     {/* Testovací tlačítko - vložte sem */}
     {process.env.NODE_ENV !== 'production' && (
