@@ -210,7 +210,7 @@ const SectionHeader = ({ currentQuestion }) => {
             
             {/* Tooltip */}
             {showTooltip && (
-              <div className="absolute left-0 top-7 z-10 w-64 p-4 bg-white rounded-lg shadow-lg border border-gray-200">
+              <div className="absolute left-1/2 translate-x-[-50%] top-7 z-10 w-64 p-4 bg-white rounded-lg shadow-lg border border-gray-200">
                 <div className="text-sm text-gray-700">
                   <p className="font-semibold mb-2">💡Co potřebujete pro přesné výsledky:</p>
                   <ul className="space-y-1 mb-3">
