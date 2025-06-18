@@ -484,9 +484,19 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
 
     
       <div className="space-y-4 mb-6">
-  <p>{typeof RESULT_TEXTS[result.recommendedSet] === 'function' 
-    ? RESULT_TEXTS[result.recommendedSet](answers) 
-    : RESULT_TEXTS[result.recommendedSet]}</p>
+  {(() => {
+    const resultText = typeof RESULT_TEXTS[result.recommendedSet] === 'function'
+      ? RESULT_TEXTS[result.recommendedSet](answers)
+      : RESULT_TEXTS[result.recommendedSet];
+    
+    // Pokud text obsahuje HTML tagy, použijeme dangerouslySetInnerHTML
+    if (typeof resultText === 'string' && resultText.includes('<')) {
+      return <div dangerouslySetInnerHTML={{ __html: resultText }} />;
+    }
+    
+    // Jinak zobrazíme jako běžný text
+    return <p>{resultText}</p>;
+  })()}
         
         {!isDermatitis && result.specialRecommendations.hasPigmentation && (
           <p className="mt-4">
@@ -585,9 +595,9 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     </div>
   </div>
 ) : currentQ.type === 'checkbox' ? (
-             <div className="space-y-1">
+             <div className="space-y-0.5">
                {currentQ.options.map((option, index) => (
-                 <div key={index} className="flex items-start space-x-3 py-2 relative group">
+                 <div key={index} className="flex items-start space-x-3 py-1.5 relative group">
                    <Checkbox
       id={`option-${index}`}
       checked={(answers[currentQ.id] || []).includes(
@@ -621,7 +631,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
                ))}
              </div>
            ) : (
-             <div className="space-y-1">
+             <div className="space-y-0.5">
                {currentQ.images ? (
                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
                    {currentQ.images.map((image, index) => (
@@ -650,7 +660,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
                            value={answers[currentQ.id]}
                            onValueChange={handleAnswer}
                          >
-                           <div className="flex items-start space-x-2">
+                           <div className="flex items-start space-x-1.5">
                              <RadioGroupItem
                                value={currentQ.options[index]}
                                id={`option-${index}`}
@@ -671,11 +681,11 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
                 <RadioGroup
                 value={answers[currentQ.id]}
                 onValueChange={handleAnswer}
-                className="space-y-2"
+                className="space-y-0.5"
               >
                 {currentQ.options.map((option, index) => (
                   <div key={index} className="flex flex-col w-full">
-                    <div className="flex items-start space-x-2 py-2">
+                    <div className="flex items-start space-x-2 py-1.5">
                       <RadioGroupItem
                         value={option}
                         id={`option-${index}`}

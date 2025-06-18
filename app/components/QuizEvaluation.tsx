@@ -186,68 +186,98 @@ export const SPECIAL_RECOMMENDATIONS = {
 
 // Výsledné texty pro jednotlivé sady
 export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
-  'Suchá základ': 'Připravila jsem pro vás základní sadu 4 produktů, která je perfektní, pokud hledáte časově úspornou a cenově dostupnější variantu. Pleť bude hydratovaná, vyživená a příjemná na dotek.',
+  'Suchá základ': `<p style="margin-bottom: 1rem;">Připravila jsem pro vás základní sadu 4 produktů, která je perfektní, pokud hledáte časově úspornou a cenově dostupnější variantu.</p>
+<p>Pleť bude hydratovaná, vyživená a příjemná na dotek.</p>`,
   
-  'Suchá komplet': 'Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující. Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.',
+  'Suchá komplet': `<p style="margin-bottom: 1rem;">Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující.</p>
+<p>Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.</p>`,
   
-  'Suchá a normální Anti-age': 'Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží tuto péči! Produkty v této sadě nabízí intenzivní hydrataci s účinnými anti-age složkami a navíc jsou vhodné i pro citlivu pleť. Už se těšíte, až zazáříte?✨',
+  'Suchá a normální Anti-age': `<p style="margin-bottom: 1rem;">Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží tuto péči!</p>
+<p style="margin-bottom: 1rem;">Produkty v této sadě nabízí intenzivní hydrataci s účinnými anti-age složkami a navíc jsou vhodné i pro citlivou pleť.</p>
+<p>Už se těšíte, až zazáříte? ✨</p>`,
   
-  'Suchá základ + Sem tam pupínek': 'Vypadá to, že vaše suchá pleť potřebuje především hydrataci, ale občas se na ní vyklube i nějaký ten pupínek. 😯 Pro řešení obou problémů vám doporučuji pořídit si sadu, která pleť hydratuje a zároveň nezatíží a doplnit ji našim oblíbeným duem pro občasné pupínky.',
+  'Suchá základ + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Vypadá to, že vaše suchá pleť potřebuje především hydrataci, ale občas se na ní vyklube i nějaký ten pupínek. 😯</p>
+<p>Pro řešení obou problémů vám doporučuji pořídit si sadu, která pleť hydratuje a zároveň nezatíží a doplnit ji našim oblíbeným duem pro občasné pupínky.</p>`,
   
   'M+SM základ': (answers) => {
-  if (answers['skin-description']?.includes('Je suchá') || 
-      answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    return 'Vypadá to, že vaše suchá pleť je ve skutečnosti dehydratovaná - chybí jí voda, ne tuky. 💧 Produkty v této sadě dodají vaší pleti hydrataci, ale nezanáší póry. Konečně budete mít pleť vyváženou - ne mastnou, ale ani vysušenou. 🎯';
-  }
+    if (answers['skin-description']?.includes('Je suchá') || 
+        answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+      return `<p style="margin-bottom: 1rem;">Vypadá to, že vaše suchá pleť je ve skutečnosti dehydratovaná - chybí jí voda, ne tuky. 💧</p>
+<p>Produkty v této sadě dodají vaší pleti hydrataci, ale nezanáší póry. Konečně budete mít pleť vyváženou - ne mastnou, ale ani vysušenou. 🎯</p>`;
+    }
 
-  return 'Tohle je přesně to, co vaše pleť potřebuje! 🎯 Konečně se zbavíte mastného lesku, který vás trápí. Díky těmto 4 produktům bude vaše pleť čistá, svěží, hydratovaná a zároveň matná. A víte co je nejlepší? Vejdete se do rozpočtu a péče vám zabere jen pár minut denně.💕';
-},
+    return `<p style="margin-bottom: 1rem;">Tohle je přesně to, co vaše pleť potřebuje! 🎯</p>
+<p style="margin-bottom: 1rem;">Díky těmto 4 produktům bude vaše pleť čistá, svěží, hydratovaná a zároveň matná.</p>
+<p>A víte co je nejlepší? Vejdete se do rozpočtu a péče vám zabere jen pár minut denně. 💕</p>`;
+  },
   
   'M+SM komplet': (answers) => {
   // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
   if (answers['skin-description']?.includes('Je suchá') || 
       answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    return 'Skvělá zpráva! Vaše pleť není typově suchá, jen jí chybí voda, což hravě vyřeší tato sada. Dodá pleti hydrataci, ale zároveň zreguluje maz a vy konečně pocítíte, jaké to je mít vyváženou pleť - žádný lesk, žádné pnutí! ✨';
+    return `<p style="margin-bottom: 1rem;">Skvělá zpráva! Vaše pleť není typově suchá, jen jí chybí voda, což hravě vyřeší tato sada.</p>
+<p>Dodá pleti hydrataci, ale zároveň zreguluje maz a vy konečně pocítíte, jaké to je mít vyváženou pleť - žádný lesk, žádné pnutí! ✨</p>`;
   }
   
-  return 'Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏 A přesně to vám zařídí tento úžasný set produktů složený z korejské a české kosmetiky.';
+  return `<p style="margin-bottom: 1rem;">Vaše pleť potřebuje chytrou péči, která zkrotí nadměrnou tvorbu mazu, zabrání vzniku pupínků a přitom ji nevysuší. 🙏</p>
+<p>A přesně to vám zařídí tento úžasný set produktů složený z korejské a české kosmetiky.</p>`;
 },
   
-  'M+SM komplet + Sem tam pupínek': 'Kompletní sada vaši pleť důkladně vyčistí, zreguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem. Pokud se přesto objeví nějaký ten pupínek, doporučuji mít po ruce produkty ze setu „Sem tam pupínek".',
+'M+SM komplet + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Kompletní sada vaši pleť důkladně vyčistí, zreguluje tvorbu mazu bez vysušení a pomůže předcházet nedokonalostem.</p>
+<p>Pokud se přesto objeví nějaký ten pupínek, doporučuji mít po ruce produkty ze setu „Sem tam pupínek".</p>`,
+  
   
   'M+SM Anti-age': (answers) => {
   // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
   if (answers['skin-description']?.includes('Je suchá') || 
       answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    return 'Perfektní volba! Tato anti-age sada řeší hned tři problémy najednou - dehydrataci, póry náchylné k ucpávání i stárnutí. 💧✨ Sama tuto sadu používám a nemůžu si ji vynachválit!';
+    return `<p style="margin-bottom: 1rem;">Perfektní volba! Tato anti-age sada řeší hned tři problémy najednou - dehydrataci, póry náchylné k ucpávání i stárnutí. 💧✨</p>
+<p>Sama tuto sadu používám a nemůžu si ji vynachválit!</p>`;
   }
   
-  return 'Vaše pleť potřebuje péči, která myslí na každý detail! 💪 Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky. Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete!';
+  return `<p style="margin-bottom: 1rem;">Vaše pleť potřebuje péči, která myslí na každý detail! 💪</p>
+<p style="margin-bottom: 1rem;">Tuto sadu sama používám a je to moje srdcovka – zpevňuje pleť, hydratuje bez ucpání pórů, projasňuje, nevysušuje a pomůže redukovat vrásky.</p>
+<p>Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete!</p>`;
 },
   
-  'Normální komplet': ' Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech. Tato sada udrží vaši pleť v perfektní kondici a ochrání ji před stárnutím. Protože i "bezproblémová" pleť si zaslouží to nejlepší!',
+  'Normální komplet': `<p style="margin-bottom: 1rem;">Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech.</p>
+<p style="margin-bottom: 1rem;">Tato sada udrží vaši pleť v perfektní kondici a ochrání ji před stárnutím.</p>
+<p>Protože i "bezproblémová" pleť si zaslouží to nejlepší!</p>`,
   
-  'Normální základ': (answers) => {
-    if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
-      return 'Tato sada je šetrná, účinná, cenově dostupná a také časově nenáročná. 😇 Perfektní pro vás, v době těhotenství i kojení. ✨ Jen POZOR na to, že na denní použití je potřeba dokoupit gel s SPF! V těhotenství je minimálně dvojnásobné riziko vzniku pigmentových skvrn, takže je ochrana UV záření velmi důležitá. 🤫';
-    }
-    return 'Vypadá to, že je vaše pleť (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊 Máte poměrně vzácný typ pleti, o kterém většina z nás může jen snít. Tato sada je pro vás dostačující, jen pozor na to, že v ní není SPF přípravek, který důrazně doporučuji dokoupit! 🙏😇';
-  },
+'Normální základ': (answers) => {
+  if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
+    return `<p style="margin-bottom: 1rem;">Tato sada je šetrná, účinná, cenově dostupná a také časově nenáročná. 😇 Perfektní pro vás, v době těhotenství i kojení. ✨</p>
+<p>Jen POZOR na to, že na denní použití je potřeba dokoupit gel s SPF! V těhotenství je minimálně dvojnásobné riziko vzniku pigmentových skvrn, takže je ochrana UV záření velmi důležitá. 🤫</p>`;
+  }
+  return `<p style="margin-bottom: 1rem;">Vypadá to, že je vaše pleť (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊</p>
+<p style="margin-bottom: 1rem;">Máte poměrně vzácný typ pleti, o kterém většina z nás může jen snít.</p>
+<p>Tato sada je pro vás dostačující, jen pozor na to, že v ní není SPF přípravek, který důrazně doporučuji dokoupit! 🙏😇</p>`;
+},
   
   'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální." Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se někdy objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek." Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
   
   'Citlivá': (answers) => {
-    if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
-      return 'Připravila jsem pro vás sadu, která řeší obě vaše potřeby - zklidnění i hydrataci. A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨';
-    }
-    return 'Konečně péče, která vaši citlivou pleť nepodráždí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce. Tato sada vaši pleť zklidní a posílí - už za pár týdnů zapomenete, že jste kdy měli problém s citlivostí. Tohle je ta změna, na kterou jste čekali! ✨';
-  },
+  if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
+    return `<p style="margin-bottom: 1rem;">Připravila jsem pro vás sadu, která řeší obě vaše potřeby - zklidnění i hydrataci.</p>
+<p>A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨</p>`;
+  }
+  return `<p style="margin-bottom: 1rem;">Konečně péče, která vaši citlivou pleť nepodráždí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce.</p>
+<p style="margin-bottom: 1rem;">Tato sada se zaměřuje na zklidnění, hydrataci a posílení ochranné bariéry pleti.</p>
+<p>Tohle je ta změna, na kterou jste čekali! ✨</p>`;
+},
   
-  'Citlivá + Sem tam pupínek': 'Potřebujete péči, která posílí ochrannou bariéru vaší pleti. A přesně na to se zaměřuje sada pro citlivou pleť. Navíc zklidní, hydratuje a vyživí! Pokud budete chtít výrazně urychlit hojení případných pupínků, doporučuji přikoupit i doplňkový set Sem tam pupínek.',
+'Citlivá + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Potřebujete péči, která posílí ochrannou bariéru vaší pleti. A přesně na to se zaměřuje sada pro citlivou pleť.</p>
+<p style="margin-bottom: 1rem;">Navíc zklidní, hydratuje a vyživí!</p>
+<p>Pokud budete chtít výrazně urychlit hojení případných pupínků, doporučuji přikoupit i doplňkový set Sem tam pupínek.</p>`,
   
-  'Kuperóza': 'Nejlepší variantou pro vás bude zklidňující sada zaměřující se na kuperózu (popraskané žilky a začervenání v obličeji). Součástí balíčku je navíc velmi důležitý manuál, ve kterém se dozvíte několik užitečných rad a tipů, které vaší pleti prospějí a jsou stejně důležité jako samotné přípravky.',
+  'Kuperóza': `<p style="margin-bottom: 1rem;">Nejlepší variantou pro vás bude zklidňující sada zaměřující se na začervenání v obličeji a popraskané žilky.</p>
+<p style="margin-bottom: 1rem;">Budu k vám upřímná, pokud máte na tváři viditelné červené žilky, nelze je "slepit" zpět nebo odstranit, ale při špatné péči je téměř jisté, že by se stav časem zhoršil! 😯</p>
+<p style="margin-bottom: 1rem;">Pokud máte tvář červenou, ale nejedná se o žilky, můžete si pořídit <a href="https://www.kailushop.cz/sada-pro-citlivou-plet/" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a> - liší se pouze sérem. 😌</p>`,
+
   
-  'Dermatitida': 'Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická. Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku. Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit! Pro oba dva typy mám připravené sady se skvělými, osvědčenými produkty.🤩',
+  'Dermatitida': `<p style="margin-bottom: 1rem;">Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická.</p>
+<p style="margin-bottom: 1rem;">Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku.</p>
+<p>Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit!🤩</p>`,
   
     'Problém: AKNÉ': (answers) => {
     // Kontrola typu pleti
@@ -255,8 +285,12 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     
     // Pokud NENÍ mastná nebo smíšená pleť
     if (!['Mastná', 'Smíšená'].includes(skinType)) {
-      return 'Z vašich odpovědí vyplývá, že vás trápí akné, ale máte spíše citlivou nebo dehydratovanou pleť. Máte dvě možnosti: 1) Zkusit nejdřív jemnější <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_parent" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>, která se zaměří na opravu kožní bariéry, což u vašeho typu pleti často "stačí". 2) Použít tuto sadu, ale URČITĚ si dokoupit hydratační sérum nebo krém, jinak riskujete vysušení a podráždění. Volba je na vás, ale pokud byste potřeboval/a poradit, nebojte se mi napsat! 😇';
-    }
+  return `<p>Z vašich odpovědí vyplývá, že vás trápí akné, ale zároveň máte citlivou nebo dehydratovanou pleť.</p>
+          <p>Máte dvě možnosti:</p>
+          <p><strong>1)</strong> Zkusit nejdřív jemnější <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>, která se zaměří na opravu kožní bariéry, což by u vás mohlo "stačit" i na problémy s pupínky.</p>
+          <p><strong>2)</strong> Použít <a href="https://www.kailushop.cz/sada-pro-problematickou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu na akné</a>, ale URČITĚ si dokoupit hydratační krém, jinak riskujete vysušení a podráždění.</p>
+          <p>Volba je na vás, ale pokud byste potřeboval/a poradit, nebojte se nám napsat!😇</p>`;
+}
     
     // Standardní odpověď pro mastnou/smíšenou pleť
     return 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt akné. Já tuto sadu zbožňuji zejména pro její rychlý nástup účinku a pro skutečně "nadupané" složení. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌';
