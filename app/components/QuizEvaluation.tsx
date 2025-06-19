@@ -276,7 +276,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
   
   'Dermatitida': `<p style="margin-bottom: 1rem;">Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická.</p>
-<p style="margin-bottom: 1rem;">Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku.</p>
+<p style="margin-bottom: 1rem;">Nejlepší bude, když se objednáte na <a href="https://www.kailu.cz" target="_blank" style="color: #faa4a6; text-decoration: underline;">offline diagnostiku s ošetřením</a> (v Brně) nebo pošlete fotku na email na info@kailu.cz.</p>
 <p>Pokud není stav příliš dramatický a nechcete se na odstranění dermatitidy přímo zaměřit, můžete zvolit naši sadu pro citlivou pleť.</p>`,
   
     'Problém: AKNÉ': (answers) => {
@@ -683,20 +683,20 @@ export function selectProductSet(
   console.log('Sady v cenovém limitu:', affordableSets);
 
   // Výběr sady podle problémů
-  const hasAcne = problems.includes('Akné (více než 5 pupínků)');
+  const hasAcne = problems.includes('Akné (stabilně více než 5 pupínků🤫)');
   const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
   
-  // Doporučit sadu na akné pouze pokud explicitně vybral akné nebo si přeje zbavit se pupínků
-  if (hasAcne || wantsToRemoveAcne) {
-    console.log('Nalezeno akné nebo přání zbavit se pupínků - vracím speciální sadu pro akné');
-    return PRODUCT_SETS.PROBLEM_AKNE;
-  }
+  // Doporučit sadu na akné pouze pokud explicitně vybral akné
+if (hasAcne) {
+  console.log('Nalezeno akné - vracím speciální sadu pro akné');
+  return PRODUCT_SETS.PROBLEM_AKNE;
+}
   
   // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
-  if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne && !wantsToRemoveAcne) {
-    affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
-    console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
-  }
+if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne) {
+  affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
+  console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
+}
 
 
   if (problems.includes('Sem tam pupínek')) {
