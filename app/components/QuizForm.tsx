@@ -100,10 +100,10 @@ const QUESTIONS = [
     'Kruhy pod očima',
     'Vrásky',
     'Sem tam pupínek',
-    'Akné (více než 5 pupínků🤫)',
-    'Rozšířené póry / černé tečky',
+    'Akné (stabilně více než 5 pupínků🤫)',
+    'Rozšířené póry nebo černé tečky',
     'Zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí (Dermatitida)',
-    'Trvale začervenalá pleť / popraskané žilky',
+    'Trvale začervenalá pleť / "popraskané žilky"',
     'Není, jsem spokojená / Nic z výše uvedeného'
   ]
 },
@@ -541,7 +541,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 <button
   onClick={() => {
     const url = isDermatitis
-      ? 'https://www.kailu.cz'
+      ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
       : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
     
     // Otevře v rodičovském okně (mimo iframe)
@@ -549,7 +549,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
   }}
   className="w-full py-3 bg-[#faa4a6] hover:bg-[#e9f0ec] transition-colors duration-200 rounded-lg text-black font-medium"
 >
-  {isDermatitis ? 'Objednat se' : 'Kouknu se na moji sadu 👀'}
+  {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Kouknu se na moji sadu 👀'}
 </button>
     {/* Testovací tlačítko - vložte sem */}
     {process.env.NODE_ENV !== 'production' && (

@@ -277,7 +277,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'Dermatitida': `<p style="margin-bottom: 1rem;">Vybral/a jste možnost, že máte dermatitidu. Není to s ní úplně jednoduché, může být periorální nebo seboroická.</p>
 <p style="margin-bottom: 1rem;">Nejlepší bude, když se objednáte na ošetření a probereme to naživo u nás v salonu. Pokud by to nebylo možné, napište mi email na info@kailu.cz, pošlete fotku a dořešíme to na dálku.</p>
-<p>Bude to výzva, ale se správnou péčí dermatitidu zvládneme porazit!🤩</p>`,
+<p>Pokud není stav příliš dramatický a nechcete se na odstranění dermatitidy přímo zaměřit, můžete zvolit naši sadu pro citlivou pleť.</p>`,
   
     'Problém: AKNÉ': (answers) => {
     // Kontrola typu pleti
