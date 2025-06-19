@@ -387,6 +387,18 @@ console.log('recommendedSet:', result?.recommendedSet);
 console.log('PRODUCT_URLS:', PRODUCT_URLS);
 
  if (result) {
+
+  // Google Analytics tracking
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'quiz_completed', {
+      skin_type: result.skinType,
+      recommended_set: result.recommendedSet,
+      has_acne: result.problems.includes('Akné (stabilně více než 5 pupínků🤫)'),
+      budget: answers['budget-limit'] || 'unlimited'
+    });
+  }
+
+
   const isDermatitis = result.recommendedSet === 'Dermatitida';
 
   return (
@@ -540,6 +552,15 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 
 <button
   onClick={() => {
+
+    // Google Analytics tracking
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'purchase_click', {
+      product_set: result.recommendedSet,
+      skin_type: result.skinType
+    });
+  }
+  
     const url = isDermatitis
       ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
       : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
