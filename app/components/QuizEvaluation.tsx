@@ -245,8 +245,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 <p>A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨</p>`;
   }
   return `<p style="margin-bottom: 1rem;">Konečně péče, která vaši citlivou pleť nepodráždí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce.</p>
-<p style="margin-bottom: 1rem;">Tato sada se zaměřuje na zklidnění, hydrataci a posílení ochranné bariéry pleti.</p>
-<p>Tohle je ta změna, na kterou jste čekali! ✨</p>`;
+<p style="margin-bottom: 1rem;">Tato sada se zaměřuje na zklidnění, hydrataci a posílení ochranné bariéry pleti.</p>`;
 },
   
 'Citlivá + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Potřebujete péči, která posílí ochrannou bariéru vaší pleti. A přesně na to se zaměřuje sada pro citlivou pleť.</p>
@@ -276,7 +275,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 }
     
     // Standardní odpověď pro mastnou/smíšenou pleť
-    return 'Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt akné. Já tuto sadu zbožňuji zejména pro její rychlý nástup účinku a pro skutečně "nadupané" složení. 💖 Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌';
+    return '<p>Tato sada vaší pleti pomůže postupně se zklidnit, projasnit a výrazně snížit výskyt akné.</p> <p>Já tuto sadu zbožňuji zejména pro její rychlý nástup účinku a pro skutečně "nadupané" složení.</p> <p>Součástí vaší nové péče bude navíc i podrobný manuál, který vás krok za krokem provede celým procesem a pomůže vám se vším, co by vaši pleť mohlo ovlivnit. Už teď se těším na vaše výsledky! 🙌</p>';
   }
 };
 

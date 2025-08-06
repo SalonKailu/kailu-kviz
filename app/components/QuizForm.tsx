@@ -122,11 +122,12 @@ const QUESTIONS = [
   section: 'wish',
   options: [
     'Chci zpomalit stárnutí.',
-    'Ať se moje pleť přestane lesknout.',
     'Už nechci mít citlivou pleť.',
     'Ať mi zmizí pupínky.',
     'Ať už není moje pleť tak vysušená.',
     'Nechť mé černé tečky navždy zmizí!',
+    'Ať se moje pleť tolik nemastí.',
+    'Chci udržet aktuální stav pleti co nejdéle.',
     'Zrovna jsem těhotná, nebo kojím - proto se chci vyhnout látkám, které bych neměla používat.',
   ]
 },
