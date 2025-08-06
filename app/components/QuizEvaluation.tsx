@@ -665,13 +665,25 @@ export function selectProductSet(
   console.log('Sady v cenovém limitu:', affordableSets);
 
   // Výběr sady podle problémů
-  const hasAcne = problems.includes('Akné (stabilně více než 5 pupínků🤫)');
-  const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
-  
-  // Doporučit sadu na akné pouze pokud explicitně vybral akné
+  // NOVÁ LOGIKA PRO AKNÉ:
+const hasAcne = problems.includes('Akné (stabilně více než 5 pupínků🤫)');
+const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
+
+// Logika podle typu pleti
 if (hasAcne) {
-  console.log('Nalezeno akné - vracím speciální sadu pro akné');
-  return PRODUCT_SETS.PROBLEM_AKNE;
+  if (['Mastná', 'Smíšená'].includes(skinType)) {
+    // Pro mastnou/smíšenou stačí jen zaškrtnuté akné
+    console.log('Mastná/smíšená pleť s akné - vracím sadu pro akné');
+    return PRODUCT_SETS.PROBLEM_AKNE;
+  } else {
+    // Pro suchou/normální je potřeba i přání zbavit se pupínků
+    if (wantsToRemoveAcne) {
+      console.log('Suchá/normální pleť s akné + přání zbavit se pupínků - vracím sadu pro akné');
+      return PRODUCT_SETS.PROBLEM_AKNE;
+    } else {
+      console.log('Suchá/normální pleť s akné, ale bez přání zbavit se pupínků - pokračuji standardní logikou');
+    }
+  }
 }
   
   // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
@@ -679,7 +691,6 @@ if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne) {
   affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
   console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
 }
-
 
   if (problems.includes('Sem tam pupínek')) {
     // Pro mastnou/smíšenou pleť
