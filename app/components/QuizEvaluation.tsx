@@ -244,7 +244,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return `<p style="margin-bottom: 1rem;">Připravila jsem pro vás sadu, která řeší obě vaše potřeby - zklidnění i hydrataci.</p>
 <p>A jako bonus posílíte ochranou bariéru a kožní mikrobiom vaší pleti.✨</p>`;
   }
-  return `<p style="margin-bottom: 1rem;">Konečně péče, která vaši citlivou pleť nepodráždí! 🙏 Žádné zarudnutí, pálení nebo nepříjemné reakce.</p>
+  return `<p style="margin-bottom: 1rem;">Žádné zarudnutí, pálení nebo nepříjemné reakce. Vaše pleť bude v sedmém nebi. ✨</p>
 <p style="margin-bottom: 1rem;">Tato sada se zaměřuje na zklidnění, hydrataci a posílení ochranné bariéry pleti.</p>`;
 },
   
