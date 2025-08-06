@@ -38,7 +38,7 @@ const QUESTIONS = [
  },
  {
    id: 'skin-nose',
-   title: 'Koukněte se na svůj nos. Jakému obrázku se nejvíce podobá?',
+   title: 'Který obrázek se vám nejvíce podobá?',
    type: 'radio',
    section: 'skin',
    images: [
@@ -54,7 +54,7 @@ const QUESTIONS = [
  },
  {
    id: 'skin-cheeks',
-   title: 'Na pórech záleží! Omrkněte prosím ještě tváře. Vidíte je tam?',
+   title: 'Na pórech fakt záleží! Omrkněte prosím ještě tváře. Vidíte je tam?',
    type: 'radio',
    section: 'skin',
    images: [
@@ -151,7 +151,7 @@ const QUESTIONS = [
 },
 {
   id: 'done-info',
-  title: 'Vaše nová kosmetická výbava už se na vás těší! 💖',
+  title: 'Vaše nová kosmetická výbava už se na vás těší!',
   type: 'info',
   section: 'done',
   content: '',
@@ -570,7 +570,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
   }}
   className="w-full py-3 bg-[#faa4a6] hover:bg-[#e9f0ec] transition-colors duration-200 rounded-lg text-black font-medium"
 >
-  {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Kouknu se na moji sadu 👀'}
+  {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Zobrazit doporučenou péči 👀'}
 </button>
     {/* Testovací tlačítko - vložte sem */}
     {process.env.NODE_ENV !== 'production' && (

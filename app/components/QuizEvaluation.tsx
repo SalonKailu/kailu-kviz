@@ -2,14 +2,12 @@
 export type SkinType = 'Suchá' | 'Smíšená' | 'Mastná' | 'Citlivá' | 'Normální';
 export type ProductSet = 
   | 'Suchá základ' 
-  | 'Suchá komplet'
   | 'Suchá a normální Anti-age'
   | 'Suchá základ + Sem tam pupínek'
   | 'M+SM základ'
   | 'M+SM komplet'
   | 'M+SM komplet + Sem tam pupínek'
   | 'M+SM Anti-age'
-  | 'Normální komplet'
   | 'Normální základ'
   | 'Normální základ + Sem tam pupínek'
   | 'Citlivá'
@@ -54,11 +52,9 @@ export const SKIN_TYPES: Record<string, SkinType> = {
 // Konstanty pro produktové sady
 export const PRODUCT_SETS: Record<string, ProductSet> = {
   SUCHA_ZAKLAD: 'Suchá základ',
-  SUCHA_KOMPLET: 'Suchá komplet',
   SUCHA_ANTIAGE: 'Suchá a normální Anti-age',
   SUCHA_PUPINEK: 'Suchá základ + Sem tam pupínek',
   MSM_ZAKLAD: 'M+SM základ',
-  MSM_KOMPLET: 'M+SM komplet',
   MSM_KOMPLET_PUPINEK: 'M+SM komplet + Sem tam pupínek',
   MSM_ANTIAGE: 'M+SM Anti-age',
   NORMALNI_KOMPLET: 'Normální komplet',
@@ -74,10 +70,8 @@ export const PRODUCT_SETS: Record<string, ProductSet> = {
 
 // URL konstanty a limity
 export const DISPLAY_NAMES = {
-  'Normální základ': 'Základní sada pro normální pleť',
-  'Normální komplet': 'Kompletní sada pro normální pleť',
-  'Suchá základ': 'Základní sada pro suchou pleť',
-  'Suchá komplet': 'Kompletní sada pro suchou pleť',
+  'Normální základ': 'Sada pro normální pleť',
+  'Suchá základ': 'Sada pro suchou pleť',
   'M+SM základ': 'Základní sada pro mastnou a smíšenou pleť',
   'M+SM komplet': 'Kompletní sada pro mastnou a smíšenou pleť',
   'Suchá a normální Anti-age': 'Anti-age sada pro normální a suchou pleť',
@@ -92,15 +86,13 @@ export const DISPLAY_NAMES = {
 export const SHOP_BASE_URL = 'https://www.kailushop.cz/';
 export const PRODUCT_URLS = {
 'Suchá základ': 'zakladni-sada-pro-suchou-plet',
-'Suchá komplet': 'kompletni-sada-pro-suchou-plet',
 'Suchá a normální Anti-age': 'anti-age-sada-pro-normalni-a-suchou-plet',
-'Suchá základ + Sem tam pupínek': 'zakladni-sada-pro-suchou-plet',
+'Suchá základ + Sem tam pupínek': 'sada-pro-suchou-plet',
 'M+SM základ': 'zakladni-sada-pro-mastnou-a-smisenou-plet',
 'M+SM komplet': 'kompletni-sada-pro-mastnou-a-smisenou-plet',
 'M+SM komplet + Sem tam pupínek': 'kompletni-sada-pro-mastnou-a-smisenou-plet',
 'M+SM Anti-age': 'anti-age-sada-pro-mastnou-a-smisenou-plet',
-'Normální komplet': 'kompletni-sada-pro-normalni-plet',
-'Normální základ': 'zakladni-sada-pro-normalni-plet',
+'Normální základ': 'sada-pro-normalni-plet',
 'Normální základ + Sem tam pupínek': 'zakladni-sada-pro-normalni-plet',
 'Citlivá': 'sada-pro-citlivou-plet',
 'Citlivá + Sem tam pupínek': 'sada-pro-citlivou-plet',
@@ -120,35 +112,33 @@ export const SKIN_TYPE_URLS = {
 
 // Sady podle typu pleti s prioritami
 export const SADY_DLE_TYPU: Record<SkinType, ProductSet[]> = {
-  'Suchá': [
-    'Suchá a normální Anti-age',
-    'Suchá komplet',
-    'Suchá základ + Sem tam pupínek',
-    'Suchá základ'
-  ],
+ 'Suchá': [
+  'Suchá a normální Anti-age',
+  'Suchá základ + Sem tam pupínek',
+  'Suchá základ'  
+],
   'Smíšená': [
-    'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
+    'M+SM komplet + Sem tam pupínek',
     'M+SM základ'
   ],
   'Mastná': [
-    'M+SM komplet + Sem tam pupínek',
     'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
+    'M+SM komplet + Sem tam pupínek',
     'M+SM základ'
   ],
   'Normální': [
-    'Suchá a normální Anti-age',
-    'Normální základ + Sem tam pupínek',
-    'Normální komplet',
-    'Normální základ'
-  ],
+  'Suchá a normální Anti-age',
+  'Normální základ + Sem tam pupínek',
+  'Normální základ'  
+],
   'Citlivá': [
-    'Citlivá + Sem tam pupínek',
-    'Citlivá'
+    'Citlivá',
+    'Citlivá + Sem tam pupínek'
   ]
 };
 
@@ -158,14 +148,12 @@ export const PRICE_LIMITS: Record<ProductSet, number | null> = {
   'M+SM základ': 2000,
   'Normální základ': 2000,
   'Dermatitida': 2000,
-  'Suchá komplet': 2500,
   'M+SM komplet': 2500,
-  'Normální komplet': 2500,
   'Citlivá': 2500,
   'Kuperóza': 2500,
   'Problém: AKNÉ': 2500,
-  'Suchá a normální Anti-age': 3000,
-  'M+SM Anti-age': 2500,
+  'Suchá a normální Anti-age': 2500,
+  'M+SM Anti-age': 3000,
   'Suchá základ + Sem tam pupínek': 2500,
   'M+SM komplet + Sem tam pupínek': 3000,
   'Normální základ + Sem tam pupínek': 2500,
@@ -186,11 +174,9 @@ export const SPECIAL_RECOMMENDATIONS = {
 
 // Výsledné texty pro jednotlivé sady
 export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
-  'Suchá základ': `<p style="margin-bottom: 1rem;">Připravila jsem pro vás základní sadu 4 produktů, která je perfektní, pokud hledáte časově úspornou a cenově dostupnější variantu.</p>
-<p>Pleť bude hydratovaná, vyživená a příjemná na dotek.</p>`,
-  
-  'Suchá komplet': `<p style="margin-bottom: 1rem;">Připravila jsem pro vás sadu 5 produktů, které jsou silně hydratační a vyživující.</p>
-<p>Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění, nepříjemné pnutí i nadměrná tvorba vrásek.</p>`,
+  'Suchá základ': `<p style="margin-bottom: 1rem;">Připravila jsem pro vás sadu produktů, které jsou silně hydratační a vyživující - perfektní kombinace účinnosti a pohodlí! 💧</p>
+<p style="margin-bottom: 1rem;">Vaše pleť se díky nim bude mít jako v bavlnce, zmizí příznaky suchosti, podráždění a nepříjemné pnutí.</p>
+<p>Péče vám zabere jen pár minut denně! ✨</p>`,
   
   'Suchá a normální Anti-age': `<p style="margin-bottom: 1rem;">Vaše pleť přirozeně stárne o něco rychleji než mastná či smíšená pleť, a proto si zaslouží tuto péči!</p>
 <p style="margin-bottom: 1rem;">Produkty v této sadě nabízí intenzivní hydrataci s účinnými anti-age složkami a navíc jsou vhodné i pro citlivou pleť.</p>
@@ -240,18 +226,14 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 <p>Perfektní kombinace vyladěná do posledního detailu, kterou věřím, že si také zamilujete!</p>`;
 },
   
-  'Normální komplet': `<p style="margin-bottom: 1rem;">Vaše pleť je ve skvělé kondici! Přestože se řadí mezi "normální" typ pleti, o kterém většina lidí jen sní, je důležité neusnout na vavřínech.</p>
-<p style="margin-bottom: 1rem;">Tato sada udrží vaši pleť v perfektní kondici a ochrání ji před stárnutím.</p>
-<p>Protože i "bezproblémová" pleť si zaslouží to nejlepší!</p>`,
-  
 'Normální základ': (answers) => {
   if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
     return `<p style="margin-bottom: 1rem;">Tato sada je šetrná, účinná, cenově dostupná a také časově nenáročná. 😇 Perfektní pro vás, v době těhotenství i kojení. ✨</p>
 <p>Jen POZOR na to, že na denní použití je potřeba dokoupit gel s SPF! V těhotenství je minimálně dvojnásobné riziko vzniku pigmentových skvrn, takže je ochrana UV záření velmi důležitá. 🤫</p>`;
   }
   return `<p style="margin-bottom: 1rem;">Vypadá to, že je vaše pleť (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊</p>
-<p style="margin-bottom: 1rem;">Máte poměrně vzácný typ pleti, o kterém většina z nás může jen snít.</p>
-<p>Tato sada je pro vás dostačující, jen pozor na to, že v ní není SPF přípravek, který důrazně doporučuji dokoupit! 🙏😇</p>`;
+<p style="margin-bottom: 1rem;">Máte poměrně vzácný typ bezproblémové pleti, o kterém většina z nás může jen snít.</p>
+<p>Tato sada udrží vaši pleť dlouhodobě v perfektní kondici a ochrání ji před stárnutím. ✨</p>`;
 },
   
   'Normální základ + Sem tam pupínek': 'Máte vzácný typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální." Z vašich odpovědí však vyplývá, že se občas objeví nějaký ten pupínek. Proto bych vám doporučila kombinaci dvou sad. Kompletní sada udrží vaši pleť v rovnováze, dodá jí přirozený jas a svěžest. A pokud se někdy objeví nečekané nedokonalosti, snadno si s nimi poradí naše mini sada „Sem tam pupínek." Dopřejte své pleti komplexní péči a objednejte si obě sady – pro krásu ve všech situacích!',
