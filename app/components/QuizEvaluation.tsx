@@ -495,7 +495,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   console.log('Filtrované problémy:', problems);
   
   // KLÍČOVÁ ZMĚNA: Priorita pro dermatitidu a kuperozu
-  if (problems.includes('Zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí (Dermatitida)')) {
+  if (problems.includes('Dermatitida = zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí')) {
     console.log('Nalezena dermatitida - nastavuji speciální sadu');
     
     // Určení zobrazovaného typu pleti
@@ -512,14 +512,14 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
         hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
         hasUndereyeCircles: problems.includes('Kruhy pod očima'),
         antiAgeSuggested: false,
-        hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
+        hasBlackheads: problems.includes('Rozšířené póry nebo černé tečky') && 
           !['Mastná', 'Smíšená'].includes(basicSkinType),
         isPregnant
       }
     };
   }
   
-  if (problems.includes('Trvale začervenalá pleť / popraskané žilky')) {
+  if (problems.includes('Trvale začervenalá pleť')) {
     console.log('Nalezena kuperóza - nastavuji speciální sadu');
     
     // Určení zobrazovaného typu pleti
@@ -536,7 +536,7 @@ export function evaluateQuiz(answers: QuizAnswers): QuizResult {
         hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
         hasUndereyeCircles: problems.includes('Kruhy pod očima'),
         antiAgeSuggested: false,
-        hasBlackheads: problems.includes('Rozšířené póry / černé tečky') && 
+        hasBlackheads: problems.includes('Rozšířené póry nebo černé tečky') && 
           !['Mastná', 'Smíšená'].includes(basicSkinType),
         isPregnant
       }
