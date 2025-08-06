@@ -55,9 +55,9 @@ export const PRODUCT_SETS: Record<string, ProductSet> = {
   SUCHA_ANTIAGE: 'Suchá a normální Anti-age',
   SUCHA_PUPINEK: 'Suchá základ + Sem tam pupínek',
   MSM_ZAKLAD: 'M+SM základ',
+  MSM_KOMPLET: 'M+SM komplet',
   MSM_KOMPLET_PUPINEK: 'M+SM komplet + Sem tam pupínek',
   MSM_ANTIAGE: 'M+SM Anti-age',
-  NORMALNI_KOMPLET: 'Normální komplet',
   NORMALNI_ZAKLAD: 'Normální základ',
   NORMALNI_PUPINEK: 'Normální základ + Sem tam pupínek',
   CITLIVA: 'Citlivá',
@@ -118,27 +118,28 @@ export const SADY_DLE_TYPU: Record<SkinType, ProductSet[]> = {
   'Suchá základ'  
 ],
   'Smíšená': [
-    'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM komplet + Sem tam pupínek',
+    'Problém: AKNÉ',
     'M+SM základ'
   ],
   'Mastná': [
-    'Problém: AKNÉ',
     'M+SM Anti-age',
     'M+SM komplet',
     'M+SM komplet + Sem tam pupínek',
+    'Problém: AKNÉ',
     'M+SM základ'
   ],
   'Normální': [
   'Suchá a normální Anti-age',
   'Normální základ + Sem tam pupínek',
-  'Normální základ'  
+  'Normální základ',
+  'Problém: AKNÉ',
 ],
   'Citlivá': [
     'Citlivá',
-    'Citlivá + Sem tam pupínek'
+    'Citlivá + Sem tam pupínek',
   ]
 };
 
