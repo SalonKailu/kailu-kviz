@@ -569,7 +569,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     // Otevře v rodičovském okně (mimo iframe)
     window.parent.location.href = url;
   }}
-  className="w-full py-3 bg-[#faa4a6] hover:bg-[#e9f0ec] transition-colors duration-200 rounded-lg text-black font-medium"
+  className="w-full py-3 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-medium"
 >
   {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Zobrazit doporučenou péči 👀'}
 </button>
