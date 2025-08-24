@@ -22,6 +22,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-size: 14px;  /* základní velikost písma */
+  line-height: 1.5;  /* výška řádku */
   margin: 0;  /* Přidáno */
   padding: 0; /* Přidáno */
 }
