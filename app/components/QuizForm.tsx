@@ -513,7 +513,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
         
         {!isDermatitis && result.specialRecommendations.hasPigmentation && (
           <p className="mt-4">
-            S pigmentovými skvrnami je to trochu složitější. Kosmetika si s nimi může částečně poradit, ale nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je chemický peeling. Více o něm píšu na {' '}
+            S <strong>pigmentovými skvrnami</strong> je to trochu složitější. Nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je <strong>PREVENCE</strong> (používat SPF) a <strong>chemický peeling</strong>. Více o něm píšu na {' '}
     <a 
       href="https://www.kailu.cz/kosmetika" 
       target="_blank" 
@@ -526,7 +526,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
         
 {!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
   <p className="mt-4">
-    Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
+    Na <strong>zmírnění kruhů pod očima</strong> vám ráda doporučím skvělý{' '}
     <a 
       href="https://www.kailushop.cz/ocni-krem" 
       target="_blank" 
