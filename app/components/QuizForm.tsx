@@ -469,12 +469,12 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
             {result.recommendedSet.includes('+ Sem tam pupínek') && (
               <p>
                 <a 
-                  href={`${SHOP_BASE_URL}sem-tam-pupinek`}
+                  href={`${SHOP_BASE_URL}sos-gel`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-black underline hover:text-[#faa4a6]"
                 >
-                  Mini sada Sem tam pupínek
+                  SOS gel na pupínky
                 </a>
               </p>
             )}
@@ -523,12 +523,7 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
           </p>
         )}
         
-        {!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
-          <p className="mt-4">
-            {result.specialRecommendations.antiAgeSuggested
-              ? 'Krém, který si hravě poradí s kruhy pod očima, je již součástí vaší anti-age sady.'
-              : (
-                <>
+        
 Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     <a 
       href="https://www.kailushop.cz/ocni-krem" 
@@ -546,7 +541,7 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
 
 {!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
   <p className="mt-4">
-    A na černé tečky je tu expert náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩 Jeho přidání do košíku určitě nebudete litovat.
+    S přáním zbavit se <strong>černých teček</strong> si vaše sada sama o sobě poradí. Pro urychlení ale můžete využít i náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
   </p>
 )}
       </div>
