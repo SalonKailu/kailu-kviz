@@ -524,7 +524,9 @@ console.log('PRODUCT_URLS:', PRODUCT_URLS);
         )}
         
         
-Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
+{!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
+  <p className="mt-4">
+    Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
     <a 
       href="https://www.kailushop.cz/ocni-krem" 
       target="_blank" 
@@ -534,10 +536,8 @@ Na zmírnění kruhů pod očima vám ráda doporučím skvělý{' '}
       oční krém
     </a>{' '}
     od korejské značky Skin1004, který navíc působí skvěle i jako prevence drobných vrásek kolem očí.
-                </>
-              )}
-          </p>
-        )}
+  </p>
+)}
 
 {!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
   <p className="mt-4">
