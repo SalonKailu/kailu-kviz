@@ -664,53 +664,34 @@ export function selectProductSet(
   });
   console.log('Sady v cenovém limitu:', affordableSets);
 
-  // Výběr sady podle problémů
   // NOVÁ LOGIKA PRO AKNÉ:
-const hasAcne = problems.includes('Akné (stabilně více než 5 pupínků🤫)');
-const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
+  const hasAcne = problems.includes('Akné (stabilně více než 5 pupínků🤫)');
+  const wantsToRemoveAcne = answers['wish-fish']?.includes('Ať mi zmizí pupínky');
 
-// Logika podle typu pleti
-if (hasAcne) {
-  if (['Mastná', 'Smíšená'].includes(skinType)) {
-    // Pro mastnou/smíšenou stačí jen zaškrtnuté akné
-    console.log('Mastná/smíšená pleť s akné - vracím sadu pro akné');
-    return PRODUCT_SETS.PROBLEM_AKNE;
-  } else {
-    // Pro suchou/normální je potřeba i přání zbavit se pupínků
-    if (wantsToRemoveAcne) {
-      console.log('Suchá/normální pleť s akné + přání zbavit se pupínků - vracím sadu pro akné');
+  // Logika podle typu pleti
+  if (hasAcne) {
+    if (['Mastná', 'Smíšená'].includes(skinType)) {
+      // Pro mastnou/smíšenou stačí jen zaškrtnuté akné
+      console.log('Mastná/smíšená pleť s akné - vracím sadu pro akné');
       return PRODUCT_SETS.PROBLEM_AKNE;
     } else {
-      console.log('Suchá/normální pleť s akné, ale bez přání zbavit se pupínků - pokračuji standardní logikou');
+      // Pro suchou/normální je potřeba i přání zbavit se pupínků
+      if (wantsToRemoveAcne) {
+        console.log('Suchá/normální pleť s akné + přání zbavit se pupínků - vracím sadu pro akné');
+        return PRODUCT_SETS.PROBLEM_AKNE;
+      } else {
+        console.log('Suchá/normální pleť s akné, ale bez přání zbavit se pupínků - pokračuji standardní logikou');
+      }
     }
   }
-}
   
   // Odstraňte sadu pro akné z dostupných sad, pokud uživatel nemá akné
-if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne) {
-  affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
-  console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
-}
-
-  if (problems.includes('Sem tam pupínek')) {
-    // Pro mastnou/smíšenou pleť
-    if (['Smíšená', 'Mastná'].includes(skinType)) {
-      const pupinekSet = PRODUCT_SETS.MSM_KOMPLET_PUPINEK;
-      if (affordableSets.includes(pupinekSet)) {
-        console.log('Nalezen občasný pupínek pro mastnou/smíšenou pleť - vybírám:', pupinekSet);
-        return pupinekSet;
-      }
-    } else {
-      // Pro ostatní typy pleti
-      const pupinekSet = `${skinType} základ + Sem tam pupínek` as ProductSet;
-      if (affordableSets.includes(pupinekSet)) {
-        console.log('Nalezen občasný pupínek - vybírám:', pupinekSet);
-        return pupinekSet;
-      }
-    }
-    console.log('Pupínková sada není v dostupných sadách, pokračuji dalším výběrem');
+  if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne) {
+    affordableSets = affordableSets.filter(set => set !== PRODUCT_SETS.PROBLEM_AKNE);
+    console.log('Sada pro akné odstraněna z dostupných sad, protože uživatel nemá akné:', affordableSets);
   }
 
+  // ANTI-AGE MÁ PRIORITU - přesunuto PŘED pupínky
   const wishAnswer = answers['wish-fish'];
   if (wishAnswer) {
     console.log('\nVyhodnocuji přání:', wishAnswer);
@@ -747,6 +728,26 @@ if (affordableSets.includes(PRODUCT_SETS.PROBLEM_AKNE) && !hasAcne) {
       const pupinekSet = `${skinType} základ + Sem tam pupínek` as ProductSet;
       if (affordableSets.includes(pupinekSet)) return pupinekSet;
     }
+  }
+
+  // PUPÍNKY AŽ PO ANTI-AGE
+  if (problems.includes('Sem tam pupínek')) {
+    // Pro mastnou/smíšenou pleť
+    if (['Smíšená', 'Mastná'].includes(skinType)) {
+      const pupinekSet = PRODUCT_SETS.MSM_KOMPLET_PUPINEK;
+      if (affordableSets.includes(pupinekSet)) {
+        console.log('Nalezen občasný pupínek pro mastnou/smíšenou pleť - vybírám:', pupinekSet);
+        return pupinekSet;
+      }
+    } else {
+      // Pro ostatní typy pleti
+      const pupinekSet = `${skinType} základ + Sem tam pupínek` as ProductSet;
+      if (affordableSets.includes(pupinekSet)) {
+        console.log('Nalezen občasný pupínek - vybírám:', pupinekSet);
+        return pupinekSet;
+      }
+    }
+    console.log('Pupínková sada není v dostupných sadách, pokračuji dalším výběrem');
   }
 
   // Jinak vracíme první dostupnou sadu podle priority
