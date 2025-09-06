@@ -173,45 +173,63 @@ export const SPECIAL_RECOMMENDATIONS = {
 
 // Výsledné texty pro jednotlivé sady
 export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
-  'Suchá základ': `<p style="margin-bottom: 1rem;">Podle vašich odpovědí je vaše pleť suchá a <strong>potřebuje hlavně hydrataci a výživu</strong>.</p>
-<p style="margin-bottom: 1rem;">Proto jsem pro vás vybrala sadu, která <strong>přinese okamžitou úlevu a dlouhodobou rovnováhu</strong>:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+  'Suchá základ': `<p style="margin-bottom: 1rem; font-size: 1.1em;"><strong>Vaše pleť je suchá</strong> – potřebuje proto <strong>hloubkovou hydrataci a výživu</strong>.</p>
+
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Vybrala jsem pro vás sadu, která přináší <strong>okamžitou úlevu</strong> a zároveň <strong>dlouhodobou rovnováhu</strong>.
+</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Uleví od pnutí a suchosti</li>
   <li>➡ Zjemní a zklidní pleť během několika dní</li>
   <li>➡ Dodá výživu bez zbytečné zátěže</li>
   <li>➡ Je časově i finančně úsporná</li>
 </ul>
-<p>S touto péčí bude vaše pleť jemná, vyživená a spokojená. ✨</p>`,
+
+<p><strong>S touto péčí bude vaše pleť jemná, vyživená a spokojená. ✨</strong></p>`,
   
-  'Suchá a normální Anti-age': `<p style="margin-bottom: 1rem;">Super! Díky vaším odpovědím víme, že kromě <strong>suchosti</strong> pleti řešíte i <strong>projevy stárnutí.</strong></p>
-<p style="margin-bottom: 1rem;">Přímo pro vás je stvořená naše anti-age sada, která spojuje intenzivní hydrataci s účinnou ochranou proti vráskám:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+  'Suchá a normální Anti-age': `<p style="margin-bottom: 1rem; font-size: 1.1em;">🎉 Skvělé! Díky vašim odpovědím víme, že kromě <strong>suchosti</strong> řešíte i <strong>projevy stárnutí</strong>.</p>
+
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Na míru pro vás: <strong>anti-age sada</strong>, která spojuje intenzivní hydrataci s <strong>účinnou ochranou proti vráskám</strong>.
+</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Hydratuje, zpevní a rozjasní pleť</li>
   <li>➡ Zpomaluje tvorbu jemných linek a vrásek ✨</li>
-  <li>➡ Obsahuje <strong>aktivní látky s klinicky prokazatelnými účinky</strong></li>
+  <li>➡ Obsahuje <strong>aktivní látky s klinicky ověřenými účinky</strong></li>
 </ul>
-<p>Tato sada udrží vaši pleť pružnou, mladistvou a svěží každý další den. 🌸</p>`,
+
+<p><strong>Tato sada udrží vaši pleť pružnou, mladistvou a svěží – každý další den. 🌸</strong></p>`,
   
-   'Suchá základ + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Vypadá to, že je vaše pleť suchá, ale občas se na ní objeví i pupínek.</p>
-<p style="margin-bottom: 1rem;">Proto jsem připravila <strong>kombinaci, která řeší oba problémy najednou</strong>:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
-  <li>Dlouhodobá hydratace a úleva od suchosti 💧</li>
-  <li>Lehká textura, která neucpává póry</li>
-  <li>Doplňkový SOS gel na rychlé řešení pupínků</li>
+   'Suchá základ + Sem tam pupínek': `<p style="margin-bottom: 1rem; font-size: 1.1em;"><strong>Suchá pleť</strong>, ale občas <strong>nepříjemný pupínek</strong>? Žádný problém.</p>
+
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Připravila jsem pro vás <strong>kombinaci, která řeší oba problémy najednou</strong>.
+</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
+  <li>💧 Dlouhodobá hydratace a úleva od suchosti</li>
+  <li>🌿 Lehká textura, která neucpává póry</li>
+  <li>🎯 <a href="https://www.kailushop.cz/sos-gel" style="color: inherit; text-decoration: underline;">SOS gel</a> na rychlé zklidnění pupínků</li>
 </ul>
-<p>Vaše pleť tak bude jemná, vyživená a bez nečekaných překvapení.🎯</p>`,
+
+<p><strong>Výsledkem je jemná, vyživená a čistá pleť – bez nečekaných překvapení. ✨</strong></p>`,
   
   'M+SM základ': (answers) => {
     if (answers['skin-description']?.includes('Je suchá') || 
         answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-      return `<p style="margin-bottom: 1rem;">Vypadá to, že vaše suchá pleť je ve skutečnosti <strong>dehydratovaná</strong> - chybí jí voda, ne tuky. 💧</p>
-      <p style="margin-bottom: 1rem;">Právě proto (a s ohledem na váš rozpočet), jsem pro vás vybrala tuto základní sadu.</p>
+      return `<p style="margin-bottom: 1rem; font-size: 1.1em;">Vaše pleť může působit suše, ale ve skutečnosti je <strong>dehydratovaná</strong> – chybí jí voda. 💧</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Proto je pro vás ideální tato <strong>základní sada</strong> – šetrná, efektivní a navíc <strong>odpovídá vašemu rozpočtu</strong>.
+</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Dodá pleti potřebnou hydrataci 💧</li>
   <li>➡ Zajistí, že nebude mastná ani vysušená</li>
-  <li>➡ Nezanáší póry</li>
-  <li>➡ Je vhodná pro váš typ pleti</li>
+  <li>➡ Nezanáší póry 🌿</li>
+  <li>➡ Je přesně pro váš typ pleti</li>
 </ul>
 
 <p>Pokud byste měl/a pocit, že přeci jen potřebujete <strong>více hydratace</strong>, doporučuji před krémem nanášet ještě <a href="https://www.kailushop.cz/hydratacni-serum/" target="_blank" rel="noopener noreferrer" class="text-black underline hover:text-[#faa4a6]">hydratační sérum</a>! 🎯</p>`;
@@ -219,86 +237,97 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
     return `<p style="margin-bottom: 1rem;">Tohle je přesně to, co vaše pleť potřebuje! 🎯</p>
 <p style="margin-bottom: 1rem;">Základní sada pro váš typ pleti:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Čistí a osvěžuje pleť</li>
   <li>➡ Hydratuje bez ucpávání pórů</li>
   <li>➡ Pomáhá udržet pleť matnou</li>
   <li>➡ Předchází vzniku pupínků</li>
 </ul>
-<p>A víte co je na tom ještě skvělé? <strong>Vejdete se do rozpočtu</strong> a péče vám zabere <strong>jen pár minut denně.</strong> 💕</p>`;
+<p>A víte co ještě je na tom skvělé? <strong>Vejdete se do rozpočtu</strong> a péče vám zabere <strong>jen pár minut denně.</strong> 💕</p>`;
   },
   
   'M+SM komplet': (answers) => {
   // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
   if (answers['skin-description']?.includes('Je suchá') || 
       answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-     return `<p style="margin-bottom: 1rem;">Z vašich odpovědí vyplývá, že vaše pleť <strong>není typově suchá</strong>, jen jí chybí voda – je tedy <strong>dehydratovaná</strong>.</p>
-<p style="margin-bottom: 1rem;">Tento kompletní set vyřeší oba problémy najednou:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
-  <li>➡ Dodá pleti <strong>hydrataci</strong> bez ucpání pórů 💧</li>
-  <li>➡ Dodá pleti potřebný balanc díky <strong>zpevnění kožní bariéry</strong></li>
-  <li>➡ Uleví od lesku i nepříjemného pnutí</li>
+     return `<p style="margin-bottom: 1rem; font-size: 1.1em;">Z vašich odpovědí vyplývá, že vaše pleť <strong>není typově suchá</strong>, jen jí chybí voda – je tedy <strong>dehydratovaná</strong>. 💧</p>
 
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Tento <strong>kompletní set</strong> vyřeší oba problémy najednou.
+</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
+  <li>➡ Dodá pleti <strong>hydrataci</strong> bez ucpání pórů 💧</li>
+  <li>➡ <strong>Posílí kožní bariéru</strong> a obnoví přirozenou rovnováhu</li>
+  <li>➡ Uleví od lesku i nepříjemného pnutí</li>
 </ul>
-<p>Vaše pleť bude konečně vyvážená – žádný lesk, žádná suchost! ✨</p>`;
+
+<p><strong>Vaše pleť bude konečně vyvážená – žádný lesk, žádná suchost, jen spokojenost. ✨</strong></p>`;
   }
   
-  return `<p style="margin-bottom: 1rem;">Pleť podobnou té vaší má téměř polovina našich zákaznic. 🙏 </p>
-<p style="margin-bottom: 1rem;">Díky tomu jsem mohla do detailu vypiplat a mnohokrát si ověřit účinky této <strong>kompletní sady z korejské a české kosmetiky</strong>, která:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
-  <li>➡ Reguluje mastnotu a lesk</li>
-  <li>➡ Brání vzniku pupínků</li>
-  <li>➡ Hydratuje bez vysušení</li>
-  <li>➡ Předchází prvním známkám stárnutí</li>
+  return `<p>Pleť podobnou té vaší má téměř polovina našich zákaznic. 🙏</p> <br />
+<p>Díky tomu jsme mohli do detailu vypilovat a mnohokrát ověřit účinky této <strong>kompletní sady z korejské a české kosmetiky</strong>, která:</p>
+
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
+  <li>➡ <strong>Reguluje</strong> mastnotu a lesk</li>
+  <li>➡ <strong>Brání</strong> vzniku pupínků</li>
+  <li>➡ <strong>Hydratuje</strong> bez vysušení</li>
+  <li>➡ <strong>Předchází</strong> známkám stárnutí</li>
 </ul>
-<p>Je to ideální kombinace, která vaši pleť dostane do rovnováhy. ⚖</p>`;
+
+<p><strong>Je to ideální kombinace, která vaši pleť dostane do rovnováhy. ⚖</strong></p>`;
 },
   
-'M+SM komplet + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Vypadá to, že mazové žlázky na vaší pleti perfektně fungují, ale občas se díky tomu objeví i nechtěné pupínky.</p>
-<p style="margin-bottom: 1rem;">Proto doporučuji tuto kompletní sadu, kterou můžete doplnit o náš oblíbený <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" class="text-black underline hover:text-[#faa4a6]">SOS gel</a> pro rychlé řešení nedokonalostí.</p>
+'M+SM komplet + Sem tam pupínek': `<p style="margin-bottom: 1rem; font-size: 1.1em;">Vaše pleť produkuje dostatek mazu – a proto se občas objeví i pupínek.</p>
+
+<p style="margin-bottom: 1rem; border-left: 3px solid #eee; padding-left: 0.8rem;">
+Proto doporučuji tuto <strong>kompletní sadu</strong>, kterou můžete doplnit o náš oblíbený <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" class="text-black underline hover:text-[#faa4a6]">SOS gel</a> pro rychlé řešení nedokonalostí.
+</p>
+
 <p style="margin-bottom: 1rem;">Tato kompletní sada:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
-  <li>➡ Důkladně <strong>čistí</strong> bez vysušení nebo podráždění</li>
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
+  <li>➡ <strong>Čistí</strong> bez vysušení nebo podráždění</li>
   <li>➡ <strong>Reguluje</strong> tvorbu mazu</li>
   <li>➡ <strong>Hydratuje</strong> bez zatížení</li>
   <li>➡ <strong>Předchází</strong> ucpávání pórů a vzniku nedokonalostí</li>
 </ul>
-<p>S touto kombinací se vaše pleť zharmonizuje tak rychle, že ani nestihnete říct "pupínek".😉</p>`,
+
+<p><strong>S touto kombinací se vaše pleť zharmonizuje tak rychle, že ani nestihnete říct "pupínek". 😉</strong></p>`,
   
   'M+SM Anti-age': (answers) => {
   // Pokud odpověděl "je suchá" v první otázce NEBO má pocit vysušení
   if (answers['skin-description']?.includes('Je suchá') || 
       answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
-    return `<p style="margin-bottom: 1rem;">Tato anti-age sada řeší hned tři problémy najednou - <strong>dehydrataci, póry náchylné k ucpávání i stárnutí</strong>. 💧✨</p>
+    return `<p style="margin-bottom: 1rem; font-size: 1.1em;">Tato <strong>anti-age sada</strong> řeší hned tři věci najednou: <strong>dehydrataci, sklony k ucpávání pórů a stárnutí</strong>. 💧✨</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
-  <li>➡ Zpevňuje a projasňuje pleť</li>
-  <li>➡ Hydratuje, aniž by ucpávala póry</li>
-  <li>➡ Pomáhá redukovat vrásky a zpomaluje jejich tvorbu</li>
-  <li>➡ Obsahuje retinol a retinal, jejichž <strong>účinnost je klinicky ověřena</strong> mnoha výzkumy</li>
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
+  <li>➡ <strong>Zpevňuje</strong> a <strong>projasňuje</strong> pleť ✨</li>
+  <li>➡ <strong>Hydratuje</strong>, aniž by ucpávala póry</li>
+  <li>➡ Pomáhá <strong>redukovat vrásky</strong> a zpomaluje jejich tvorbu</li>
+  <li>➡ Obsahuje <strong>retinol a retinal</strong>, jejichž účinnost je klinicky ověřena</li>
 </ul>
 
-<p>Sama tuto sadu používám a naprosto ji zbožňuji. Těším se, až i vám přinese o level krásnější pleť.🙌</p>`;
+<p><strong>Sama tuto sadu používám a naprosto ji zbožňuji. Těším se, až i vám přinese o level krásnější pleť. 🙌</strong></p>`;
   }
   
-  return `<p style="margin-bottom: 1rem;">Z vašich odpovědí vyplývá, že kromě mastnější nebo smíšené pleti řešíte také projevy stárnutí.</p>
+  return `<p>Skvělé! 🙌 Víme, co chcete a máme perfektní plán jak toho dosáhnout. 😎</strong>.</p><br />
 
-<p style="margin-bottom: 1rem;">Proto jsem vybrala anti-age sadu, která kombinuje <strong>účinnou regulaci mazu, hydrataci i péči proti vráskám</strong>:</p>
+<p>Tato anti-age sada pokryje <strong>všechny oblasti, které vaše pleť vyžaduje</strong>:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ <strong>Zpevňuje</strong> a <strong>projasňuje</strong> pleť</li>
   <li>➡ <strong>Hydratuje</strong>, aniž by ucpávala póry</li>
-  <li>➡ Pomáhá <strong>redukovat</strong> vrásky a zpomaluje jejich tvorbu</li>
-  <li>➡ Obsahuje <strong>retinol a retinal</strong>, jejichž <strong>účinnost je klinicky ověřena</strong> a podpořena mnoha výzkumy</li>
+  <li>➡ Pomáhá <strong>redukovat vrásky</strong> a zpomaluje jejich tvorbu</li>
+  <li>💡 Obsahuje <strong>retinol a retinal</strong>, jejichž <strong>účinnost je klinicky ověřena</strong> a podpořena mnoha výzkumy (+ další úžasné aktivní látky)</li>
 </ul>
 
-<p>Sama tuto sadu používám a naprosto ji zbožňuji. Těším se, až i vám přinese o level krásnější pleť.🙌</p>`;
+<p><strong>Sama tuto sadu používám a naprosto ji zbožňuji. Těším se, až i vám přinese o level krásnější pleť. 🙌</strong></p>`;
 },
   
 'Normální základ': (answers) => {
   if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
     return `<p style="margin-bottom: 1rem;">Doporučuji vám tuto sadu, protože je:</p>
-    <ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+    <ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Perfektní pro vás, v době těhotenství i kojení</li>
   <li>➡ Cenově i časově úsporná</li>
   <li>➡ Šetrná a účinná</li>
@@ -306,24 +335,25 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 </ul>
 <p>❗V těhotenství je minimálně <strong>dvojnásobné riziko vzniku pigmentových skvrn</strong>, takže dbejte na <strong>důsledné nanášení i pravidelnou re-aplikaci denního krému.</strong> 🤫</p>`;
   }
-  return `<p style="margin-bottom: 1rem;">Vypadá to, že je vaše pleť (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊</p>
+  return `<p style="margin-bottom: 1rem;">Vypadá to, že je vaše pleť typově (naprosto) normální! 😯 Gratuluji - a tiše vám závidím. 😊</p>
 
 <p style="margin-bottom: 1rem;">Doporučuji vám sadu, která:</p>
 
 <ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+  <li>➡ Respektuje váš rozpočet</li>
   <li>➡ Udržuje pleť svěží a v kondici</li>
   <li>➡ Chrání před předčasným stárnutím</li>
-  <li>➡ Je časově i finančně nenáročná</li>
+  <li>➡ Je časově velmi nenáročná</li>
 </ul>
 
-<p>Tato sada udrží vaši pleť dlouhodobě v perfektní kondici a ochrání ji před stárnutím. ✨</p>`;
+<p>Produkty v této sadě dodají vaší pleti to, co potřebuje pro dlouhodobé udržení optimálního stavu. ✨</p>`;
 },
   
   'Normální základ + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Z vašich odpovědí to vypadá, že máte typ pleti, o kterém mnozí mohou jen snít – vaši pleť označujeme jako „normální". 😊</p>
 <p style="margin-bottom: 1rem;">Vidím ale, že vás občas potrápí nějaký ten pupínek a proto vám doporučuji tuto kombinaci:</p>
 
 <p style="margin-bottom: 0.5rem;"><strong>1) Základní sada pro normální pleť:</strong></p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ <strong>Udržuje</strong> pleť svěží a v kondici</li>
   <li>➡ <strong>Nezanáší</strong> póry</li>
   <li>➡ <strong>Chrání</strong> před předčasným stárnutím</li>
@@ -331,7 +361,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 </ul>
 
 <p style="margin-bottom: 0.5rem;"><strong>2) SOS gel:</strong></p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Hravě si poradí s klubajícím se pupínkem</li>
   <li>➡ <strong>Zabraňuje</strong> rozšíření nedokonalostí</li>
   <li>➡ <strong>Urychluje hojení</strong> a brání vzniku jizev nebo fleků</li>
@@ -343,7 +373,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   if (answers['wish-fish']?.includes('Ať už není moje pleť tak vysušená')) {
     return `<p style="margin-bottom: 1rem;">Vaše odpovědi ukazují, že máte citlivou, suchou pleť.</p>
 <p style="margin-bottom: 1rem;">Proto jsem vybrala <strong>sadu, která řeší obě potřeby najednou</strong>:</p>
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ <strong>Zklidní</strong> podráždění</li>
   <li>➡ Doplní <strong>hydrataci</strong></li>
   <li>➡ Posílí <strong>ochrannou bariéru</strong> a <strong>mikrobiom</strong> pleti</li>
@@ -354,7 +384,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
 <p style="margin-bottom: 1rem;">Proto doporučuji sadu, která kombinuje jemnou, ale účinnou péči:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Zklidní zarudnutí a pálení</li>
   <li>➡ Hydratuje a posílí ochrannou bariéru</li>
   <li>➡ Podpoří zdravý mikrobiom pleti</li>
@@ -367,7 +397,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 'Citlivá + Sem tam pupínek': `<p style="margin-bottom: 1rem;">Potřebujete péči, která <strong>posílí ochrannou bariéru</strong> vaší pleti.</p>
 <p style="margin-bottom: 1rem;">Proto je ideální volbou pro vás tato sada:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Neucpává póry a zmírňuje zánět</li>
   <li>➡ Zklidní zarudnutí a nepříjemné pocity</li>
   <li>➡ Hydratuje a posílí ochrannou bariéru</li>
@@ -380,7 +410,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
 <p style="margin-bottom: 1rem;">Proto doporučuji speciální sadu zaměřenou právě na tento problém:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>➡ Zklidňuje zarudnutí a podráždění</li>
   <li>➡ Podporuje pevnost a pružnost cév</li>
   <li>➡ Předchází zhoršování stavu</li>
@@ -394,7 +424,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
 <p style="margin-bottom: 1rem;">V takovém případě doporučuji postupovat <strong>opatrně a individuálně</strong>:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
 <li>➡Okamžitě <strong>přestaňte používat produkty, které vám do teď nepomohly</strong></li>
   <li>➡ Nejlepší je <strong>objednat se</strong> na <a href="https://www.kailu.cz" target="_blank" style="color: #faa4a6; text-decoration: underline;">offline diagnostiku v Brně</a></li>
   <li>➡ Případně můžete <strong>poslat fotku</strong> na info@kailu.cz - zdarma vám poradíme o jaký typ dermatitidy se jedná a doporučíme péči na míru</li>
@@ -421,7 +451,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return `<p>Z vašich odpovědí vyplývá, že vás trápí akné.</p>
           <p style="margin-bottom: 1rem;">Naštěstí mám pro vás sadu, která řeší tento problém komplexně:</p>
 
-<ul style="margin-bottom: 1rem; padding-left: 1.2rem;">
+<ul style="margin: 0.5rem; margin-bottom: 1.2 rem; padding-left: 0rem; line-height: 1.6;">
   <li>· Postupně zklidňuje a projasňuje pleť</li>
   <li>· Viditelně snižuje výskyt pupínků</li>
   <li>· Obsahuje i podrobný manuál, který vás provede péčí krok za krokem</li>

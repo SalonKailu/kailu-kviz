@@ -10,7 +10,6 @@ import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
 import { SKIN_TYPE_URLS } from './QuizEvaluation';
 import Image from 'next/image';
 
-
 const INTRO_TEXT = {
  title: "Vítejte na cestě za spokojenou pletí! 🎀",
  paragraphs: [
@@ -61,7 +60,6 @@ const QUESTIONS = [
      { url: 'https://684389.myshoptet.com/user/documents/upload/tvare.png', alt: 'Póry všude' },
      { url: 'https://684389.myshoptet.com/user/documents/upload/tvare2.png', alt: 'Póry u nosu' },
      { url: 'https://684389.myshoptet.com/user/documents/upload/tvare3.jpg', alt: 'Minimum pórů' }
-  
    ],
    options: [
      'Ano, jsou všude.',
@@ -267,42 +265,131 @@ const QuizForm = () => {
  const [hoveredImage, setHoveredImage] = useState(null);
  const [isTransitioning, setIsTransitioning] = useState(false);
  const [result, setResult] = useState<QuizResult | null>(null);
+ const [sessionId] = useState(() => `quiz_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
-   // KÓD PRO DYNAMICKOU VÝŠKU
+ // === ANALYTICS FUNKCE ===
+ const getClientIP = async (): Promise<string> => {
+   try {
+     const response = await fetch('https://api.ipify.org?format=json');
+     const data = await response.json();
+     return data.ip;
+   } catch (error) {
+     console.warn('Nepodařilo se získat IP adresu:', error);
+     return 'unknown';
+   }
+ };
+
+ const logQuizData = async (answers: any, result: any, step: string) => {
+  console.log('ANALYTICS FUNKCE BYLA ZAVOLÁNA!', step);
+   // LEPŠÍ KONTROLA DUPLICITŮ
+const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
+const isDuplicate = existingLogs.some(log => 
+  log.sessionId === sessionId && 
+  log.step === step &&
+  Math.abs(new Date(log.timestamp).getTime() - Date.now()) < 5000 // 5 sekund tolerance
+);
+
+if (isDuplicate) {
+  console.log('Duplicitní log ignorován:', step, sessionId);
+  return;
+}
+  
+  const timestamp = new Date().toISOString();
+   const userAgent = navigator.userAgent;
+   const clientIP = await getClientIP();
+   
+   const logData = {
+     id: `${sessionId}_${step}_${Date.now()}`,
+     sessionId,
+     timestamp,
+     clientIP,
+     userAgent: userAgent.substring(0, 100),
+     step, // 'started', 'completed', 'abandoned'
+     answers,
+     result,
+     currentQuestion: currentQuestion,
+     url: window.location.href,
+     referrer: document.referrer || 'direct'
+   };
+   
+   console.log('=== QUIZ ANALYTICS ===');
+   console.log('Session ID:', logData.sessionId);
+   console.log('Čas:', logData.timestamp);
+   console.log('IP:', logData.clientIP);
+   console.log('Krok:', logData.step);
+   console.log('Otázka:', logData.currentQuestion);
+   if (result) {
+     console.log('Typ pleti:', result.skinType);
+     console.log('Doporučená sada:', result.recommendedSet);
+   }
+   console.log('=========================');
+   
+   // Uložení do localStorage
+   try {
+     const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
+     existingLogs.push(logData);
+     localStorage.setItem('quizAnalytics', JSON.stringify(existingLogs));
+   } catch (error) {
+     console.warn('Chyba při ukládání analytics:', error);
+   }
+ };
+
+ // Logování opuštění stránky
+useEffect(() => {
+  const handleBeforeUnload = () => {
+    if (currentQuestion > 0 && !result) {
+      logQuizData(answers, null, 'abandoned');
+    }
+  };
+  
+  window.addEventListener('beforeunload', handleBeforeUnload);
+  return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+}, [currentQuestion, answers, result, sessionId]);
+
+// Analytics pro dokončení kvízu
+useEffect(() => {
+  if (result && !sessionStorage.getItem(`completed_${sessionId}`)) {
+    logQuizData(answers, result, 'completed');
+    sessionStorage.setItem(`completed_${sessionId}`, 'true');
+  }
+}, [result, sessionId, answers]);
+
+// KÓD PRO DYNAMICKOU VÝŠKU
 useEffect(() => {
   const sendHeight = () => {
     const height = document.body.scrollHeight;
-    window.parent.postMessage(
-      { type: 'kviz-height', height: height },
-      '*'
-    );
-  };
+     window.parent.postMessage(
+       { type: 'kviz-height', height: height },
+       '*'
+     );
+   };
 
-  sendHeight();
-  
-  // Pošleme výšku každých 500ms
-  const interval = setInterval(sendHeight, 500);
+   sendHeight();
+   
+   // Pošleme výšku každých 500ms
+   const interval = setInterval(sendHeight, 500);
 
-  return () => {
-    clearInterval(interval);
-  };
-}, [currentQuestion, showIntro, result]);
-  // KONEC KÓDU PRO DYNAMICKOU VÝŠKU
+   return () => {
+     clearInterval(interval);
+   };
+ }, [currentQuestion, showIntro, result]);
 
  const handleQuizComplete = () => {
-  // Když dojdeme na konec kvízu, vyhodnotíme odpovědi
-  if (currentQuestion === QUESTIONS.length - 1) {
-    const result = evaluateQuiz(answers);
-    setResult(result);
-  }
-};
+   // Když dojdeme na konec kvízu, vyhodnotíme odpovědi
+   if (currentQuestion === QUESTIONS.length - 1) {
+     const result = evaluateQuiz(answers);
+     setResult(result);
+     
+     // LOGOVÁNÍ DOKONČENÍ KVÍZU
+     logQuizData(answers, result, 'completed');
+   }
+ };
 
  const handleQuestionChange = (newQuestion) => {
-
-  if (newQuestion >= QUESTIONS.length) {
-    handleQuizComplete();
-    return;
-  }
+   if (newQuestion >= QUESTIONS.length) {
+     handleQuizComplete();
+     return;
+   }
 
    setIsTransitioning(true);
    setTimeout(() => {
@@ -312,29 +399,29 @@ useEffect(() => {
  };
 
  const handleAnswer = (value, isCheckbox = false) => {
-  if (isCheckbox) {
-    setAnswers(prev => {
-      const currentAnswers = prev[QUESTIONS[currentQuestion].id] || [];
-      const newAnswers = currentAnswers.includes(value)
-        ? currentAnswers.filter(item => item !== value)
-        : [...currentAnswers, value];
-      return {
-        ...prev,
-        [QUESTIONS[currentQuestion].id]: newAnswers
-      };
-    });
-  } else {
-    setAnswers(prev => ({
-      ...prev,
-      [QUESTIONS[currentQuestion].id]: value
-    }));
-    if (currentQuestion < QUESTIONS.length - 1) {
-      handleQuestionChange(currentQuestion + 1);
-    } else {
-      handleQuizComplete(); // Přidali jsme volání handleQuizComplete
-    }
-  }
-};
+   if (isCheckbox) {
+     setAnswers(prev => {
+       const currentAnswers = prev[QUESTIONS[currentQuestion].id] || [];
+       const newAnswers = currentAnswers.includes(value)
+         ? currentAnswers.filter(item => item !== value)
+         : [...currentAnswers, value];
+       return {
+         ...prev,
+         [QUESTIONS[currentQuestion].id]: newAnswers
+       };
+     });
+   } else {
+     setAnswers(prev => ({
+       ...prev,
+       [QUESTIONS[currentQuestion].id]: value
+     }));
+     if (currentQuestion < QUESTIONS.length - 1) {
+       handleQuestionChange(currentQuestion + 1);
+     } else {
+       handleQuizComplete();
+     }
+   }
+ };
 
  const handlePrevious = () => {
    if (currentQuestion === 0) {
@@ -344,418 +431,444 @@ useEffect(() => {
    }
  };
 
-if (showIntro) {
-  return (
-    <div className="bg-transparent">
-      
-      {/* VERZE PRO PC - pouze obrázek */}
-<div className="hidden md:flex justify-center items-stretch min-h-screen w-full">
-  <img 
-    src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.png"
-    alt="Spustit diagnostiku"
-    onClick={() => setShowIntro(false)}
-    className="w-full h-full cursor-pointer"
-  />
-</div>
+ if (showIntro) {
+   return (
+     <div className="bg-transparent">
+       
+       {/* VERZE PRO PC - pouze obrázek */}
+       <div className="hidden md:flex justify-center items-stretch min-h-screen w-full">
+         <img 
+           src="https://www.kailushop.cz/user/documents/upload/kviz_diagnostika_pc.png"
+           alt="Spustit diagnostiku"
+           onClick={() => {
+             setShowIntro(false);
+             logQuizData({}, null, 'started');
+           }}
+           className="w-full h-full cursor-pointer"
+         />
+       </div>
 
-      {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
-      <div className="flex md:hidden">
-        <img 
-          src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
-          alt="Spustit diagnostiku"
-          onClick={() => setShowIntro(false)}
-          className="w-full h-auto cursor-pointer"
-        />
-      </div>
+       {/* VERZE PRO MOBIL - viditelná pouze na mobilu */}
+       <div className="flex md:hidden">
+         <img 
+           src="https://www.kailushop.cz/user/documents/upload/HP_mob2.svg"
+           alt="Spustit diagnostiku"
+           onClick={() => {
+             setShowIntro(false);
+             logQuizData({}, null, 'started');
+           }}
+           className="w-full h-auto cursor-pointer"
+         />
+       </div>
 
-    </div> 
-  );
-}
+     </div> 
+   );
+ }
 
  console.log('currentQuestion:', currentQuestion);
-console.log('QUESTIONS length:', QUESTIONS.length);
+ console.log('QUESTIONS length:', QUESTIONS.length);
 
-const currentQ = currentQuestion < QUESTIONS.length ? QUESTIONS[currentQuestion] : null;
+ const currentQ = currentQuestion < QUESTIONS.length ? QUESTIONS[currentQuestion] : null;
 
-if (!currentQ) {
-  handleQuizComplete();
-  return null;
-}
+ if (!currentQ) {
+   handleQuizComplete();
+   return null;
+ }
 
  console.log('currentQ:', currentQ);
-
-console.log('recommendedSet:', result?.recommendedSet);
-console.log('PRODUCT_URLS:', PRODUCT_URLS);
+ console.log('recommendedSet:', result?.recommendedSet);
+ console.log('PRODUCT_URLS:', PRODUCT_URLS);
 
  if (result) {
+   // Google Analytics tracking
+   if (typeof window !== 'undefined' && window.gtag) {
+     window.gtag('event', 'quiz_completed', {
+       skin_type: result.skinType,
+       recommended_set: result.recommendedSet,
+       has_acne: result.problems.includes('Akné (stabilně více než 5 pupínků🤫)'),
+       budget: answers['budget-limit'] || 'unlimited'
+     });
+   }
 
-  // Google Analytics tracking
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'quiz_completed', {
-      skin_type: result.skinType,
-      recommended_set: result.recommendedSet,
-      has_acne: result.problems.includes('Akné (stabilně více než 5 pupínků🤫)'),
-      budget: answers['budget-limit'] || 'unlimited'
-    });
-  }
 
+   const isDermatitis = result.recommendedSet === 'Dermatitida';
 
-  const isDermatitis = result.recommendedSet === 'Dermatitida';
+   return (
+     <div className="max-w-2xl mx-auto p-6">
+       <h1 className="text-center text-2xl font-semibold mb-8">
+         ✨ VAŠE VÝSLEDKY ✨
+       </h1>
+       
+       <p className="mb-4">
+         Vaše pleť je:{' '}
+         {result.skinType.includes(' a také ') ? (
+           <>
+             {/* Rozdělíme text na části před a po "a také" */}
+             <span className="font-semibold">
+               <a
+                 href={getSkinTypeUrl(result.skinType.split(' a také ')[0])}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="text-black underline hover:text-[#faa4a6]"
+               >
+                 {result.skinType.split(' a také ')[0]}
+               </a>
+               {' a také '}
+               <a
+                 href={getSkinTypeUrl(result.skinType.split(' a také ')[1])}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="text-black underline hover:text-[#faa4a6]"
+               >
+                 {result.skinType.split(' a také ')[1]}
+               </a>
+             </span>
+           </>
+         ) : (
+           <>
+             <span className="font-semibold">
+               <a
+                 href={getSkinTypeUrl(result.skinType)}
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="text-black underline hover:text-[#faa4a6]"
+               >
+                 {result.skinType}
+               </a>
+             </span>
+           </>
+         )}
+         .
+       </p>
 
-  return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-center text-2xl font-semibold mb-8">
-        ✨ VAŠE VÝSLEDKY ✨
-      </h1>
-      
-      <p className="mb-4">
-  Vaše pleť je:{' '}
-  {result.skinType.includes(' a také ') ? (
-    <>
-      {/* Rozdělíme text na části před a po "a také" */}
-      <span className="font-semibold">
-        <a
-          href={getSkinTypeUrl(result.skinType.split(' a také ')[0])}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline hover:text-[#faa4a6]"
-        >
-          {result.skinType.split(' a také ')[0]}
-        </a>
-        {' a také '}
-        <a
-          href={getSkinTypeUrl(result.skinType.split(' a také ')[1])}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline hover:text-[#faa4a6]"
-        >
-          {result.skinType.split(' a také ')[1]}
-        </a>
-      </span>
-    </>
-  ) : (
-    <>
-      <span className="font-semibold">
-        <a
-          href={getSkinTypeUrl(result.skinType)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-black underline hover:text-[#faa4a6]"
-        >
-          {result.skinType}
-        </a>
-      </span>
-    </>
-  )}
-  .
-</p>
-
-      {!isDermatitis && (
-  <div className="bg-[#f1eae2] mb-6 p-6 rounded-lg">
-  <h2 className="font-semibold mb-4">
-    Doporučená péče:{' '}
-    <a 
-      href={`${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-black underline hover:text-[#faa4a6]"
-    >
-      {DISPLAY_NAMES[result.recommendedSet.split(' + ')[0]]}
-    </a>
-  </h2>
-  {(result.recommendedSet.includes('+ Sem tam pupínek') || result.problems.includes('Kruhy pod očima')) && (
-          <div>
-            <p className="font-semibold">Doplňkové produkty:</p>
-            {result.recommendedSet.includes('+ Sem tam pupínek') && (
-              <p>
-                <a 
-                  href={`${SHOP_BASE_URL}sos-gel`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black underline hover:text-[#faa4a6]"
-                >
-                  SOS gel na pupínky
-                </a>
-              </p>
-            )}
-            {result.problems.includes('Kruhy pod očima') && (
-              <p>
-                <a 
-                  href={`${SHOP_BASE_URL}ocni-krem`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-black underline hover:text-[#faa4a6]"
-                >
-                  Oční krém
-                </a>
-              </p>
-            )}
-          </div>
-        )}
-      </div>
-    )}
-
-    
-      <div className="space-y-4 mb-6">
-  {(() => {
-    const resultText = typeof RESULT_TEXTS[result.recommendedSet] === 'function'
-      ? RESULT_TEXTS[result.recommendedSet](answers)
-      : RESULT_TEXTS[result.recommendedSet];
-    
-    // Pokud text obsahuje HTML tagy, použijeme dangerouslySetInnerHTML
-    if (typeof resultText === 'string' && resultText.includes('<')) {
-      return <div dangerouslySetInnerHTML={{ __html: resultText }} />;
-    }
-    
-    // Jinak zobrazíme jako běžný text
-    return <p>{resultText}</p>;
-  })()}
-        
-        {!isDermatitis && result.specialRecommendations.hasPigmentation && (
-          <p className="mt-4">
-            S <strong>pigmentovými skvrnami</strong> je to trochu složitější. Nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je <strong>PREVENCE</strong> (používat SPF) a <strong>chemický peeling</strong>. Více o něm píšu na {' '}
-    <a 
-      href="https://www.kailu.cz/kosmetika" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="text-black underline hover:text-[#faa4a6]"
-    >webu</a>,{' '} kde máte také rovnou i možnost objednání.
-          </p>
-        )}
-        
-        
-{!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
-  <p className="mt-4">
-    Na <strong>zmírnění kruhů pod očima</strong> vám ráda doporučím skvělý{' '}
-    <a 
-      href="https://www.kailushop.cz/ocni-krem" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="text-black underline hover:text-[#faa4a6]"
-    >
-      oční krém
-    </a>{' '}
-    od korejské značky Skin1004, který navíc působí skvěle i jako prevence drobných vrásek kolem očí.
-  </p>
-)}
-
-{!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
-  <p className="mt-4">
-    S přáním zbavit se <strong>černých teček</strong> si vaše sada sama o sobě poradí. Pro urychlení ale můžete využít i náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
-  </p>
-)}
-      </div>
-
-<button
-  onClick={() => {
-
-    // Google Analytics tracking
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', 'purchase_click', {
-      product_set: result.recommendedSet,
-      skin_type: result.skinType
-    });
-  }
-  
-    const url = isDermatitis
-      ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
-      : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
-    
-    // Otevře v rodičovském okně (mimo iframe)
-    window.parent.location.href = url;
-  }}
-  className="w-full py-3 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-medium"
->
-  {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Zobrazit doporučenou péči 👀'}
-</button>
-    {/* Testovací tlačítko - vložte sem */}
-    {process.env.NODE_ENV !== 'production' && (
-        <button 
-          onClick={() => import('./QuizEvaluation.test').then(module => module.runTests())}
-          style={{position: 'fixed', bottom: '10px', right: '10px', zIndex: 9999}}
-        >
-          Spustit testy
-        </button>
-      )}
-    </div>
-  );
-}
-
- return (
-  <>
-
-   <div className={`bg-white container mx-auto max-w-[950px] ${currentQuestion === 0 ? '' : 'py-2 px-1 md:px-4'}`}>
-  <Card className={`bg-white max-w-[800px] mx-auto ${currentQuestion === 0 ? 'p-2' : 'py-2 md:py-8 px-1 md:px-4'}`}>
-       <CardContent className="p-4">
-         <SectionHeader currentQuestion={currentQuestion} />
-         <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
-         <h2 className="text-md font-bold mb-2 text-gray-900">
-  {currentQ.title}
-</h2>
-
-{currentQ.type === 'info' ? (
-  <div className="space-y-10">
-    <p className="text-sm leading-[1.8]" dangerouslySetInnerHTML={{ __html: currentQ.content }}></p>
-    <div className="flex justify-end mt-6">
-      <CustomButton
-        onClick={() => {
-          if (currentQuestion === QUESTIONS.length - 1) {
-            const quizResult = evaluateQuiz(answers);
-            setResult(quizResult);
-          } else {
-            handleQuestionChange(currentQuestion + 1);
-          }
-        }}
-      >
-        {currentQ.buttonText || 'Další'}
-      </CustomButton>
-    </div>
-  </div>
-) : currentQ.type === 'checkbox' ? (
-             <div className="space-y-0.5">
-               {currentQ.options.map((option, index) => (
-                 <div key={index} className="flex items-start space-x-3 py-1.5 relative group">
-                   <Checkbox
-      id={`option-${index}`}
-      checked={(answers[currentQ.id] || []).includes(
-        typeof option === 'object' ? option.text : option
-      )}
-      onChange={(checked) =>
-        handleAnswer(
-          typeof option === 'object' ? option.text : option,
-          true
-        )
-      }
-      className="mt-0.5"
-    />
-                   <Label
-                     htmlFor={`option-${index}`}
-                     className="text-sm cursor-pointer leading-[1.8] flex-1"
+       {!isDermatitis && (
+         <div className="bg-[#f1eae2] mb-6 p-6 rounded-lg">
+           <h2 className="font-semibold mb-4">
+             Doporučená péče:{' '}
+             <a 
+               href={`${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="text-black underline hover:text-[#faa4a6]"
+             >
+               {DISPLAY_NAMES[result.recommendedSet.split(' + ')[0]]}
+             </a>
+           </h2>
+           {(result.recommendedSet.includes('+ Sem tam pupínek') || result.problems.includes('Kruhy pod očima')) && (
+             <div>
+               <p className="font-semibold">Doplňkové produkty:</p>
+               {result.recommendedSet.includes('+ Sem tam pupínek') && (
+                 <p>
+                   <a 
+                     href={`${SHOP_BASE_URL}sos-gel`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="text-black underline hover:text-[#faa4a6]"
                    >
-                     {typeof option === 'object' ? option.text : option}
-                   </Label>
-                   {/* Hover obrázek */}
-<div className="absolute left-full ml-4 hidden group-hover:block transition-opacity duration-300">
-{typeof option === 'object' && option.image && (
-    <Image
-      src={option.image}
-      alt={option.text}
-      className="w-[200px] h-[200px] object-cover rounded-lg shadow-lg"
-    />
-  )}
-</div>
-                 </div>
-               ))}
-             </div>
-           ) : (
-             <div className="space-y-0.5">
-               {currentQ.images ? (
-                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-                   {currentQ.images.map((image, index) => (
-                     <div key={index} className="flex flex-col w-[160px]">
-                       <div
-                         className="relative aspect-square group"
-                         onMouseEnter={() => setHoveredImage(index)}
-                         onMouseLeave={() => setHoveredImage(null)}
-                       >
-                         <div className="relative overflow-hidden rounded-lg h-full">
-                           <Image
-                             src={image.url}
-                             alt={image.alt}
-                             layout="responsive" // Dynamická velikost
-                width={1} // Poměr stran
-                height={1} // Poměr stran (čtverec díky "aspect-square")
-                             className={`w-full h-full object-cover transition-transform duration-200 ${
-                               hoveredImage === index ? 'scale-125' : 'scale-100'
-                             }`}
-                           />
-                         
-                         </div>
-                       </div>
-                       <div className="mt-2">
-                         <RadioGroup
-                           value={answers[currentQ.id]}
-                           onValueChange={handleAnswer}
-                         >
-                           <div className="flex items-start space-x-1.5">
-                             <RadioGroupItem
-                               value={currentQ.options[index]}
-                               id={`option-${index}`}
-                             />
-                             <Label
-                               htmlFor={`option-${index}`}
-                               className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
-                             >
-                               {currentQ.options[index]}
-                             </Label>
-                           </div>
-                         </RadioGroup>
-                       </div>
-                     </div>
-                   ))}
-                 </div>
-               ) : (
-                <RadioGroup
-                value={answers[currentQ.id]}
-                onValueChange={handleAnswer}
-                className="space-y-0.5"
-              >
-                {currentQ.options.map((option, index) => (
-                  <div key={index} className="flex flex-col w-full">
-                    <div className="flex items-start space-x-2 py-1.5">
-                      <RadioGroupItem
-                        value={option}
-                        id={`option-${index}`}
-                      />
-                      <Label
-                        htmlFor={`option-${index}`}
-                        className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
-                      >
-                        {option}
-                      </Label>
-                    </div>
-                  </div>
-                ))}
-              </RadioGroup>
+                     SOS gel na pupínky
+                   </a>
+                 </p>
+               )}
+               {result.problems.includes('Kruhy pod očima') && (
+                 <p>
+                   <a 
+                     href={`${SHOP_BASE_URL}ocni-krem`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="text-black underline hover:text-[#faa4a6]"
+                   >
+                     Oční krém
+                   </a>
+                 </p>
                )}
              </div>
            )}
+         </div>
+       )}
 
-           {/* Navigační tlačítka */}
-           <div className="flex justify-between mt-6">
-             {currentQ.type === 'radio' && (
-               <CustomButton onClick={handlePrevious}>
-                 Předchozí
-               </CustomButton>
+       <div className="space-y-4 mb-6">
+         {(() => {
+           const resultText = typeof RESULT_TEXTS[result.recommendedSet] === 'function'
+             ? RESULT_TEXTS[result.recommendedSet](answers)
+             : RESULT_TEXTS[result.recommendedSet];
+           
+           // Pokud text obsahuje HTML tagy, použijeme dangerouslySetInnerHTML
+           if (typeof resultText === 'string' && resultText.includes('<')) {
+             return <div dangerouslySetInnerHTML={{ __html: resultText }} />;
+           }
+           
+           // Jinak zobrazíme jako běžný text
+           return <p>{resultText}</p>;
+         })()}
+           
+         {!isDermatitis && result.specialRecommendations.hasPigmentation && (
+           <p className="mt-4">
+             S <strong>pigmentovými skvrnami</strong> je to trochu složitější. Nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je <strong>PREVENCE</strong> (používat SPF) a <strong>chemický peeling</strong>. Více o něm píšu na {' '}
+             <a 
+               href="https://www.kailu.cz/kosmetika" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-black underline hover:text-[#faa4a6]"
+             >webu</a>,{' '} kde máte také rovnou i možnost objednání.
+           </p>
+         )}
+         
+         {!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
+           <p className="mt-4">
+             Na <strong>zmírnění kruhů pod očima</strong> vám doporučuji přihodit do košíku skvělý{' '}
+             <a 
+               href="https://www.kailushop.cz/ocni-krem" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               className="text-black underline hover:text-[#faa4a6]"
+             >
+               oční krém
+             </a>{' '}
+             od korejské značky Skin1004, který navíc působí skvěle i jako prevence drobných vrásek kolem očí.
+           </p>
+         )}
+
+         {!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
+           <p className="mt-4">
+             S přáním zbavit se <strong>černých teček</strong> si vaše sada sama o sobě poradí. Pro urychlení ale můžete využít i náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
+           </p>
+         )}
+       </div>
+
+       <button
+         onClick={() => {
+           // Google Analytics tracking
+           if (typeof window !== 'undefined' && window.gtag) {
+             window.gtag('event', 'purchase_click', {
+               product_set: result.recommendedSet,
+               skin_type: result.skinType
+             });
+           }
+           
+           const url = isDermatitis
+             ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
+             : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
+           
+           // Otevře v rodičovském okně (mimo iframe)
+           window.parent.location.href = url;
+         }}
+         className="w-full py-3 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-medium"
+       >
+         {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Zobrazit doporučenou péči 👀'}
+       </button>
+
+       {/* Analytics tlačítko - pouze v development módu */}
+       {process.env.NODE_ENV !== 'production' && (
+         <div style={{position: 'fixed', bottom: '10px', right: '10px', zIndex: 9999}}>
+           <a 
+             href="/admin" 
+             target="_blank"
+             style={{
+               display: 'block',
+               background: '#faa4a6', 
+               color: 'white', 
+               padding: '5px 10px', 
+               borderRadius: '5px', 
+               textDecoration: 'none',
+               fontSize: '12px',
+               marginBottom: '5px'
+             }}
+           >
+             📊 Analytics
+           </a>
+           <button 
+             onClick={() => import('./QuizEvaluation.test').then(module => module.runTests())}
+             style={{
+               display: 'block',
+               background: '#faa4a6', 
+               color: 'white', 
+               padding: '5px 10px', 
+               borderRadius: '5px', 
+               border: 'none',
+               fontSize: '12px'
+             }}
+           >
+             Spustit testy
+           </button>
+         </div>
+       )}
+     </div>
+   );
+ }
+
+ return (
+   <>
+     <div className={`bg-white container mx-auto max-w-[950px] ${currentQuestion === 0 ? '' : 'py-2 px-1 md:px-4'}`}>
+       <Card className={`bg-white max-w-[800px] mx-auto ${currentQuestion === 0 ? 'p-2' : 'py-2 md:py-8 px-1 md:px-4'}`}>
+         <CardContent className="p-4">
+           <SectionHeader currentQuestion={currentQuestion} />
+           <div className={`mb-6 transition-opacity duration-300 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
+             <h2 className="text-md font-bold mb-2 text-gray-900">
+               {currentQ.title}
+             </h2>
+
+             {currentQ.type === 'info' ? (
+               <div className="space-y-10">
+                 <p className="text-sm leading-[1.8]" dangerouslySetInnerHTML={{ __html: currentQ.content }}></p>
+                 <div className="flex justify-end mt-6">
+                   <CustomButton
+                     onClick={() => {
+                       if (currentQuestion === QUESTIONS.length - 1) {
+                         const quizResult = evaluateQuiz(answers);
+                         setResult(quizResult);
+                       } else {
+                         handleQuestionChange(currentQuestion + 1);
+                       }
+                     }}
+                   >
+                     {currentQ.buttonText || 'Další'}
+                   </CustomButton>
+                 </div>
+               </div>
+             ) : currentQ.type === 'checkbox' ? (
+               <div className="space-y-0.5">
+                 {currentQ.options.map((option, index) => (
+                   <div key={index} className="flex items-start space-x-3 py-1.5 relative group">
+                     <Checkbox
+                       id={`option-${index}`}
+                       checked={(answers[currentQ.id] || []).includes(
+                         typeof option === 'object' ? option.text : option
+                       )}
+                       onChange={(checked) =>
+                         handleAnswer(
+                           typeof option === 'object' ? option.text : option,
+                           true
+                         )
+                       }
+                       className="mt-0.5"
+                     />
+                     <Label
+                       htmlFor={`option-${index}`}
+                       className="text-sm cursor-pointer leading-[1.8] flex-1"
+                     >
+                       {typeof option === 'object' ? option.text : option}
+                     </Label>
+                     {/* Hover obrázek */}
+                     <div className="absolute left-full ml-4 hidden group-hover:block transition-opacity duration-300">
+                       {typeof option === 'object' && option.image && (
+                         <Image
+                           src={option.image}
+                           alt={option.text}
+                           className="w-[200px] h-[200px] object-cover rounded-lg shadow-lg"
+                         />
+                       )}
+                     </div>
+                   </div>
+                 ))}
+               </div>
+             ) : (
+               <div className="space-y-0.5">
+                 {currentQ.images ? (
+                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
+                     {currentQ.images.map((image, index) => (
+                       <div key={index} className="flex flex-col w-[160px]">
+                         <div
+                           className="relative aspect-square group"
+                           onMouseEnter={() => setHoveredImage(index)}
+                           onMouseLeave={() => setHoveredImage(null)}
+                         >
+                           <div className="relative overflow-hidden rounded-lg h-full">
+                             <Image
+                               src={image.url}
+                               alt={image.alt}
+                               layout="responsive"
+                               width={1}
+                               height={1}
+                               className={`w-full h-full object-cover transition-transform duration-200 ${
+                                 hoveredImage === index ? 'scale-125' : 'scale-100'
+                               }`}
+                             />
+                           </div>
+                         </div>
+                         <div className="mt-2">
+                           <RadioGroup
+                             value={answers[currentQ.id]}
+                             onValueChange={handleAnswer}
+                           >
+                             <div className="flex items-start space-x-1.5">
+                               <RadioGroupItem
+                                 value={currentQ.options[index]}
+                                 id={`option-${index}`}
+                               />
+                               <Label
+                                 htmlFor={`option-${index}`}
+                                 className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
+                               >
+                                 {currentQ.options[index]}
+                               </Label>
+                             </div>
+                           </RadioGroup>
+                         </div>
+                       </div>
+                     ))}
+                   </div>
+                 ) : (
+                   <RadioGroup
+                     value={answers[currentQ.id]}
+                     onValueChange={handleAnswer}
+                     className="space-y-0.5"
+                   >
+                     {currentQ.options.map((option, index) => (
+                       <div key={index} className="flex flex-col w-full">
+                         <div className="flex items-start space-x-2 py-1.5">
+                           <RadioGroupItem
+                             value={option}
+                             id={`option-${index}`}
+                           />
+                           <Label
+                             htmlFor={`option-${index}`}
+                             className="text-sm cursor-pointer leading-[1.8] text-gray-900 flex-1"
+                           >
+                             {option}
+                           </Label>
+                         </div>
+                       </div>
+                     ))}
+                   </RadioGroup>
+                 )}
+               </div>
              )}
-             
-             {currentQ.type === 'checkbox' && (
-               <>
+
+             {/* Navigační tlačítka */}
+             <div className="flex justify-between mt-6">
+               {currentQ.type === 'radio' && (
                  <CustomButton onClick={handlePrevious}>
                    Předchozí
                  </CustomButton>
-                 <CustomButton
-                   onClick={() => {
-                     if (answers[currentQ.id]?.length > 0) {
-                       handleQuestionChange(currentQuestion + 1);
-                     }
-                   }}
-                   disabled={!answers[currentQ.id]?.length}
-                 >
-                   Další
-                 </CustomButton>
-               </>
-             )}
-           </div>
+               )}
+               
+               {currentQ.type === 'checkbox' && (
+                 <>
+                   <CustomButton onClick={handlePrevious}>
+                     Předchozí
+                   </CustomButton>
+                   <CustomButton
+                     onClick={() => {
+                       if (answers[currentQ.id]?.length > 0) {
+                         handleQuestionChange(currentQuestion + 1);
+                       }
+                     }}
+                     disabled={!answers[currentQ.id]?.length}
+                   >
+                     Další
+                   </CustomButton>
+                 </>
+               )}
+             </div>
 
-           <ProgressBar 
-             current={currentQuestion + 1}
-             total={QUESTIONS.length}
-           />
-         </div>
-       </CardContent>
-     </Card>
-   </div>
+             <ProgressBar 
+               current={currentQuestion + 1}
+               total={QUESTIONS.length}
+             />
+           </div>
+         </CardContent>
+       </Card>
+     </div>
    </>
  );
 };
