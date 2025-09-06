@@ -387,7 +387,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   <li>➡ Vyživuje a hydratuje pleť</li>
 </ul>
 
-<p>⚡Pokud jde ve vašem případě pouze o občasné zarudnutí / nárazovou reakci pleti, bude pro vás správnou volbou také <a href="https://www.kailushop.cz/sada-pro-citlivou-plet/" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>, která se liší pouze použitým sérem. 😌</p>`,
+<p>⚡Pokud jde ve vašem případě pouze o občasné zarudnutí / nárazovou reakci pleti, bude pro vás správnou volbou také <a href="https://www.kailushop.cz/sada-pro-citlivou-plet/" target="_blank" style="color: #faa4a6; text-decoration: underline;">sada pro citlivou pleť</a>, která se liší pouze použitým sérem. 😌</p>`,
 
   
   'Dermatitida': `<p style="margin-bottom: 1rem;"><strong>Zvolil/a jste možnost, že vás trápí dermatitida.</strong></p>
