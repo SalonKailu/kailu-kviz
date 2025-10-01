@@ -27,14 +27,15 @@ const AdminAnalytics = () => {
     loadAnalytics();
   }, []);
 
-  const loadAnalytics = () => {
-    try {
-      const data = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
-      setAnalytics(data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()));
-    } catch (error) {
-      console.error('Chyba při načítání analytics:', error);
-    }
-  };
+const loadAnalytics = async () => {
+  try {
+    const response = await fetch('/api/analytics');
+    const data = await response.json();
+    setAnalytics(data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()));
+  } catch (error) {
+    console.error('Chyba při načítání analytics:', error);
+  }
+};
 
   const clearAnalytics = () => {
     if (confirm('Opravdu chcete smazat všechna analytics data?')) {

@@ -279,60 +279,79 @@ const QuizForm = () => {
    }
  };
 
- const logQuizData = async (answers: any, result: any, step: string) => {
+const logQuizData = async (answers: any, result: any, step: string) => {
   console.log('ANALYTICS FUNKCE BYLA ZAVOLÁNA!', step);
-   // LEPŠÍ KONTROLA DUPLICITŮ
-const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
-const isDuplicate = existingLogs.some(log => 
-  log.sessionId === sessionId && 
-  log.step === step &&
-  Math.abs(new Date(log.timestamp).getTime() - Date.now()) < 5000 // 5 sekund tolerance
-);
-
-if (isDuplicate) {
-  console.log('Duplicitní log ignorován:', step, sessionId);
-  return;
-}
+  
+  // PŘIDAT KONTROLU DUPLICITŮ
+  const logId = `${sessionId}_${step}`;
+  const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
+  const isDuplicate = existingLogs.some(log => 
+    log.sessionId === sessionId && 
+    log.step === step &&
+    Math.abs(new Date(log.timestamp).getTime() - Date.now()) < 5000
+  );
+  
+  if (isDuplicate) {
+    console.log('Duplicitní log ignorován:', step, sessionId);
+    return;
+  }
   
   const timestamp = new Date().toISOString();
-   const userAgent = navigator.userAgent;
-   const clientIP = await getClientIP();
-   
-   const logData = {
-     id: `${sessionId}_${step}_${Date.now()}`,
-     sessionId,
-     timestamp,
-     clientIP,
-     userAgent: userAgent.substring(0, 100),
-     step, // 'started', 'completed', 'abandoned'
-     answers,
-     result,
-     currentQuestion: currentQuestion,
-     url: window.location.href,
-     referrer: document.referrer || 'direct'
-   };
-   
-   console.log('=== QUIZ ANALYTICS ===');
-   console.log('Session ID:', logData.sessionId);
-   console.log('Čas:', logData.timestamp);
-   console.log('IP:', logData.clientIP);
-   console.log('Krok:', logData.step);
-   console.log('Otázka:', logData.currentQuestion);
-   if (result) {
-     console.log('Typ pleti:', result.skinType);
-     console.log('Doporučená sada:', result.recommendedSet);
-   }
-   console.log('=========================');
-   
-   // Uložení do localStorage
-   try {
-     const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
-     existingLogs.push(logData);
-     localStorage.setItem('quizAnalytics', JSON.stringify(existingLogs));
-   } catch (error) {
-     console.warn('Chyba při ukládání analytics:', error);
-   }
- };
+  const userAgent = navigator.userAgent;
+  const clientIP = await getClientIP();
+  
+  const logData = {
+    id: `${sessionId}_${step}_${Date.now()}`,
+    sessionId,
+    timestamp,
+    clientIP,
+    userAgent: userAgent.substring(0, 100),
+    step,
+    answers,
+    result,
+    currentQuestion: currentQuestion,
+    url: window.location.href,
+    referrer: document.referrer || 'direct'
+  };
+  
+  console.log('=== QUIZ ANALYTICS ===');
+  console.log('Session ID:', logData.sessionId);
+  console.log('Čas:', logData.timestamp);
+  console.log('IP:', logData.clientIP);
+  console.log('Krok:', logData.step);
+  console.log('Otázka:', logData.currentQuestion);
+  if (result) {
+    console.log('Typ pleti:', result.skinType);
+    console.log('Doporučená sada:', result.recommendedSet);
+  }
+  console.log('=========================');
+  
+  // NOVÉ - poslat na server místo localStorage
+  try {
+    const response = await fetch('/api/analytics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(logData)
+    });
+    
+    if (response.ok) {
+      console.log('Data úspěšně odeslána na server');
+    } else {
+      console.error('Chyba při odesílání dat na server');
+    }
+  } catch (error) {
+    console.warn('Chyba při ukládání analytics:', error);
+  }
+  
+  // Stále ukládat i do localStorage jako backup
+  try {
+    const existingLogs = JSON.parse(localStorage.getItem('quizAnalytics') || '[]');
+    existingLogs.push(logData);
+    localStorage.setItem('quizAnalytics', JSON.stringify(existingLogs));
+  } catch (error) {
+    console.warn('Chyba při ukládání do localStorage:', error);
+  }
+};
 
  // Logování opuštění stránky
 useEffect(() => {
