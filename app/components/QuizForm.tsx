@@ -259,7 +259,7 @@ const ProgressBar = ({ current, total }) => (
 );
 
 const QuizForm = () => {
- const [showIntro, setShowIntro] = useState(true);
+ const [showIntro, setShowIntro] = useState(false);
  const [currentQuestion, setCurrentQuestion] = useState(0);
  const [answers, setAnswers] = useState({});
  const [hoveredImage, setHoveredImage] = useState(null);
