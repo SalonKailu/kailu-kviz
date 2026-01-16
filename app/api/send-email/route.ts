@@ -112,13 +112,13 @@ export async function POST(request: Request) {
 
             <div class="content">
               <p>
-                Děkuji, že jste si udělali čas na diagnostiku pleti.
+                Těší mě, že jste investoval/a čas do vaší pleti.
                 Na základě vašich odpovědí už máme jasno v tom,
                 <strong>co vaší pleti dává smysl a čemu je lepší se vyhnout</strong>.
               </p>
 
               <div class="result-box">
-                <h3>Váš typ pleti</h3>
+                <h3>Váš typ / stav pleti</h3>
                 <p><strong>${skinType}</strong></p>
 
                 <h3 style="margin-top: 18px;">Doporučená péče</h3>
@@ -136,11 +136,9 @@ export async function POST(request: Request) {
                   </p>
                   <p>
                     Pošlete mi prosím fotografii postižených míst
-                    (na denním světle) na:
+                    (na denním světle) na: <a href="mailto:info@kailu.cz">info@kailu.cz</a>
                   </p>
-                  <p style="font-size: 16px; font-weight: 600;">
-                    <a href="mailto:info@kailu.cz">info@kailu.cz</a>
-                  </p>
+                  
                   <p style="font-size: 14px; color: #666;">
                     Ozvu se vám nejpozději do 24 hodin s konkrétním návrhem péče.
                   </p>
@@ -151,7 +149,7 @@ export async function POST(request: Request) {
                   <h3>Malý dárek pro vás</h3>
                   <p>
                     Aby pro vás bylo rozhodování jednodušší,
-                    můžete nyní využít slevový kód:
+                    můžete i nyní využít slevový kód, se kterým osobně zkontroluji výsledky vaší diagnostiky. :)
                   </p>
                   <div class="discount-code">${discountCode}</div>
                   <p style="font-size: 14px; color: #666;">
@@ -169,19 +167,17 @@ export async function POST(request: Request) {
               }
 
               <p style="margin-top: 34px;">
-                Pokud máte otázky nebo si nejste jistí,
-                napište mi – ráda vám poradím.
+                Pokud máte jakékoli otázky, nebojte se zeptat. 
               </p>
 
               <p>
-                Karolína<br>
-                <span style="color:#777;">Kailu</span>
+                Karolína z kailushop.cz
               </p>
             </div>
 
             <div class="footer">
               <p>
-                Kailu – kosmetika na míru<br>
+                Péče bez kompromisů<br>
                 <a href="https://www.kailushop.cz">www.kailushop.cz</a>
               </p>
             </div>

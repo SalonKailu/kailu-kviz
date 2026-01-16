@@ -247,24 +247,22 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   return `<div class="result-card-box">
     
     <p class="result-lead">
-      Skvělé je, že má téměř neviditelné póry. Horší je, že brzy ztrácí svoji pružnost.
-      Vrásky se pak do ní doslova "vpisují" a pleť bez správné péče působí unaveně a bez života.
+      Skvělé je, že je hladká a má téměř neviditelné póry. Horší je, že brzy ztrácí svoji pružnost, je náchylná k tvorbě vrásek a bez správné péče působí unaveně.
     </p>
 
     <p class="result-paragraph">
-      Většina krémů z drogerie jen promastí povrch, ale vy potřebujete víc. Potřebujete látky, 
-      které pleti vrátí její pružnost a sílu zevnitř, jinak bude pocit pnutí stále vyhrávat.
+      Většina krémů z drogerie jen promastí povrch, ale vy potřebujete víc. Potřebujete účinné látky v efektivní rutině.
     </p>
 
     <div class="result-highlight-box">
-      Tato sada využívá unikátní technologii mikrojehliček.
+      Anti-age sada využívá unikátní technologii mikrojehliček.
       Díky nim se dostanou aktivní látky (peptidy) hlouběji pod povrch, kde pleť znovu "nastartují". Je to nejúčinnější neinvazivní alternativa k estetickým zákrokům.
     </div>
 
     <p class="result-transition-text">Co můžete očekávat?</p>
 
 <ul class="result-list">
-  <li><strong>Intenzivní zpevnění</strong> povadlých kontur obličeje</li>
+  <li><strong>Intenzivní zpevnění</strong> kontur obličeje</li>
   <li><strong>Vyplnění jemných linek</strong> a viditelné zjemnění hlubších vrásek</li>
   <li><strong>Okamžitou úlevu</strong> od pnutí a navrácení "šťavnatosti" pleti</li>
 </ul>
