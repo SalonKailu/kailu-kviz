@@ -97,3 +97,31 @@ export function runTests() {
 
 // Spustíme testy
 runTests();
+
+// --- BEZPEČNÝ PŘEPÍNAČ VÝSLEDKŮ ---
+if (typeof window !== 'undefined') {
+  const panel = document.createElement('div');
+  panel.style.cssText = 'position:fixed;bottom:20px;left:20px;z-index:99999;background:white;padding:15px;border:2px solid #faa4a6;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,0.2);font-family:sans-serif;';
+  panel.innerHTML = `
+    <b style="display:block;margin-bottom:10px;color:black">Zobrazit výsledky pro:</b>
+    <select id="set-switcher" style="padding:5px;width:100%;cursor:pointer;">
+      <option value="">-- Vyberte sadu --</option>
+      <option value="Suchá a normální Anti-age">Suchá a normální Anti-age</option>
+      <option value="M+SM Anti-age">M+SM Anti-age</option>
+      <option value="Citlivá">Citlivá</option>
+      <option value="Normální základ + Sem tam pupínek">Normální základ + pupínek</option>
+    </select>
+  `;
+  document.body.appendChild(panel);
+
+  document.getElementById('set-switcher')?.addEventListener('change', (e: any) => {
+    const vybranaSada = e.target.value;
+    if (vybranaSada) {
+      // Toto dočasně přepíše výsledek v paměti prohlížeče
+      (window as any).forcedSet = vybranaSada;
+      // Pokud jsi na stránce výsledků, hned se to změní
+      alert("Sada nastavena na: " + vybranaSada + ". Pokud se text nezměnil, dokončete kvíz nebo obnovte stránku.");
+      window.location.reload();
+    }
+  });
+}

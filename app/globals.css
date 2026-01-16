@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Přidání písma Cinzel pro nadpisy */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -56,5 +58,84 @@ html {
   .py-8 {
     padding-top: 0.5rem !important;
     padding-bottom: 0.5rem !important;
+  }
+}
+
+/* Tyto styly Tailwind nikdy nevymaže */
+@layer components {
+  .result-card-box {
+    background-color: transparent !important;
+    padding: 0 !important;
+    margin: 30px 0 !important; /* Větší odstup od "Vaše pleť je..." */
+    display: block !important;
+  }
+
+  .result-card-title {
+    font-family: 'Cinzel', serif !important;
+    color: #faa4a6 !important;
+    font-size: 2.0rem !important; /* Ještě o kousek větší */
+    font-weight: 700 !important;
+    margin-bottom: 20px !important; /* Výrazná mezera pod nadpisem */
+    line-height: 1.2 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+.result-list {
+    list-style-type: none !important;
+    padding: 0 !important;
+    margin: 20px 0 !important;
+  }
+
+  .result-list li {
+  position: relative !important;
+  list-style-type: none !important; /* Vypne standardní tečky */
+  margin-bottom: 12px !important;
+  padding-left: 1.8em !important; /* Vytvoří přesný prostor pro hvězdičku vlevo */
+  line-height: 1.5 !important;
+  display: block !important; /* Důležité: Zruší flexbox, který dělal neplechu */
+  text-align: left !important;
+}
+
+  /* aby text vedle hvězdičky věděl, že má zbytek místa */
+  .result-list li span {
+    flex: 1;
+    display: block;
+  }
+
+  /* Automatické doplnění hvězdičky ✦ */
+.result-list li::before {
+  content: "✦" !important;
+  position: absolute !important;
+  left: 0 !important;   /* Hvězdička se přibije úplně doleva */
+  top: 0 !important;    /* Zarovná se k prvnímu řádku textu */
+  color: #faa4a6 !important;
+  font-size: 1.2em !important;
+}
+
+  /* Třída pro ten zvýrazněný odstavec (oranžový/růžový box) */
+  .result-highlight-box {
+    background-color: #fdf2f2; 
+    border-left: 4px solid #faa4a6; 
+    padding: 20px; 
+    margin: 30px 0;
+    line-height: 1.6;
+  }
+  .result-lead {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  .result-paragraph {
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .result-section-spacing {
+    margin-bottom: 30px;
+  }
+
+  .result-transition-text {
+    margin-top: 30px;
+    font-weight: 500;
   }
 }

@@ -4,7 +4,7 @@ import { Card, CardContent } from "./ui/card";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Checkbox } from "./ui/checkbox";
 import { Label } from "./ui/label";
-import { evaluateQuiz, type QuizResult } from './QuizEvaluation';
+import { evaluateQuiz, type QuizResult, getRandomDiscountCode, copyToClipboard } from './QuizEvaluation';;
 import { RESULT_TEXTS } from './QuizEvaluation';
 import { SHOP_BASE_URL, PRODUCT_URLS, DISPLAY_NAMES } from './QuizEvaluation';
 import { SKIN_TYPE_URLS } from './QuizEvaluation';
@@ -266,6 +266,12 @@ const QuizForm = () => {
  const [isTransitioning, setIsTransitioning] = useState(false);
  const [result, setResult] = useState<QuizResult | null>(null);
  const [sessionId] = useState(() => `quiz_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
+ const [discountCode] = useState(() => getRandomDiscountCode());
+const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minut v sekundách
+const [codeExpired, setCodeExpired] = useState(false);
+const [codeCopied, setCodeCopied] = useState(false);
+const [saveEmail, setSaveEmail] = useState('');
+const [emailSaved, setEmailSaved] = useState(false);
 
  // === ANALYTICS FUNKCE ===
  const getClientIP = async (): Promise<string> => {
@@ -372,6 +378,86 @@ useEffect(() => {
     sessionStorage.setItem(`completed_${sessionId}`, 'true');
   }
 }, [result, sessionId, answers]);
+
+// Odpočet 15 minut pro slevový kód
+useEffect(() => {
+  if (!result || codeExpired) return;
+  
+  const timer = setInterval(() => {
+    setTimeLeft((prev) => {
+      if (prev <= 1) {
+        setCodeExpired(true);
+        clearInterval(timer);
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+  
+  return () => clearInterval(timer);
+}, [result, codeExpired]);
+
+// Formátování času pro odpočet
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// Funkce pro odeslání výsledků na email
+const handleSaveEmail = async () => {
+  if (!saveEmail || !saveEmail.includes('@')) return;
+  
+  try {
+    // Uložit do analytics
+    await fetch('/api/analytics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: `${sessionId}_email_${Date.now()}`,
+        sessionId,
+        timestamp: new Date().toISOString(),
+        step: 'email_saved',
+        email: saveEmail,
+        discountCode,
+        result,
+        answers
+      })
+    });
+    
+    // Vytvoř URL produktu
+    const isDermatitis = result?.recommendedSet === 'Dermatitida';
+    const productUrl = isDermatitis
+      ? 'https://www.kailu.cz/kontakt'
+      : `${SHOP_BASE_URL}${PRODUCT_URLS[result?.recommendedSet?.split(' + ')[0] || '']}`;
+
+    // Poslat email
+    await fetch('/api/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: saveEmail,
+        discountCode,
+        result: result?.recommendedSet,
+        skinType: result?.skinType,
+        productUrl: productUrl
+      })
+    });
+    
+    setEmailSaved(true);
+  } catch (error) {
+    console.error('Chyba při ukládání emailu:', error);
+  }
+};
+// Funkce pro kopírování kódu
+const handleCopyCode = async () => {
+  const success = await copyToClipboard(discountCode);
+  if (success) {
+    setCodeCopied(true);
+    setTimeout(() => setCodeCopied(false), 2000);
+  }
+};
+
 
 // KÓD PRO DYNAMICKOU VÝŠKU
 useEffect(() => {
@@ -498,222 +584,182 @@ useEffect(() => {
  console.log('recommendedSet:', result?.recommendedSet);
  console.log('PRODUCT_URLS:', PRODUCT_URLS);
 
- if (result) {
-   // Google Analytics tracking
-   if (typeof window !== 'undefined' && window.gtag) {
-     window.gtag('event', 'quiz_completed', {
-       skin_type: result.skinType,
-       recommended_set: result.recommendedSet,
-       has_acne: result.problems.includes('Akné (stabilně více než 5 pupínků🤫)'),
-       budget: answers['budget-limit'] || 'unlimited'
-     });
-   }
+if (result) {
+  // Google Analytics tracking
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'quiz_completed', {
+      skin_type: result.skinType,
+      recommended_set: result.recommendedSet,
+      has_acne: result.problems.includes('Akné (stabilně více než 5 pupínků🤫)'),
+      budget: answers['budget-limit'] || 'unlimited',
+      discount_code: discountCode
+    });
+  }
 
+  const isDermatitis = result.recommendedSet === 'Dermatitida';
+  const productUrl = isDermatitis
+    ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
+    : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
 
-   const isDermatitis = result.recommendedSet === 'Dermatitida';
+  // Speciální text pro M+SM komplet (dehydratovaná varianta)
+  const isDehydrated = answers['skin-description']?.includes('Je suchá') || 
+    answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší');
+  
+  const isMSMKomplet = result.recommendedSet === 'M+SM komplet';
 
-   return (
-     <div className="max-w-2xl mx-auto p-6">
-       <h1 className="text-center text-2xl font-semibold mb-8">
-         ✨ VAŠE VÝSLEDKY ✨
-       </h1>
-       
-       <p className="mb-4">
-         Vaše pleť je:{' '}
-         {result.skinType.includes(' a také ') ? (
-           <>
-             {/* Rozdělíme text na části před a po "a také" */}
-             <span className="font-semibold">
-               <a
-                 href={getSkinTypeUrl(result.skinType.split(' a také ')[0])}
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="text-black underline hover:text-[#faa4a6]"
-               >
-                 {result.skinType.split(' a také ')[0]}
-               </a>
-               {' a také '}
-               <a
-                 href={getSkinTypeUrl(result.skinType.split(' a také ')[1])}
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="text-black underline hover:text-[#faa4a6]"
-               >
-                 {result.skinType.split(' a také ')[1]}
-               </a>
-             </span>
-           </>
-         ) : (
-           <>
-             <span className="font-semibold">
-               <a
-                 href={getSkinTypeUrl(result.skinType)}
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 className="text-black underline hover:text-[#faa4a6]"
-               >
-                 {result.skinType}
-               </a>
-             </span>
-           </>
-         )}
-         .
-       </p>
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      
+     {/* SEKCE 1: TYP PLETI */}
+<div className="mb-4">
+  <p style={{ fontFamily: 'Cinzel, serif', fontSize: '2rem', color: '#faa4a6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
+    Vaše pleť je {result.skinType.toLowerCase()}.
+  </p>
+</div>
 
-       {!isDermatitis && (
-         <div className="bg-[#f1eae2] mb-6 p-6 rounded-lg">
-           <h2 className="font-semibold mb-4">
-             Doporučená péče:{' '}
-             <a 
-               href={`${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`}
-               target="_blank"
-               rel="noopener noreferrer"
-               className="text-black underline hover:text-[#faa4a6]"
-             >
-               {DISPLAY_NAMES[result.recommendedSet.split(' + ')[0]]}
-             </a>
-           </h2>
-           {(result.recommendedSet.includes('+ Sem tam pupínek') || result.problems.includes('Kruhy pod očima')) && (
-             <div>
-               <p className="font-semibold">Doplňkové produkty:</p>
-               {result.recommendedSet.includes('+ Sem tam pupínek') && (
-                 <p>
-                   <a 
-                     href={`${SHOP_BASE_URL}sos-gel`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="text-black underline hover:text-[#faa4a6]"
-                   >
-                     SOS gel na pupínky
-                   </a>
-                 </p>
-               )}
-               {result.problems.includes('Kruhy pod očima') && (
-                 <p>
-                   <a 
-                     href={`${SHOP_BASE_URL}ocni-krem`}
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="text-black underline hover:text-[#faa4a6]"
-                   >
-                     Oční krém
-                   </a>
-                 </p>
-               )}
-             </div>
-           )}
-         </div>
-       )}
+{/* SEKCE 2-5: TEXT Z RESULT_TEXTS */}
+<div className="mb-8 result-output-debug">
+  {result && (
+    <div 
+      dangerouslySetInnerHTML={{ 
+        __html: typeof RESULT_TEXTS[result.recommendedSet] === 'function'
+          ? (RESULT_TEXTS[result.recommendedSet] as any)(answers, result)
+          : RESULT_TEXTS[result.recommendedSet]
+      }} 
+    />
+  )}
+</div>
+      {/* SEKCE 6: URGENCE + KÓD + CTA */}
+{!codeExpired ? (
+  <div className="mb-8">
+    {/* Co získáte v sadě */}
+    <div className="p-6 border border-gray-200 rounded-lg mb-4">
+      <h3 className="font-semibold text-lg mb-4">V sadě získáte:</h3>
+      <ul className="space-y-2">
+        <li>✓ <strong>Produkty</strong> přesně pro vaši pleť</li>
+<li>✓ <strong>Pleťový manuál</strong> krok za krokem</li>
+<li>✓ <strong>Garance spokojenosti</strong> a další výhody Kailu klubu</li>
+      </ul>
+    </div>
 
-       <div className="space-y-4 mb-6">
-         {(() => {
-           const resultText = typeof RESULT_TEXTS[result.recommendedSet] === 'function'
-             ? RESULT_TEXTS[result.recommendedSet](answers)
-             : RESULT_TEXTS[result.recommendedSet];
-           
-           // Pokud text obsahuje HTML tagy, použijeme dangerouslySetInnerHTML
-           if (typeof resultText === 'string' && resultText.includes('<')) {
-             return <div dangerouslySetInnerHTML={{ __html: resultText }} />;
-           }
-           
-           // Jinak zobrazíme jako běžný text
-           return <p>{resultText}</p>;
-         })()}
-           
-         {!isDermatitis && result.specialRecommendations.hasPigmentation && (
-           <p className="mt-4">
-             S <strong>pigmentovými skvrnami</strong> je to trochu složitější. Nejúčinnější možností, jak se jich doopravdy zbavit, nebo je alespoň viditelně zmírnit, je <strong>PREVENCE</strong> (používat SPF) a <strong>chemický peeling</strong>. Více o něm píšu na {' '}
-             <a 
-               href="https://www.kailu.cz/kosmetika" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="text-black underline hover:text-[#faa4a6]"
-             >webu</a>,{' '} kde máte také rovnou i možnost objednání.
-           </p>
-         )}
-         
-         {!isDermatitis && result.specialRecommendations.hasUndereyeCircles && (
-           <p className="mt-4">
-             Na <strong>zmírnění kruhů pod očima</strong> vám doporučuji přihodit do košíku skvělý{' '}
-             <a 
-               href="https://www.kailushop.cz/ocni-krem" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="text-black underline hover:text-[#faa4a6]"
-             >
-               oční krém
-             </a>{' '}
-             od korejské značky Skin1004, který navíc působí skvěle i jako prevence drobných vrásek kolem očí.
-           </p>
-         )}
+    {/* Bonus s kódem */}
+    <div className="p-6 border-2 border-[#faa4a6] rounded-lg bg-[#fdf8f8]">
+      <h3 className="font-semibold text-lg mb-3 text-center">🎁 BONUS S KÓDEM</h3>
+      <p className="text-center text-gray-700 mb-4">
+        Osobně se podívám na vaše odpovědi<br />
+        a ověřím, že je sada pro vás ta pravá.
+      </p>
 
-         {!isDermatitis && result.specialRecommendations.hasBlackheads && result.recommendedSet !== 'Problém: AKNÉ' && (
-           <p className="mt-4">
-             S přáním zbavit se <strong>černých teček</strong> si vaše sada sama o sobě poradí. Pro urychlení ale můžete využít i náš <a href="https://www.kailushop.cz/enzymaticky-peeling/" target="_blank" rel="noopener noreferrer" className="text-black underline hover:text-[#faa4a6]">enzymatický peeling</a>.🤩
-           </p>
-         )}
-       </div>
+      <div className="flex items-center justify-center gap-3 mb-2">
+        <button
+          onClick={handleCopyCode}
+          className="px-6 py-3 bg-white border-2 border-gray-300 hover:border-[#faa4a6] rounded-lg font-mono text-xl font-bold transition-colors"
+          title="Klikněte pro zkopírování"
+        >
+          {discountCode}
+          {codeCopied ? ' ✓' : ' 📋'}
+        </button>
+      </div>
+      
+      {codeCopied && (
+        <p className="text-center text-sm text-green-600 mb-2">Kód zkopírován!</p>
+      )}
 
-       <button
-         onClick={() => {
-           // Google Analytics tracking
-           if (typeof window !== 'undefined' && window.gtag) {
-             window.gtag('event', 'purchase_click', {
-               product_set: result.recommendedSet,
-               skin_type: result.skinType
-             });
-           }
-           
-           const url = isDermatitis
-             ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
-             : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
-           
-           // Otevře v rodičovském okně (mimo iframe)
-           window.parent.location.href = url;
-         }}
-         className="w-full py-3 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-medium"
-       >
-         {isDermatitis ? '➡ Sada pro zpevnění kožní bariéry 👀' : 'Zobrazit doporučenou péči 👀'}
-       </button>
+      <p className="text-center text-sm text-gray-500 mb-4">
+        Kód zadejte v košíku. Platí ještě: <span className="font-bold text-[#faa4a6]">{formatTime(timeLeft)}</span>
+      </p>
+    </div>
 
-       {/* Analytics tlačítko - pouze v development módu */}
-       {process.env.NODE_ENV !== 'production' && (
-         <div style={{position: 'fixed', bottom: '10px', right: '10px', zIndex: 9999}}>
-           <a 
-             href="/admin" 
-             target="_blank"
-             style={{
-               display: 'block',
-               background: '#faa4a6', 
-               color: 'white', 
-               padding: '5px 10px', 
-               borderRadius: '5px', 
-               textDecoration: 'none',
-               fontSize: '12px',
-               marginBottom: '5px'
-             }}
-           >
-             📊 Analytics
-           </a>
-           <button 
-             onClick={() => import('./QuizEvaluation.test').then(module => module.runTests())}
-             style={{
-               display: 'block',
-               background: '#faa4a6', 
-               color: 'white', 
-               padding: '5px 10px', 
-               borderRadius: '5px', 
-               border: 'none',
-               fontSize: '12px'
-             }}
-           >
-             Spustit testy
-           </button>
-         </div>
-       )}
-     </div>
-   );
- }
+    {/* CTA tlačítko */}
+    <button
+      onClick={() => {
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'purchase_click', {
+            product_set: result.recommendedSet,
+            skin_type: result.skinType,
+            discount_code: discountCode
+          });
+        }
+        window.parent.location.href = productUrl;
+      }}
+      className="w-full mt-4 py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
+    >
+      Objednat sadu
+    </button>
+    
+    <p className="text-center text-sm text-gray-500 mt-3">
+      Expedice do 24 h
+    </p>
+  </div>
+) : (
+  <div className="mb-8 p-6 bg-gray-100 rounded-lg">
+    <p className="text-center text-gray-600 mb-4">
+      Platnost kódu vypršela, ale sadu si stále můžete objednat:
+    </p>
+    <button
+      onClick={() => {
+        window.parent.location.href = productUrl;
+      }}
+      className="w-full py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
+    >
+      Zobrazit doporučenou péči
+    </button>
+  </div>
+)}
+
+      {/* SEKCE 7: ZÁCHYTNÁ SÍŤ */}
+      {!emailSaved ? (
+        <div className="p-6 bg-gray-50 rounded-lg">
+          <h3 className="font-semibold mb-2">Chcete si to ještě rozmyslet?</h3>
+          <p className="text-sm text-gray-600 mb-4">Uložím vám výsledek na e-mail.</p>
+          
+          <div className="flex gap-2">
+            <input
+              type="email"
+              value={saveEmail}
+              onChange={(e) => setSaveEmail(e.target.value)}
+              placeholder="váš@email.cz"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#faa4a6]"
+            />
+            <button
+              onClick={handleSaveEmail}
+              disabled={!saveEmail || !saveEmail.includes('@')}
+              className="px-6 py-2 bg-[#faa4a6] hover:bg-[#f89a9c] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+            >
+              Uložit
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="p-6 bg-green-50 rounded-lg text-center">
+          <p className="text-green-700">✓ Výsledek uložen! Pošleme vám ho na e-mail.</p>
+        </div>
+      )}
+
+      {/* Debug tlačítka - pouze v development */}
+      {process.env.NODE_ENV !== 'production' && (
+        <div style={{position: 'fixed', bottom: '10px', right: '10px', zIndex: 9999}}>
+          <a 
+            href="/admin" 
+            target="_blank"
+            style={{
+              display: 'block',
+              background: '#faa4a6', 
+              color: 'white', 
+              padding: '5px 10px', 
+              borderRadius: '5px', 
+              textDecoration: 'none',
+              fontSize: '12px',
+              marginBottom: '5px'
+            }}
+          >
+            📊 Analytics
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
 
  return (
    <>
