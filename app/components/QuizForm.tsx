@@ -684,7 +684,7 @@ if (result) {
       }}
       className="w-full mt-4 py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
     >
-      Objednat sadu
+      Zobrazit doporučenou péči
     </button>
     
     <p className="text-center text-sm text-gray-500 mt-3">
@@ -694,7 +694,6 @@ if (result) {
 ) : (
   <div className="mb-8 p-6 bg-gray-100 rounded-lg">
     <p className="text-center text-gray-600 mb-4">
-      Platnost kódu vypršela, ale sadu si stále můžete objednat:
     </p>
     <button
       onClick={() => {

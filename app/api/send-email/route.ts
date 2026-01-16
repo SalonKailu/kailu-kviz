@@ -2,7 +2,9 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
+  console.log('ENV CHECK:', process.env.RESEND_API_KEY ? 'API key exists' : 'API key MISSING');
   const resend = new Resend(process.env.RESEND_API_KEY);
+  
   try {
     const { email, discountCode, result, skinType, productUrl } = await request.json();
 

@@ -178,72 +178,68 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 'Suchá základ': `
 <div class="result-card-box">
 
-
   <p class="result-lead">
-    Proto často pne, je citlivější a bez krému se necítí komfortně.
+    Často pne, je citlivější a bez krému se necítí komfortně.
+    Nestačí ji jen „něčím namazat“.
   </p>
 
   <p class="result-paragraph">
-    Suché pleti
-    <strong>chybí hydratace i výživa zároveň</strong>.
-    A hlavně schopnost si je v pleti udržet.
-  </p>
-
-  <p class="result-paragraph result-section-spacing">
-    Proto se může stát, že krém krátkodobě uleví,
-    ale pocit sucha se během dne znovu objeví.
-  </p>
+  Vaše pleť má obvykle nedostatek výživy i hydratace, proto je běžné, že se po nanesení krému chvíli cítíte lépe, ale <strong>během dne se pocit sucha vrátí</strong> a vy máte potřebu krém aplikovat znovu.
+</p>
 
   <div class="result-highlight-box">
-    Pokud máte zkušenost, že musíte krém často přidávat,
-    <strong>je to u suché pleti běžné</strong>
-    a neznamená to, že byste dělala něco špatně.
+    Připravila jsem pro vás sadu 4 produktů, která je vhodná i pro začátečníky a zároveň dává smysl, pokud hledáte cenově i časově dostupnější variantu. 
   </div>
 
-  <p class="result-transition-text">
-    Sada pro suchou pleť je sestavená tak, aby pleti ulevila:
-  </p>
+
+  <p class="result-paragraph">Přestože jde o základní péči, její účinnost vás příjemně překvapí!</p>
+
 
   <ul class="result-list">
-    <li>Pleť přestane nepříjemně pnout</li>
-    <li>Bude jemnější a klidnější na dotek</li>
-    <li>Krém vydrží „fungovat“ déle než pár hodin</li>
+    <li>Pleť nebude nepříjemně pnout</li>
+    <li>Bude jemnější a příjemná na dotek</li>
+    <li>Krém bude „fungovat“ po celý den, ne jen pár hodin</li>
   </ul>
 
-</div>`,
+</div>`
+,
   
 'Suchá základ + Sem tam pupínek': `<div class="result-card-box">
 
   <p style="font-size: 1.1rem; margin-bottom: 20px;">
-    Pleť je spíš suchá, citlivější – a občas se objeví pupínek, který tam „vůbec nemá co dělat“.
+    A občas se na ní objeví pupínek, který tam „vůbec nemá co dělat“.
   </p>
 
   <p style="margin-bottom: 20px;">
-    Nejde o typickou mastnou problematickou pleť.
-    Často je naopak <strong style="color: #171717;">oslabená kožní bariéra</strong>,
+    Nejde o typickou problematickou pleť.
+    Často je příčinou <strong style="color: #171717;">oslabená kožní bariéra</strong>,
     která hůř chrání pleť před vnějšími vlivy.
   </p>
 
   <p style="margin-bottom: 25px;">
     Vysušující produkty sice mohou pupínek krátkodobě stáhnout,
-    ale zároveň pleť ještě více rozhodí – objeví se pnutí, citlivost
+    ale zároveň pleť ještě více rozhodí a objeví se pnutí, citlivost
     nebo další reakce.
   </p>
 
   <div class="result-highlight-box">
     U suché pleti se sklonem k pupínkům je klíčové pleť
-    <strong>zklidnit, hydratovat a posílit</strong>,
-    ne ji dál vysušovat.
+    <strong>zklidnit a posílit</strong> a důsledně se vyhýbat látkám, které by ji mohly oslabit.
   </div>
 
-  <p style="margin-top: 30px; font-weight: 500;">
-    Tato sada je sestavená tak, aby:
+  <p style="margin-bottom: 5px;">
+    Proto vám doporučuji sadu pro váš typ pleti doplnit <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">SOS gelem</a> na pupínky.
+  </p>
+
+  <p style="margin-bottom: 0px;">
+    Tato kombinace vám zajistí:
   </p>
 
   <ul class="result-list">
-    <li>Ulevila suchosti a nepříjemnému pnutí</li>
-    <li>Podpořila přirozenou ochrannou funkci pleti</li>
-    <li>Pomohla zvládnout jednotlivé pupínky bez podráždění</li>
+    <li>Úlevu od suchosti a nepříjemného pnutí</li>
+    <li>Dostatečnou hydrataci bez zatížení</li>
+    <li>Podporu ochranné bariéry pleti</li>
+    <li>Rychlé zvládnutí pupínků bez podráždění</li>
   </ul>
 </div>`,
 
@@ -251,28 +247,27 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   return `<div class="result-card-box">
     
     <p class="result-lead">
-      Skvělé je, že má téměř neviditelné póry. Horší je to, že brzy ztrácí svoji pružnost.
+      Skvělé je, že má téměř neviditelné póry. Horší je, že brzy ztrácí svoji pružnost.
       Vrásky se pak do ní doslova "vpisují" a pleť bez správné péče působí unaveně a bez života.
     </p>
 
     <p class="result-paragraph">
-      Většina krémů z drogerie jen "promastí" povrch, ale vy potřebujete víc. Potřebujete látky, 
-      které pleti vrátí její hutnost a sílu zevnitř, jinak bude pocit pnutí stále vyhrávat.
+      Většina krémů z drogerie jen promastí povrch, ale vy potřebujete víc. Potřebujete látky, 
+      které pleti vrátí její pružnost a sílu zevnitř, jinak bude pocit pnutí stále vyhrávat.
     </p>
 
     <div class="result-highlight-box">
-      Tato sada je unikátní technologií mikrojehliček. Ty dopraví <strong>Matrixyl 3000® hluboko pod povrch</strong>, 
-      kde pleť znovu "nastartují". Je to neinvazivní alternativa k estetickým zákrokům.
+      Tato sada využívá unikátní technologii mikrojehliček.
+      Díky nim se dostanou aktivní látky (peptidy) hlouběji pod povrch, kde pleť znovu "nastartují". Je to nejúčinnější neinvazivní alternativa k estetickým zákrokům.
     </div>
 
-    <p class="result-transition-text">Co tato sada dokáže s vaší pletí:</p>
+    <p class="result-transition-text">Co můžete očekávat?</p>
 
-    <ul class="result-list">
-      <li>Intenzivně zpevňuje povadlé kontury obličeje</li>
-      <li>Vyplňuje jemné linky a zjemňuje ty hlubší</li>
-      <li>Dodává pleti "šťavnatost" a okamžitou úlevu od pnutí</li>
-      <li>Matrixyl 3000® – špičková technologie pro obnovu kolagenu</li>
-    </ul>
+<ul class="result-list">
+  <li><strong>Intenzivní zpevnění</strong> povadlých kontur obličeje</li>
+  <li><strong>Vyplnění jemných linek</strong> a viditelné zjemnění hlubších vrásek</li>
+  <li><strong>Okamžitou úlevu</strong> od pnutí a navrácení "šťavnatosti" pleti</li>
+</ul>
 
     <div style="background: #f9f9f9; padding: 20px; margin-top: 30px; border-radius: 8px;">
       <div style="color: #f5c518;">⭐⭐⭐⭐⭐</div>
@@ -372,27 +367,31 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
   return `<div class="result-card-box">
   
+<p class="result-lead">
+    Mastí se v T-zóně, ale zároveň volá po rovnováze, aby se zbytečně nepřesušovala.
+  </p>
 
-    <p style="font-size: 1.1rem; margin-bottom: 20px;">
-      Pleť má tendenci se mastit v T-zóně, ale zároveň potřebuje lehkou a vyváženou péči.
-    </p>
+  <div class="result-highlight-box">
+    Většina produktů na mastnou pleť je příliš agresivní. My na to jdeme jinak: pleť nebudeme "vysušovat", ale naučíme ji, aby se přestala bránit nadměrnou tvorbou mazu.
+  </div>
 
-    <p style="margin-bottom: 20px;">
-      Tato základní sada respektuje potřeby smíšené pleti
-      a pomáhá udržet rovnováhu bez zbytečné zátěže.
-    </p>
+  <p class="result-paragraph">
+    Tato 4kroková základní péče respektuje potřeby smíšené pleti. Nezatěžuje ji hutnými texturami, ale dodává lehkou hydrataci přesně tam, kde je potřeba.
+  </p>
 
-    <ul class="result-list">
-  <li><span>Čistí a osvěžuje pleť</span></li>
-  <li><span>Hydratuje bez ucpávání pórů</span></li>
-  <li><span>Pomáhá udržet pleť matnou a klidnou</span></li>
-  <li><span>Je časově i finančně nenáročná</span></li>
-</ul>
+  <p class="result-transition-text">Co můžete očekávat?</p>
 
-    <p style="margin-top: 20px;">
-      Péče vám zabere jen pár minut denně a snadno se vejde do rozpočtu.
-    </p>
-  </div>`;
+  <ul class="result-list">
+    <li><span><strong>Regulace lesku:</strong> Udrží vaši T-zónu matnou a svěží po celý den.</span></li>
+    <li><span><strong>Čisté póry:</strong> Hloubkově čistí nečistoty bez pocitu nepříjemného pnutí.</span></li>
+    <li><span><span><strong>Lehká hydratace:</strong> Dodává vláhu bez ucpávání pórů nebo pocitu mastnoty.</span></li>
+    <li><span><strong>Rychlá rutina:</strong> Funkční péče, která vám zabere jen pár minut ráno a večer.</span></li>
+  </ul>
+
+  <p class="result-paragraph" style="margin-top: 25px;">
+    Pokud s cílenou péčí o pleť teprve začínáte, tato sada je pro vás perfektním odrazovým můstkem k čisté a klidné pleti. ✨
+  </p>
+</div>`;
 },
 
   
@@ -443,23 +442,20 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     
 
     <p style="font-size: 1.05rem; margin-bottom: 18px;">
-      Smíšená pleť bývá náročná hlavně proto,
-      že špatně snáší extrémy – jak přesušení, tak přetížení.
+      Občas bývá náročná hlavně proto,
+      že špatně snáší extrémy - jak přesušení, tak přetížení.
     </p>
 
     <p style="margin-bottom: 18px;">
-      <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong> je navržená pro pleť,
-která reaguje přecitlivě na špatně zvolenou péči –
-a potřebuje, aby každý krok dával smysl.
+      <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong> nabídne pleti perfektní balanc bez kompromisů.
     </p>
 
     <div class="result-highlight-box">
-      Nejde o rychlé „zmatnění“, ale o dlouhodobou rovnováhu,
-      ve které se pleť postupně uklidňuje.
+      Nejde o rychlé „zmatnění“, ale o dlouhodobou rovnováhu.
     </div>
 
     <ul class="result-list">
-      <li>Pomáhá regulovat mastnotu bez vysušování</li>
+      <li>Pomáhá regulovat mastnotu bez vysušení</li>
       <li>Snižuje sklon k ucpávání pórů</li>
       <li>Podporuje přirozenou hydrataci pleti</li>
       <li>Je vhodná pro každodenní používání</li>
@@ -485,7 +481,7 @@ a potřebuje, aby každý krok dával smysl.
 
     <div class="result-highlight-box">
       Tahle kompletní sada je jiná – <strong>reguluje maz, ale nevysušuje</strong>. 
-      A když se občas pupínek přece objeví, pomůže vám 
+      A když se občas pupínek přece objeví, doporučuji přikoupit
       <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">SOS gel</a> 
       pro rychlé řešení.
     </div>
@@ -494,9 +490,10 @@ a potřebuje, aby každý krok dával smysl.
 
     <ul class="result-list">
       <li>Čistí bez vysušení a podráždění</li>
-      <li>Reguluje tvorbu mazu přirozeně</li>
-      <li>Hydratuje bez zatížení pórů</li>
+      <li>Reguluje tvorbu mazu</li>
+      <li>Hydratuje bez zatížení a ucpávání pórů</li>
       <li>Předchází vzniku nových nedokonalostí</li>
+      <li>Působí jako prevenci proti vráskám</li>
     </ul>
 
   
@@ -513,14 +510,13 @@ a potřebuje, aby každý krok dával smysl.
       
       
       <p class="result-lead">
-        Leskne se, ale zároveň pne. Má sklony k ucpávání pórů, 
-        a k tomu se začínají objevovat první vrásky.
+        Má viditelné póry, je dehydratovaná a k tomu se začínají objevovat první vrásky.
         Hodně výzev najednou, ale řešitelných.
       </p>
 
       <p class="result-paragraph">
         Dehydratovaná pleť stárne rychleji, protože jí chybí přirozená ochrana.
-        A běžné anti-age krémy bývají příliš hutné – ucpou póry a způsobí další problémy.
+        A běžné anti-age krémy bývají příliš hutné, ucpou póry a způsobí další problémy.
       </p>
 
       <div class="result-highlight-box">
@@ -558,8 +554,7 @@ a potřebuje, aby každý krok dával smysl.
   return `<div class="result-card-box">
     
     <p class="result-lead">
-      Mastí se, má sklony k rozšířeným pórům a zároveň 
-      se začínají objevovat první známky stárnutí.
+      Nemá problém se suchostí, ale už se na ní začínají objevovat první známky stárnutí.
     </p>
 
     <p class="result-paragraph">
@@ -604,8 +599,8 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     
       
       <p class="result-lead">
-        Skvělá zpráva – vaše pleť je v rovnováze a nevyžaduje speciální zásahy.
-        V těhotenství nebo při kojení je ale důležité vybírat produkty pečlivě.
+        I když je vaše pleť běžně bezproblémová, v období těhotenství a kojení se k ní musíme chovat s maximálním respektem. 
+        Hormony totiž mění její reakce a to, co vám dříve vyhovovalo, může být najednou příliš silné.
       </p>
 
       <p class="result-paragraph">
@@ -621,15 +616,11 @@ To je častý problém, protože většina z nich může být na váš typ pleti
       <p class="result-transition-text">Sada pro normální pleť:</p>
 
       <ul class="result-list">
-        <li>Bezpečná v těhotenství i při kojení</li>
+        <li>Je bezpečná v těhotenství i při kojení</li>
         <li>Hydratuje bez ucpávání pórů</li>
         <li>Chrání před pigmentací díky SPF</li>
-        <li>Časově i finančně nenáročná</li>
+        <li>Je časově i finančně nenáročná</li>
       </ul>
-
-      <p class="result-paragraph">
-        Pokud by vám něco nesedělo, sadu přizpůsobíme podle potřeb vaší pleti.
-      </p>
     </div>`;
   }
 
@@ -638,32 +629,29 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     
     
     <p class="result-lead">
-      Gratuluji – normální pleť je vzácnost. Není suchá, nemastí se, 
+      Gratuluji, normální pleť je vzácnost! 🙌 Není suchá, nemastí se, 
       nereaguje přehnaně na kosmetiku. Prostě funguje.
     </p>
 
     <p class="result-paragraph">
-      Teď jde o to tento stav udržet. Správná péče nemusí být složitá – 
-      stačí pleť chránit a dodávat jí to, co potřebuje.
+      Teď jde o to tento stav udržet. Správná péče nemusí být složitá.
     </p>
 
     <div class="result-highlight-box">
-      Tahle sada je přesně o tom – <strong>udržuje pleť v kondici
-      a chrání ji před předčasným stárnutím</strong>. Nic zbytečného navíc.
+      Sada, kterou vám doporučuji, <strong>udržuje pleť v kondici
+      a chrání ji před předčasným stárnutím</strong>.
     </div>
 
-    <p class="result-transition-text">Sada pro normální pleť:</p>
+    <p class="result-transition-text">Co můžete očekávat?</p>
 
-    <ul class="result-list">
-      <li>Udržuje pleť svěží a v rovnováze</li>
-      <li>Chrání před předčasným stárnutím</li>
-      <li>Časově nenáročná – jednoduchá rutina</li>
-      <li>Respektuje váš rozpočet</li>
-    </ul>
+   <ul class="result-list">
+  <li><span><strong>Dokonalou rovnováhu:</strong> Pleť bude svěží, sjednocená a bez nadbytečného lesku v T-zóně.</span></li>
+  <li><span><strong>Aktivní ochranu:</strong> Účinnou prevenci proti předčasnému stárnutí a prvním vráskám.</span></li>
+  <li><span><strong>Rychlé výsledky:</strong> Efektivní rutinu, která pleti dodá vše potřebné během pár minut.</span></li>
+  <li><span><span><strong>Dostupnou kvalitu:</strong> Profesionální péči navrženou tak, aby šetřila vaši pleť i rozpočet.</span></li>
+</ul>
 
-    <p class="result-paragraph">
-      Pokud by vám něco nesedělo, sadu přizpůsobíme podle potřeb vaší pleti.
-    </p>
+  
   </div>`;
 },
   
@@ -672,7 +660,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   
   <p class="result-lead">
     Nemastí se, nevysychá, většinou spolupracuje.
-    Jen občas vyskočí pupínek – a to dokáže pořádně potrápit.
+    Jen občas vyskočí pupínek a to dokáže pořádně potrápit.
   </p>
 
   <p class="result-paragraph">
@@ -682,16 +670,16 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   </p>
 
   <div class="result-highlight-box">
-    Základní sada udrží pleť zdravou a chráněnou.
-    A když se pupínek objeví, <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">SOS gel</a> ho rychle zklidní.
+    Každodenní péče, kterou vám doporučuji, udrží pleť hydratovanou a chráněnou.
+    A pro případ, že se objeví pupínek, doporučuji přikoupit <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">SOS gel</a>.
   </div>
 
   <p class="result-transition-text">Sada pro normální pleť:</p>
 
   <ul class="result-list">
     <li>Čistí a chrání bez zbytečné zátěže</li>
-    <li>Nezanáší póry</li>
-    <li>Obsahuje SPF proti předčasnému stárnutí</li>
+    <li>Nezanáší póry (kterých stejně moc nemáte 😉)</li>
+    <li>Chrání pleť a podporuje kožní bariéru</li>
   </ul>
 
   <p class="result-transition-text">SOS gel na pupínky:</p>
@@ -702,9 +690,6 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     <li>Stačí nanést lokálně večer</li>
   </ul>
 
-  <p class="result-paragraph">
-    Pokud by vám něco nesedělo, sadu přizpůsobíme podle potřeb vaší pleti.
-  </p>
 </div>`,
   
   'Citlivá': (answers, result) => {
@@ -721,7 +706,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
       </p>
 
       <p class="result-paragraph">
-        Ať už teď vaše pleť díky hormonům září, nebo vás naopak trochu trápí, nejdůležitější je pro nás bezpečnost a stabilita. Vybrala jsem pro vás péči, která respektuje váš typ pleti, ale zároveň je 100% bezpečná pro vás i miminko.
+        Ať už teď vaše pleť díky hormonům září, nebo vás naopak trochu trápí, nejdůležitější je pro nás bezpečnost a stabilita. Vybrala jsem pro vás péči, která respektuje váš typ pleti, je účinná a zároveň bezpečná.
       </p>
 
       <div class="result-highlight-box">
@@ -729,8 +714,8 @@ To je častý problém, protože většina z nich může být na váš typ pleti
       </div>
 
       <ul class="result-list">
-        <li>100% bezpečné složení pro zdravý vývoj miminka i během kojení.</li>
-        <li>Posílení bariéry, aby vaše pleť zůstala klidná i při hormonálních výkyvech.</li>
+        <li>100% bezpečné složení během těhotenství i kojení.</li>
+        <li>Posílení bariéry, aby vaše pleť zůstala klidná i při hormonálních bouřích.</li>
         <li>Intenzivní hydratace přizpůsobená potřebám vaší pleti.</li>
         <li>Bez parfemace</li>
       </ul>
@@ -780,21 +765,24 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     
     
 <p class="result-lead">
-      Reaguje na produkty, které ostatním vyhovují. Zčervená, pálí nebo pne. 
-      Vím, že každá změna kosmetiky je pro vás risk – proto jsem pro vás vybrala péči, která je sázkou na jistotu.
+      Reaguje i na produkty, které ostatním vyhovují. Zčervená, pálí nebo pne. 
     </p>
 
+    <p class="result-paragraph">
+         Vím, že každá změna kosmetiky je pro vás risk a proto jsem pro vás vybrala péči, která se mým klientkám vždy vyplatila.
+      </p>
+
     <div class="result-highlight-box">
-      <strong>Moje doporučení:</strong> Za citlivostí stojí oslabený mikrobiom. Tato sada funguje jako „posilovna“ pro vaši bariéru. Nejdříve pleť zklidníme a pak ji naučíme, aby se už nenechala ničím rozhodit.
+      <strong>Proč tato sada:</strong> Tato sada funguje jako „posilovna“ pro vaši bariéru. Nejdříve pleť zklidníme a pak ji naučíme, aby se už nenechala ničím rozhodit.
     </div>
 
-    <p class="result-transition-text">Co se po zavedení této rutiny změní?</p>
+    <p class="result-transition-text">Co se po zavedení nové rutiny změní?</p>
 
     <ul class="result-list">
-      <li><strong>Konec pocitům horka:</strong> Účinné látky okamžitě zklidní „rozpálenou“ pleť.</li>
+      <li><strong>Konec nepříjemným pocitům:</strong> Účinné látky okamžitě zklidní vaši pleť.</li>
       <li><strong>Odolnější štít:</strong> Vaše bariéra se zacelí a přestane propouštět dráždivé látky.</li>
       <li><strong>Dlouhodobá úleva:</strong> Už nebudete muset každé ráno řešit, jak zakrýt červené skvrny.</li>
-      <li><strong>Jemný anti-age:</strong> Omlazení pleti bez obav z podráždění nebo pálení.</li>
+      <li><strong>Jemný anti-age:</strong> Omlazení pleti bez obav z podráždění.</li>
     </ul>
 
     <p class="result-paragraph" style="border-top: 1px solid #eee; padding-top: 1rem; font-weight: 500;">
@@ -807,12 +795,12 @@ To je častý problém, protože většina z nich může být na váš typ pleti
  
   
   <p class="result-lead">
-    Máte pocit, že si musíte vybrat? Buď řešit pupínky agresivní kosmetikou, nebo nechat pleť v klidu, ale s nedokonalostmi? 
-    <strong>Pomohu vám z tohoto začarovaného kruhu konečně vystoupit.</strong>
+    Máte pocit, že si musíte vybrat? Buď řešit pupínky agresivní kosmetikou, nebo nechat pleť v klidu, ale s nedokonalostmi? 🤔
+    Pomohu vám z tohoto začarovaného kruhu konečně vystoupit.
   </p>
 
   <p class="result-paragraph">
-    Vaše pleť je citlivá, což znamená, že na každý silný zásah reaguje podrážděním. Tato sada na to jde chytře: nejdříve pleť „udobří“, posílí její přirozenou obranu a teprve poté jemně čistí cestu k pleti bez pupínků.
+    Vaše pleť je citlivá, což znamená, že na každý silný zásah reaguje podrážděním. Potřebujeme si ji „udobřit“, posílit její přirozenou obranu a zároveň se šetrně a účinně zbavit existujících pupínků.
   </p>
 
   <div class="result-highlight-box">
@@ -827,34 +815,31 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     <li><strong>Zdravý mikrobiom:</strong> Silná pleť, která se s bakteriemi akné dokáže mnohem lépe vypořádat sama.</li>
   </ul>
 
-  <p class="result-transition-text">SOS gel na pupínky (vaše jistota):</p>
+  <p class="result-transition-text">SOS gel na pupínky (doporučuji přikoupit):</p>
 
   <ul class="result-list">
     <li><strong>Cílený zásah:</strong> Zklidní pupínek, ale okolní citlivou kůži neporuší ani nevysuší.</li>
     <li><strong>Rychlejší hojení:</strong> Pomáhá předcházet tomu, aby po každém pupínku zůstal červený flíček.</li>
   </ul>
 
-  <p class="result-paragraph" style="border-top: 1px solid #eee; padding-top: 1rem; font-weight: 500;">
-    Dopřejte své pleti péči, která ji nebude trestat za to, že je citlivá, ale naopak ji podpoří v její síle.
-  </p>
 </div>`,
   
   'Kuperóza': `<div class="result-card-box">
   
   
   <p class="result-lead">
-    Rozšířené žilky na tvářích nebo nose, pleť, která snadno zrudne.
+    Rozšířené žilky a pleť, která snadno zrudne.
     Víte, jak nepříjemné to je. A asi už tušíte, že zázračný krém neexistuje.
   </p>
 
   <p class="result-paragraph">
-Budu k vám upřímná: Kosmetika kuperózu ani rosaceu nevyléčí. Nejúčinnější řešení (nebo spíše odstranění viditelných projevů) je IPL nebo laser. Ale i tak se začervenání časem vrací…
-    Ale správná péče dokáže začervenání zmírnit a posílit stěny cév.
-    a zpomalit zhoršování. A to není málo.
+Budu k vám upřímná: Kosmetika to nevyléčí, jen zmírní. Nejdéletrvající řešení (nebo spíše odstranění viditelných projevů) je IPL nebo laser.
+Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěny cév
+  a zpomalit zhoršování. A to není málo.
   </p>
 
   <div class="result-highlight-box">
-    Tato sada je sestavená speciálně pro vaši pleť.
+    Tuto sadu jsem sestavila speciálně pro vaši pleť.
     <strong>Zklidňuje, posiluje cévy a chrání před faktory, které stav zhoršují.</strong>
   </div>
 
@@ -913,12 +898,12 @@ Budu k vám upřímná: Kosmetika kuperózu ani rosaceu nevyléčí. Nejúčinn�
 
   <ul class="result-list">
     <li><strong>Identifikace zdarma:</strong> Vyfoťte postižená místa na denním světle a pošlete na <a href="mailto:info@kailu.cz" style="color: #faa4a6; font-weight: bold;">info@kailu.cz</a>. Podívám se na ně a <strong>odpovím vám co nejdříve</strong> (obvykle do 24h), co (ne)dělat.</li>
-    <li><strong>Nulová terapie:</strong> Přestaňte používat produkty, co máte. Když vám nepomohly do teď, nepomůžou ani dnes nebo zítra a zbytečně bysme mohly oddálit účinek správně zvolené péče.</li>
+    <li><strong>Nulová terapie:</strong> Přestaňte používat produkty, co máte. Když vám nepomohly do teď, nepomůžou ani dnes nebo zítra a zbytečně bysme mohli oddálit účinek správně zvolené péče.</li>
     <li><strong>Byl to jen překlik?</strong> Pokud dermatitidu nemáte a hledáte jen péči o citlivou pleť, vraťte se zpět nebo zvolte <a href="https://www.kailushop.cz/sada-pro-citlivou-plet/" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>.</li>
   </ul>
 
   <p class="result-paragraph">
-    Těším se na vaši fotku, společně najdeme bezpečnou cestu. 
+    Těším se na vaši fotku a na to, že společně najdeme bezpečnou a účinnou cestu. 🙏
   </p>
 </div>`,
   
@@ -931,16 +916,16 @@ Budu k vám upřímná: Kosmetika kuperózu ani rosaceu nevyléčí. Nejúčinn�
        
         
         <p class="result-lead">
-          To je kombinace, která vyžaduje velmi opatrný přístup. Vaše pleť potřebuje řešit pupínky, ale zároveň nutně volá po hydrataci a ochraně.
-          <strong>Běžná vysušující kosmetika na akné by pro vás v tuto chvíli byla spíše trestem.</strong>
+          To je důvod, proč vyžaduje velmi opatrný přístup. Vaše pleť potřebuje řešit pupínky, ale zároveň nutně volá po hydrataci a ochraně.
+          <strong>Běžná "vysušující" kosmetika na akné by pro vás v tuto chvíli byla spíše trestem.</strong>
         </p>
 
         <p class="result-paragraph">
-          U ${skinType.toLowerCase()} pleti se akné často objevuje jako reakce na narušenou kožní bariéru. Máme dvě cesty, jak se s tím vypořádat:
+          U vašeho typu pleti se akné často objevuje jako reakce na narušenou kožní bariéru nebo hormonální změny. Máme dvě cesty, jak se s tím vypořádat:
         </p>
 
         <div class="result-highlight-box">
-          <strong>Možnost 1 (Doporučuji):</strong> Začněte se <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline; font-weight: bold;">sadou pro citlivou pleť</a>. Ta bariéru opraví a zklidní zánět. Často se stane, že pupínky zmizí samy, jakmile se pleť přestane "bránit" okolí.
+          <strong>Možnost 1 (Doporučuji):</strong> Začněte se <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline; font-weight: bold;">sadou pro citlivou pleť</a>. Ta bariéru opraví a zklidní zánět. Často se stane, že pupínky zmizí samy, jakmile se pleť dostatečně "zpevní".
         </div>
 
         <div class="result-highlight-box" style="margin-top: 1rem;">
@@ -948,7 +933,7 @@ Budu k vám upřímná: Kosmetika kuperózu ani rosaceu nevyléčí. Nejúčinn�
         </div>
 
         <p class="result-paragraph">
-          Nejste si jistá? Napište mi. U ${skinType.toLowerCase()} pleti je důležité pleť uzdravit, ne ji vysušit na troud.
+          Nejste si jistá? Napište mi na info@kailu.cz. Ráda to s vámi proberu!
         </p>
       </div>`;
     }
@@ -961,14 +946,15 @@ Budu k vám upřímná: Kosmetika kuperózu ani rosaceu nevyléčí. Nejúčinn�
       </p>
 
       <p class="result-paragraph">
-        Naše sada pro aknozní pleť kombinuje hned několik aktivních látek, ale zároveň dbá na ochranu pleti i hydrataci. 
+        Naše sada pro aknozní pleť kombinuje hned několik aktivních látek včetně retinalu, ale zároveň dbá na ochranu pleti i hydrataci. 
       </p>
-
+ <p class="result-transition-text">Co můžete očekávat?</p>
       <ul class="result-list">
-        <li><strong>Zastavení zánětu:</strong> Postupné zklidnění bez agresivních šoků.</li>
-        <li><strong>Regulace mazu:</strong> Čistější póry a méně pupínků bez nepříjemného pnutí.</li>
-        <li><strong>Prevence</strong></li>
-      </ul>
+        <li><span><strong>Čisté póry:</strong> Retinal urychluje obnovu pleti, čímž omezuje tvorbu černých teček a pupínků.</span></li>
+    <li><span><strong>Zklidnění aktivních míst:</strong> Redukce zarudnutí a urychlení regenerace již vzniklých projevů.</span></li>
+    <li><span><strong>Sjednocení textury:</strong> Postupné vyhlazení povrchu pleti, který může být vlivem akné nejednotný.</span></li>
+    <li><span><strong>Méně mastná pleť:</strong> Stabilizace celkového vzhledu pleti bez zbytečného pocitu mastnoty.</span></li>
+  </ul>
 
       <div class="result-highlight-box">
         <strong>Pamatujte:</strong> Každá pleť je jedinečná. Dejte jí čas se adaptovat a poctivě dodržujte manuál. Trpělivost je v boji s akné vaše největší síla.
