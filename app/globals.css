@@ -49,6 +49,15 @@ html {
   background-color: #ffffff !important;
 }
 
+/* Toto zajistí, že doplňkový typ pleti bude na novém řádku a jemnější */
+small {
+ display: block !important;  /* Vynutí nový řádek */
+  font-size: 0.75em;   /* Menší písmo */
+  font-weight: 400;    /* Tenčí písmo */
+  opacity: 0.8;        /* Jemnější barva */
+  margin-top: 4px;     /* Malý rozestup */
+}
+
 /* Pro iframe prostředí */
 @media (max-width: 99999px) {
   .min-h-screen {

@@ -10,11 +10,11 @@ interface QuizAnalytics {
   step: 'started' | 'completed' | 'abandoned';
   answers: any;
   result: any;
+  discountCode?: string;  // <-- PŘIDÁNO
   currentQuestion: number;
   url: string;
   referrer: string;
 }
-
 const AdminAnalytics = () => {
   const [analytics, setAnalytics] = useState<QuizAnalytics[]>([]);
   const [filter, setFilter] = useState<'all' | 'started' | 'completed' | 'abandoned'>('all');
@@ -46,7 +46,7 @@ const loadAnalytics = async () => {
 
   const exportToCSV = () => {
     const csvContent = [
-      ['Datum', 'Čas', 'IP adresa', 'Krok', 'Typ pleti', 'Doporučená sada', 'Rozpočet', 'Session ID'].join(','),
+      ['Datum', 'Čas', 'IP adresa', 'Krok', 'Typ pleti', 'Doporučená sada', 'Rozpočet', 'Slevový kód', 'Session ID'].join(','),
       ...filteredAnalytics.map(item => [
         new Date(item.timestamp).toLocaleDateString('cs-CZ'),
         new Date(item.timestamp).toLocaleTimeString('cs-CZ'),
@@ -55,6 +55,7 @@ const loadAnalytics = async () => {
         item.result?.skinType || '',
         item.result?.recommendedSet || '',
         item.answers?.['budget-limit'] || '',
+item.discountCode || '',  // <-- PŘIDÁNO
         item.sessionId
       ].map(field => `"${field}"`).join(','))
     ].join('\n');
@@ -201,7 +202,8 @@ const loadAnalytics = async () => {
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Typ pleti</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Doporučená sada</th>
                   <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Rozpočet</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Akce</th>
+<th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Slevový kód</th>
+<th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Akce</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -230,10 +232,13 @@ const loadAnalytics = async () => {
                       {item.result?.recommendedSet || '-'}
                     </td>
                     <td className="px-4 py-3 text-sm">
-                      {item.answers?.['budget-limit'] || '-'}
-                    </td>
-                    <td className="px-4 py-3 text-sm">
-                      <button
+  {item.answers?.['budget-limit'] || '-'}
+</td>
+<td className="px-4 py-3 text-sm font-mono text-blue-600">
+  {item.discountCode || '-'}
+</td>
+<td className="px-4 py-3 text-sm">
+  <button
                         onClick={() => {
                           setSelectedRecord(item);
                           setShowDetailModal(true);
@@ -277,7 +282,8 @@ const loadAnalytics = async () => {
                   <div><strong>Datum a čas:</strong> {new Date(selectedRecord.timestamp).toLocaleString('cs-CZ')}</div>
                   <div><strong>IP adresa:</strong> {selectedRecord.clientIP}</div>
                   <div><strong>Session ID:</strong> {selectedRecord.sessionId}</div>
-                  <div><strong>Krok:</strong> {selectedRecord.step}</div>
+<div><strong>Slevový kód:</strong> {selectedRecord.discountCode || '-'}</div>
+<div><strong>Krok:</strong> {selectedRecord.step}</div>
                   <div><strong>Aktuální otázka:</strong> {selectedRecord.currentQuestion}</div>
                   <div><strong>URL:</strong> {selectedRecord.url}</div>
                   <div><strong>Referrer:</strong> {selectedRecord.referrer || 'Přímý přístup'}</div>

@@ -14,12 +14,12 @@ export async function POST(request: Request) {
       subject: 'Výsledek vaší pleťové diagnostiky',
       html: `
         <!DOCTYPE html>
-        <html>
+        <html lang="cs">
           <head>
             <meta charset="utf-8">
             <style>
               body {
-                font-family: Poppins, sans-serif;
+                font-family: Arial, sans-serif;
                 line-height: 1.7;
                 color: #2d2d2d;
                 max-width: 600px;
@@ -86,8 +86,8 @@ export async function POST(request: Request) {
               }
               .cta-button {
                 display: inline-block;
-                background: #1f1f1f;
-                color: #ffffff;
+                background: #1f1f1f !important;
+                color: #ffffff !important;
                 padding: 16px 42px;
                 text-decoration: none;
                 border-radius: 999px;
@@ -112,9 +112,8 @@ export async function POST(request: Request) {
 
             <div class="content">
               <p>
-                Těší mě, že jste investoval/a čas do vaší pleti.
-                Na základě vašich odpovědí už máme jasno v tom,
-                <strong>co vaší pleti dává smysl a čemu je lepší se vyhnout</strong>.
+                Skvělá práce! Analýzu máme hotovou. Teď už nemusíte hádat a hledat.
+                Na základě vašich odpovědí jsem vám vybrala vhodnou péči.
               </p>
 
               <div class="result-box">
@@ -126,21 +125,18 @@ export async function POST(request: Request) {
               </div>
 
               ${
-                result === 'Dermatitida'
+                result === 'Dermatitida' || result === 'Sada pro dermatitidu'
                   ? `
-                <div class="warning-box">
-                  <h3>Individuální posouzení pleti</h3>
+                <div class="warning-box" style="background-color: #fdf2f2; border: 1px solid #faa4a6; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                  <h3 style="color: #d68b8d; margin-top: 0;">Individuální posouzení pleti</h3>
                   <p>
-                    U dermatitidy je potřeba vidět stav pleti,
-                    aby bylo doporučení opravdu přesné a bezpečné.
+                    U dermatitidy je potřeba vidět stav pleti, aby bylo doporučení opravdu přesné a bezpečné.
                   </p>
                   <p>
-                    Pošlete mi prosím fotografii postižených míst
-                    (na denním světle) na: <a href="mailto:info@kailu.cz">info@kailu.cz</a>
+                    Pošlete mi v odpovědi na tento email nebo na: <a href="mailto:info@kailu.cz">info@kailu.cz</a> <strong>fotografii pleti na denním světle</strong>.
                   </p>
-                  
                   <p style="font-size: 14px; color: #666;">
-                    Ozvu se vám nejpozději do 24 hodin s konkrétním návrhem péče.
+                    Ozvu se vám nejpozději do 48 hodin s konkrétním návrhem péče.
                   </p>
                 </div>
               `
@@ -148,8 +144,7 @@ export async function POST(request: Request) {
                 <div class="discount-box">
                   <h3>Malý dárek pro vás</h3>
                   <p>
-                    Aby pro vás bylo rozhodování jednodušší,
-                    můžete i nyní využít slevový kód, se kterým osobně zkontroluji výsledky vaší diagnostiky. :)
+                    Aby pro vás bylo rozhodování jednodušší, můžete i nyní využít slevový kód, se kterým osobně zkontroluji výsledky vaší diagnostiky. :)
                   </p>
                   <div class="discount-code">${discountCode}</div>
                   <p style="font-size: 14px; color: #666;">
@@ -171,7 +166,7 @@ export async function POST(request: Request) {
               </p>
 
               <p>
-                Karolína z kailushop.cz
+                Karolína z Kailushopu
               </p>
             </div>
 

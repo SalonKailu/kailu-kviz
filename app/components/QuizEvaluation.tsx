@@ -28,7 +28,6 @@ export interface QuizAnswers {
   'wish-fish'?: string;
   'budget-limit'?: string;
 }
-
 // Rozhraní pro výsledek kvízu
 export interface QuizResult {
   skinType: SkinType;
@@ -40,6 +39,11 @@ export interface QuizResult {
     antiAgeSuggested: boolean;
     hasBlackheads?: boolean;
     isPregnant?: boolean;
+    isUnder25?: boolean;
+    is26to35?: boolean;
+    is36to45?: boolean;
+    is46to55?: boolean;
+    isOver55?: boolean;
   };
 }
 // Konstanty pro typy pleti
@@ -322,7 +326,39 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   </div>`;
 },
   
- 'M+SM základ': (answers) => {
+ 'M+SM základ': (answers, result) => {
+  const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
+  // NOVÁ PODMÍNKA PRO 45+ S DEHYDRATACÍ
+  if (isOver45 && (
+    answers['skin-description']?.includes('Je suchá') || 
+    answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')
+  )) {
+    return `<div class="result-card-box">
+      
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">
+        S věkem se pleť přirozeně mění. Produkuje méně mazu a ztrácí hydrataci.
+      </p>
+
+      <p style="margin-bottom: 20px;">
+        Typ vaší pleti vám zůstane na vždy, ale stav se změnil. 
+        To není chyba, jen přirozená změna, kterou respektujeme správnou péčí.
+      </p>
+
+      <div class="result-highlight-box">
+        Tato sada podporuje přirozenou hydrataci vaší pleti bez zbytečného zatížení.
+      </div>
+
+      <p style="margin-top: 30px; font-weight: 500;">
+        V čem je ještě skvelá?
+      </p>
+
+      <ul class="result-list">
+        <li><span>Je časově i finančně úsporná</span></li>
+        <li><span>Pomůže vyrovnat pleť a vrátit jí komfort</span></li>
+        <li><span>Neucpává póry a respektuje přirozenou rovnováhu pleti</span></li>
+      </ul>
+    </div>`;
+  }
   if (
     answers['skin-description']?.includes('Je suchá') || 
     answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')
@@ -330,17 +366,17 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return `<div class="result-card-box">
       
       <p style="font-size: 1.1rem; margin-bottom: 20px;">
-        Pleť může působit suše, ale ve skutečnosti jí chybí voda – ne mastnota.
+        Možná si říkáte, že máte pleť suchou, ale typ a stav není to stejné.
       </p>
 
       <p style="margin-bottom: 20px;">
-        Proto se může lesknout v T-zóně, a přitom pnout nebo reagovat citlivě.
+        Vaše pleť se může lesknout v T-zóně, a přitom pnout nebo reagovat citlivě.
         To není rozpor, ale typický projev <strong style="color: #171717;">dehydratované smíšené pleti</strong>.
       </p>
 
       <div class="result-highlight-box">
-        Jakmile pleti dodáte hydrataci a podpoříte její rovnováhu,
-        začne se chovat klidněji – bez extrémů.
+        Jakmile pleti dodáte hydrataci a zpevníte kožní bariéru,
+        začne se chovat klidněji a nepříjemné pocity zmizí.
       </div>
 
       <p style="margin-top: 30px; font-weight: 500;">
@@ -354,8 +390,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 </ul>
 
       <p style="margin-top: 20px;">
-        Pokud byste cítila, že pleť potřebuje hydratace ještě víc,
-        doporučuji před krém zařadit
+        Výsledky viditelně urychlí, když před krémy ve vaší sadě přidáte ještě
         <a href="https://www.kailushop.cz/hydratacni-serum/" target="_blank" rel="noopener noreferrer" class="underline">
           hydratační sérum
         </a>.
@@ -394,6 +429,38 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
   
   'M+SM komplet': (answers, result) => {
+    const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
+    // NOVÁ PODMÍNKA PRO 45+ S DEHYDRATACÍ
+if (isOver45 && (
+  answers['skin-description']?.includes('Je suchá') || 
+  answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')
+)) {
+  return `<div class="result-card-box">
+    
+    <p style="font-size: 1.1rem; margin-bottom: 20px;">
+        S věkem se vaše pleť přirozeně změnila. Produkuje méně mazu a ztrácí hydrataci.
+      </p>
+
+      <p style="margin-bottom: 20px;">
+        Typ vaší pleti vám zůstane na vždy, ale stav se změnil. 
+        To není chyba, jen běžná změna, kterou respektujeme správnou péčí.
+      </p>
+
+    <div class="result-highlight-box">
+      Vaše pleť si zaslouží <strong>systematickou hydrataci, ochranu a posílení kožní bariéry</strong>.
+    </div>
+
+    <p style="margin-top: 30px; font-weight: 500;">
+      <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong>:
+    </p>
+
+    <ul class="result-list">
+      <li><span>Dodá pleti hydrataci bez ucpávání pórů</span></li>
+      <li><span>Pomůže obnovit přirozenou rovnováhu</span></li>
+      <li><span>Uleví od pocitu nepohodlí a sucha</span></li>
+    </ul>
+  </div>`;
+}
   // Dehydratovaná smíšená pleť
   if (
     answers['skin-description']?.includes('Je suchá') || 
@@ -463,7 +530,46 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
 'M+SM komplet + Sem tam pupínek': (answers, result) => {
   const skinType = result.skinType.toLowerCase();
+  const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
   
+  // VARIANTA PRO 36+
+  if (isOver45 || result?.specialRecommendations?.is36to45) {
+    return `<div class="result-card-box">
+     
+      <p class="result-lead">
+        Pupínky ve vašem věku většinou nesouvisí s nadměrným mazem, ale s hormonálními změnami.
+      </p>
+
+      <p class="result-paragraph">
+        Těhotenství i menopauza mohou vyvolat lokální záněty podobné akné.
+        Pleť zároveň potřebuje více hydratace a jemné zacházení, protože už není tak pevná jako dřív.
+      </p>
+
+      <div class="result-highlight-box">
+        Kombinace SOS gel + kompletní sada respektuje citlivost vaší pleti a zároveň se postará o pupínky.
+      </div>
+
+      <p class="result-transition-text">
+        <a href="https://www.kailushop.cz/sos-gel/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">SOS gel</a>
+      </p>
+      
+      <ul class="result-list">
+        <li>Výrazně brání rozvoji pupínků</li>
+        <li>Působí proti vzniku skvrnek po akné</li>
+      </ul>
+
+      <p class="result-transition-text">Kompletní sada pro smíšenou pleť:</p>
+
+      <ul class="result-list">
+        <li>Hydratuje bez zatížení</li>
+        <li>Zklidňuje záněty a podporuje hojení</li>
+        <li>Neucpává póry</li>
+        <li>Jemně reguluje bez vysoušení</li>
+      </ul>
+
+    </div>`;
+  }
+  // A POTOM POKRAČUJE PŮVODNÍ KÓD
   return `<div class="result-card-box">
    
     
@@ -500,12 +606,55 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
   'M+SM Anti-age': (answers, result) => {
   const skinType = result.skinType.toLowerCase();
+  const isOver35 = result?.specialRecommendations?.is36to45 || result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
   
   // Dehydratovaná varianta
   if (answers['skin-description']?.includes('Je suchá') || 
       answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    
+    // Varianta pro 36+
+    if (isOver35) {
+      return `<div class="result-card-box">
+        
+        <p class="result-lead">
+  Vaše pleť prochází přirozenými změnami. začíná se méně mastit, ztrácí hydrataci a pevnost. Vrásky jsou přirozenou součástí tohoto procesu.
+</p>
+
+<p class="result-paragraph">
+  Hormonální změny ovlivňují kvalitu vaší pleti víc, než si možná myslíte. Proto potřebujete péči, která dělá více věcí najednou - hydratuje, zpevňuje a zpomaluje viditelné stárnutí.
+</p>
+
+        <div class="result-highlight-box">
+          Tato péče kombinuje retinal (nejúčinnější formu vitaminu A) s intenzivní hydratací. Bez ucpávání pórů.
+        </div>
+
+        <p class="result-transition-text">Anti-age sada pro mastnou a smíšenou pleť:</p>
+
+        <ul class="result-list">
+          <li>Zpevňuje a projasňuje pleť</li>
+          <li>Hydratuje bez ucpávání pórů</li>
+          <li>Redukuje vrásky a zpomaluje jejich tvorbu</li>
+          <li>Obsahuje retinol a retinal – látky s klinicky ověřenou účinností</li>
+        </ul>
+
+        <p class="result-paragraph">
+          Sama tuto sadu používám a (nejen jako milovnice retinolu) jsem nadšená! 🤫
+        </p>
+
+        <div style="background: #f9f9f9; padding: 20px; margin-top: 30px; border-radius: 8px;">
+          <div style="color: #f5c518;">⭐⭐⭐⭐⭐</div>
+          <p style="font-style: italic; margin-top: 10px;">
+            „Sadu mi doporučila moje kosmetička a trefila do černého. 
+            Po měsíci používání mám pocit, že hlubší vrásky se zjemnily 
+            a ty drobné skoro zmizely."
+          </p>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">– Jitka</p>
+        </div>
+      </div>`;
+    }
+    
+    // Původní text pro mladší s dehydratací
     return `<div class="result-card-box">
-      
       
       <p class="result-lead">
         Má viditelné póry, je dehydratovaná a k tomu se začínají objevovat první vrásky.
@@ -518,8 +667,8 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
       </p>
 
       <div class="result-highlight-box">
-        Tato sada je sestavená přesně pro tuto kombinaci – 
-        <strong>hydratuje, reguluje maz a zpomaluje stárnutí</strong> najednou.
+        Tato sada je sestavená přesně pro vaše potřeby -
+        <strong>hydratuje, reguluje maz a zpomaluje první projevy stárnutí</strong> najednou.
         Bez kompromisů.
       </div>
 
@@ -529,7 +678,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
         <li>Zpevňuje a projasňuje pleť</li>
         <li>Hydratuje bez ucpávání pórů</li>
         <li>Redukuje vrásky a zpomaluje jejich tvorbu</li>
-        <li>Obsahuje retinol a retinal – látky s klinicky ověřenou účinností</li>
+        <li>Obsahuje retinol a retinal - látky s klinicky ověřenou účinností</li>
       </ul>
 
       <p class="result-paragraph">
@@ -549,7 +698,53 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   }
   
   // Klasická varianta (bez dehydratace)
+const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
+
+// Pro 45+ jiný úvod
+if (isOver45) {
   return `<div class="result-card-box">
+    
+    <p class="result-lead">
+      Vrásky jsou viditelné, ale tvorba mazu je výrazně nižší.
+    </p>
+
+    <p class="result-paragraph">
+      Zkoušela jste anti-age krémy, ale cítila jste, že jsou na vás moc těžké? 
+      To je častý problém, protože většina z nich může být na váš typ pleti příliš hutná.
+    </p>
+
+    <div class="result-highlight-box">
+      Tato sada je sestavená tak, že <strong>zpomaluje stárnutí a zároveň 
+      neucpává póry a nezatěžuje pleť</strong>. Přesně to, co vpotřebujete.
+    </div>
+
+    <p class="result-transition-text">Anti-age sada pro mastnou a smíšenou pleť:</p>
+
+   <ul class="result-list">
+  <li><strong>Zpevňuje a projasňuje</strong> pleť</li>
+  <li><strong>Hydratuje</strong> bez mastného filmu</li>
+  <li><strong>Redukuje vrásky</strong> a zpomaluje jejich tvorbu</li>
+  <li>Obsahuje <strong>retinol a retinal</strong> - látky s klinicky ověřenou účinností</li>
+</ul>
+
+    <p class="result-paragraph">
+      Sama tuto sadu používám a nemůžu si ji vynachválit. Stejně jako moje klientky.
+    </p>
+
+    <div style="background: #f9f9f9; padding: 20px; margin-top: 30px; border-radius: 8px;">
+      <div style="color: #f5c518;">⭐⭐⭐⭐⭐</div>
+      <p style="font-style: italic; margin-top: 10px;">
+        „Sadu mi doporučila moje kosmetička a trefila do černého. 
+        Po měsíci používání mám pocit, že hlubší vrásky se zjemnily 
+        a ty drobné skoro zmizely."
+      </p>
+      <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">– Jitka</p>
+    </div>
+  </div>`;
+}
+
+// Pro mladší - původní text s "prvními známkami"
+return `<div class="result-card-box">
     
     <p class="result-lead">
       Nemá problém se suchostí, ale už se na ní začínají objevovat první známky stárnutí.
@@ -826,12 +1021,12 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   
   
   <p class="result-lead">
-    Rozšířené žilky a pleť, která snadno zrudne.
-    Víte, jak nepříjemné to je. A asi už tušíte, že zázračný krém neexistuje.
+    Vybrala jste možnost, že vás trápí pleť se sklonem k začervenání.
+    A asi už tušíte, že žádný zázračný krém neexistuje.
   </p>
 
   <p class="result-paragraph">
-Budu k vám upřímná: Kosmetika to nevyléčí, jen zmírní. Nejdéletrvající řešení (nebo spíše odstranění viditelných projevů) je IPL nebo laser.
+Budu k vám upřímná: Kosmetika to nevyléčí, jen zmírní. Neefektivnější řešení (nebo spíše odstranění viditelných projevů) je IPL nebo laser.
 Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěny cév
   a zpomalit zhoršování. A to není málo.
   </p>
@@ -905,21 +1100,62 @@ Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěn
   </p>
 </div>`,
   
-'Problém: AKNÉ': (answers) => {
+'Problém: AKNÉ': (answers, result) => {
     const skinType = evaluateSkinType(answers);
+    const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
     
     // VARIANT: Pokud má akné, ale pleť NENÍ mastná/smíšená (tedy je suchá, normální nebo citlivá)
     if (!['Mastná', 'Smíšená'].includes(skinType)) {
+      
+      // Varianta pro 45+
+      if (isOver45) {
+        return `<div class="result-card-box">
+         
+          <p class="result-lead">
+            Říkáte si co se to s vaší pletí děje? Odpověď je: hormony.
+          </p>
+
+         <p class="result-paragraph">
+  Po 40 letech tělo prochází hormonálními změnami, které ovlivňují i pleť. 
+  Menopauza a perimenopauza způsobují kolísání hladin estrogenů, což může vyvolat záněty podobné akné.
+</p>
+
+<p class="result-paragraph">
+  To není selhání vaší péče. Je to přirozená reakce těla na změny.
+  Problém je, že většina produktů na akné počítá s mladou, mastnou pletí. 
+</p>
+
+<p class="result-paragraph">
+  <strong>U vás potřebujeme trochu jiný přístup</strong> - ten, který zklidňuje záněty, 
+  ale zároveň respektuje, že už není tak odolná jako dřív a potřebuje více hydratace a ochrany.
+</p>
+
+          <div class="result-highlight-box">
+            <strong>Doporučuji - Možnost 1 (Doporučuji):</strong> Začněte se <a href="https://www.kailushop.cz/sada-pro-citlivou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline; font-weight: bold;">sadou pro citlivou pleť</a>. Ta bariéru opraví a zklidní zánět. Často pupínky zmizí samy.
+          </div>
+
+          <div class="result-highlight-box" style="margin-top: 1rem;">
+            <strong>Možnost 2:</strong> Pokud chcete cílenější řešení a cítíte, že je vaše pleť stále poměrně odolná, zvolte <a href="https://www.kailushop.cz/sada-pro-problematickou-plet" target="_blank" style="color: #faa4a6; text-decoration: underline; font-weight: bold;">sadu na akné</a>, ale <strong>doplňte ji o výživný krém</strong>, aby se pleť nezačala loupat.
+          </div>
+
+          <p class="result-paragraph">
+            Nejste si jistá? Napište mi na info@kailu.cz. Ráda to s vámi proberu!
+          </p>
+        </div>`;
+      }
+      
+      // Původní varianta pro mladší
       return `<div class="result-card-box">
        
         
         <p class="result-lead">
-          To je důvod, proč vyžaduje velmi opatrný přístup. Vaše pleť potřebuje řešit pupínky, ale zároveň nutně volá po hydrataci a ochraně.
-          <strong>Běžná "vysušující" kosmetika na akné by pro vás v tuto chvíli byla spíše trestem.</strong>
+          To je důvod, proč vyžaduje velmi opatrný přístup. Potřebujeme vyřešit pupínky, ale zároveň hydratovat a chránit.
         </p>
 
         <p class="result-paragraph">
-          U vašeho typu pleti se akné často objevuje jako reakce na narušenou kožní bariéru nebo hormonální změny. Máme dvě cesty, jak se s tím vypořádat:
+          Akné u suché pleti má úplně jiné příčiny než u té mastné.
+          Nevzniká ucpáním póru mazem, ale jako reakce na narušenou kožní bariéru a/nebo hormonální výkyvy.
+          Máme dvě cesty, jak se s tím vypořádat:
         </p>
 
         <div class="result-highlight-box">
@@ -936,32 +1172,67 @@ Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěn
       </div>`;
     }
     
-    // STANDARD: Mastná/Smíšená pleť s akné
-    return `<div class="result-card-box">
-      
-      <p class="result-lead">
-        Proto má k tvorbě akné přirozeně větší sklony.
-      </p>
+// STANDARD: Mastná/Smíšená pleť s akné
+const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
 
-      <p class="result-paragraph">
-        Naše sada pro aknozní pleť kombinuje hned několik aktivních látek včetně retinalu, ale zároveň dbá na ochranu pleti i hydrataci. 
-      </p>
- <p class="result-transition-text">Co můžete očekávat?</p>
-      <ul class="result-list">
-        <li><span><strong>Čisté póry:</strong> Retinal urychluje obnovu pleti, čímž omezuje tvorbu černých teček a pupínků.</span></li>
+// Varianta pro 45+
+if (isOver45) {
+  return `<div class="result-card-box">
+    
+    <p class="result-lead">
+  Asi jste si myslela, že v tomto věku budete mít od akné už klid.
+</p>
+
+<p class="result-paragraph">
+  Chápu vaši frustraci. Ale akné není jen problém teenagerů. 
+  Po 45 letech se může objevit znovu, tentokrát kvůli hormonálním změnám, ne kvůli nadměrnému mazu.
+  Vaše pleť navíc není tak odolná vůči agresivní péči jako dřív.
+</p>
+
+<p class="result-paragraph">
+  Naše sada pro aknozní pleť je velmi účinná a vaše pleť si ji díky jejímu typu "může dovolit" aniž by se přesušila.
+  Kombinuje retinal (nejúčinnější formu vitaminu A) s hydratací a ochranou, kterou vaše pleť v tomto věku potřebuje.
+</p>
+
+    <p class="result-transition-text">Co můžete očekávat?</p>
+    <ul class="result-list">
+      <li><span><strong>Zklidnění zánětů:</strong> Redukce zarudnutí a urychlení hojení.</span></li>
+      <li><span><strong>Prevence nových pupínků:</strong> Retinal podporuje obnovu pleti a reguluje tvorbu mazu.</span></li>
+      <li><span><strong>Vyhlazení textury:</strong> Postupné sjednocení povrchu pleti.</span></li>
+      <li><span><strong>Bez vysušení:</strong> Hydratace a ochrana, kterou vaše pleť v tomto věku potřebuje.</span></li>
+    </ul>
+
+    <div class="result-highlight-box">
+    <strong>Pamatujte:</strong> Každá pleť je jedinečná. Dejte jí čas se adaptovat a poctivě dodržujte manuál. Trpělivost je v boji s akné vaše největší síla.
+  </div>
+  
+  </div>`;
+}
+
+// Původní varianta pro mladší
+return `<div class="result-card-box">
+  
+  <p class="result-lead">
+    Proto má k tvorbě akné přirozeně větší sklony.
+  </p>
+
+  <p class="result-paragraph">
+    Naše sada pro aknozní pleť kombinuje hned několik aktivních látek včetně retinalu, ale zároveň dbá na ochranu pleti i hydrataci. 
+  </p>
+  
+  <p class="result-transition-text">Co můžete očekávat?</p>
+  <ul class="result-list">
+    <li><span><strong>Čisté póry:</strong> Retinal urychluje obnovu pleti, čímž omezuje tvorbu černých teček a pupínků.</span></li>
     <li><span><strong>Zklidnění aktivních míst:</strong> Redukce zarudnutí a urychlení regenerace již vzniklých projevů.</span></li>
     <li><span><strong>Sjednocení textury:</strong> Postupné vyhlazení povrchu pleti, který může být vlivem akné nejednotný.</span></li>
     <li><span><strong>Méně mastná pleť:</strong> Stabilizace celkového vzhledu pleti bez zbytečného pocitu mastnoty.</span></li>
   </ul>
 
-      <div class="result-highlight-box">
-        <strong>Pamatujte:</strong> Každá pleť je jedinečná. Dejte jí čas se adaptovat a poctivě dodržujte manuál. Trpělivost je v boji s akné vaše největší síla.
-      </div>
+  <div class="result-highlight-box">
+    <strong>Pamatujte:</strong> Každá pleť je jedinečná. Dejte jí čas se adaptovat a poctivě dodržujte manuál. Trpělivost je v boji s akné vaše největší síla.
+  </div>
 
-      <p class="result-paragraph">
-        Jsme v tom s vámi. Kdykoliv si nebudete jistá, ozvěte se – společně to dotáhneme k čisté pleti! 🙌
-      </p>
-    </div>`;
+</div>`;
 }
 };
 
@@ -1158,6 +1429,14 @@ function countSensitivityPoints(answers: QuizAnswers): number {
 export function evaluateQuiz(answers: QuizAnswers): QuizResult {
   // Základní typ pleti
   const basicSkinType = evaluateSkinType(answers);
+
+// Získání věku
+const age = answers['age'] || '';
+const isUnder25 = age === 'Do 25 let';
+const is26to35 = age === '26-35 let';
+const is36to45 = age === '36-45 let';
+const is46to55 = age === '46-55 let';
+const isOver55 = age === '56+ let';
   
   // Body citlivosti
   const sensitivityPoints = countSensitivityPoints(answers);
@@ -1273,8 +1552,7 @@ recommendedSet = affordableSets.length > 0 ? affordableSets[0] : `${basicSkinTyp
   const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
   let displaySkinType;
   
-  if (basicSkinType === 'Citlivá') {
-    // Najdeme druhý nejčastější typ pleti
+if (basicSkinType === 'Citlivá') {
     const sortedSkinTypes = Object.entries(points)
       .filter(([type]) => type !== 'Citlivá')
       .sort((a, b) => b[1] - a[1]);
@@ -1282,11 +1560,11 @@ recommendedSet = affordableSets.length > 0 ? affordableSets[0] : `${basicSkinTyp
     const secondMostCommonType = sortedSkinTypes.length > 0 ? sortedSkinTypes[0][0] : null;
   
     displaySkinType = secondMostCommonType 
-      ? `${secondMostCommonType} a také citlivá` 
+      ? `${secondMostCommonType}<br><small>a také citlivá</small>` 
       : `citlivá`;
   } else {
     displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá` 
+      ? `${basicSkinType}<br><small>a také citlivá</small>` 
       : basicSkinType;
   }
 
@@ -1294,7 +1572,7 @@ recommendedSet = affordableSets.length > 0 ? affordableSets[0] : `${basicSkinTyp
   console.log('Je citlivá:', isSensitive);
   console.log('Výsledný zobrazený typ:', displaySkinType);
   
-  return {
+return {
     skinType: displaySkinType,
     recommendedSet,
     problems,
@@ -1306,7 +1584,12 @@ recommendedSet = affordableSets.length > 0 ? affordableSets[0] : `${basicSkinTyp
         !['Mastná', 'Smíšená'].includes(basicSkinType) && 
         !recommendedSet.includes('M+SM komplet') && 
         !recommendedSet.includes('M+SM Anti-age'),
-      isPregnant
+      isPregnant,
+      isUnder25,
+      is26to35,
+      is36to45,
+      is46to55,
+      isOver55
     }
   };
 };

@@ -6,23 +6,24 @@ export async function POST(request: Request) {
     const data = await request.json();
     
     await sql`
-      INSERT INTO quiz_analytics (
-        id, session_id, timestamp, client_ip, user_agent, 
-        step, answers, result, current_question, url, referrer
-      ) VALUES (
-        ${data.id},
-        ${data.sessionId},
-        ${data.timestamp},
-        ${data.clientIP},
-        ${data.userAgent},
-        ${data.step},
-        ${JSON.stringify(data.answers)},
-        ${JSON.stringify(data.result)},
-        ${data.currentQuestion},
-        ${data.url},
-        ${data.referrer}
-      )
-    `;
+   INSERT INTO quiz_analytics (
+    id, session_id, timestamp, client_ip, user_agent, 
+    step, answers, result, current_question, url, referrer, discount_code
+  ) VALUES (
+    ${data.id},
+    ${data.sessionId},
+    ${data.timestamp},
+    ${data.clientIP},
+    ${data.userAgent},
+    ${data.step},
+    ${JSON.stringify(data.answers)},
+    ${JSON.stringify(data.result)},
+    ${data.currentQuestion},
+    ${data.url},
+    ${data.referrer},
+    ${data.discountCode}
+  )
+`;
 
     return NextResponse.json({ success: true });
   } catch (error) {

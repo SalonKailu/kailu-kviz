@@ -105,6 +105,22 @@ const QUESTIONS = [
     'Není, jsem spokojená / Nic z výše uvedeného'
   ]
 },
+
+{
+  id: 'age',
+  title: 'Kolik je vám let?',
+  type: 'radio',
+  section: 'target',
+  options: [
+    'Do 25 let',
+    '26-35 let',
+    '36-45 let',
+    '46-55 let',
+    '56+ let'
+  ]
+},
+
+
 {
   id: 'wish-intro',
   title: 'Skvělé, už se nám to rýsuje...',
@@ -306,19 +322,20 @@ const logQuizData = async (answers: any, result: any, step: string) => {
   const userAgent = navigator.userAgent;
   const clientIP = await getClientIP();
   
-  const logData = {
-    id: `${sessionId}_${step}_${Date.now()}`,
-    sessionId,
-    timestamp,
-    clientIP,
-    userAgent: userAgent.substring(0, 100),
-    step,
-    answers,
-    result,
-    currentQuestion: currentQuestion,
-    url: window.location.href,
-    referrer: document.referrer || 'direct'
-  };
+const logData = {
+  id: `${sessionId}_${step}_${Date.now()}`,
+  sessionId,
+  timestamp,
+  clientIP,
+  userAgent: userAgent.substring(0, 100),
+  step,
+  answers,
+  result,
+  discountCode: discountCode,  // <-- PŘIDÁNO
+  currentQuestion: currentQuestion,
+  url: window.location.href,
+  referrer: document.referrer || 'direct'
+};
   
   console.log('=== QUIZ ANALYTICS ===');
   console.log('Session ID:', logData.sessionId);
@@ -596,10 +613,14 @@ if (result) {
     });
   }
 
-  const isDermatitis = result.recommendedSet === 'Dermatitida';
-  const productUrl = isDermatitis
-    ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
-    : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
+const isDermatitis = result.recommendedSet === 'Dermatitida';
+const isSuchaAkne = result.recommendedSet === 'Problém: AKNÉ' && result.skinType.includes('Suchá');
+
+const productUrl = isDermatitis
+  ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
+  : isSuchaAkne
+  ? 'https://www.kailushop.cz/sada-pro-citlivou-plet/'
+  : `${SHOP_BASE_URL}${PRODUCT_URLS[result.recommendedSet.split(' + ')[0]]}`;
 
   // Speciální text pro M+SM komplet (dehydratovaná varianta)
   const isDehydrated = answers['skin-description']?.includes('Je suchá') || 
@@ -610,10 +631,20 @@ if (result) {
   return (
     <div className="max-w-2xl mx-auto p-6">
       
-     {/* SEKCE 1: TYP PLETI */}
+   {/* SEKCE 1: TYP PLETI */}
 <div className="mb-4">
-  <p style={{ fontFamily: 'Cinzel, serif', fontSize: '2rem', color: '#faa4a6', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>
-    Vaše pleť je {result.skinType.toLowerCase()}.
+  <p 
+    style={{ 
+      fontFamily: 'Cinzel, serif', 
+      fontSize: '2rem', 
+      color: '#faa4a6', 
+      fontWeight: 700, 
+      textTransform: 'uppercase', 
+      letterSpacing: '1px',
+      lineHeight: '1.2'
+    }}
+  >
+    Vaše pleť je <span dangerouslySetInnerHTML={{ __html: result.skinType }} />
   </p>
 </div>
 
@@ -710,7 +741,7 @@ if (result) {
       {!emailSaved ? (
         <div className="p-6 bg-gray-50 rounded-lg">
           <h3 className="font-semibold mb-2">Chcete si to ještě rozmyslet?</h3>
-          <p className="text-sm text-gray-600 mb-4">Uložím vám výsledek na e-mail.</p>
+          <p className="text-sm text-gray-600 mb-4">Pošlu vám výsledek diagnostiky na e-mail.</p>
           
           <div className="flex gap-2">
             <input
@@ -731,7 +762,7 @@ if (result) {
         </div>
       ) : (
         <div className="p-6 bg-green-50 rounded-lg text-center">
-          <p className="text-green-700">✓ Výsledek uložen! Pošleme vám ho na e-mail.</p>
+          <p className="text-green-700">✓ A je to! Mé doporučení najdete na e-mailu.</p>
         </div>
       )}
 
