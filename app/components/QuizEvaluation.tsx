@@ -697,7 +697,7 @@ if (isOver45 && (
     </div>`;
   }
   
-  // Klasická varianta (bez dehydratace)
+ // Klasická varianta (bez dehydratace)
 const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
 
 // Pro 45+ jiný úvod
@@ -1116,7 +1116,7 @@ Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěn
           </p>
 
          <p class="result-paragraph">
-  Po 40 letech tělo prochází hormonálními změnami, které ovlivňují i pleť. 
+  Tělo prochází hormonálními změnami, které ovlivňují i pleť. 
   Menopauza a perimenopauza způsobují kolísání hladin estrogenů, což může vyvolat záněty podobné akné.
 </p>
 
@@ -1173,8 +1173,6 @@ Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěn
     }
     
 // STANDARD: Mastná/Smíšená pleť s akné
-const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
-
 // Varianta pro 45+
 if (isOver45) {
   return `<div class="result-card-box">
