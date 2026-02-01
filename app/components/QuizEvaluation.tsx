@@ -328,6 +328,76 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   
  'M+SM základ': (answers, result) => {
   const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
+  const is36to45 = result?.specialRecommendations?.is36to45;
+
+  // 46+ BEZ dehydratace
+  if (isOver45 && 
+      !answers['skin-description']?.includes('Je suchá') && 
+      !answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    return `<div class="result-card-box">
+      
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">
+Vaše pleť se už nemastí jako dřív.
+  T-zóna je klidnější a póry méně viditelné.
+  Ale vrásky a ztráta pružnosti jsou naopak čím dál výraznější.
+      </p>
+
+      <p style="margin-bottom: 20px;">
+        S věkem se produkce mazu snižuje. To znamená méně lesku, ale také méně přirozené ochrany.
+        Proto je teď správná péče důležitější než kdy dřív.
+      </p>
+
+      <div class="result-highlight-box">
+        Tahle sada udržuje pleť v kondici bez zbytečného zatěžování.
+        Péče s ní je velmi rychlá, levná, ale přesto účinná.
+      </div>
+
+      <p style="margin-top: 30px; font-weight: 500;">
+        Co vám přinese:
+      </p>
+
+      <ul class="result-list">
+        <li><span>Udržuje pleť čistou bez vysušování</span></li>
+        <li><span>Podporuje přirozenou pružnost</span></li>
+        <li><span>Chrání před vnějšími vlivy</span></li>
+      </ul>
+    </div>`;
+  }
+
+  // 36-45 BEZ dehydratace
+  if (is36to45 && 
+      !answers['skin-description']?.includes('Je suchá') && 
+      !answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')) {
+    return `<div class="result-card-box">
+      
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">
+        Cítíte, že se vaše pleť v posledních letech mění? 
+        Mastí se o něco méně, pupínky vás netrápí, ale pořád nezvládne jakýkoli hutný krém.
+      </p>
+
+      <p style="margin-bottom: 20px;">
+        To je přesně ta chvíle, kdy správná péče rozhodne o tom, 
+        jak bude vaše pleť vypadat za pět let.
+        Smíšená pleť stárne pomaleji, ale jen když ji nepřestanete chránit.
+      </p>
+
+      <div class="result-highlight-box">
+        Tato sada dává pleti přesně to, co teď potřebuje: 
+        lehkou ochranu bez ucpávání pórů. A je přívětivá k vašemu rozpočtu.
+      </div>
+
+      <p style="margin-top: 30px; font-weight: 500;">
+        Co můžete očekávat:
+      </p>
+
+      <ul class="result-list">
+        <li><span>Pleť zůstane matná bez nepříjemného vysušení</span></li>
+        <li><span>Póry se nebudou ucpávat ani při každodenním používání</span></li>
+        <li><span>Jednoduchá rutina, která zabere pár minut denně</span></li>
+      </ul>
+    </div>`;
+  }
+
   // NOVÁ PODMÍNKA PRO 45+ S DEHYDRATACÍ
   if (isOver45 && (
     answers['skin-description']?.includes('Je suchá') || 
@@ -417,7 +487,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   <ul class="result-list">
     <li><span><strong>Regulace lesku:</strong> Udrží vaši T-zónu matnou a svěží po celý den.</span></li>
     <li><span><strong>Čisté póry:</strong> Hloubkově čistí nečistoty bez pocitu nepříjemného pnutí.</span></li>
-    <li><span><span><strong>Lehká hydratace:</strong> Dodává vláhu bez ucpávání pórů nebo pocitu mastnoty.</span></li>
+    <li><span><strong>Lehká hydratace:</strong> Dodává vláhu bez ucpávání pórů nebo pocitu mastnoty.</span></li>
     <li><span><strong>Rychlá rutina:</strong> Funkční péče, která vám zabere jen pár minut ráno a večer.</span></li>
   </ul>
 
@@ -481,7 +551,7 @@ if (isOver45 && (
 
       <div class="result-highlight-box">
         Kompletní péče je v tomto případě klíčová.
-        Nestačí jen krém – pleť potřebuje
+        Nestačí jen krém, pleť potřebuje
         <strong>systematickou hydrataci a posílení kožní bariéry</strong>.
       </div>
 
@@ -617,7 +687,7 @@ if (isOver45 && (
       return `<div class="result-card-box">
         
         <p class="result-lead">
-  Vaše pleť prochází přirozenými změnami. začíná se méně mastit, ztrácí hydrataci a pevnost. Vrásky jsou přirozenou součástí tohoto procesu.
+  Vaše pleť prochází přirozenými změnami. Začíná se méně mastit, ztrácí hydrataci a pevnost a vrásky se začínají prohlubovat.
 </p>
 
 <p class="result-paragraph">
@@ -625,7 +695,7 @@ if (isOver45 && (
 </p>
 
         <div class="result-highlight-box">
-          Tato péče kombinuje retinal (nejúčinnější formu vitaminu A) s intenzivní hydratací. Bez ucpávání pórů.
+          Využijeme toho, že váš typ pleti dobře snáší silné aktivní látky a zvolíme sadu s retinalem pro maximální a rychlý účinek.
         </div>
 
         <p class="result-transition-text">Anti-age sada pro mastnou a smíšenou pleť:</p>
@@ -705,7 +775,7 @@ if (isOver45) {
   return `<div class="result-card-box">
     
     <p class="result-lead">
-      Vrásky jsou viditelné, ale tvorba mazu je výrazně nižší.
+      Vrásky jsou viditelné, ale tvorba mazu už je výrazně nižší.
     </p>
 
     <p class="result-paragraph">
@@ -714,8 +784,8 @@ if (isOver45) {
     </p>
 
     <div class="result-highlight-box">
-      Tato sada je sestavená tak, že <strong>zpomaluje stárnutí a zároveň 
-      neucpává póry a nezatěžuje pleť</strong>. Přesně to, co vpotřebujete.
+      Využijeme toho, že <strong>váš typ pleti dobře snáší silné aktivní látky</strong> a zvolíme sadu s retinalem.
+      Jeho účinky jsou klinicky ověřené a velmi rychle viditelné.
     </div>
 
     <p class="result-transition-text">Anti-age sada pro mastnou a smíšenou pleť:</p>
@@ -756,8 +826,8 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     </p>
 
     <div class="result-highlight-box">
-      Tato sada je sestavená tak, že <strong>zpomaluje stárnutí a zároveň 
-      neucpává póry</strong>. Přesně to, co vaše pleť potřebuje.
+      Využijeme toho, že <strong>váš typ pleti dobře snáší silné aktivní látky</strong> a zvolíme sadu s retinalem.
+      Jeho účinky jsou klinicky ověřené a velmi rychle viditelné.
     </div>
 
     <p class="result-transition-text">Anti-age sada pro mastnou a smíšenou pleť:</p>
@@ -792,7 +862,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     
       
       <p class="result-lead">
-        I když je vaše pleť běžně bezproblémová, v období těhotenství a kojení se k ní musíme chovat s maximálním respektem. 
+        V období těhotenství a kojení se k vaší pleti chceme chovat s maximálním respektem. 
         Hormony totiž mění její reakce a to, co vám dříve vyhovovalo, může být najednou příliš silné.
       </p>
 
@@ -803,7 +873,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
 
       <div class="result-highlight-box">
         <strong>Důležité:</strong> V těhotenství je až dvojnásobné riziko vzniku pigmentových skvrn.
-        Denní krém s SPF nanášejte důsledně a během dne ho obnovujte.
+        Denní krém s SPF nanášejte důsledně a během dne ho při pobytu na slunci obnovujte.
       </div>
 
       <p class="result-transition-text">Sada pro normální pleť:</p>
@@ -827,7 +897,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     </p>
 
     <p class="result-paragraph">
-      Teď jde o to tento stav udržet. Správná péče nemusí být složitá.
+      Teď jde o to tento stav udržet nebo ještě trochu vylepšit. 😉
     </p>
 
     <div class="result-highlight-box">

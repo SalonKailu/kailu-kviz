@@ -738,33 +738,33 @@ const productUrl = isDermatitis
 )}
 
       {/* SEKCE 7: ZÁCHYTNÁ SÍŤ */}
-      {!emailSaved ? (
-        <div className="p-6 bg-gray-50 rounded-lg">
-          <h3 className="font-semibold mb-2">Chcete si to ještě rozmyslet?</h3>
-          <p className="text-sm text-gray-600 mb-4">Pošlu vám výsledek diagnostiky na e-mail.</p>
-          
-          <div className="flex gap-2">
-            <input
-              type="email"
-              value={saveEmail}
-              onChange={(e) => setSaveEmail(e.target.value)}
-              placeholder="váš@email.cz"
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#faa4a6]"
-            />
-            <button
-              onClick={handleSaveEmail}
-              disabled={!saveEmail || !saveEmail.includes('@')}
-              className="px-6 py-2 bg-[#faa4a6] hover:bg-[#f89a9c] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-            >
-              Uložit
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div className="p-6 bg-green-50 rounded-lg text-center">
-          <p className="text-green-700">✓ A je to! Mé doporučení najdete na e-mailu.</p>
-        </div>
-      )}
+{!emailSaved ? (
+  <div className="p-6 bg-gray-50 rounded-lg">
+    <h3 className="font-semibold mb-2">Chcete si to ještě rozmyslet?</h3>
+    <p className="text-sm text-gray-600 mb-4">Pošlu vám výsledek diagnostiky na e-mail.</p>
+    
+    <div className="flex flex-col sm:flex-row gap-2">
+      <input
+        type="email"
+        value={saveEmail}
+        onChange={(e) => setSaveEmail(e.target.value)}
+        placeholder="váš@email.cz"
+        className="w-full flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-[#faa4a6]"
+      />
+      <button
+        onClick={handleSaveEmail}
+        disabled={!saveEmail || !saveEmail.includes('@')}
+        className="w-full sm:w-auto px-6 py-2 bg-[#faa4a6] hover:bg-[#f89a9c] disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors whitespace-nowrap"
+      >
+        Uložit
+      </button>
+    </div>
+  </div>
+) : (
+  <div className="p-6 bg-green-50 rounded-lg text-center">
+    <p className="text-green-700">✓ A je to! Mé doporučení najdete na e-mailu.</p>
+  </div>
+)}
 
       {/* Debug tlačítka - pouze v development */}
       {process.env.NODE_ENV !== 'production' && (
