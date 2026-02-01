@@ -498,73 +498,63 @@ Vaše pleť se už nemastí jako dřív.
 },
 
   
-  'M+SM komplet': (answers, result) => {
-    const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
-    // NOVÁ PODMÍNKA PRO 45+ S DEHYDRATACÍ
-if (isOver45 && (
-  answers['skin-description']?.includes('Je suchá') || 
-  answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')
-)) {
-  return `<div class="result-card-box">
-    
-    <p style="font-size: 1.1rem; margin-bottom: 20px;">
+'M+SM komplet': (answers, result) => {
+  // Definice věku a stavu pleti
+  const age = answers['age'] || '';
+  const isOver45 = age === '46-55 let' || age === '56+ let';
+  const isOver26 = age !== 'Do 25 let' && age !== '';
+  
+  const hasDehydration = answers['skin-description']?.includes('Je suchá') || 
+                         answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší');
+
+  // 1. VAŠE PŮVODNÍ PODMÍNKA PRO 45+ S DEHYDRATACÍ
+  if (isOver45 && hasDehydration) {
+    return `<div class="result-card-box">
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">
         S věkem se vaše pleť přirozeně změnila. Produkuje méně mazu a ztrácí hydrataci.
       </p>
-
       <p style="margin-bottom: 20px;">
         Typ vaší pleti vám zůstane na vždy, ale stav se změnil. 
         To není chyba, jen běžná změna, kterou respektujeme správnou péčí.
       </p>
+      <div class="result-highlight-box">
+        Vaše pleť si zaslouží <strong>systematickou hydrataci, ochranu a posílení kožní bariéry</strong>.
+      </div>
+      <p style="margin-top: 30px; font-weight: 500;">
+        <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong>:
+      </p>
+      <ul class="result-list">
+        <li><span>Dodá pleti hydrataci bez ucpávání pórů</span></li>
+        <li><span>Pomůže obnovit přirozenou rovnováhu</span></li>
+        <li><span>Uleví od pocitu nepohodlí a sucha</span></li>
+      </ul>
+    </div>`;
+  }
 
-    <div class="result-highlight-box">
-      Vaše pleť si zaslouží <strong>systematickou hydrataci, ochranu a posílení kožní bariéry</strong>.
-    </div>
-
-    <p style="margin-top: 30px; font-weight: 500;">
-      <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong>:
-    </p>
-
-    <ul class="result-list">
-      <li><span>Dodá pleti hydrataci bez ucpávání pórů</span></li>
-      <li><span>Pomůže obnovit přirozenou rovnováhu</span></li>
-      <li><span>Uleví od pocitu nepohodlí a sucha</span></li>
-    </ul>
-  </div>`;
-}
-  // Dehydratovaná smíšená pleť
-  if (
-    answers['skin-description']?.includes('Je suchá') || 
-    answers['cosmetic-compatibility']?.includes('Občas mám pocit, že mi pleť spíše vysuší')
-  ) {
+  // 2. VAŠE PŮVODNÍ PODMÍNKA PRO OSTATNÍ S DEHYDRATACÍ
+  if (hasDehydration) {
     return `<div class="result-card-box">
-      
-
       <p style="font-size: 1.1rem; margin-bottom: 20px;">
         Není typově suchá, ale chybí jí hydratace.
         Proto může působit rozhozeně – někde se leskne, jinde pne.
       </p>
-
       <p style="margin-bottom: 20px;">
         Když hydratace chybí dlouhodobě, pleť se začne „bránit“:
         produkuje víc mazu, je citlivější a hůř reaguje na běžnou kosmetiku.
       </p>
-
       <div class="result-highlight-box">
         Kompletní péče je v tomto případě klíčová.
         Nestačí jen krém, pleť potřebuje
         <strong>systematickou hydrataci a posílení kožní bariéry</strong>.
       </div>
-
       <p style="margin-top: 30px; font-weight: 500;">
         <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong>:
       </p>
-
       <ul class="result-list">
-  <li><span>Dodá pleti hydrataci bez ucpávání pórů</span></li>
-  <li><span>Pomůže obnovit přirozenou rovnováhu pleti</span></li>
-  <li><span>Uleví od lesku i nepříjemného pnutí</span></li>
-</ul>
-
+        <li><span>Dodá pleti hydrataci bez ucpávání pórů</span></li>
+        <li><span>Pomůže obnovit přirozenou rovnováhu pleti</span></li>
+        <li><span>Uleví od lesku i nepříjemného pnutí</span></li>
+      </ul>
       <p style="margin-top: 20px;">
         Výsledkem je klidnější, vyváženější pleť,
         která se během dne nechová extrémně.
@@ -572,28 +562,45 @@ if (isOver45 && (
     </div>`;
   }
 
-  // Klasická smíšená pleť
-  return `<div class="result-card-box">
-    
+  // 3. NOVÁ PODMÍNKA: NAD 26 LET BEZ DEHYDRATACE
+  if (isOver26) {
+    return `<div class="result-card-box">
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">
+        Občas bývá náročná hlavně proto,
+      že špatně snáší extrémy - jak přesušení, tak přetížení. A s věkem se její schopnost regenerace se postupně zpomaluje.
+      </p>
+      <p style="margin-bottom: 20px;">
+        Nyní je klíčová preventivní a udržovací péče, která respektuje její potřeby. Tedy hydratovat bez zatížení a chránit před vnějšími vlivy.
+      </p>
+      <div class="result-highlight-box">
+        <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong> nabízí perfektní balanc.
+      </div>
+      <ul class="result-list">
+        <li><span>Podporuje přirozenou regeneraci pleti</span></li>
+        <li><span>Perfektně čistí a neucpává póry</span></li>
+        <li><span>Udržuje kožní bariéru silnou a odolnou</span></li>
+        <li><span>Zpomaluje projevy stárnutí</span></li>
+      </ul>
+    </div>`;
+  }
 
+  // 4. VAŠE PŮVODNÍ "KLASICKÁ SMÍŠENÁ" (PRO MLADÉ DO 25)
+  return `<div class="result-card-box">
     <p style="font-size: 1.05rem; margin-bottom: 18px;">
       Občas bývá náročná hlavně proto,
       že špatně snáší extrémy - jak přesušení, tak přetížení.
     </p>
-
     <p style="margin-bottom: 18px;">
       <strong>${DISPLAY_NAMES[result.recommendedSet]}</strong> nabídne pleti perfektní balanc bez kompromisů.
     </p>
-
     <div class="result-highlight-box">
       Nejde o rychlé „zmatnění“, ale o dlouhodobou rovnováhu.
     </div>
-
     <ul class="result-list">
       <li>Pomáhá regulovat mastnotu bez vysušení</li>
-      <li>Snižuje sklon k ucpávání pórů</li>
-      <li>Podporuje přirozenou hydrataci pleti</li>
-      <li>Je vhodná pro každodenní používání</li>
+      <li>Perfektně čistí</li>
+      <li>Neucpává póry</li>
+      <li>Skvělý poměr cena:výkon</li>
     </ul>
   </div>`;
 },
