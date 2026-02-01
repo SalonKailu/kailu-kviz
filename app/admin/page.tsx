@@ -30,117 +30,150 @@ export default function AdminPage() {
   const completedSessions = data.filter(d => d.step === 'completed').length;
   const completionRate = totalSessions > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
 
-  if (loading) return <div className="p-8 text-center font-sans">Načítání...</div>;
+  if (loading) return <div className="p-8 text-center font-sans">Načítání analytiky...</div>;
 
   return (
-    <div className="p-4 md:p-8 font-sans bg-gray-50 min-h-screen text-black">
+    <div className="p-8 font-sans bg-white min-h-screen text-gray-900">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-black mb-8 uppercase tracking-tighter">Admin Panel</h1>
+        <div className="flex justify-between items-center mb-10">
+          <h1 className="text-2xl font-black uppercase tracking-tight">Přehled Analytiky</h1>
+          <button onClick={fetchData} className="text-sm font-bold border-2 border-gray-900 px-4 py-2 hover:bg-gray-900 hover:text-white transition-all">
+            AKTUALIZOVAT
+          </button>
+        </div>
 
-        {/* STATISTIKY */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <p className="text-[10px] text-gray-400 font-black uppercase mb-1">Průchodů</p>
-            <p className="text-4xl font-black">{totalSessions}</p>
+        {/* STATISTIKY - SVĚTLÉ */}
+        <div className="grid grid-cols-3 gap-8 mb-12">
+          <div className="border-l-4 border-gray-900 pl-4 py-2">
+            <p className="text-[10px] uppercase font-black text-gray-400">Celkem průchodů</p>
+            <p className="text-3xl font-black">{totalSessions}</p>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <p className="text-[10px] text-gray-400 font-black uppercase mb-1">Dokončeno</p>
-            <p className="text-4xl font-black text-green-600">{completedSessions}</p>
+          <div className="border-l-4 border-green-500 pl-4 py-2">
+            <p className="text-[10px] uppercase font-black text-gray-400">Dokončeno</p>
+            <p className="text-3xl font-black text-green-600">{completedSessions}</p>
           </div>
-          <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-            <p className="text-[10px] text-gray-400 font-black uppercase mb-1">Míra dokončení</p>
-            <p className="text-4xl font-black text-blue-600">{completionRate}%</p>
+          <div className="border-l-4 border-blue-500 pl-4 py-2">
+            <p className="text-[10px] uppercase font-black text-gray-400">Úspěšnost</p>
+            <p className="text-3xl font-black text-blue-600">{completionRate}%</p>
           </div>
         </div>
 
-        {/* TABULKA */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-          <table className="min-w-full text-left text-sm">
+        {/* TABULKA S NOVÝM SLOUPCEM */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-gray-100 border-b border-gray-200">
-                <th className="p-4 font-black uppercase text-[11px]">Datum</th>
-                <th className="p-4 font-black uppercase text-[11px]">Stav</th>
-                <th className="p-4 font-black uppercase text-[11px]">Slevový kód</th>
-                <th className="p-4 font-black uppercase text-[11px]">Akce</th>
+              <tr className="border-b-2 border-gray-900 text-[11px] uppercase font-black text-gray-500">
+                <th className="py-4 px-2">Datum</th>
+                <th className="py-4 px-2">Stav</th>
+                <th className="py-4 px-2">Doporučení</th>
+                <th className="py-4 px-2">Slevový kód</th>
+                <th className="py-4 px-2 text-right">Akce</th>
               </tr>
             </thead>
-            <tbody>
-              {data.map((entry) => (
-                <tr key={entry.id} className="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-                  <td className="p-4">{new Date(entry.timestamp).toLocaleString('cs-CZ')}</td>
-                  <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-[10px] font-black ${entry.step === 'completed' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>
-                      {entry.step === 'completed' ? 'DOKONČENO' : `KROK: ${entry.step}`}
-                    </span>
-                  </td>
-                  <td className="p-4 font-bold text-blue-600 font-mono">{entry.discount_code || '-'}</td>
-                  <td className="p-4">
-                    <button onClick={() => setSelectedEntry(entry)} className="bg-black text-white px-4 py-1.5 rounded-lg font-bold text-[10px] hover:scale-105 transition-transform">DETAIL</button>
-                  </td>
-                </tr>
-              ))}
+            <tbody className="divide-y divide-gray-100">
+              {data.map((entry) => {
+                const res = parseJson(entry.result);
+                return (
+                  <tr key={entry.id} className="hover:bg-gray-50 transition-colors">
+                    <td className="py-4 px-2 text-sm">
+                      {new Date(entry.timestamp).toLocaleString('cs-CZ')}
+                    </td>
+                    <td className="py-4 px-2">
+                      <span className={`text-[10px] font-black px-2 py-1 rounded ${
+                        entry.step === 'completed' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {entry.step === 'completed' ? 'DOKONČENO' : `KROK ${entry.step}`}
+                      </span>
+                    </td>
+                    <td className="py-4 px-2 font-bold text-sm">
+                      {res.recommendedSet || '—'}
+                    </td>
+                    <td className="py-4 px-2 font-mono font-bold text-blue-600">
+                      {entry.discount_code || '—'}
+                    </td>
+                    <td className="py-4 px-2 text-right">
+                      <button 
+                        onClick={() => setSelectedEntry(entry)} 
+                        className="text-[10px] font-black border-b-2 border-gray-900 pb-0.5 hover:text-gray-500 hover:border-gray-500 transition-all"
+                      >
+                        DETAIL
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* DETAIL MODAL */}
+      {/* DETAIL MODAL - SVĚTLÝ A PŘEHLEDNÝ */}
       {selectedEntry && (() => {
         const answers = parseJson(selectedEntry.answers);
         const result = parseJson(selectedEntry.result);
         
         return (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-              <div className="p-6 border-b flex justify-between items-center bg-gray-50">
-                <h2 className="text-xl font-black uppercase">Detail respondenta</h2>
-                <button onClick={() => setSelectedEntry(null)} className="text-3xl font-light">×</button>
+          <div className="fixed inset-0 bg-white/95 backdrop-blur-md flex flex-col p-8 md:p-16 z-50 overflow-y-auto">
+            <div className="max-w-4xl mx-auto w-full">
+              <div className="flex justify-between items-center mb-12 border-b border-gray-200 pb-6">
+                <div>
+                  <h2 className="text-3xl font-black uppercase tracking-tighter">Analýza záznamu</h2>
+                  <p className="text-xs font-bold text-gray-400 mt-1">ID: {selectedEntry.session_id}</p>
+                </div>
+                <button onClick={() => setSelectedEntry(null)} className="text-5xl font-light hover:rotate-90 transition-transform">✕</button>
               </div>
               
-              <div className="p-6 overflow-y-auto space-y-6">
-                {/* HLAVNÍ VÝSLEDEK - Zde jsou ty zmizelé sady a typ pleti */}
-                <div className="bg-black text-white p-6 rounded-2xl shadow-xl">
-                  <h3 className="text-[10px] font-black uppercase mb-4 tracking-widest opacity-60">Závěr kvízu</h3>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-[10px] uppercase font-bold opacity-50">Doporučená sada</p>
-                      <p className="text-lg font-black">{result.recommendedSet || 'Nenalezeno'}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                {/* LEVÝ SLOUPEC: VÝSLEDKY */}
+                <div className="space-y-8">
+                  <section>
+                    <h3 className="text-[11px] font-black uppercase tracking-widest text-blue-500 mb-4">Závěrečné vyhodnocení</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-gray-400">Doporučená sada</p>
+                        <p className="text-2xl font-black text-gray-900">{result.recommendedSet || '—'}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-gray-400">Zjištěný typ pleti</p>
+                        <p className="text-2xl font-black text-gray-900">{result.skinType || '—'}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-bold uppercase text-gray-400">Použitý slevový kód</p>
+                        <p className="text-2xl font-black text-blue-600">{selectedEntry.discount_code || '—'}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-[10px] uppercase font-bold opacity-50">Typ pleti</p>
-                      <p className="text-lg font-black">{result.skinTypeName || 'Nenalezeno'}</p>
-                    </div>
-                  </div>
+                  </section>
+
+                  <section className="pt-8 border-t border-gray-100">
+                    <h3 className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-4">Technické parametry</h3>
+                    <p className="text-xs font-bold">IP: {selectedEntry.client_ip || '—'}</p>
+                    <p className="text-xs font-bold mt-1 text-gray-500">Čas: {new Date(selectedEntry.timestamp).toLocaleString('cs-CZ')}</p>
+                  </section>
                 </div>
 
-                {/* ODPOVĚDI NA OTÁZKY */}
-                <div className="space-y-2">
-                  <h3 className="text-xs font-black text-gray-400 uppercase mb-3 tracking-widest">Kompletní odpovědi</h3>
-                  {Object.entries(answers).map(([key, value]: [string, any]) => (
-                    <div key={key} className="bg-white border border-gray-100 p-4 rounded-xl shadow-sm flex justify-between items-center">
-                      <p className="text-[10px] font-black text-gray-400 uppercase w-1/3">{key}</p>
-                      <p className="text-sm font-bold text-gray-800 w-2/3 text-right">
-                        {Array.isArray(value) ? value.join(', ') : String(value)}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* TECHNICKÉ INFO */}
-                <div className="pt-4 border-t border-gray-100 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-[10px] text-gray-400 uppercase font-black">IP Adresa</p>
-                    <p className="text-xs font-bold">{selectedEntry.client_ip || '-'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-gray-400 uppercase font-black">Referrer</p>
-                    <p className="text-xs font-bold truncate">{selectedEntry.referrer || 'Přímý vstup'}</p>
+                {/* PRAVÝ SLOUPEC: ODPOVĚDI */}
+                <div className="bg-gray-50 p-6 rounded-2xl">
+                  <h3 className="text-[11px] font-black uppercase tracking-widest text-gray-400 mb-6">Odpovědi respondenta</h3>
+                  <div className="space-y-4">
+                    {Object.entries(answers).map(([key, value]: [string, any]) => (
+                      <div key={key} className="border-b border-gray-200 pb-2">
+                        <span className="text-[9px] font-black uppercase text-gray-400 block mb-1">{key}</span>
+                        <span className="font-bold text-sm text-gray-800 leading-tight">
+                          {Array.isArray(value) ? value.join(', ') : String(value)}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              <div className="p-6 border-t bg-gray-50 text-right">
-                <button onClick={() => setSelectedEntry(null)} className="bg-black text-white px-10 py-3 rounded-xl font-bold hover:bg-gray-800 transition-colors">ZAVŘÍT</button>
+              <div className="flex justify-center mt-8">
+                <button 
+                  onClick={() => setSelectedEntry(null)} 
+                  className="bg-gray-900 text-white px-16 py-4 font-black uppercase text-xs tracking-widest hover:bg-black transition-all"
+                >
+                  ZAVŘÍT DETAIL
+                </button>
               </div>
             </div>
           </div>
