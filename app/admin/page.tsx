@@ -85,7 +85,7 @@ export default function AdminPage() {
                         {entry.step === 'completed' ? 'DOKONČENO' : `KROK ${entry.step}`}
                       </span>
                     </td>
-                    <td className="py-4 px-2 font-bold text-sm">
+                    <td className="py-4 px-2 font-normal text-sm">
                       {res.recommendedSet || '—'}
                     </td>
                     <td className="py-4 px-2 font-mono font-bold text-blue-600">

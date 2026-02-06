@@ -349,7 +349,7 @@ Vaše pleť se už nemastí jako dřív.
 
       <div class="result-highlight-box">
         Tahle sada udržuje pleť v kondici bez zbytečného zatěžování.
-        Péče s ní je velmi rychlá, levná, ale přesto účinná.
+        Péče s ní je velmi rychlá, levná a pokrývá všechny základní potřeby.
       </div>
 
       <p style="margin-top: 30px; font-weight: 500;">
@@ -382,8 +382,7 @@ Vaše pleť se už nemastí jako dřív.
       </p>
 
       <div class="result-highlight-box">
-        Tato sada dává pleti přesně to, co teď potřebuje: 
-        lehkou ochranu bez ucpávání pórů. A je přívětivá k vašemu rozpočtu.
+        Tato sada bere ohled na váš rozpočet a dodává pleti čištění, ochranu i hydrataci.
       </div>
 
       <p style="margin-top: 30px; font-weight: 500;">
@@ -391,8 +390,9 @@ Vaše pleť se už nemastí jako dřív.
       </p>
 
       <ul class="result-list">
-        <li><span>Pleť zůstane matná bez nepříjemného vysušení</span></li>
-        <li><span>Póry se nebudou ucpávat ani při každodenním používání</span></li>
+        <li><span>Pleť zůstane matná, ale ne vysušená</span></li>
+        <li><span>Hydratace a ochrana proti UV záření</span></li>
+        <li><span>Póry zůstanou čisté</span></li>
         <li><span>Jednoduchá rutina, která zabere pár minut denně</span></li>
       </ul>
     </div>`;
@@ -472,23 +472,23 @@ Vaše pleť se už nemastí jako dřív.
   
 <p class="result-lead">
     Mastí se v T-zóně, ale zároveň volá po rovnováze, aby se zbytečně nepřesušovala.
-  </p>
+</p>
 
-  <div class="result-highlight-box">
-    Většina produktů na mastnou pleť je příliš agresivní. My na to jdeme jinak: pleť nebudeme "vysušovat", ale naučíme ji, aby se přestala bránit nadměrnou tvorbou mazu.
-  </div>
+<div class="result-highlight-box">
+  Proto jsem sestavila péči, která ji nenutí vybírat mezi "matnou" nebo "mastnou".
+</div>
 
   <p class="result-paragraph">
-    Tato 4kroková základní péče respektuje potřeby smíšené pleti. Nezatěžuje ji hutnými texturami, ale dodává lehkou hydrataci přesně tam, kde je potřeba.
+    Tato 4kroková rutina respektuje váš rozpočet i potřeby smíšené pleti. 
   </p>
 
   <p class="result-transition-text">Co můžete očekávat?</p>
 
   <ul class="result-list">
-    <li><span><strong>Regulace lesku:</strong> Udrží vaši T-zónu matnou a svěží po celý den.</span></li>
-    <li><span><strong>Čisté póry:</strong> Hloubkově čistí nečistoty bez pocitu nepříjemného pnutí.</span></li>
-    <li><span><strong>Lehká hydratace:</strong> Dodává vláhu bez ucpávání pórů nebo pocitu mastnoty.</span></li>
-    <li><span><strong>Rychlá rutina:</strong> Funkční péče, která vám zabere jen pár minut ráno a večer.</span></li>
+    <li><span><strong>Regulace lesku:</strong> Vaše T-zóna zůstane matná a svěží po celý den.</span></li>
+    <li><span><strong>Čisté póry:</strong> Hloubkové čištění bez pocitu nepříjemného pnutí.</span></li>
+    <li><span><strong>Lehká hydratace:</strong> Hydrataci bez ucpávání pórů a pocitu mastnoty.</span></li>
+    <li><span><strong>Rychlá rutina:</strong> Funkční péči, která vám zabere jen pár minut ráno a večer.</span></li>
   </ul>
 
   <p class="result-paragraph" style="margin-top: 25px;">
@@ -1103,23 +1103,21 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   </p>
 
   <p class="result-paragraph">
-Budu k vám upřímná: Kosmetika to nevyléčí, jen zmírní. Neefektivnější řešení (nebo spíše odstranění viditelných projevů) je IPL nebo laser.
-Ale správná pleťová péče dokáže začervenání zmírnit a posílit stěny cév
-  a zpomalit zhoršování. A to není málo.
+Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování. Neumí již vzniklé "popraskané žilky" odstranit.
   </p>
 
   <div class="result-highlight-box">
-    Tuto sadu jsem sestavila speciálně pro vaši pleť.
-    <strong>Zklidňuje, posiluje cévy a chrání před faktory, které stav zhoršují.</strong>
+    Tuto sadu jsem sestavila dle výsledků mých salonních klientek.
   </div>
 
-  <p class="result-transition-text">Sada pro pleť s kuperózou:</p>
+  <p class="result-transition-text">Tato sada:</p>
 
   <ul class="result-list">
     <li>Zklidňuje zarudnutí a podráždění</li>
     <li>Posiluje pevnost a pružnost cév</li>
     <li>Předchází zhoršování stavu a zmírňuje projevy</li>
     <li>Hydratuje a chrání pleť</li>
+    <li>Obsahuje manuál, který důkladně řeší i nekosmetickou část péče</li>
   </ul>
 
   <p class="result-paragraph">
