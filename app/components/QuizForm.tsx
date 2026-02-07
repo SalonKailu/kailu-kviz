@@ -101,7 +101,7 @@ const QUESTIONS = [
     'Akné (stabilně více než 5 pupínků🤫)',
     'Rozšířené póry nebo černé tečky',
     'Trvale začervenalá pleť',
-    'Dermatitida = zarudlé skvrny, šupinky nebo malé pupínky v okolí úst nebo na čele, nose a obočí',
+    'Dermatitida = zarudlé skvrny, šupinky nebo malé pupínky (nejčastěji v okolí úst, očí nebo obočí)',
     'Není, jsem spokojená / Nic z výše uvedeného'
   ]
 },
@@ -660,81 +660,86 @@ const productUrl = isDermatitis
     />
   )}
 </div>
-      {/* SEKCE 6: URGENCE + KÓD + CTA */}
-{!codeExpired ? (
-  <div className="mb-8">
-    {/* Co získáte v sadě */}
-    <div className="p-6 border border-gray-200 rounded-lg mb-4">
-      <h3 className="font-semibold text-lg mb-4">V sadě získáte:</h3>
-      <ul className="space-y-2">
-        <li>✓ <strong>Produkty</strong> přesně pro vaši pleť</li>
-<li>✓ <strong>Pleťový manuál</strong> krok za krokem</li>
-<li>✓ <strong>Garance spokojenosti</strong> a další výhody Kailu klubu</li>
-      </ul>
-    </div>
+{/* SEKCE 6: URGENCE + KÓD + CTA - NEZOBRAZOVAT PRO DERMATITIDU */}
+{!isDermatitis && (
+  <>
+    {!codeExpired ? (
+      <div className="mb-8">
+        {/* Co získáte v sadě */}
+        <div className="p-6 border border-gray-200 rounded-lg mb-4">
+          <h3 className="font-semibold text-lg mb-4">V sadě získáte:</h3>
+          <ul className="space-y-2">
+            <li>✓ <strong>Produkty</strong> přesně pro vaši pleť</li>
+            <li>✓ <strong>Pleťový manuál</strong> krok za krokem</li>
+            <li>✓ <strong>Garance spokojenosti</strong> a další výhody Kailu klubu</li>
+          </ul>
+        </div>
 
-    {/* Bonus s kódem */}
-    <div className="p-6 border-2 border-[#faa4a6] rounded-lg bg-[#fdf8f8]">
-      <h3 className="font-semibold text-lg mb-3 text-center">🎁 BONUS S KÓDEM</h3>
-      <p className="text-center text-gray-700 mb-4">
-        Osobně se podívám na vaše odpovědi<br />
-        a ověřím, že je sada pro vás ta pravá.
-      </p>
+        {/* Bonus s kódem */}
+        <div className="p-6 border-2 border-[#faa4a6] rounded-lg bg-[#fdf8f8]">
+          <h3 className="font-semibold text-lg mb-3 text-center">🎁 BONUS S KÓDEM</h3>
+          <p className="text-center text-gray-700 mb-4">
+            Osobně se podívám na vaše odpovědi<br />
+            a ověřím, že je sada pro vás ta pravá.
+          </p>
 
-      <div className="flex items-center justify-center gap-3 mb-2">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <button
+              onClick={handleCopyCode}
+              className="px-6 py-3 bg-white border-2 border-gray-300 hover:border-[#faa4a6] rounded-lg font-mono text-xl font-bold transition-colors"
+              title="Klikněte pro zkopírování"
+            >
+              {discountCode}
+              {codeCopied ? ' ✓' : ' 📋'}
+            </button>
+          </div>
+          
+          {codeCopied && (
+            <p className="text-center text-sm text-green-600 mb-2">Kód zkopírován!</p>
+          )}
+
+          <p className="text-center text-sm text-gray-500 mb-4">
+            Kód platí ještě: <span className="font-bold text-[#faa4a6]">{formatTime(timeLeft)}</span>
+          </p>
+        </div>
+
+        {/* CTA tlačítko */}
         <button
-          onClick={handleCopyCode}
-          className="px-6 py-3 bg-white border-2 border-gray-300 hover:border-[#faa4a6] rounded-lg font-mono text-xl font-bold transition-colors"
-          title="Klikněte pro zkopírování"
+          onClick={() => {
+            if (typeof window !== 'undefined' && window.gtag) {
+              window.gtag('event', 'purchase_click', {
+                product_set: result.recommendedSet,
+                skin_type: result.skinType,
+                discount_code: discountCode
+              });
+            }
+            window.parent.location.href = productUrl;
+          }}
+          className="w-full mt-4 py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
         >
-          {discountCode}
-          {codeCopied ? ' ✓' : ' 📋'}
+          Zobrazit doporučenou péči
+        </button>
+        
+        <p className="text-center text-sm text-gray-500 mt-3">
+          Expedice do 24 h
+        </p>
+      </div>
+    ) : (
+      <div className="mb-8 p-6 bg-gray-100 rounded-lg">
+        <p className="text-center text-gray-600 mb-4">
+          {/* prázdné - můžeš přidat text typu "Kód vypršel" */}
+        </p>
+        <button
+          onClick={() => {
+            window.parent.location.href = productUrl;
+          }}
+          className="w-full py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
+        >
+          Zobrazit doporučenou péči
         </button>
       </div>
-      
-      {codeCopied && (
-        <p className="text-center text-sm text-green-600 mb-2">Kód zkopírován!</p>
-      )}
-
-      <p className="text-center text-sm text-gray-500 mb-4">
-        Kód zadejte v košíku. Platí ještě: <span className="font-bold text-[#faa4a6]">{formatTime(timeLeft)}</span>
-      </p>
-    </div>
-
-    {/* CTA tlačítko */}
-    <button
-      onClick={() => {
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'purchase_click', {
-            product_set: result.recommendedSet,
-            skin_type: result.skinType,
-            discount_code: discountCode
-          });
-        }
-        window.parent.location.href = productUrl;
-      }}
-      className="w-full mt-4 py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
-    >
-      Zobrazit doporučenou péči
-    </button>
-    
-    <p className="text-center text-sm text-gray-500 mt-3">
-      Expedice do 24 h
-    </p>
-  </div>
-) : (
-  <div className="mb-8 p-6 bg-gray-100 rounded-lg">
-    <p className="text-center text-gray-600 mb-4">
-    </p>
-    <button
-      onClick={() => {
-        window.parent.location.href = productUrl;
-      }}
-      className="w-full py-4 bg-[#91C77E] hover:bg-[#B2EA9F] transition-colors duration-200 rounded-lg text-black font-semibold text-lg"
-    >
-      Zobrazit doporučenou péči
-    </button>
-  </div>
+    )}
+  </>
 )}
 
       {/* SEKCE 7: ZÁCHYTNÁ SÍŤ */}

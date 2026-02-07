@@ -1139,7 +1139,7 @@ Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmír
   
   
   <p class="result-lead">
-    V kvízu jste označila, že vás trápí <strong>dermatitida</strong>. Protože u této diagnózy může nesprávná péče napáchat velké škody, můj systém vám teď nedoporučí žádnou sadu.
+    Ale v kvízu jste označila, že vás trápí <strong>dermatitida</strong>. Při ní může nesprávná péče napáchat velké škody a můj systém vám teď raději žádou sadu nedoporučí.
   </p>
 
   <p class="result-paragraph">
@@ -1147,8 +1147,8 @@ Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmír
   </p>
 
   <ul class="result-list" style="margin-bottom: 1.5rem;">
-    <li><strong>Periorální d. (kolem úst):</strong> Často vzniká "přepečováním" pleti, citlivou reakcí (např. na pastu s fluorem) nebo hormonálními změnami. Potřebuje absolutní klid a minimum látek.</li>
-    <li><strong>Seboroická d. (šupinky):</strong> Souvisí s aktivitou kvasinek v mastnějších oblastech obličeje. Potřebuje složky, které kvasinky nebudou "krmit".</li>
+    <li><strong>Periorální (kolem úst):</strong> Často vzniká "přepečováním" pleti, citlivou reakcí (např. na pastu s fluorem) nebo hormonálními změnami. Potřebuje absolutní klid a minimum látek.</li>
+    <li><strong>Seboroická (šupinky):</strong> Souvisí s aktivitou kvasinek v mastnějších oblastech obličeje. Potřebuje složky, které kvasinky nebudou "krmit".</li>
   </ul>
 
   <div style="margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #eee; background: #fff;">
@@ -1165,13 +1165,13 @@ Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmír
   <p class="result-transition-text">Co teď musíme udělat?</p>
 
   <ul class="result-list">
-    <li><strong>Identifikace zdarma:</strong> Vyfoťte postižená místa na denním světle a pošlete na <a href="mailto:info@kailu.cz" style="color: #faa4a6; font-weight: bold;">info@kailu.cz</a>. Podívám se na ně a <strong>odpovím vám co nejdříve</strong> (obvykle do 24h), co (ne)dělat.</li>
+    <li><strong>Zhodnotit stav:</strong> Nejlepší je to naživo, u kosmetičky nebo dermatologa. Ale pokud nemáte možnost, vyfoťte postižená místa na denním světle a pošlete na <a href="mailto:info@kailu.cz" style="color: #faa4a6; font-weight: bold;">info@kailu.cz</a>. Podívám se na ně a <strong>odpovím vám co nejdříve</strong> (obvykle do 24h), co (ne)dělat.</li>
     <li><strong>Nulová terapie:</strong> Přestaňte používat produkty, co máte. Když vám nepomohly do teď, nepomůžou ani dnes nebo zítra a zbytečně bysme mohli oddálit účinek správně zvolené péče.</li>
     <li><strong>Byl to jen překlik?</strong> Pokud dermatitidu nemáte a hledáte jen péči o citlivou pleť, vraťte se zpět nebo zvolte <a href="https://www.kailushop.cz/sada-pro-citlivou-plet/" target="_blank" style="color: #faa4a6; text-decoration: underline;">sadu pro citlivou pleť</a>.</li>
   </ul>
 
   <p class="result-paragraph">
-    Těším se na vaši fotku a na to, že společně najdeme bezpečnou a účinnou cestu. 🙏
+    Těším se na to, že společně najdeme bezpečnou a účinnou cestu. 🙏
   </p>
 </div>`,
   
