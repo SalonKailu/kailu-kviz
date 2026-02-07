@@ -1098,16 +1098,12 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   
   
   <p class="result-lead">
-    Vybrala jste možnost, že vás trápí pleť se sklonem k začervenání.
+    Vybrala jste možnost, že vás trápí začervenání.
     A asi už tušíte, že žádný zázračný krém neexistuje.
   </p>
 
-  <p class="result-paragraph">
-Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování. Neumí již vzniklé "popraskané žilky" odstranit.
-  </p>
-
   <div class="result-highlight-box">
-    Tuto sadu jsem sestavila dle výsledků mých salonních klientek.
+    Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování. Neumí již vzniklé "popraskané žilky" odstranit.
   </div>
 
   <p class="result-transition-text">Tato sada:</p>
