@@ -190,8 +190,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
 
   <p class="result-paragraph">
     Suchá pleť má přirozeně tenčí ochrannou bariéru a méně mazových žláz.
-    Právě proto jsou cévy blíže povrchu a pleť na vnější podněty snáze reaguje zarudnutím.
-    Správná péče, která bariéru posiluje, je tedy klíčová hned z dvojího důvodu.
+    Právě proto na vnější podněty snáze reaguje zarudnutím a správná péče, která bariéru posiluje, je pro vás klíčová.
   </p>
 
   <div class="result-highlight-box">
