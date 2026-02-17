@@ -677,10 +677,9 @@ const productUrl = isDermatitis
 
         {/* Bonus s kódem */}
         <div className="p-6 border-2 border-[#faa4a6] rounded-lg bg-[#fdf8f8]">
-          <h3 className="font-semibold text-lg mb-3 text-center">🎁 BONUS S KÓDEM</h3>
+          <h3 className="font-semibold text-lg mb-3 text-center">🎁 DÁREK K OBJEDNÁVCE</h3>
           <p className="text-center text-gray-700 mb-4">
-            Osobně se podívám na vaše odpovědi<br />
-            a ověřím, že je sada pro vás ta pravá.
+            Protože vím, že vás fakt potěší! 😍
           </p>
 
           <div className="flex items-center justify-center gap-3 mb-2">
@@ -699,7 +698,7 @@ const productUrl = isDermatitis
           )}
 
           <p className="text-center text-sm text-gray-500 mb-4">
-            Kód platí ještě: <span className="font-bold text-[#faa4a6]">{formatTime(timeLeft)}</span>
+            Kód zadejte v košíku, platí ještě: <span className="font-bold text-[#faa4a6]">{formatTime(timeLeft)}</span>
           </p>
         </div>
 
@@ -727,7 +726,7 @@ const productUrl = isDermatitis
     ) : (
       <div className="mb-8 p-6 bg-gray-100 rounded-lg">
         <p className="text-center text-gray-600 mb-4">
-          {/* prázdné - můžeš přidat text typu "Kód vypršel" */}
+          Kód vypršel
         </p>
         <button
           onClick={() => {

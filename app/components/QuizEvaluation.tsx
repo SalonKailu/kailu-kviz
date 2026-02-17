@@ -179,34 +179,67 @@ export const SPECIAL_RECOMMENDATIONS = {
 
 // Výsledné texty pro jednotlivé sady
 export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
-'Suchá základ': `
-<div class="result-card-box">
+'Suchá základ': (answers, result) => {
+
+  if (result.problems.includes('Trvale začervenalá pleť')) {
+    return `<div class="result-card-box">
 
   <p class="result-lead">
-    Často pne, je citlivější a bez krému se necítí komfortně.
-    Nestačí ji jen „něčím namazat“.
+    A má sklony k zaarudnutí. To není náhoda, tyto dvě věci spolu úzce souvisí.
   </p>
 
   <p class="result-paragraph">
-  Vaše pleť má obvykle nedostatek výživy i hydratace, proto je běžné, že se po nanesení krému chvíli cítíte lépe, ale <strong>během dne se pocit sucha vrátí</strong> a vy máte potřebu krém aplikovat znovu.
-</p>
+    Suchá pleť má přirozeně tenčí ochrannou bariéru a méně mazových žláz.
+    Právě proto jsou cévy blíže povrchu a pleť na vnější podněty snáze reaguje zarudnutím.
+    Správná péče, která bariéru posiluje, je tedy klíčová hned z dvojího důvodu.
+  </p>
+
+  <div class="result-highlight-box">
+    Tato sada za skvělou cenu pleť zklidní, hydratuje a posílí její přirozenou ochrannou bariéru.
+  </div>
+
+  <p style="margin-top: 20px; margin-bottom: 10px; font-weight: 500;">Co můžete očekávat:</p>
+
+  <ul class="result-list">
+    <li>Pleť přestane nepříjemně pnout</li>
+    <li>Bude jemnější a příjemná na dotek</li>
+    <li>Posílená bariéra pomůže postupně zmírnit reaktivitu a zarudnutí</li>
+    <li>Krém bude „fungovat" po celý den, ne jen pár hodin</li>
+  </ul>
+
+  <p class="result-paragraph">
+    Pokud byste v budoucnu chtěla péči přímo cílenou na výrazné začervenání,
+    máme pro vás připravenou <a href="https://www.kailushop.cz/pece-o-plet-s-kuperozou/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">specializovanou sadu</a>.
+  </p>
+
+</div>`;
+  }
+
+  return `<div class="result-card-box">
+
+  <p class="result-lead">
+    Často pne, je citlivější a bez krému se necítí komfortně.
+    Nestačí jí jen „něčím namazat".
+  </p>
+
+  <p class="result-paragraph">
+    Vaše pleť má obvykle nedostatek výživy i hydratace, proto je běžné, že se po nanesení krému chvíli cítíte lépe, ale <strong>během dne se pocit sucha vrátí</strong> a vy máte potřebu krém aplikovat znovu.
+  </p>
 
   <div class="result-highlight-box">
     Připravila jsem pro vás sadu 4 produktů, která je vhodná i pro začátečníky a zároveň dává smysl, pokud hledáte cenově i časově dostupnější variantu. 
   </div>
 
-
   <p class="result-paragraph">Přestože jde o základní péči, její účinnost vás příjemně překvapí!</p>
-
 
   <ul class="result-list">
     <li>Pleť nebude nepříjemně pnout</li>
     <li>Bude jemnější a příjemná na dotek</li>
-    <li>Krém bude „fungovat“ po celý den, ne jen pár hodin</li>
+    <li>Krém bude „fungovat" po celý den, ne jen pár hodin</li>
   </ul>
 
-</div>`
-,
+</div>`;
+},
   
 'Suchá základ + Sem tam pupínek': `<div class="result-card-box">
 
@@ -251,7 +284,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   return `<div class="result-card-box">
     
     <p class="result-lead">
-      Skvělé je, že je hladká a má téměř neviditelné póry. Horší je, že brzy ztrácí svoji pružnost, je náchylná k tvorbě vrásek a bez správné péče působí unaveně.
+      Skvělé je, že nemá viditelné póry. Horší je, že je náchylnější k tvorbě vrásek a bez správné péče působí unaveně.
     </p>
 
     <p class="result-paragraph">
@@ -259,8 +292,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     </p>
 
     <div class="result-highlight-box">
-      Anti-age sada využívá unikátní technologii mikrojehliček.
-      Díky nim se dostanou aktivní látky (peptidy) hlouběji pod povrch, kde pleť znovu "nastartují". Je to nejúčinnější neinvazivní alternativa k estetickým zákrokům.
+      Anti-age sada využívá unikátní technologii mikrojehliček, díky kterým se dostanou aktivní látky hlouběji do pleti. Je to nejúčinnější možnost neinvazivní, domácí péče.
     </div>
 
     <p class="result-transition-text">Co můžete očekávat?</p>
@@ -289,7 +321,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     
     <p class="result-lead">
       Máte pleť v rovnováze, což je skvělý dar. Ale ty nárazové pupínky, které se objeví 
-      před menstruací nebo po stresovém týdnu, dokážou tu radost spolehlivě zkazit.
+      kvůli hormonálním změnám, dokážou tu radost spolehlivě zkazit. Chápu to a vím, jak si s tím poradit.
     </p>
 
     <p class="result-paragraph">
@@ -329,6 +361,41 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
  'M+SM základ': (answers, result) => {
   const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
   const is36to45 = result?.specialRecommendations?.is36to45;
+
+  if (result.problems.includes('Trvale začervenalá pleť')) {
+    return `<div class="result-card-box">
+
+    <p class="result-lead">
+      A přitom místy červená a podrážděná (soudím dle vaší odpovědi o trvalém zarudnutí). To si žádá péči, která tohle všechno zvládne.
+    </p>
+    
+  </p>
+
+  <p class="result-paragraph">
+    U vašeho typu pleti bývá zarudnutí často spojeno s nešetrným čištěním nebo reakcí na kosmetiku, která pleti nevyhovuje.
+    Správně zvolená péče dokáže situaci výrazně zlepšit.
+  </p>
+
+  <div class="result-highlight-box">
+    Tato cenově dostupná sada perfektně balancuje potřeby vaší pleti a zároveň pomáhá zklidnit reaktivní místa.
+  </div>
+
+  <p style="margin-top: 20px; margin-bottom: 10px; font-weight: 500;">Co můžete očekávat:</p>
+
+  <ul class="result-list">
+    <li><span>T-zóna zůstane matná a svěží po celý den</span></li>
+    <li><span>Čištění bez pocitu nepříjemného pnutí</span></li>
+    <li><span>Hydratace bez ucpávání pórů a pocitu "diskokoule"</span></li>
+    <li><span>Postupné zklidnění zarudlých míst</span></li>
+  </ul>
+
+  <p class="result-paragraph">
+    Pokud byste v budoucnu chtěla péči přímo cílenou na kuperózu (trvalé zarudnutí a popraskané žilky),
+    máme pro vás připravenou <a href="https://www.kailushop.cz/pece-o-plet-s-kuperozou/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">specializovanou sadu</a>.
+  </p>
+
+</div>`;
+  }
 
   // 46+ BEZ dehydratace
   if (isOver45 && 
@@ -894,6 +961,41 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     </div>`;
   }
 
+if (result.problems.includes('Trvale začervenalá pleť')) {
+    return `<div class="result-card-box">
+
+  <p class="result-lead">
+    A přesto má sklony k zarudnutí. To je kombinace, která vyžaduje jemný, ale cílený přístup.
+  </p>
+
+  <p class="result-paragraph">
+    Na rozdíl od suché pleti máte přirozenou ochrannou bariéru v dobré kondici.
+    Zarudnutí u vás nejčastěji vzniká jako reakce na vnější podněty: změny teploty, vítr nebo nevhodnou kosmetiku.
+    Správná péče dokáže reaktivitu výrazně snížit.
+  </p>
+
+  <div class="result-highlight-box">
+    S ohledem na váš rozpočet vám doporučuji sadu, která pleti dodá čištění, hydrataci a ochranu.
+    Zklidnění zarudnutí přijde postupně, jak se pleť stabilizuje.
+  </div>
+
+  <p style="margin-top: 20px; margin-bottom: 10px; font-weight: 500;">Co můžete očekávat:</p>
+
+  <ul class="result-list">
+    <li><span>Dokonalou rovnováhu bez nadměrného lesku</span></li>
+    <li><span>Ochranu před předčasným stárnutím</span></li>
+    <li><span>Postupné zklidnění reaktivity a zarudnutí</span></li>
+    <li><span>Rychlou rutinu, která pleti dodá vše potřebné během pár minut</span></li>
+  </ul>
+
+  <p class="result-paragraph">
+    Pokud byste v budoucnu chtěla péči přímo cílenou na kuperózu,
+    máme pro vás připravenou <a href="https://www.kailushop.cz/pece-o-plet-s-kuperozou/" target="_blank" rel="noopener noreferrer" style="color: #faa4a6; text-decoration: underline;">specializovanou sadu</a>.
+  </p>
+
+</div>`;
+  }
+
   // Klasická normální pleť
   return `<div class="result-card-box">
     
@@ -909,7 +1011,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
 
     <div class="result-highlight-box">
       Sada, kterou vám doporučuji, <strong>udržuje pleť v kondici
-      a chrání ji před předčasným stárnutím</strong>.
+      a chrání ji před vysušením i předčasným stárnutím</strong>.
     </div>
 
     <p class="result-transition-text">Co můžete očekávat?</p>
@@ -1553,28 +1655,30 @@ const isOver55 = age === '56+ let';
     };
   }
   
-  if (problems.includes('Trvale začervenalá pleť')) {
-    console.log('Nalezena kuperóza - nastavuji speciální sadu');
+if (problems.includes('Trvale začervenalá pleť')) {
+    console.log('Nalezena kuperóza - budget:', budget);
     
-    // Určení zobrazovaného typu pleti
-    const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
-    let displaySkinType = isSensitive 
-      ? `${basicSkinType} a také citlivá` 
-      : basicSkinType;
-    
-    return {
-      skinType: displaySkinType,
-      recommendedSet: 'Kuperóza',
-      problems,
-      specialRecommendations: {
-        hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
-        hasUndereyeCircles: problems.includes('Kruhy pod očima'),
-        antiAgeSuggested: false,
-        hasBlackheads: problems.includes('Rozšířené póry nebo černé tečky') && 
-          !['Mastná', 'Smíšená'].includes(basicSkinType),
-        isPregnant
-      }
-    };
+    if (budget !== 2000) {
+      const isSensitive = sensitivityPoints >= 2 || (isPregnant && budget > 2000);
+      let displaySkinType = isSensitive 
+        ? `${basicSkinType} a také citlivá` 
+        : basicSkinType;
+      
+      return {
+        skinType: displaySkinType,
+        recommendedSet: 'Kuperóza',
+        problems,
+        specialRecommendations: {
+          hasPigmentation: problems.includes('Pigmentové skvrny nebo jizvy po akné'),
+          hasUndereyeCircles: problems.includes('Kruhy pod očima'),
+          antiAgeSuggested: false,
+          hasBlackheads: problems.includes('Rozšířené póry nebo černé tečky') && 
+            !['Mastná', 'Smíšená'].includes(basicSkinType),
+          isPregnant
+        }
+      };
+    }
+    // budget === 2000 → pokračujeme standardní logikou níže
   }
   
   // Pokud je těhotná, odstraníme pupínky z problémů
