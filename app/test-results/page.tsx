@@ -52,13 +52,15 @@ export default function TestResults() {
       specialRecommendations: {}
     };
     
-   if (typeof text === 'function') {
-  try {
-    return text(testAnswers, testResult);
-  } catch (e) {
-    return '<p>Chyba při načítání textu</p>';
-  }
-}
+    if (typeof text === 'function') {
+      try {
+        return text(testAnswers, testResult);
+      } catch (e) {
+        return '<p>Chyba při načítání textu</p>';
+      }
+    }
+    return text;
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
