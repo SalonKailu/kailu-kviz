@@ -185,7 +185,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
     return `<div class="result-card-box">
 
   <p class="result-lead">
-    A má sklony k zaarudnutí. To není náhoda, tyto dvě věci spolu úzce souvisí.
+    A má sklony k zarudnutí. To není náhoda, tyto dvě věci spolu úzce souvisí.
   </p>
 
   <p class="result-paragraph">
