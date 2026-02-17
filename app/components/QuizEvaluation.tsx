@@ -178,10 +178,10 @@ export const SPECIAL_RECOMMENDATIONS = {
 };
 
 // Výsledné texty pro jednotlivé sady
-export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) => string)> = {
+export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers, result?: QuizResult) => string)> = {
 'Suchá základ': (answers, result) => {
 
-  if (result.problems.includes('Trvale začervenalá pleť')) {
+  if (result?.problems.includes('Trvale začervenalá pleť')) {
     return `<div class="result-card-box">
 
   <p class="result-lead">
@@ -361,7 +361,7 @@ export const RESULT_TEXTS: Record<ProductSet, string | ((answers: QuizAnswers) =
   const isOver45 = result?.specialRecommendations?.is46to55 || result?.specialRecommendations?.isOver55;
   const is36to45 = result?.specialRecommendations?.is36to45;
 
-  if (result.problems.includes('Trvale začervenalá pleť')) {
+   if (result?.problems.includes('Trvale začervenalá pleť')) {
     return `<div class="result-card-box">
 
     <p class="result-lead">
@@ -928,7 +928,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
   </div>`;
 },
 
-'Normální základ': (answers) => {
+'Normální základ': (answers, result) => {
   // Těhotenství/kojení
   if (answers['wish-fish']?.includes('Zrovna jsem těhotná')) {
     return `<div class="result-card-box">
@@ -960,7 +960,7 @@ To je častý problém, protože většina z nich může být na váš typ pleti
     </div>`;
   }
 
-if (result.problems.includes('Trvale začervenalá pleť')) {
+if (result?.problems.includes('Trvale začervenalá pleť')) {
     return `<div class="result-card-box">
 
   <p class="result-lead">
