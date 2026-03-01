@@ -633,7 +633,7 @@ Vaše pleť se už nemastí jako dřív.
     return `<div class="result-card-box">
       <p style="font-size: 1.1rem; margin-bottom: 20px;">
         Občas bývá náročná hlavně proto,
-      že špatně snáší extrémy - jak přesušení, tak přetížení. A s věkem se její schopnost regenerace se postupně zpomaluje.
+      že špatně snáší extrémy - jak přesušení, tak přetížení. 
       </p>
       <p style="margin-bottom: 20px;">
         Nyní je klíčová preventivní a udržovací péče, která respektuje její potřeby. Tedy hydratovat bez zatížení a chránit před vnějšími vlivy.
@@ -1200,20 +1200,20 @@ if (result?.problems.includes('Trvale začervenalá pleť')) {
   
   <p class="result-lead">
     Vybrala jste možnost, že vás trápí začervenání.
-    A asi už tušíte, že žádný zázračný krém neexistuje.
+    A asi už tušíte, že na to žádný zázračný krém neexistuje.
   </p>
 
   <div class="result-highlight-box">
-    Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování. Neumí již vzniklé "popraskané žilky" odstranit.
+    Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování.
   </div>
 
   <p class="result-transition-text">Tato sada:</p>
 
   <ul class="result-list">
-    <li>Zklidňuje zarudnutí a podráždění</li>
+    <li><strong>Zklidňuje</strong> zarudnutí a podráždění</li>
     <li>Posiluje pevnost a pružnost cév</li>
-    <li>Předchází zhoršování stavu a zmírňuje projevy</li>
-    <li>Hydratuje a chrání pleť</li>
+    <li>Předchází zhoršování stavu a <strong>zmírňuje projevy</strong></li>
+    <li><strong>Hydratuje</strong> a chrání pleť</li>
     <li>Obsahuje manuál, který důkladně řeší i nekosmetickou část péče</li>
   </ul>
 
