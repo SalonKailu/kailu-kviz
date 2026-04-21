@@ -1204,7 +1204,7 @@ if (result?.problems.includes('Trvale začervenalá pleť')) {
   </p>
 
   <div class="result-highlight-box">
-    Budu k vám upřímná: Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování.
+    Správná pleťová péče dokáže začervenání zmírnit, posílit stěny cév a zastavit zhoršování.
   </div>
 
   <p class="result-transition-text">Tato sada:</p>
@@ -1212,7 +1212,6 @@ if (result?.problems.includes('Trvale začervenalá pleť')) {
   <ul class="result-list">
     <li><strong>Zklidňuje</strong> zarudnutí a podráždění</li>
     <li>Posiluje pevnost a pružnost cév</li>
-    <li>Předchází zhoršování stavu a <strong>zmírňuje projevy</strong></li>
     <li><strong>Hydratuje</strong> a chrání pleť</li>
     <li>Obsahuje manuál, který důkladně řeší i nekosmetickou část péče</li>
   </ul>
